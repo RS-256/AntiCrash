@@ -3,49 +3,20 @@
 
 import com.atsukimc.anticrash.mixin.PortalManagerAccessorMixin;
 
-//? if (>=1.21 && <=1.21.11) {
-/^import net.minecraft.world.level.block.Block;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.core.registries.BuiltInRegistries;
-^///?}
-
-//? if (>=1.21 && <=1.21.11) {
-/^import net.minecraft.world.level.block.Portal;
-^///?}
+import net.minecraft.world.level.block.Block;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.block.Portal;
 import net.minecraft.nbt.CompoundTag;
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.resources.Identifier;
-^///?}
+import net.minecraft.world.entity.PortalProcessor;
 
 //? if (>=1.21 && <=1.21.4) {
 /^import net.minecraft.nbt.NbtUtils;
 ^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.entity.PortalProcessor;
-^///?}
-
-//? if (>=1.21 && <=1.21.11) {
-/^import net.minecraft.core.registries.BuiltInRegistries;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.block.Block;
-^///?}
-
 //? if (>=1.21 && <=1.21.10) {
 /^import net.minecraft.resources.ResourceLocation;
-^///?}
-//? if 1.21.11 {
-/^import net.minecraft.resources.Identifier;
-^///?}
-
-//? if (>=1.21 && <=1.21.11) {
-/^import net.minecraft.world.entity.PortalProcessor;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.block.Portal;
-^///?}
-
+^///?} else {
+import net.minecraft.resources.Identifier;
+//?}
 
 public final class PortalRuntime {
     private PortalRuntime() {}

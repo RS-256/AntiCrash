@@ -4,150 +4,45 @@ import com.atsukimc.anticrash.AntiCrashController;
 import com.atsukimc.anticrash.AntiCrashMod;
 import com.atsukimc.anticrash.command.RecoveryCommandPolicy;
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.item.BlockItem;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.core.BlockPos;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
-//?}
 import net.minecraft.network.protocol.game.*;
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.ClientboundBlockChangedAckPacket;
-*///?}
-
 import net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.server.network.ServerGamePacketListenerImpl;
+import net.minecraft.server.level.ServerPlayer;
 
-//? if (>=1.18 && <=1.21.11) {
 //? if (>=1.18 && <=1.18.2) {
 import net.minecraft.network.protocol.game.ClientboundBlockBreakAckPacket;
-//?}
-//? if (>=1.19 && <=1.21.11) {
+//?} else {
 /*import net.minecraft.network.protocol.game.ClientboundBlockChangedAckPacket;
-*///?}
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.ServerboundChangeDifficultyPacket;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.inventory.AbstractContainerMenu;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.ServerboundClientCommandPacket;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.inventory.ClickType;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.ServerboundContainerClickPacket;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.server.network.ServerGamePacketListenerImpl;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.ServerboundContainerClosePacket;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.server.level.ServerPlayer;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.ServerboundInteractPacket;
-*///?}
-
+ *///?}
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.InteractionHand;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.ServerboundLockDifficultyPacket;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.core.BlockPos;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.ServerboundMovePlayerPacket;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
+import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.phys.Vec3;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.ServerboundMoveVehiclePacket;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.ServerboundPickItemFromBlockPacket;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.ServerboundPickItemFromEntityPacket;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.ServerboundPlayerAbilitiesPacket;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.ServerboundPlayerActionPacket;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.ServerboundPlayerCommandPacket;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.ServerboundPlayerInputPacket;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.ServerboundSelectTradePacket;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.ServerboundSetCreativeModeSlotPacket;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.ServerboundTeleportToEntityPacket;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.ServerboundUseItemOnPacket;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.ServerboundUseItemPacket;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.ServerPlayer;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.network.ServerGamePacketListenerImpl;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.inventory.AbstractContainerMenu;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.inventory.ContainerInput;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.item.BlockItem;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.item.ItemStack;
+//?} else {
+/*import net.minecraft.network.protocol.game.ServerboundChangeDifficultyPacket;
+import net.minecraft.network.protocol.game.ServerboundClientCommandPacket;
+import net.minecraft.network.protocol.game.ServerboundContainerClickPacket;
+import net.minecraft.network.protocol.game.ServerboundContainerClosePacket;
+import net.minecraft.network.protocol.game.ServerboundInteractPacket;
+import net.minecraft.network.protocol.game.ServerboundLockDifficultyPacket;
+import net.minecraft.network.protocol.game.ServerboundMovePlayerPacket;
+import net.minecraft.network.protocol.game.ServerboundMoveVehiclePacket;
+import net.minecraft.network.protocol.game.ServerboundPickItemFromBlockPacket;
+import net.minecraft.network.protocol.game.ServerboundPickItemFromEntityPacket;
+import net.minecraft.network.protocol.game.ServerboundPlayerAbilitiesPacket;
+import net.minecraft.network.protocol.game.ServerboundPlayerActionPacket;
+import net.minecraft.network.protocol.game.ServerboundPlayerCommandPacket;
+import net.minecraft.network.protocol.game.ServerboundPlayerInputPacket;
+import net.minecraft.network.protocol.game.ServerboundSelectTradePacket;
+import net.minecraft.network.protocol.game.ServerboundSetCreativeModeSlotPacket;
+import net.minecraft.network.protocol.game.ServerboundTeleportToEntityPacket;
+import net.minecraft.network.protocol.game.ServerboundUseItemOnPacket;
+import net.minecraft.network.protocol.game.ServerboundUseItemPacket;
+import net.minecraft.world.inventory.ContainerInput;
 *///?}
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -189,23 +84,15 @@ public abstract class ServerPlayNetworkHandlerMixin {
     //? if (>=1.19 && <=26.3) {
     /*private void anticrash$ackPrediction(int sequence) {
             if (sequence < 0) {
-*///?}
-    //? if (>=1.19 && <=26.3) {
-    /*anticrash$handler()
+    anticrash$handler()
                         .disconnect(
                                 net.minecraft.network.chat.Component.translatable(
                                         "multiplayer.disconnect.invalid_packet"));
-*///?}
-    //? if (>=1.19 && <=26.3) {
 
-    /*} else {
-*///?}
-    //? if (>=1.19 && <=26.3) {
-    /*anticrash$handler().ackBlockChangesUpTo(sequence);
-*///?}
-    //? if (>=1.19 && <=26.3) {
+    } else {
+    anticrash$handler().ackBlockChangesUpTo(sequence);
 
-    /*}
+    }
     }
 *///?}
 
@@ -267,13 +154,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
 *///?}
                     //? if (>=1.21.6 && <=26.3) {
                     /*{
-*///?}
-                    //? if (>=1.21.6 && <=1.21.8) {
-                    /*anticrash$handler()
-                                                .send(new ClientboundBlockUpdatePacket(player.level(), first));
-*///?}
-                    //? if (>=1.21.9 && <=26.3) {
-                    /*anticrash$handler()
+                    anticrash$handler()
                                                 .send(new ClientboundBlockUpdatePacket(player.level(), first));
 *///?}
 
@@ -292,19 +173,10 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 //?}
                 //? if (>=1.21.6 && <=26.3) {
                 /*{
-*///?}
-                //? if (>=1.21.6 && <=1.21.8) {
-                /*anticrash$handler()
+                anticrash$handler()
                                                 .send(new ClientboundBlockUpdatePacket(player.level(), second));
-*///?}
-                //? if (>=1.21.9 && <=26.3) {
-                /*anticrash$handler()
-                                                .send(
-                                                        new ClientboundBlockUpdatePacket(player.level(), second));
-*///?}
-                //? if (>=1.21.6 && <=26.3) {
 
-                /*}
+                }
                 }
 *///?}
                 );
@@ -321,9 +193,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
 
         //? if (>=1.18 && <=1.18.2) {
         ServerboundPlayerActionPacket.Action action = packet.getAction();
-        //?}
 
-        //? if (>=1.18 && <=1.18.2) {
         player.server.execute(() ->
                 anticrash$handler()
                         .send(
@@ -357,29 +227,15 @@ public abstract class ServerPlayNetworkHandlerMixin {
         //? if (>=1.21.6 && <=26.3) {
         /*{
                             // 1.19 replaced per-block approvals with a cumulative prediction sequence ACK.
-*///?}
-        //? if (>=1.21.6 && <=1.21.8) {
-        /*anticrash$handler()
-                                    .send(new ClientboundBlockUpdatePacket(player.level(), pos));
-*///?}
-        //? if (>=1.21.9 && <=26.3) {
-        /*anticrash$handler()
+        anticrash$handler()
                                     .send(new ClientboundBlockUpdatePacket(player.level(), pos));
 *///?}
 
         //? if (>=1.19 && <=26.3) {
         /*anticrash$ackPrediction(packet.getSequence());
-*///?}
-        //? if (>=1.19 && <=1.21.5) {
 
-        /*}
-*///?}
-        //? if (>=1.21.6 && <=26.3) {
-
-        /*}
-*///?}
-        //? if (>=1.19 && <=26.3) {
-        /*);
+        }
+        );
 *///?}
 
     }
@@ -886,19 +742,13 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 if (anticrash$frozen()
                         && !anticrash$controller().config().recovery.lock.allowEntityAttack) {
                     info.cancel();
-*///?}
 
-        //? if (>=26.1 && <=26.3) {
-        /*anticrash$resyncInventory();
-*///?}
+        anticrash$resyncInventory();
 
-        //? if (>=26.1 && <=26.3) {
-        /*return;
+        return;
                 }
-*///?}
 
-        //? if (>=26.1 && <=26.3) {
-        /*anticrash$record(
+        anticrash$record(
                         "ENTITY_ATTACK",
                         anticrash$player(),
                         "player",
@@ -935,24 +785,16 @@ public abstract class ServerPlayNetworkHandlerMixin {
 *///?}
         //? if (>=26.1 && <=26.3) {
         /*boolean drop = packet.containerInput() == ContainerInput.THROW;
-*///?}
 
-        //? if (>=26.1 && <=26.3) {
-        /*if (anticrash$frozen()) {
+        if (anticrash$frozen()) {
                     var lock = anticrash$controller().config().recovery.lock;
-*///?}
 
-        //? if (>=26.1 && <=26.3) {
-        /*if ((drop && !lock.allowItemDrop) || (!drop && !lock.allowContainerInteraction)) {
+        if ((drop && !lock.allowItemDrop) || (!drop && !lock.allowContainerInteraction)) {
                         info.cancel();
-*///?}
 
-        //? if (>=26.1 && <=26.3) {
-        /*anticrash$resyncInventory();
-*///?}
+        anticrash$resyncInventory();
 
-        //? if (>=26.1 && <=26.3) {
-        /*return;
+        return;
                     }
                 }
 *///?}
@@ -968,10 +810,8 @@ public abstract class ServerPlayNetworkHandlerMixin {
                         null,
                         anticrash$player().containerMenu.getCarried());
             }
-*///?}
 
-        //? if (>=26.1 && <=26.3) {
-        /*@Inject(method = "handleSetCreativeModeSlot", at = @At("HEAD"), cancellable = true)
+        @Inject(method = "handleSetCreativeModeSlot", at = @At("HEAD"), cancellable = true)
             private void anticrash$creative(
                     ServerboundSetCreativeModeSlotPacket packet, CallbackInfo info) {
                 boolean drop = packet.slotNum() < 0;
@@ -1035,24 +875,18 @@ public abstract class ServerPlayNetworkHandlerMixin {
         //? if (>=1.18 && <=1.21.11) {
         if (anticrash$frozen()) {
             var lock = anticrash$controller().config().recovery.lock;
-            //?}
 
-            //? if (>=1.18 && <=1.21.11) {
             if ((drop && !lock.allowItemDrop) || (!drop && !lock.allowContainerInteraction)) {
                 info.cancel();
-                //?}
 
-                //? if (>=1.18 && <=1.21.11) {
                 anticrash$resyncInventory();
-                //?}
 
-                //? if (>=1.18 && <=1.21.11) {
                 return;
             }
         }
         //?}
 
-        //? if (>=1.18 && <=1.20.1) {
+        //? if (>=1.18 && <=1.20.4) {
         anticrash$record(
                 drop ? "ITEM_DROP" : "CREATIVE_INVENTORY",
                 anticrash$player(),
@@ -1061,15 +895,6 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 null,
                 packet.getItem());
         //?}
-        //? if (>=1.20.2 && <=1.20.4) {
-        /*anticrash$record(
-                        drop ? "ITEM_DROP" : "CREATIVE_INVENTORY",
-                        anticrash$player(),
-                        "player",
-                        drop ? "world" : "inventory",
-                        null,
-                        packet.getItem());
-*///?}
         //? if (>=1.20.5 && <=1.21.11) {
         /*anticrash$record(
                         drop ? "ITEM_DROP" : "CREATIVE_INVENTORY",
@@ -1094,7 +919,6 @@ public abstract class ServerPlayNetworkHandlerMixin {
             return;
         }
 
-        //? if (>=1.18 && <=1.21.11) {
         anticrash$record(
                 "CONTAINER_CLOSE",
                 anticrash$player(),
@@ -1102,17 +926,6 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 "player",
                 null,
                 anticrash$player().getMainHandItem());
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*anticrash$record(
-                        "CONTAINER_CLOSE",
-                        anticrash$player(),
-                        "container",
-                        "player",
-                        null,
-                        anticrash$player().getMainHandItem());
-*///?}
-
     }
 
     @Inject(method = "handleSelectTrade", at = @At("HEAD"), cancellable = true)
@@ -1148,15 +961,11 @@ public abstract class ServerPlayNetworkHandlerMixin {
                                             shift = At.Shift.AFTER),
                             cancellable = true)
                     private void anticrash$pickBlock(ServerboundPickItemFromBlockPacket packet, CallbackInfo info)
-*///?}
-                //? if (>=1.21.4 && <=26.3) {
-                /*{
+                {
                         anticrash$pickInventory(info);
                     }
-*///?}
 
-                //? if (>=1.21.4 && <=26.3) {
-                /*@Inject(
+                @Inject(
                             method = "handlePickItemFromEntity",
                             at =
                                     @At(
@@ -1166,15 +975,11 @@ public abstract class ServerPlayNetworkHandlerMixin {
                                             shift = At.Shift.AFTER),
                             cancellable = true)
                     private void anticrash$pickEntity(ServerboundPickItemFromEntityPacket packet, CallbackInfo info)
-*///?}
-                //? if (>=1.21.4 && <=26.3) {
-                /*{
+                {
                         anticrash$pickInventory(info);
                     }
-*///?}
 
-                //? if (>=1.21.4 && <=26.3) {
-                /*private void anticrash$pickInventory(CallbackInfo info)
+                private void anticrash$pickInventory(CallbackInfo info)
 *///?}
             {
         if (anticrash$frozen()
@@ -1184,7 +989,6 @@ public abstract class ServerPlayNetworkHandlerMixin {
             return;
         }
 
-        //? if (>=1.18 && <=1.21.11) {
         anticrash$record(
                 "INVENTORY_PICK",
                 anticrash$player(),
@@ -1192,17 +996,6 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 "hotbar",
                 null,
                 anticrash$player().getMainHandItem());
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*anticrash$record(
-                        "INVENTORY_PICK",
-                        anticrash$player(),
-                        "inventory",
-                        "hotbar",
-                        null,
-                        anticrash$player().getMainHandItem());
-*///?}
-
     }
 
     @Inject(method = "handleTeleportToEntityPacket", at = @At("HEAD"), cancellable = true)
@@ -1352,18 +1145,12 @@ public abstract class ServerPlayNetworkHandlerMixin {
     @Inject(method = "handleCustomPayload", at = @At("HEAD"), cancellable = true)
     private void anticrash$customPayload(ServerboundCustomPayloadPacket packet, CallbackInfo info) {
         if (!anticrash$frozen()) return;
-        //?}
 
-        //? if (>=1.18 && <=1.20.1) {
         if (com.atsukimc.anticrash.network.DeferredPayloads.immediate(
                 String.valueOf(packet.getIdentifier()))) return;
-        //?}
 
-        //? if (>=1.18 && <=1.20.1) {
         anticrash$controller().deferCustomPayload(anticrash$handler(), packet);
-        //?}
 
-        //? if (>=1.18 && <=1.20.1) {
         info.cancel();
     }
 
@@ -1372,35 +1159,25 @@ public abstract class ServerPlayNetworkHandlerMixin {
     //? if (>=1.18 && <=1.21.11) {
     private static boolean anticrash$entityActionIsAttack(ServerboundInteractPacket packet) {
         boolean[] attack = {false};
-        //?}
 
-        //? if (>=1.18 && <=1.21.11) {
         packet.dispatch(
                 new ServerboundInteractPacket.Handler() {
                     @Override
                     public void onInteraction(InteractionHand hand) {}
 
-                    //?}
-
-                    //? if (>=1.18 && <=1.21.11) {
                     @Override
                     public void onInteraction(InteractionHand hand, Vec3 position) {}
 
-                    //?}
-
-                    //? if (>=1.18 && <=1.21.11) {
                     @Override
                     public void onAttack() {
                         attack[0] = true;
                     }
                 });
-        //?}
 
-        //? if (>=1.18 && <=1.21.11) {
         return attack[0];
     }
 }
-//?}
+        //?}
     //? if (>=26.1 && <=26.3) {
 
     /*/^*

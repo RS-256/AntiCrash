@@ -2,13 +2,8 @@ package com.atsukimc.anticrash.mixin;
 
 import com.atsukimc.anticrash.snapshot.logical.ChunkMutationTracker;
 
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.level.block.entity.BlockEntity;
-//?}
 import net.minecraft.world.level.ChunkPos;
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.entity.BlockEntity;
-*///?}
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -37,13 +32,11 @@ public abstract class BlockEntityMutationMixin {
                 blockEntity.getLevel(),
                 new ChunkPos(blockEntity.getBlockPos()),
                 "blockEntity.markDirty");
-        //?}
-        //? if (>=26.1 && <=26.3) {
+        //?} else {
         /*ChunkMutationTracker.record(
-                        blockEntity.getLevel(),
-                        ChunkPos.containing(blockEntity.getBlockPos()),
-                        "blockEntity.markDirty");
-*///?}
-
+                blockEntity.getLevel(),
+                ChunkPos.containing(blockEntity.getBlockPos()),
+                "blockEntity.markDirty");
+        *///?}
     }
 }

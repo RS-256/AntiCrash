@@ -3,7 +3,6 @@
 
 import net.minecraft.world.food.FoodData;
 
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
@@ -12,8 +11,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 public interface HungerManagerAccessorMixin {
     @Accessor("exhaustionLevel")
     float anticrash$getExhaustion();
-
-
 
 @Accessor("exhaustionLevel")
     void anticrash$setExhaustion(float value);

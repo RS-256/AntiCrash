@@ -3,40 +3,11 @@
 
 import com.atsukimc.anticrash.mixin.RecipeMatchGetterAccessorMixin;
 
-//? if (>=1.21.2 && <=1.21.11) {
-/^import net.minecraft.world.level.block.state.BlockState;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.core.BlockPos;
-^///?}
-
-//? if (>=1.21.2 && <=1.21.11) {
-/^import net.minecraft.world.level.block.entity.BlockEntity;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.Level;
-^///?}
-
-//? if (>=1.21.2 && <=1.21.11) {
-/^import net.minecraft.world.level.block.entity.BlockEntityTicker;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.block.entity.BlockEntity;
-^///?}
-
-//? if (>=1.21.2 && <=1.21.11) {
-/^import net.minecraft.core.BlockPos;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.block.entity.BlockEntityTicker;
-^///?}
-
-//? if (>=1.21.2 && <=1.21.11) {
-/^import net.minecraft.world.level.Level;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.block.state.BlockState;
-^///?}
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
 
 
 /^* A native ticker delegate plus its semantic recipe cache; never serialized as a Java object. ^/

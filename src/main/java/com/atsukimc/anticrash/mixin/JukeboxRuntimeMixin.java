@@ -3,53 +3,21 @@
 
 //? if (>=1.19.1 && <=1.20.6) {
 /^import com.atsukimc.anticrash.runtime.RuntimeExtensionNbt;
+import net.minecraft.nbt.CompoundTag;
+import org.spongepowered.asm.mixin.Shadow;
 ^///?}
 
-
-//? if (>=1.19.1 && <=1.21.11) {
-/^import net.minecraft.world.level.block.state.BlockState;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.core.BlockPos;
-^///?}
-
-//? if (>=1.19.1 && <=1.21.11) {
-/^import net.minecraft.world.level.block.entity.JukeboxBlockEntity;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.Level;
-^///?}
-
-//? if (>=1.19.1 && <=1.20.6) {
-/^import net.minecraft.nbt.CompoundTag;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.block.entity.JukeboxBlockEntity;
-^///?}
-
-//? if (>=1.19.1 && <=1.21.11) {
-/^import net.minecraft.core.BlockPos;
-^///?}
-
-//? if (>=1.19.1 && <=1.21.11) {
-/^import net.minecraft.world.level.Level;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.block.state.BlockState;
-^///?}
-
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.entity.JukeboxBlockEntity;
+import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.Mixin;
-//? if (>=1.19.1 && <=1.20.6) {
-/^import org.spongepowered.asm.mixin.Shadow;
-^///?}
-
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /^* 1.19.1 saves TickCount/RecordStartTick/IsPlaying, but omits the periodic game-event phase. ^/
-
 
 /^* 1.21: Vanilla saves ticks_since_song_started, including the JUKEBOX_PLAY modulo-20 phase. ^/
 @Mixin(JukeboxBlockEntity.class)
@@ -58,8 +26,6 @@ public abstract class JukeboxRuntimeMixin {
 //? if (>=1.19.1 && <=1.20.6) {
 /^@Shadow private int ticksSinceLastEvent;
 ^///?}
-
-
 
 //? if (>=1.19.1 && <=1.20.4) {
 /^@Inject(method = "saveAdditional", at = @At("TAIL"))
@@ -85,11 +51,9 @@ public abstract class JukeboxRuntimeMixin {
 
 //? if (>=1.19.1 && <=1.20.6) {
 /^if (!RuntimeExtensionNbt.savingLoadedChunk()) return;
-^///?}
 
 
-//? if (>=1.19.1 && <=1.20.6) {
-/^RuntimeExtensionNbt.write(
+RuntimeExtensionNbt.write(
                 nbt, extension -> extension.putInt("JukeboxEventPhase", ticksSinceLastEvent));
     }
 ^///?}
@@ -110,11 +74,9 @@ public abstract class JukeboxRuntimeMixin {
 //? if (>=1.19.1 && <=1.20.6) {
 /^{
         CompoundTag extension = RuntimeExtensionNbt.read(nbt);
-^///?}
 
 
-//? if (>=1.19.1 && <=1.20.6) {
-/^if (extension != null && extension.contains("JukeboxEventPhase", 3)) {
+if (extension != null && extension.contains("JukeboxEventPhase", 3)) {
             ticksSinceLastEvent = extension.getInt("JukeboxEventPhase");
         }
     }

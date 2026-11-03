@@ -2,40 +2,11 @@ package com.atsukimc.anticrash.runtime;
 
 import com.atsukimc.anticrash.mixin.ServerWorldAccessorMixin;
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.entity.Entity;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.core.BlockPos;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.entity.item.FallingBlockEntity;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.ServerLevel;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.entity.item.PrimedTnt;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.entity.Entity;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.server.level.ServerLevel;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.entity.item.FallingBlockEntity;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.core.BlockPos;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.entity.item.PrimedTnt;
-*///?}
+import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.item.PrimedTnt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,17 +71,9 @@ public final class TransientEntityTickSnapshot {
                 .forEach(entity -> {
                     String kind = kind(entity);
 
-                    //? if (>=1.18 && <=1.21.4) {
                     if (kind == null
                             || entity.isRemoved()
-                            || !world.isPositionEntityTicking(entity.blockPosition()))
-                        //?}
-                        //? if (>=1.21.5 && <=26.3) {
-                        /*if (kind == null
-                                                    || entity.isRemoved()
-                                                    || !world.isPositionEntityTicking(entity.blockPosition()))
-*///?}
-                        return;
+                            || !world.isPositionEntityTicking(entity.blockPosition())) return;
                     TransientEntityTickSnapshot snapshot = new TransientEntityTickSnapshot();
                     snapshot.dimension = dimension;
 

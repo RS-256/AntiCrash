@@ -3,17 +3,11 @@ package com.atsukimc.anticrash.player;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.nbt.Tag;
-//?}
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.nbt.Tag;
-*///?}
-
-import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;

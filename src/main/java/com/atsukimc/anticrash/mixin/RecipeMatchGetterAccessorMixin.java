@@ -5,7 +5,6 @@
 /^import net.minecraft.resources.ResourceLocation;
 ^///?}
 
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
@@ -22,8 +21,6 @@ public interface RecipeMatchGetterAccessorMixin {
     @Accessor("lastRecipe")
     net.minecraft.resources.ResourceKey<net.minecraft.world.item.crafting.Recipe<?>> anticrash$getRecipeId();
 ^///?}
-
-
 
 //? if (>=1.19 && <=1.21.1) {
 /^@Accessor("lastRecipe")

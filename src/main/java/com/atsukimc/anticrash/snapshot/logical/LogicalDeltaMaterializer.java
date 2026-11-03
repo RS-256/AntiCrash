@@ -1,5 +1,11 @@
 package com.atsukimc.anticrash.snapshot.logical;
 
+//? if (>=1.18 && <=1.21.10) {
+import net.minecraft.resources.ResourceLocation;
+//?} else {
+/*import net.minecraft.resources.Identifier;
+*///?}
+
 import com.atsukimc.anticrash.player.NbtCodec;
 import com.atsukimc.anticrash.snapshot.FileFacts;
 import com.atsukimc.anticrash.snapshot.JavaIncrementalBackend;
@@ -8,29 +14,9 @@ import com.atsukimc.anticrash.snapshot.SnapshotResult;
 import com.atsukimc.anticrash.util.Hashing;
 
 import net.minecraft.nbt.CompoundTag;
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.nbt.ListTag;
-*///?}
-
-import net.minecraft.nbt.NbtIo;
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.nbt.ListTag;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.resources.Identifier;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-//? if (>=1.18 && <=1.21.10) {
-import net.minecraft.resources.ResourceLocation;
-//?}
-//? if 1.21.11 {
-/*import net.minecraft.resources.Identifier;
-*///?}
-//?}
+import net.minecraft.nbt.NbtIo;
 import net.minecraft.world.level.ChunkPos;
-
 import net.minecraft.world.level.chunk.storage.RegionFile;
 
 import java.io.DataOutputStream;
@@ -278,12 +264,7 @@ public final class LogicalDeltaMaterializer {
                                 false))
 *///?}
         {
-            //? if (>=1.18 && <=1.19.1) {
             region.clear(chunk);
-            //?}
-            //? if (>=1.19.2 && <=26.3) {
-            /*region.clear(chunk);
-*///?}
 
             region.flush();
         }
@@ -336,12 +317,7 @@ public final class LogicalDeltaMaterializer {
                 //? if (>=1.18 && <=1.20.1) {
                 root = NbtIo.read(input);
                 //?}
-                //? if (>=1.20.2 && <=1.20.3) {
-                /*root =
-                                        NbtIo.read(
-                                                input, net.minecraft.nbt.NbtAccounter.create(16 * 1024 * 1024));
-*///?}
-                //? if (>=1.20.4 && <=26.3) {
+                //? if (>=1.20.2 && <=26.3) {
                 /*root =
                                         NbtIo.read(
                                                 input, net.minecraft.nbt.NbtAccounter.create(16 * 1024 * 1024));

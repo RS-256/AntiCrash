@@ -1,5 +1,13 @@
 package com.atsukimc.anticrash.runtime;
 
+//? if (>=1.18 && <=1.21.4) {
+import java.util.regex.Matcher;
+import net.minecraft.server.level.DistanceManager;
+import net.minecraft.util.SortedArraySet;
+//?} else {
+/*import net.minecraft.world.level.TicketStorage;
+*///?}
+
 import com.atsukimc.anticrash.mixin.ChunkTicketAccessorMixin;
 import com.atsukimc.anticrash.mixin.ChunkTicketManagerAccessorMixin;
 import com.atsukimc.anticrash.mixin.EntityListAccessorMixin;
@@ -8,59 +16,12 @@ import com.atsukimc.anticrash.mixin.WorldAccessorMixin;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.entity.Entity;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.core.BlockPos;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.server.level.Ticket;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.ServerLevel;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-//? if (>=1.18 && <=1.21.4) {
-import net.minecraft.server.level.DistanceManager;
-//?}
-//? if (>=1.21.5 && <=1.21.11) {
-/*import net.minecraft.world.level.TicketStorage;
-*///?}
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.Ticket;
-*///?}
-
-import net.minecraft.server.level.TicketType;
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.server.level.ServerLevel;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.entity.Entity;
-*///?}
-
-//? if (>=1.18 && <=1.21.4) {
-import net.minecraft.util.SortedArraySet;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.ChunkPos;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.core.BlockPos;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.TicketStorage;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
+import net.minecraft.server.level.Ticket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.TicketType;
 import net.minecraft.world.level.ChunkPos;
-//?}
-
 import net.minecraft.world.level.block.entity.TickingBlockEntity;
 
 import java.util.ArrayList;
@@ -68,10 +29,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-//? if (>=1.18 && <=1.21.4) {
-import java.util.regex.Matcher;
-//?}
-
 import java.util.regex.Pattern;
 
 /**
@@ -272,14 +229,10 @@ public final class RuntimeOrderRestorer {
 
         for (Map.Entry<String, ServerLevel> world : worlds.entrySet()) {
 
-            //? if (>=1.18 && <=1.20.6) {
+            //? if (>=1.18 && <=1.21.4) {
             DistanceManager manager =
                     world.getValue().getChunkSource().chunkMap.getDistanceManager();
             //?}
-            //? if (>=1.21 && <=1.21.4) {
-            /*DistanceManager manager =
-                                world.getValue().getChunkSource().chunkMap.getDistanceManager();
-*///?}
             //? if (>=1.21.5 && <=26.3) {
             /*TicketStorage manager =
                                 ((com.atsukimc.anticrash.mixin.ServerChunkManagerAccessorMixin)
@@ -431,13 +384,9 @@ public final class RuntimeOrderRestorer {
             if (world == null || entry.level < 0 || entry.level > 64) continue;
             ChunkPos chunk = new ChunkPos(entry.x, entry.z);
 
-            //? if (>=1.18 && <=1.20.6) {
+            //? if (>=1.18 && <=1.21.4) {
             DistanceManager manager = world.getChunkSource().chunkMap.getDistanceManager();
             //?}
-            //? if (>=1.21 && <=1.21.4) {
-            /*DistanceManager manager =
-                                world.getChunkSource().chunkMap.getDistanceManager();
-*///?}
             //? if (>=1.21.5 && <=26.3) {
             /*TicketStorage manager =
                                 ((com.atsukimc.anticrash.mixin.ServerChunkManagerAccessorMixin)
@@ -452,32 +401,22 @@ public final class RuntimeOrderRestorer {
             /*TicketType type =
                                 switch (entry.type) {
                                     case "portal" -> TicketType.PORTAL;
-*///?}
 
-            //? if (>=1.21.5 && <=26.3) {
-            /*case "ender_pearl" -> TicketType.ENDER_PEARL;
-*///?}
+            case "ender_pearl" -> TicketType.ENDER_PEARL;
 
-            //? if (>=1.21.5 && <=26.3) {
-            /*case "unknown" -> TicketType.UNKNOWN;
-*///?}
+            case "unknown" -> TicketType.UNKNOWN;
 
-            //? if (>=1.21.5 && <=26.3) {
-            /*default -> null;
+            default -> null;
                                 };
 *///?}
 
             //? if (>=1.18 && <=1.21.4) {
             Object argument;
-            //?}
 
-            //? if (>=1.18 && <=1.21.4) {
             switch (entry.type) {
                 case "portal" -> {
                     Matcher matcher = BLOCK_POS.matcher(entry.argument);
-                    //?}
 
-                    //? if (>=1.18 && <=1.21.4) {
                     if (!matcher.find() || entry.level > 33)
                         //?}
                         //? if (>=1.21.5 && <=26.3) {
@@ -491,17 +430,11 @@ public final class RuntimeOrderRestorer {
                                     Integer.parseInt(matcher.group(1)),
                                     Integer.parseInt(matcher.group(2)),
                                     Integer.parseInt(matcher.group(3)));
-                    //?}
 
-                    //? if (>=1.18 && <=1.21.4) {
                     manager.addRegionTicket(TicketType.PORTAL, chunk, 33 - entry.level, portal);
-                    //?}
 
-                    //? if (>=1.18 && <=1.21.4) {
                     type = TicketType.PORTAL;
-                    //?}
 
-                    //? if (>=1.18 && <=1.21.4) {
                     argument = portal;
                 }
                 //?}
@@ -563,23 +496,15 @@ public final class RuntimeOrderRestorer {
                     //? if (>=1.18 && <=1.21.4) {
 
                 }
-                //?}
 
-                //? if (>=1.18 && <=1.21.4) {
                 case "unknown" -> {
                     manager.addTicket(TicketType.UNKNOWN, chunk, entry.level, chunk);
-                    //?}
 
-                    //? if (>=1.18 && <=1.21.4) {
                     type = TicketType.UNKNOWN;
-                    //?}
 
-                    //? if (>=1.18 && <=1.21.4) {
                     argument = chunk;
                 }
-                //?}
 
-                //? if (>=1.18 && <=1.21.4) {
                 default -> {
                     continue;
                 }
@@ -609,12 +534,7 @@ public final class RuntimeOrderRestorer {
 
             if (tickets == null) continue;
 
-            //? if (>=1.18 && <=1.21.4) {
             long expiry = type.timeout();
-            //?}
-            //? if (>=1.21.5 && <=26.3) {
-            /*long expiry = type.timeout();
-*///?}
 
             //? if (>=1.18 && <=1.21.4) {
             for (Ticket<?> ticket : tickets)
@@ -645,10 +565,8 @@ public final class RuntimeOrderRestorer {
                     //? if (>=1.21.5 && <=26.3) {
                     /*if (entry.remainingTicks > expiry)
                                             throw new IllegalArgumentException("Invalid remaining ticket lifetime");
-*///?}
 
-                    //? if (>=1.21.5 && <=26.3) {
-                    /*ticketAccessor.anticrash$setTicksLeft(entry.remainingTicks);
+                    ticketAccessor.anticrash$setTicksLeft(entry.remainingTicks);
 *///?}
 
                     restored++;

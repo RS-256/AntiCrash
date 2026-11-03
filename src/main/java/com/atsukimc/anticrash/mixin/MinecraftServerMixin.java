@@ -56,25 +56,13 @@ public abstract class MinecraftServerMixin {
         if (controller != null && controller.holdsServerTasks()) callbackInfo.setReturnValue(false);
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Redirect(
             method = "tickChildren",
             at =
                     @At(
                             value = "INVOKE",
                             target = "Lnet/minecraft/server/ServerFunctionManager;tick()V"))
-    private void anticrash$skipFunctionsDuringRecovery(ServerFunctionManager manager)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Redirect(
-                            method = "tickChildren",
-                            at =
-                                    @At(
-                                            value = "INVOKE",
-                                            target = "Lnet/minecraft/server/ServerFunctionManager;tick()V"))
-                    private void anticrash$skipFunctionsDuringRecovery(ServerFunctionManager manager)
-*///?}
-            {
+    private void anticrash$skipFunctionsDuringRecovery(ServerFunctionManager manager) {
         AntiCrashController controller = AntiCrashMod.controller();
         if (controller == null || !controller.isWorldFrozen()) manager.tick();
     }
@@ -91,10 +79,8 @@ public abstract class MinecraftServerMixin {
         private void anticrash$skipClocksDuringRecovery(
                 net.minecraft.world.clock.ServerClockManager clocks) {
             AntiCrashController controller = AntiCrashMod.controller();
-*///?}
 
-    //? if (>=26.1 && <=26.3) {
-    /*if (controller == null || !controller.isWorldFrozen()) clocks.tick();
+    if (controller == null || !controller.isWorldFrozen()) clocks.tick();
         }
 *///?}
 

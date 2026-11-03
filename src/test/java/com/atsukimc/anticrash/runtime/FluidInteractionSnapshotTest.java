@@ -92,77 +92,55 @@ class FluidInteractionSnapshotTest {
                         true,
                         Vec3.ZERO,
                         0);
-^///?}
 
 
-//? if 26.3 {
-/^var current =
+var current =
                 new FluidInteractionSnapshot.State(
                         "minecraft:water", 0.5, false, new Vec3(0.5, 0, 0), 2);
-^///?}
 
 
-//? if 26.3 {
-/^var n = new ListTag();
-^///?}
+var n = new ListTag();
 
 
-//? if 26.3 {
-/^n.add(contact.write());
-^///?}
+n.add(contact.write());
 
 
-//? if 26.3 {
-/^n.add(current.write());
-^///?}
+n.add(current.write());
 
 
-//? if 26.3 {
-/^assertEquals(java.util.List.of(contact, current), FluidInteractionSnapshot.decode(n));
+assertEquals(java.util.List.of(contact, current), FluidInteractionSnapshot.decode(n));
     }
-^///?}
 
 
 
-//? if 26.3 {
-/^@Test
+@Test
     void wrongDomainOrOrderCannotBeApplied() {
         var water = new FluidInteractionSnapshot.State("minecraft:water", 0, false, Vec3.ZERO, 0);
-^///?}
 
 
-//? if 26.3 {
-/^var lava = new FluidInteractionSnapshot.State("minecraft:lava", 0, false, Vec3.ZERO, 0);
-^///?}
+var lava = new FluidInteractionSnapshot.State("minecraft:lava", 0, false, Vec3.ZERO, 0);
 
 
-//? if 26.3 {
-/^var expected = java.util.List.of(water, lava);
-^///?}
+var expected = java.util.List.of(water, lava);
 
 
-//? if 26.3 {
-/^assertDoesNotThrow(() ->
+assertDoesNotThrow(() ->
                 FluidInteractionSnapshot.validateDomains(
                         expected,
                         java.util.List.of(),
                         java.util.List.of("minecraft:water", "minecraft:lava")));
-^///?}
 
 
-//? if 26.3 {
-/^assertThrows(
+assertThrows(
                 IllegalStateException.class,
                 () ->
                         FluidInteractionSnapshot.validateDomains(
                                 expected,
                                 java.util.List.of(),
                                 java.util.List.of("minecraft:lava", "minecraft:water")));
-^///?}
 
 
-//? if 26.3 {
-/^assertThrows(
+assertThrows(
                 IllegalStateException.class,
                 () ->
                         FluidInteractionSnapshot.validateDomains(
@@ -170,19 +148,15 @@ class FluidInteractionSnapshotTest {
                                 java.util.List.of("minecraft:water"),
                                 java.util.List.of("minecraft:water", "minecraft:lava")));
     }
-^///?}
 
 
 
-//? if 26.3 {
-/^@Test
+@Test
     void auditedNativeFactoryReusesTrackerWithoutReplacingCollection() throws Exception {
         var interaction = new net.minecraft.world.entity.EntityFluidInteraction(java.util.Set.of());
-^///?}
 
 
-//? if 26.3 {
-/^var fluid =
+var fluid =
                 net.minecraft.core.registries.BuiltInRegistries.FLUID
                         .get(
                                 net.minecraft.resources.ResourceKey.create(
@@ -190,31 +164,21 @@ class FluidInteractionSnapshotTest {
                                         net.minecraft.resources.Identifier.parse(
                                                 "minecraft:water")))
                         .orElseThrow();
-^///?}
 
 
-//? if 26.3 {
-/^var first = FluidInteractionSnapshot.createTracker(interaction, fluid);
-^///?}
+var first = FluidInteractionSnapshot.createTracker(interaction, fluid);
 
 
-//? if 26.3 {
-/^assertSame(first, FluidInteractionSnapshot.createTracker(interaction, fluid));
-^///?}
+assertSame(first, FluidInteractionSnapshot.createTracker(interaction, fluid));
 
 
-//? if 26.3 {
-/^var list = interaction.getClass().getDeclaredField("fluidTrackers");
-^///?}
+var list = interaction.getClass().getDeclaredField("fluidTrackers");
 
 
-//? if 26.3 {
-/^list.setAccessible(true);
-^///?}
+list.setAccessible(true);
 
 
-//? if 26.3 {
-/^assertEquals(1, ((java.util.List<?>) list.get(interaction)).size());
+assertEquals(1, ((java.util.List<?>) list.get(interaction)).size());
     }
 ^///?}
 

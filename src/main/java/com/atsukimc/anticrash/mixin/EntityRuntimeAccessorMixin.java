@@ -11,60 +11,37 @@ public interface EntityRuntimeAccessorMixin {
 
     //? if (>=1.21.11 && <=26.3) {
     /*@Accessor("lastKnownSpeed")
-        net.minecraft.world.phys.Vec3 anticrash$movement();
-*///?}
+    net.minecraft.world.phys.Vec3 anticrash$movement();
 
-    //? if (>=1.21.11 && <=26.3) {
-    /*@Accessor("lastKnownSpeed")
-        void anticrash$setMovement(net.minecraft.world.phys.Vec3 value);
-*///?}
+    @Accessor("lastKnownSpeed")
+    void anticrash$setMovement(net.minecraft.world.phys.Vec3 value);
 
-    //? if (>=1.21.11 && <=26.3) {
-    /*@Accessor("lastKnownPosition")
-        net.minecraft.world.phys.Vec3 anticrash$lastPos();
-*///?}
+    @Accessor("lastKnownPosition")
+    net.minecraft.world.phys.Vec3 anticrash$lastPos();
 
-    //? if (>=1.21.11 && <=26.3) {
-    /*@Accessor("lastKnownPosition")
-        void anticrash$setLastPos(net.minecraft.world.phys.Vec3 value);
-*///?}
+    @Accessor("lastKnownPosition")
+    void anticrash$setLastPos(net.minecraft.world.phys.Vec3 value);
+    *///?}
 
     //? if (>=1.20 && <=26.3) {
     /*@Accessor("onGroundNoBlocks")
         boolean anticrash$forceSupportUpdate();
-*///?}
+    *///?}
 
     //? if (>=1.18 && <=1.20.6) {
     @Accessor("isInsidePortal")
     boolean anticrash$isInNetherPortal();
 
-    //?}
-    //? if (>=26.1 && <=26.3) {
-    /*@Accessor("boardingCooldown")
-        int anticrash$getRidingCooldown();
-*///?}
-
-    //? if (>=1.18 && <=1.20.6) {
     @Accessor("portalTime")
     int anticrash$getNetherPortalTime();
 
     //?}
-    //? if (>=26.1 && <=26.3) {
-    /*@Accessor("firstTick")
-        boolean anticrash$isFirstUpdate();
-*///?}
 
-    //? if (>=1.18 && <=1.21.11) {
     @Accessor("boardingCooldown")
     int anticrash$getRidingCooldown();
 
-    //?}
-
-    //? if (>=1.18 && <=1.21.11) {
     @Accessor("firstTick")
     boolean anticrash$isFirstUpdate();
-
-    //?}
 
     @Accessor("wasTouchingWater")
     boolean anticrash$isTouchingWater();
@@ -73,10 +50,7 @@ public interface EntityRuntimeAccessorMixin {
 
     //? if (>=1.18 && <=26.1) {
     @Accessor("ENTITY_COUNTER")
-    static java.util.concurrent.atomic.AtomicInteger anticrash$currentId()
-                //?}
-                //? if (>=1.18 && <=26.1) {
-            {
+    static java.util.concurrent.atomic.AtomicInteger anticrash$currentId() {
         throw new AssertionError();
     }
     //?}

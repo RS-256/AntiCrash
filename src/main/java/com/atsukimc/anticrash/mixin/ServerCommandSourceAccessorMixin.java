@@ -1,9 +1,7 @@
 package com.atsukimc.anticrash.mixin;
 
 import net.minecraft.commands.CommandSource;
-
 import net.minecraft.commands.CommandSourceStack;
-
 import net.minecraft.network.chat.Component;
 
 import org.spongepowered.asm.mixin.Mixin;

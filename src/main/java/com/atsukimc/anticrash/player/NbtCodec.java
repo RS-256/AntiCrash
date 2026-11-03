@@ -1,38 +1,10 @@
 package com.atsukimc.anticrash.player;
 
 import net.minecraft.nbt.CompoundTag;
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.nbt.Tag;
-//?}
-//? if (>=1.18.1 && <=26.3) {
 import net.minecraft.nbt.EndTag;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.nbt.NbtAccounter;
-*///?}
-
-//? if 1.18 || (>=1.20.4 && <=26.3) {
-/*import net.minecraft.nbt.NbtIo;
-*///?}
-
-//? if (>=1.18.1 && <=1.20.3) {
-import net.minecraft.nbt.NbtIo;
-//?}
-//? if 1.18 {
-/*import net.minecraft.nbt.EndTag;
-*///?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.nbt.Tag;
-*///?}
-
-//? if (>=1.18 && <=1.20.3) {
 import net.minecraft.nbt.NbtAccounter;
-//?}
-//? if (>=1.20.4 && <=1.21.11) {
-/*import net.minecraft.nbt.NbtAccounter;
-*///?}
-
+import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.TagTypes;
 
 import java.io.ByteArrayInputStream;
@@ -83,29 +55,11 @@ public final class NbtCodec {
         try (DataInputStream input = new DataInputStream(new ByteArrayInputStream(bytes))) {
             int type = input.readUnsignedByte();
 
-            //? if (>=1.18.1 && <=1.21.11) {
-            if (type == Tag.TAG_END)
-            //?}
-            //? if 1.18 {
-            /*if (type == Tag.TAG_END)
-*///?}
-            //? if (>=26.1 && <=26.3) {
-            /*if (type == Tag.TAG_END)
-*///?}
-            {
+            if (type == Tag.TAG_END) {
                 if (input.available() != 0)
                     throw new IOException("Encoded NBT contains trailing bytes");
 
-                //? if (>=1.18.1 && <=1.21.11) {
                 return EndTag.INSTANCE;
-                //?}
-                //? if 1.18 {
-                /*return EndTag.INSTANCE;
-*///?}
-                //? if (>=26.1 && <=26.3) {
-                /*return EndTag.INSTANCE;
-*///?}
-
             }
             input.readUTF(); // root name; encode() writes the empty name used by Vanilla NbtIo
 
@@ -116,10 +70,7 @@ public final class NbtCodec {
                 //? if (>=1.18 && <=1.20.1) {
                 element = TagTypes.getType(type).load(input, 0, new NbtAccounter(MAX_NBT_BYTES));
                 //?}
-                //? if (>=1.20.2 && <=1.20.3) {
-                /*element = TagTypes.getType(type).load(input, NbtAccounter.create(MAX_NBT_BYTES));
-*///?}
-                //? if (>=1.20.4 && <=26.3) {
+                //? if (>=1.20.2 && <=26.3) {
                 /*element = TagTypes.getType(type).load(input, NbtAccounter.create(MAX_NBT_BYTES));
 *///?}
 

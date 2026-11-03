@@ -2,22 +2,9 @@ package com.atsukimc.anticrash.mixin;
 
 import com.atsukimc.anticrash.snapshot.logical.ChunkMutationTracker;
 
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.level.block.state.BlockState;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.core.BlockPos;
-*///?}
-
-import net.minecraft.world.level.block.entity.BlockEntity;
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.core.BlockPos;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.state.BlockState;
-*///?}
-
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 
 import org.spongepowered.asm.mixin.Mixin;

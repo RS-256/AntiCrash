@@ -1,67 +1,15 @@
 //? if (>=1.21.6 && <=26.3) {
 /*package com.atsukimc.anticrash.runtime;
 
-//? if (>=1.21.6 && <=1.21.11) {
-/^import net.minecraft.world.entity.Entity;
-^///?}
-
-//? if (>=1.21.6 && <=1.21.11) {
-/^import net.minecraft.world.entity.player.Abilities;
-^///?}
-
-//? if (>=1.21.6 && <=1.21.11) {
-/^import net.minecraft.world.Container;
-^///?}
-
-//? if (>=1.21.6 && <=1.21.11) {
-/^import net.minecraft.world.ItemStackWithSlot;
-^///?}
-
-//? if (>=1.21.6 && <=1.21.11) {
-/^import net.minecraft.world.item.ItemStack;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.core.HolderLookup;
-^///?}
-
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Abilities;
+import net.minecraft.world.Container;
+import net.minecraft.world.ItemStackWithSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.*;
-//? if (>=1.21.6 && <=1.21.11) {
-/^import net.minecraft.core.HolderLookup;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.util.ProblemReporter;
-^///?}
-
-//? if (>=1.21.6 && <=1.21.11) {
-/^import net.minecraft.world.level.storage.TagValueOutput;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.Container;
-^///?}
-
-//? if (>=1.21.6 && <=1.21.11) {
-/^import net.minecraft.util.ProblemReporter;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.ItemStackWithSlot;
-^///?}
-
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.entity.Entity;
-^///?}
-
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.entity.player.Abilities;
-^///?}
-
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.item.ItemStack;
-^///?}
-
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.storage.TagValueOutput;
-^///?}
-
+import net.minecraft.util.ProblemReporter;
+import net.minecraft.world.level.storage.TagValueOutput;
 
 import java.util.*;
 

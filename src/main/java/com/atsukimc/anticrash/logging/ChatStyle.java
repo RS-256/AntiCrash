@@ -3,22 +3,10 @@ package com.atsukimc.anticrash.logging;
 //? if (>=1.18 && <=1.18.2) {
 import net.minecraft.network.chat.TextComponent;
 //?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.ChatFormatting;
-*///?}
 
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.network.chat.MutableComponent;
-//?}
-import net.minecraft.network.chat.Component;
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.ChatFormatting;
-
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.chat.MutableComponent;
-*///?}
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 /** Renders an AntiCrash message as coloured Minecraft chat text; see {@link MessageStyle}. */
 public final class ChatStyle {
@@ -33,29 +21,26 @@ public final class ChatStyle {
         if (message == null)
             //? if (>=1.18 && <=1.18.2) {
             return new TextComponent("");
-        //?}
-        //? if (>=1.19 && <=26.3) {
+        //?} else {
         /*return Component.literal("");
-*///?}
+            *///?}
 
         if (!coloured) {
 
             //? if (>=1.18 && <=1.18.2) {
             MutableComponent plain = new TextComponent(message);
-            //?}
-            //? if (>=1.19 && <=26.3) {
+            //?} else {
             /*MutableComponent plain = Component.literal(message);
-*///?}
+            *///?}
 
             return base == null ? plain : plain.withStyle(base);
         }
 
         //? if (>=1.18 && <=1.18.2) {
         MutableComponent result = new TextComponent("");
-        //?}
-        //? if (>=1.19 && <=26.3) {
+        //?} else {
         /*MutableComponent result = Component.literal("");
-*///?}
+        *///?}
 
         if (base != null) result.withStyle(base);
 
@@ -66,14 +51,12 @@ public final class ChatStyle {
 
                 //? if (>=1.18 && <=1.18.2) {
                 MutableComponent part = new TextComponent(span.text());
-                //?}
-                //? if (>=1.19 && <=26.3) {
+                //?} else {
                 /*MutableComponent part = Component.literal(span.text());
-*///?}
+                *///?}
 
                 switch (span.kind()) {
                     case HEADER -> part.withStyle(ChatFormatting.BOLD);
-
                     case PREFIX, PLAIN -> {}
                 }
                 result.append(part);

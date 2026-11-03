@@ -2,22 +2,8 @@ package com.atsukimc.anticrash.mixin;
 
 import com.atsukimc.anticrash.snapshot.logical.EntityLifecycleTracker;
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.entity.Entity;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.ChunkMap;
-*///?}
-
-//? if (>=1.18 && <=1.20.6) {
 import net.minecraft.server.level.ChunkMap;
-//?}
-//? if (>=1.21 && <=1.21.11) {
-/*import net.minecraft.server.level.ChunkMap;
-*///?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.entity.Entity;
-*///?}
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -28,26 +14,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * EntityManager unload is a persistence boundary rather than a removal. The logical engine records
  * it and falls back unless a future semantic entity-region capture is available.
  */
-//? if (>=1.18 && <=1.20.6) {
 @Mixin(ChunkMap.class)
 public abstract class ThreadedAnvilChunkStorageEntityLifecycleMixin {
 
-    //?}
-    //? if (>=1.21 && <=1.21.11) {
-    /*@Mixin(ChunkMap.class)
-    public abstract class ThreadedAnvilChunkStorageEntityLifecycleMixin {
-*///?}
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "removeEntity", at = @At("HEAD"))
-    private void anticrash$entityUnload(Entity entity, CallbackInfo callbackInfo)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Mixin(ChunkMap.class)
-                public abstract class ThreadedAnvilChunkStorageEntityLifecycleMixin {
-                    @Inject(method = "removeEntity", at = @At("HEAD"))
-                    private void anticrash$entityUnload(Entity entity, CallbackInfo callbackInfo)
-*///?}
-            {
+    private void anticrash$entityUnload(Entity entity, CallbackInfo callbackInfo) {
         EntityLifecycleTracker.recordUnload(entity);
     }
 
@@ -70,12 +41,9 @@ public abstract class ThreadedAnvilChunkStorageEntityLifecycleMixin {
                 && ((com.atsukimc.anticrash.runtime.ExtensionCarrier) worldChunk)
                         .anticrash$extensionOnDisk()) {
 
-            //? if (>=1.18.2 && <=1.21.1) {
+            //? if (>=1.18 && <=1.21.1) {
             worldChunk.setUnsaved(true);
             //?}
-            //? if (>=1.18 && <=1.18.1) {
-            /*worldChunk.setUnsaved(true);
-*///?}
             //? if (>=1.21.2 && <=26.3) {
             /*worldChunk.markUnsaved();
 *///?}

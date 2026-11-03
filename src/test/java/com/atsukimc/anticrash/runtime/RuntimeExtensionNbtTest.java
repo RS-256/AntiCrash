@@ -156,14 +156,11 @@ class RuntimeExtensionNbtTest {
 
         // Parse executable source, not the first 200 characters after a textual
         // annotation: inactive Stonecutter branches contain annotation-shaped comments.
-        //? if <=1.21.5 {
+        //? if <=1.21.11 {
         int injections =
                 com.atsukimc.anticrash.audit.MixinSaveScopeAudit.verifyFromProperty(
                         java.util.Set.of("saveAdditional", "saveWithoutId"));
-        //?} else if <=1.21.11 {
-        /*int injections = com.atsukimc.anticrash.audit.MixinSaveScopeAudit.verifyFromProperty(
-                java.util.Set.of("saveAdditional", "saveWithoutId"));
-*///?} else {
+        //?} else {
         /*int injections = com.atsukimc.anticrash.audit.MixinSaveScopeAudit.verifyFromProperty(
                 java.util.Set.of("saveAdditional", "addAdditionalSaveData", "saveWithoutId"));
 *///?}

@@ -5,18 +5,11 @@ import com.atsukimc.anticrash.mixin.StorageIoWorkerAccessorMixin;
 import com.atsukimc.anticrash.mixin.StorageIoWorkerResultAccessorMixin;
 import com.atsukimc.anticrash.snapshot.PendingRegionWrite;
 
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.ChunkPos;
-*///?}
-
 //? if (>=1.18 && <=1.21.1) {
 import com.mojang.datafixers.util.Either;
 //?}
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.ChunkPos;
-//?}
-
 import net.minecraft.world.level.chunk.storage.IOWorker;
 
 import java.io.IOException;
@@ -102,8 +95,7 @@ final class IoSeal implements AutoCloseable {
 
                     //? if (>=1.18 && <=1.21.1) {
                     return Either.left(null);
-                    //?}
-                    //? if (>=1.21.2 && <=26.3) {
+                    //?} else {
                     /*return null;
 *///?}
 
@@ -112,8 +104,7 @@ final class IoSeal implements AutoCloseable {
 
                 //? if (>=1.18 && <=1.21.1) {
                 return Either.left(null);
-                //?}
-                //? if (>=1.21.2 && <=26.3) {
+                //?} else {
                 /*return null;
 *///?}
 

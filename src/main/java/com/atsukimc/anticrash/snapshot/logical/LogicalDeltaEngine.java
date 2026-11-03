@@ -5,47 +5,21 @@ import com.atsukimc.anticrash.player.NbtCodec;
 import com.atsukimc.anticrash.util.Hashing;
 
 import net.minecraft.SharedConstants;
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.entity.Entity;
-//?}
 import net.minecraft.nbt.CompoundTag;
-
 import net.minecraft.nbt.ListTag;
-
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ChunkHolder;
-
 import net.minecraft.server.level.ServerLevel;
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.ChunkPos;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.entity.Entity;
-*///?}
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.storage.PrimaryLevelData;
 
 //? if (>=1.18 && <=1.21.1) {
 import net.minecraft.world.level.chunk.storage.ChunkSerializer;
-//?}
-//? if (>=1.21.2 && <=1.21.11) {
+//?} else {
 /*import net.minecraft.world.level.chunk.storage.SerializableChunkData;
-*///?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.ChunkPos;
-*///?}
-
-import net.minecraft.world.level.chunk.LevelChunk;
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.level.storage.PrimaryLevelData;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.chunk.storage.SerializableChunkData;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.storage.PrimaryLevelData;
-*///?}
+ *///?}
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -709,13 +683,9 @@ public final class LogicalDeltaEngine {
 
             }
         }
-        //?}
 
-        //? if (>=1.18 && <=1.21.11) {
         CompoundTag player = server.getPlayerList().getSingleplayerData();
-        //?}
 
-        //? if (>=1.18 && <=1.21.11) {
         CompoundTag data =
                 properties.createTag(
                         server.registryAccess(), player == null ? null : player.copy());
@@ -765,16 +735,9 @@ public final class LogicalDeltaEngine {
             /*String dimension = world.dimension().identifier().toString();
 *///?}
 
-            //? if (>=1.18 && <=1.20.6) {
             var storage =
                     (com.atsukimc.anticrash.mixin.ThreadedAnvilChunkStorageAccessorMixin)
                             world.getChunkSource().chunkMap;
-            //?}
-            //? if (>=1.21 && <=26.3) {
-            /*var storage =
-                                (com.atsukimc.anticrash.mixin.ThreadedAnvilChunkStorageAccessorMixin)
-                                        world.getChunkSource().chunkMap;
-*///?}
 
             for (ChunkHolder holder : storage.anticrash$getCurrentChunkHolders().values()) {
                 if (holder == null) continue;

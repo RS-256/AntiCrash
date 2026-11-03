@@ -224,10 +224,8 @@ class MixinTargetAuditTest {
                                                         .stream()
                                                         .anyMatch(a ->
                                                                 a.desc.equals("Lorg/spongepowered/asm/mixin/Pseudo;"));
-*///?}
 
-                    //? if (>=1.20.2 && <=26.3) {
-                    /*if (pseudo
+                    if (pseudo
                                                 && target.startsWith("carpet/")
                                                 && getClass().getClassLoader().getResource(target + ".class") == null)
                                             continue;

@@ -10,28 +10,20 @@ public interface BrewingStandBlockEntityTimerAccessor {
 
     //? if 26.3 {
     /*@Accessor("totalBrewTime")
-        int anticrash$totalBrewTime();
-*///?}
+    int anticrash$totalBrewTime();
 
-    //? if 26.3 {
-    /*@Accessor("fuel")
-        int anticrash$fuel();
-*///?}
+    @Accessor("fuel")
+    int anticrash$fuel();
 
-    //? if 26.3 {
-    /*@Accessor("totalFuel")
-        int anticrash$totalFuel();
-*///?}
+    @Accessor("totalFuel")
+    int anticrash$totalFuel();
 
-    //? if 26.3 {
-    /*@Accessor("speedMultiplier")
-        float anticrash$speed();
-*///?}
+    @Accessor("speedMultiplier")
+    float anticrash$speed();
 
-    //? if 26.3 {
-    /*@Accessor("quickCheck")
-        net.minecraft.world.item.crafting.RecipeManager.CachedCheck anticrash$recipeCheck();
-*///?}
+    @Accessor("quickCheck")
+    net.minecraft.world.item.crafting.RecipeManager.CachedCheck anticrash$recipeCheck();
+    *///?}
 
     @Accessor("brewTime")
     int anticrash$getBrewTime();

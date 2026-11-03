@@ -1,24 +1,14 @@
 //? if (>=1.20.5 && <=26.3) {
 /*package com.atsukimc.anticrash.snapshot;
 
-//? if (>=1.20.5 && <=1.21.11) {
-/^import net.minecraft.resources.ResourceKey;
-^///?}
-import net.minecraft.core.registries.Registries;
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.resources.Identifier;
-^///?}
-
 //? if (>=1.20.5 && <=1.21.10) {
 /^import net.minecraft.resources.ResourceLocation;
-^///?}
-//? if 1.21.11 {
-/^import net.minecraft.resources.Identifier;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.resources.ResourceKey;
-^///?}
+^///?} else {
+import net.minecraft.resources.Identifier;
+//?}
 
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.chunk.storage.RegionStorageInfo;
 
 

@@ -3,22 +3,10 @@ package com.atsukimc.anticrash.runtime;
 import com.atsukimc.anticrash.mixin.RedstoneTorchBlockAccessorMixin;
 import com.atsukimc.anticrash.mixin.RedstoneTorchBurnoutEntryAccessorMixin;
 
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.level.block.RedstoneTorchBlock;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.core.BlockPos;
-*///?}
-
-import net.minecraft.server.level.ServerLevel;
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.core.BlockPos;
-//?}
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.BlockGetter;
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.RedstoneTorchBlock;
-*///?}
+import net.minecraft.world.level.block.RedstoneTorchBlock;
 
 import java.util.ArrayList;
 import java.util.List;

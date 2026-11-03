@@ -2,28 +2,14 @@ package com.atsukimc.anticrash.mixin;
 
 //? if (>=1.18 && <=1.20.4) {
 import com.mojang.datafixers.util.Either;
-//?}
-
-//? if (>=1.18 && <=1.20.4) {
 import net.minecraft.server.level.ChunkHolder;
-//?}
-import net.minecraft.server.level.ServerChunkCache;
-
-//? if (>=1.18 && <=1.21.11) {
-//? if (>=1.18 && <=1.20.4) {
 import net.minecraft.world.level.chunk.ChunkStatus;
-//?}
-//? if (>=1.20.5 && <=1.21.11) {
-/*import net.minecraft.world.level.chunk.status.ChunkStatus;
-*///?}
-//?}
-
-//? if (>=1.18 && <=1.20.4) {
 import net.minecraft.world.level.chunk.LevelChunk;
-//?}
-//? if (>=26.1 && <=26.3) {
+//?} else {
 /*import net.minecraft.world.level.chunk.status.ChunkStatus;
 *///?}
+
+import net.minecraft.server.level.ServerChunkCache;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
@@ -67,13 +53,9 @@ public interface ServerChunkManagerAccessorMixin {
                 anticrash$getChunkFuture(int chunkX, int chunkZ, ChunkStatus status, boolean addTicket);
 *///?}
 
-    //? if (>=1.18 && <=1.21.1) {
+    //? if (>=1.18 && <=26.2) {
     @org.spongepowered.asm.mixin.gen.Accessor("lastInhabitedUpdate")
     void anticrash$setLastMobSpawningTime(long time);
     //?}
-    //? if (>=1.21.2 && <=26.2) {
-    /*@org.spongepowered.asm.mixin.gen.Accessor("lastInhabitedUpdate")
-        void anticrash$setLastMobSpawningTime(long time);
-*///?}
 
 }

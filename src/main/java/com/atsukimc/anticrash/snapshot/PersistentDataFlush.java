@@ -10,10 +10,8 @@ import net.minecraft.server.MinecraftServer;
 
 //? if (>=1.21.2 && <=26.3) {
 /*import java.util.ArrayList;
-*///?}
 
-//? if (>=1.21.2 && <=26.3) {
-/*import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletableFuture;
 *///?}
 
 /**
@@ -42,10 +40,8 @@ public final class PersistentDataFlush {
     /*writes.add(
                     ((PersistentDataStorageAccessorMixin) server.getDataStorage())
                             .anticrash$getPendingWrite());
-*///?}
 
-    //? if (>=26.1 && <=26.3) {
-    /*for (var world : server.getAllLevels())
+    for (var world : server.getAllLevels())
                 writes.add(
                         ((PersistentDataStorageAccessorMixin) world.getDataStorage())
                                 .anticrash$getPendingWrite());

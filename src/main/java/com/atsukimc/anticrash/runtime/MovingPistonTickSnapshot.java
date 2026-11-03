@@ -2,23 +2,11 @@ package com.atsukimc.anticrash.runtime;
 
 import com.atsukimc.anticrash.mixin.WorldAccessorMixin;
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.block.piston.PistonMovingBlockEntity;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.core.BlockPos;
-*///?}
-
-import net.minecraft.server.level.ServerLevel;
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.core.BlockPos;
-//?}
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.entity.TickingBlockEntity;
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.piston.PistonMovingBlockEntity;
-*///?}
 
 import java.util.ArrayList;
 import java.util.HashSet;

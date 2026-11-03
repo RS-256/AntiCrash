@@ -1,97 +1,33 @@
 package com.atsukimc.anticrash.runtime;
 
+//? if (>=1.18 && <=1.18.2) {
+import com.atsukimc.anticrash.mixin.SculkSensorListenerAccessorMixin;
+import net.minecraft.world.level.block.entity.SculkSensorBlockEntity;
+//?}
+//? if (>=1.18 && <=1.19.2) {
+import net.minecraft.core.Registry;
+//?} else {
+/*import net.minecraft.core.registries.BuiltInRegistries;
+*///?}
+
 import com.atsukimc.anticrash.mixin.BrewingStandBlockEntityTimerAccessor;
 import com.atsukimc.anticrash.mixin.EndGatewayBlockEntityAccessorMixin;
 import com.atsukimc.anticrash.mixin.EntityRuntimeAccessorMixin;
 import com.atsukimc.anticrash.mixin.LivingEntityAccessorMixin;
-//? if (>=1.18 && <=1.18.2) {
-import com.atsukimc.anticrash.mixin.SculkSensorListenerAccessorMixin;
-//?}
-
 import com.atsukimc.anticrash.mixin.ServerWorldAccessorMixin;
 import com.atsukimc.anticrash.mixin.WorldAccessorMixin;
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.block.entity.BlockEntity;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.core.BlockPos;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BrewingStandBlockEntity;
-//?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.block.entity.TheEndGatewayBlockEntity;
-//?}
-
-//? if (>=1.18 && <=1.18.2) {
-import net.minecraft.world.level.block.entity.SculkSensorBlockEntity;
-//?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.entity.ExperienceOrb;
-//?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.entity.item.ItemEntity;
-//?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.entity.LivingEntity;
-//?}
-
-//? if (>=1.19.3 && <=26.3) {
-/*import net.minecraft.core.registries.BuiltInRegistries;
-*///?}
-
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.core.BlockPos;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.entity.ExperienceOrb;
-*///?}
-
-//? if (>=1.18 && <=1.19.2) {
-import net.minecraft.core.Registry;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.entity.LivingEntity;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.block.entity.TickingBlockEntity;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.entity.item.ItemEntity;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.chunk.LevelChunk;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.entity.BlockEntity;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.entity.BrewingStandBlockEntity;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.entity.TheEndGatewayBlockEntity;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.entity.TickingBlockEntity;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.chunk.LevelChunk;
-*///?}
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -284,22 +220,12 @@ public final class RuntimeExtensionSnapshot {
         /*{
                 // Experimental trial-spawner logic has non-codec detector/force-activation state.
                 // Do not claim exact runtime support merely because its ordinary data has a codec.
-*///?}
-        //? if (>=1.20.3 && <=1.20.6) {
-        /*var holders =
+        var holders =
                         ((com.atsukimc.anticrash.mixin.ThreadedAnvilChunkStorageAccessorMixin)
                                         world.getChunkSource().chunkMap)
                                 .anticrash$getCurrentChunkHolders();
-*///?}
-        //? if (>=1.21 && <=26.3) {
-        /*var holders =
-                        ((com.atsukimc.anticrash.mixin.ThreadedAnvilChunkStorageAccessorMixin)
-                                        world.getChunkSource().chunkMap)
-                                .anticrash$getCurrentChunkHolders();
-*///?}
 
-        //? if (>=1.20.3 && <=26.3) {
-        /*for (var holder : holders.values()) {
+        for (var holder : holders.values()) {
 *///?}
         //? if (>=1.20.3 && <=1.20.6) {
         /*LevelChunk loaded = holder.getTickingChunk();
@@ -310,10 +236,8 @@ public final class RuntimeExtensionSnapshot {
 
         //? if (>=1.20.3 && <=26.3) {
         /*if (loaded == null) continue;
-*///?}
 
-        //? if (>=1.20.3 && <=26.3) {
-        /*for (BlockEntity entity : loaded.getBlockEntities().values()) {
+        for (BlockEntity entity : loaded.getBlockEntities().values()) {
 *///?}
         //? if (>=1.21.5 && <=1.21.11) {
         /*if ((entity instanceof net.minecraft.world.level.block.entity.TestBlockEntity
@@ -325,21 +249,15 @@ public final class RuntimeExtensionSnapshot {
         //? if 26.3 {
         /*if (entity instanceof BrewingStandBlockEntity) {
                             var stand = (BrewingStandBlockEntityTimerAccessor) entity;
-*///?}
 
-        //? if 26.3 {
-        /*var pos = entity.getBlockPos();
-*///?}
+        var pos = entity.getBlockPos();
 
-        //? if 26.3 {
-        /*var recipe =
+        var recipe =
                                     ((com.atsukimc.anticrash.mixin.RecipeMatchGetterAccessorMixin)
                                                     stand.anticrash$recipeCheck())
                                             .anticrash$getRecipeId();
-*///?}
 
-        //? if 26.3 {
-        /*lines.get(BREWING)
+        lines.get(BREWING)
                                     .add(
                                             dimension
                                                     + "|"
@@ -375,10 +293,8 @@ public final class RuntimeExtensionSnapshot {
                                 instanceof
                                 net.minecraft.world.level.block.entity.PotentSulfurBlockEntity sulfur) {
                             var pos = sulfur.getBlockPos();
-*///?}
 
-        //? if (>=26.2 && <=26.3) {
-        /*lines.get(SULFUR)
+        lines.get(SULFUR)
                                     .add(
                                             dimension
                                                     + "|"
@@ -410,30 +326,22 @@ public final class RuntimeExtensionSnapshot {
         //? if (>=1.21.2 && <=26.3) {
         /*if (entity instanceof net.minecraft.world.level.block.entity.CreakingHeartBlockEntity
                                 && !capsule.unsupportedRuntimeState.contains("CREAKING_HEART_RUNTIME"))
-*///?}
-        //? if (>=1.21.2 && <=26.3) {
-        /*capsule.unsupportedRuntimeState.add("CREAKING_HEART_RUNTIME");
+        capsule.unsupportedRuntimeState.add("CREAKING_HEART_RUNTIME");
 *///?}
 
         //? if (>=1.20.3 && <=26.3) {
         /*if (entity instanceof net.minecraft.world.level.block.entity.TrialSpawnerBlockEntity
                                 && !capsule.unsupportedRuntimeState.contains("TRIAL_SPAWNER_RUNTIME"))
-*///?}
-        //? if (>=1.20.3 && <=26.3) {
-        /*{
+        {
                             capsule.unsupportedRuntimeState.add("TRIAL_SPAWNER_RUNTIME");
 *///?}
         //? if (>=1.20.5 && <=26.3) {
 
         /*}
-*///?}
 
-        //? if (>=1.20.5 && <=26.3) {
-        /*if (entity instanceof net.minecraft.world.level.block.entity.vault.VaultBlockEntity
+        if (entity instanceof net.minecraft.world.level.block.entity.vault.VaultBlockEntity
                                 && !capsule.unsupportedRuntimeState.contains("VAULT_RUNTIME"))
-*///?}
-        //? if (>=1.20.5 && <=26.3) {
-        /*{
+        {
                             capsule.unsupportedRuntimeState.add("VAULT_RUNTIME");
 *///?}
         //? if (>=1.20.3 && <=26.3) {
@@ -464,9 +372,7 @@ public final class RuntimeExtensionSnapshot {
                 if (blockEntity instanceof BrewingStandBlockEntity) {
                     BrewingStandBlockEntityTimerAccessor stand =
                             (BrewingStandBlockEntityTimerAccessor) blockEntity;
-                    //?}
 
-                    //? if (>=1.18 && <=26.2) {
                     if (stand.anticrash$getBrewTime() > 0) {
 
                         //?}
@@ -512,9 +418,7 @@ public final class RuntimeExtensionSnapshot {
                 else if (blockEntity instanceof SculkSensorBlockEntity sensor) {
                     SculkSensorListenerAccessorMixin listener =
                             (SculkSensorListenerAccessorMixin) sensor.getListener();
-                    //?}
 
-                    //? if (>=1.18 && <=1.18.2) {
                     if (listener.anticrash$getEvent() != null
                             && listener.anticrash$getEvent().isPresent()) {
                         lines.get(SCULK)
@@ -536,10 +440,8 @@ public final class RuntimeExtensionSnapshot {
 
                 //? if (>=1.19 && <=26.3) {
                 /*String sculk = SculkRuntimeFingerprint.capture(blockEntity);
-*///?}
 
-                //? if (>=1.19 && <=26.3) {
-                /*if (sculk != null) lines.get(SCULK).add(where + "|" + sculk);
+                if (sculk != null) lines.get(SCULK).add(where + "|" + sculk);
 *///?}
 
             }
@@ -582,14 +484,10 @@ public final class RuntimeExtensionSnapshot {
             //?}
             //? if (>=1.21 && <=26.3) {
             /*lines.get(PORTAL).add(id + "|" + PortalRuntime.canonical(entity.portalProcess));
-*///?}
 
-            //? if (>=1.21 && <=26.3) {
-            /*if (PortalRuntime.type(entity.portalProcess) == null
+            if (PortalRuntime.type(entity.portalProcess) == null
                                 && !capsule.unsupportedRuntimeState.contains("PORTAL_IMPLEMENTATION"))
-*///?}
-            //? if (>=1.21 && <=26.3) {
-            /*capsule.unsupportedRuntimeState.add("PORTAL_IMPLEMENTATION");
+            capsule.unsupportedRuntimeState.add("PORTAL_IMPLEMENTATION");
 *///?}
 
         }
@@ -609,10 +507,8 @@ public final class RuntimeExtensionSnapshot {
 *///?}
         //? if (>=26.1 && <=26.3) {
         /*line.append("|fluidTrackers=").append(FluidInteractionSnapshot.capture(entity));
-*///?}
 
-        //? if (>=26.1 && <=26.3) {
-        /*if (entity instanceof net.minecraft.world.entity.vehicle.minecart.MinecartTNT
+        if (entity instanceof net.minecraft.world.entity.vehicle.minecart.MinecartTNT
                         && ((com.atsukimc.anticrash.mixin.TntMinecartRuntimeAccessorMixin) entity)
                                         .anticrash$getDamageSource()
                                 != null
@@ -680,46 +576,32 @@ public final class RuntimeExtensionSnapshot {
 *///?}
         //? if (>=1.21.2 && <=26.3) {
         /*capsule.unsupportedRuntimeState.add("BOAT_TURN_UNDERWATER_RUNTIME");
-*///?}
 
-        //? if (>=1.21.2 && <=26.3) {
-        /*int collisionChecks =
+        int collisionChecks =
                         ((com.atsukimc.anticrash.mixin.EntityCollisionQueueAccessorMixin) entity)
                                 .anticrash$collisionChecks()
                                 .size();
-*///?}
 
-        //? if (>=1.21.2 && <=26.3) {
-        /*if (collisionChecks > 0) {
+        if (collisionChecks > 0) {
                     line.append("|collisionChecks=").append(collisionChecks);
-*///?}
 
-        //? if (>=1.21.2 && <=26.3) {
-        /*if (!capsule.unsupportedRuntimeState.contains("ENTITY_COLLISION_QUEUE"))
+        if (!capsule.unsupportedRuntimeState.contains("ENTITY_COLLISION_QUEUE"))
                         capsule.unsupportedRuntimeState.add("ENTITY_COLLISION_QUEUE");
                 }
 *///?}
 
         //? if (>=1.21 && <=26.3) {
         /*if (entity instanceof net.minecraft.world.entity.item.PrimedTnt)
-*///?}
-        //? if (>=1.21 && <=26.3) {
-        /*line.append("|teleportedTnt=")
+        line.append("|teleportedTnt=")
                             .append(
                                     ((com.atsukimc.anticrash.mixin.TntRuntimeAccessorMixin) entity)
                                             .anticrash$teleported());
-*///?}
 
-        //? if (>=1.21 && <=26.3) {
-        /*if (entity instanceof net.minecraft.world.entity.item.FallingBlockEntity falling)
+        if (entity instanceof net.minecraft.world.entity.item.FallingBlockEntity falling)
                     line.append("|shouldDupe=").append(falling.forceTickAfterTeleportToDuplicate);
-*///?}
 
-        //? if (>=1.21 && <=26.3) {
-        /*if (entity instanceof net.minecraft.world.entity.projectile.Projectile)
-*///?}
-        //? if (>=1.21 && <=26.3) {
-        /*{
+        if (entity instanceof net.minecraft.world.entity.projectile.Projectile)
+        {
 *///?}
         //? if (>=1.21.9 && <=26.3) {
         /*line.append("|checkedOwner=")
@@ -732,17 +614,11 @@ public final class RuntimeExtensionSnapshot {
         /*var deflected =
                             ((com.atsukimc.anticrash.mixin.ProjectileRuntimeAccessorMixin) entity)
                                     .anticrash$lastDeflectedEntity();
-*///?}
 
-        //? if (>=1.21 && <=26.3) {
-        /*if (deflected != null) {
-*///?}
-        //? if (>=1.21 && <=26.3) {
-        /*line.append("|lastDeflected=").append(deflected.getUUID());
-*///?}
+        if (deflected != null) {
+        line.append("|lastDeflected=").append(deflected.getUUID());
 
-        //? if (>=1.21 && <=26.3) {
-        /*if (!capsule.unsupportedRuntimeState.contains("PROJECTILE_DEFLECTION_RUNTIME"))
+        if (!capsule.unsupportedRuntimeState.contains("PROJECTILE_DEFLECTION_RUNTIME"))
                             capsule.unsupportedRuntimeState.add("PROJECTILE_DEFLECTION_RUNTIME");
                     }
                 }

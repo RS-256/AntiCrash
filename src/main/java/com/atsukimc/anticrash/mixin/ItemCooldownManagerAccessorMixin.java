@@ -1,15 +1,10 @@
 package com.atsukimc.anticrash.mixin;
 
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.item.ItemCooldowns;
-//?}
-
 //? if (>=1.18 && <=1.21.1) {
 import net.minecraft.world.item.Item;
 //?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.item.ItemCooldowns;
-*///?}
+
+import net.minecraft.world.item.ItemCooldowns;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;

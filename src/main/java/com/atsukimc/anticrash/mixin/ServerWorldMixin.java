@@ -6,13 +6,8 @@ import com.atsukimc.anticrash.checkpoint.CutSave;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.level.entity.PersistentEntitySectionManager;
-//?}
 import net.minecraft.server.level.ServerLevel;
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.entity.PersistentEntitySectionManager;
-*///?}
+import net.minecraft.world.level.entity.PersistentEntitySectionManager;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

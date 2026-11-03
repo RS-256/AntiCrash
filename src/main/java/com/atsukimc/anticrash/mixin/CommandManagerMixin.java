@@ -7,18 +7,14 @@ import com.atsukimc.anticrash.command.RecoveryCommandPolicy;
 import com.atsukimc.anticrash.i18n.MessageCatalog;
 import com.mojang.brigadier.CommandDispatcher;
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.commands.Commands;
-//?}
 import net.minecraft.commands.CommandSourceStack;
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.commands.Commands;
-*///?}
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
 //? if (>=1.18 && <=1.20.2) {
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -44,27 +40,25 @@ public abstract class CommandManagerMixin {
     private void anticrash$blockCommandsDuringCheckpoint(
             CommandSourceStack source,
             String command,
-            CallbackInfoReturnable<Integer> callbackInfo)
-                //?}
-                //? if (>=1.19.1 && <=1.20.2) {
-                /*@Inject(method = "performCommand", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$blockCommandsDuringCheckpoint(
-                            com.mojang.brigadier.ParseResults<CommandSourceStack> parse,
-                            String command,
-                            CallbackInfoReturnable<Integer> callbackInfo)
-*///?}
-                //? if (>=1.20.3 && <=26.3) {
-                /*@Inject(method = "performCommand", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$blockCommandsDuringCheckpoint(
-                            com.mojang.brigadier.ParseResults<CommandSourceStack> parse,
-                            String command,
-                            CallbackInfo callbackInfo)
-*///?}
-            {
-
+            CallbackInfoReturnable<Integer> callbackInfo) {
+        //?} else if <=1.20.2 {
+        /*@Inject(method = "performCommand", at = @At("HEAD"), cancellable = true)
+    private void anticrash$blockCommandsDuringCheckpoint(
+            com.mojang.brigadier.ParseResults<CommandSourceStack> parse,
+            String command,
+            CallbackInfoReturnable<Integer> callbackInfo
+    ) {
+    *///?} else {
+        /*@Inject(method = "performCommand", at = @At("HEAD"), cancellable = true)
+    private void anticrash$blockCommandsDuringCheckpoint(
+            com.mojang.brigadier.ParseResults<CommandSourceStack> parse,
+            String command,
+            CallbackInfo callbackInfo
+    ) {
+    *///?}
         //? if (>=1.19.1 && <=26.3) {
         /*CommandSourceStack source = parse.getContext().getSource();
-*///?}
+        *///?}
 
         AntiCrashController controller = AntiCrashMod.controller();
         if (controller == null) return;
@@ -85,11 +79,9 @@ public abstract class CommandManagerMixin {
 
                 //? if (>=1.18 && <=1.20.2) {
                 callbackInfo.setReturnValue(0);
-                //?}
-                //? if (>=1.20.3 && <=26.3) {
+                //?} else {
                 /*callbackInfo.cancel();
-*///?}
-
+                *///?}
             }
             return;
         }
@@ -109,11 +101,9 @@ public abstract class CommandManagerMixin {
 
             //? if (>=1.18 && <=1.20.2) {
             callbackInfo.setReturnValue(0);
-            //?}
-            //? if (>=1.20.3 && <=26.3) {
+            //?} else {
             /*callbackInfo.cancel();
-*///?}
-
+            *///?}
         }
     }
 }

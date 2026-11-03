@@ -50,14 +50,10 @@ public final class RuntimeExtensionNbt {
         //?}
         //? if (>=1.21.6 && <=26.3) {
         /*Scope scope = SCOPE.get();
-*///?}
 
-        //? if (>=1.21.6 && <=26.3) {
-        /*scope.entitySave = active;
-*///?}
+        scope.entitySave = active;
 
-        //? if (>=1.21.6 && <=26.3) {
-        /*if (!active && !scope.loadedChunkSave) scope.viewExtensions.clear();
+        if (!active && !scope.loadedChunkSave) scope.viewExtensions.clear();
 *///?}
 
     }
@@ -152,9 +148,7 @@ public final class RuntimeExtensionNbt {
 
     //? if (>=1.21.6 && <=26.3) {
     /*public static void write(net.minecraft.world.level.storage.ValueOutput view, Consumer<CompoundTag> writer)
-*///?}
-    //? if (>=1.21.6 && <=26.3) {
-    /*{
+    {
             Scope scope = SCOPE.get();
 *///?}
 
@@ -166,53 +160,29 @@ public final class RuntimeExtensionNbt {
                     scope.entitySave || scope.loadedChunkSave
                             ? scope.viewExtensions.computeIfAbsent(view, ignored -> new CompoundTag())
                             : new CompoundTag();
-*///?}
 
-    //? if (>=1.21.6 && <=26.3) {
-    /*write(encoded, writer);
-*///?}
+    write(encoded, writer);
 
-    //? if (>=1.21.6 && <=26.3) {
-    /*CompoundTag extension = encoded.getCompound(KEY).orElse(null);
-*///?}
+    CompoundTag extension = encoded.getCompound(KEY).orElse(null);
 
-    //? if (>=1.21.6 && <=26.3) {
-    /*if (extension == null) {
-*///?}
-    //? if (>=1.21.6 && <=26.3) {
-    /*view.discard(KEY);
-*///?}
+    if (extension == null) {
+    view.discard(KEY);
 
-    //? if (>=1.21.6 && <=26.3) {
-    /*return;
+    return;
             }
-*///?}
 
-    //? if (>=1.21.6 && <=26.3) {
-    /*view.store(KEY, CompoundTag.CODEC, extension);
-*///?}
-    //? if (>=1.21.6 && <=26.3) {
+    view.store(KEY, CompoundTag.CODEC, extension);
 
-    /*}
-*///?}
+    }
 
-    //? if (>=1.21.6 && <=26.3) {
-    /*public static CompoundTag read(net.minecraft.world.level.storage.ValueInput view)
-*///?}
-    //? if (>=1.21.6 && <=26.3) {
-    /*{
-*///?}
-    //? if (>=1.21.6 && <=26.3) {
-    /*return view.read(KEY, CompoundTag.CODEC)
+    public static CompoundTag read(net.minecraft.world.level.storage.ValueInput view)
+    {
+    return view.read(KEY, CompoundTag.CODEC)
                     .map(extension ->
-*///?}
-    //? if (>=1.21.6 && <=26.3) {
-    /*{
+    {
                         int version = extension.getInt(VERSION_KEY).orElse(0);
-*///?}
 
-    //? if (>=1.21.6 && <=26.3) {
-    /*return version >= 1 && version <= VERSION ? extension : null;
+    return version >= 1 && version <= VERSION ? extension : null;
                     })
                     .orElse(null);
         }

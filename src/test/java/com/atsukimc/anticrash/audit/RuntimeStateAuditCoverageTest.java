@@ -2,16 +2,10 @@ package com.atsukimc.anticrash.audit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.level.block.entity.BlockEntity;
-//?}
-import net.minecraft.world.entity.Entity;
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.entity.BlockEntity;
-*///?}
-
 import org.junit.jupiter.api.Test;
+
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.entity.Entity;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -170,20 +164,11 @@ class RuntimeStateAuditCoverageTest {
     void everyBlockEntityFieldHasADecision() throws Exception {
         Map<String, Set<String>> audited = matrix("/runtime-audit/block-entities.tsv");
 
-        //? if (>=1.18 && <=1.21.11) {
         Map<String, List<String>> actual =
                 RuntimeFieldDump.declaredFields(
                         BlockEntity.class,
                         "net/minecraft/world/level/block/entity",
                         "net/minecraft/world/level/block/piston");
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*Map<String, List<String>> actual =
-                        RuntimeFieldDump.declaredFields(
-                                BlockEntity.class,
-                                "net/minecraft/world/level/block/entity",
-                                "net/minecraft/world/level/block/piston");
-*///?}
 
         List<String> problems = new ArrayList<>();
         for (Map.Entry<String, List<String>> type : actual.entrySet()) {

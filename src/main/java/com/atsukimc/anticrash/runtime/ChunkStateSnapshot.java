@@ -1,42 +1,18 @@
 package com.atsukimc.anticrash.runtime;
 
-import com.atsukimc.anticrash.mixin.ThreadedAnvilChunkStorageAccessorMixin;
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.ChunkHolder;
-*///?}
-
 //? if (>=1.18 && <=1.20.4) {
 import com.mojang.datafixers.util.Either;
-//?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.server.level.ChunkHolder;
-//?}
-//? if (>=1.21 && <=26.3) {
-/*import net.minecraft.server.level.ChunkMap;
-*///?}
-import net.minecraft.server.level.ServerLevel;
-
-//? if (>=1.18 && <=1.20.6) {
-import net.minecraft.server.level.ChunkMap;
-//?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.level.ChunkPos;
-//?}
-
-//? if (>=1.18 && <=1.20.6) {
-//? if (>=1.18 && <=1.20.4) {
 import net.minecraft.world.level.chunk.ChunkStatus;
-//?}
-//? if (>=1.20.5 && <=1.20.6) {
+//?} else if <=1.20.6 {
 /*import net.minecraft.world.level.chunk.status.ChunkStatus;
 *///?}
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.ChunkPos;
-*///?}
+
+import com.atsukimc.anticrash.mixin.ThreadedAnvilChunkStorageAccessorMixin;
+
+import net.minecraft.server.level.ChunkHolder;
+import net.minecraft.server.level.ChunkMap;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.ChunkPos;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -84,12 +60,7 @@ public final class ChunkStateSnapshot {
 
         Set<Long> loaded = new LinkedHashSet<>();
 
-        //? if (>=1.18 && <=1.20.6) {
         ChunkMap storage = world.getChunkSource().chunkMap;
-        //?}
-        //? if (>=1.21 && <=26.3) {
-        /*ChunkMap storage = world.getChunkSource().chunkMap;
-*///?}
 
         ThreadedAnvilChunkStorageAccessorMixin accessor =
                 (ThreadedAnvilChunkStorageAccessorMixin) storage;
@@ -108,10 +79,8 @@ public final class ChunkStateSnapshot {
                                 accessor.anticrash$getChunksToUnload())) {
                     for (ChunkHolder holder : holders.values()) {
                         var chunk = VersionChunkView.worldChunk(holder);
-*///?}
 
-        //? if (>=1.21 && <=26.3) {
-        /*if (chunk != null
+        if (chunk != null
                                 && ((com.atsukimc.anticrash.mixin.WorldChunkAccessorMixin) chunk)
                                         .anticrash$isLoadedToWorld())
 *///?}

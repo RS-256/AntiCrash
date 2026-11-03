@@ -7,78 +7,28 @@ import com.atsukimc.anticrash.integration.carpet.FakePlayerSnapshot;
 import com.atsukimc.anticrash.logging.AntiCrashLogger;
 import com.atsukimc.anticrash.mixin.ThreadedAnvilChunkStorageAccessorMixin;
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.block.Block;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.core.BlockPos;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.piston.PistonMovingBlockEntity;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.core.registries.BuiltInRegistries;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.material.Fluid;
-//?}
-
-//? if (>=1.19.3 && <=1.21.11) {
-/*import net.minecraft.core.registries.BuiltInRegistries;
-*///?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.resources.Identifier;
-*///?}
-
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-
-//? if (>=1.18 && <=1.21.11) {
-//? if (>=1.18 && <=1.21.10) {
-import net.minecraft.resources.ResourceLocation;
-//?}
-//? if 1.21.11 {
-/*import net.minecraft.resources.Identifier;
-*///?}
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.ChunkPos;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.core.BlockPos;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.Block;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.ChunkPos;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.entity.TickingBlockEntity;
-*///?}
+import net.minecraft.world.level.block.entity.TickingBlockEntity;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.ticks.LevelChunkTicks;
+import net.minecraft.world.ticks.ScheduledTick;
 
 //? if (>=1.18 && <=1.19.2) {
 import net.minecraft.core.Registry;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.piston.PistonMovingBlockEntity;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.level.block.entity.TickingBlockEntity;
-//?}
-import net.minecraft.world.level.chunk.LevelChunk;
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.material.Fluid;
-*///?}
-
-import net.minecraft.world.ticks.LevelChunkTicks;
-
-import net.minecraft.world.ticks.ScheduledTick;
+//?} else {
+/*import net.minecraft.core.registries.BuiltInRegistries;
+ *///?}
+//? if (>=1.18 && <=1.21.10) {
+import net.minecraft.resources.ResourceLocation;
+//?} else {
+/*import net.minecraft.resources.Identifier;
+ *///?}
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -406,15 +356,8 @@ public final class RuntimeCapsuleManager {
 
         for (ServerLevel world : worlds.values()) {
 
-            //? if (>=1.18 && <=1.20.6) {
             ThreadedAnvilChunkStorageAccessorMixin storage =
                     (ThreadedAnvilChunkStorageAccessorMixin) world.getChunkSource().chunkMap;
-            //?}
-            //? if (>=1.21 && <=26.3) {
-            /*ThreadedAnvilChunkStorageAccessorMixin storage =
-                                (ThreadedAnvilChunkStorageAccessorMixin)
-                                        world.getChunkSource().chunkMap;
-*///?}
 
             for (net.minecraft.server.level.ChunkHolder holder :
                     storage.anticrash$getCurrentChunkHolders().values()) {
@@ -685,9 +628,6 @@ public final class RuntimeCapsuleManager {
             ((com.atsukimc.anticrash.mixin.ServerChunkManagerAccessorMixin)
                             (Object) world.getChunkSource())
                     .anticrash$setLastMobSpawningTime(world.getGameTime());
-            //?}
-            //? if (>=1.18 && <=26.2) {
-
         }
         //?}
         //? if 26.3 {
@@ -903,15 +843,8 @@ public final class RuntimeCapsuleManager {
 
     private static LevelChunk resolveAccessibleChunk(ServerLevel world, ChunkPos position) {
 
-        //? if (>=1.18 && <=1.20.6) {
         ThreadedAnvilChunkStorageAccessorMixin storage =
                 (ThreadedAnvilChunkStorageAccessorMixin) world.getChunkSource().chunkMap;
-        //?}
-        //? if (>=1.21 && <=26.3) {
-        /*ThreadedAnvilChunkStorageAccessorMixin storage =
-                        (ThreadedAnvilChunkStorageAccessorMixin)
-                                world.getChunkSource().chunkMap;
-*///?}
 
         //? if (>=1.18 && <=1.21.11) {
         net.minecraft.server.level.ChunkHolder holder =
@@ -2178,20 +2111,14 @@ public final class RuntimeCapsuleManager {
         //? if (>=26.1 && <=26.3) {
         /*if (capsule.formatVersion >= 8 && capsule.clockStates == null)
                     throw new IllegalStateException("Runtime capsule is missing world clocks");
-*///?}
 
-        //? if (>=26.1 && <=26.3) {
-        /*if (capsule.clockStates != null) {
+        if (capsule.clockStates != null) {
                     if (capsule.clockStates.size() > 65536)
                         throw new IllegalStateException("Too many world clocks");
-*///?}
 
-        //? if (>=26.1 && <=26.3) {
-        /*Set<String> ids = new HashSet<>();
-*///?}
+        Set<String> ids = new HashSet<>();
 
-        //? if (>=26.1 && <=26.3) {
-        /*for (ClockSnapshot clock : capsule.clockStates) {
+        for (ClockSnapshot clock : capsule.clockStates) {
                         if (clock == null || !ids.add(clock.id()))
                             throw new IllegalStateException("Duplicate/invalid clock");
 *///?}

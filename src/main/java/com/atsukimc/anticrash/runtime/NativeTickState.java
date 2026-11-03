@@ -6,7 +6,6 @@ import com.atsukimc.anticrash.mixin.NativeTickManagerAccessor;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerTickRateManager;
 
-
 import java.util.List;
 
 /^* 1.20.3: Vanilla /tick state is independent of Carpet. Never replay wall-clock sprint state. ^/

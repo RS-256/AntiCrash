@@ -1,24 +1,16 @@
 //? if (>=1.21.11 && <=26.3) {
 /*package com.atsukimc.anticrash.command;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import net.minecraft.server.permissions.*;
-
 //? if (>=26.1 && <=26.3) {
 /^import net.minecraft.server.permissions.LevelBasedPermissionSet;
+import net.minecraft.server.permissions.PermissionLevel;
+import net.minecraft.server.permissions.PermissionSet;
 ^///?}
 
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.server.permissions.PermissionLevel;
-^///?}
-
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.server.permissions.PermissionSet;
-^///?}
-
-
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+
+import net.minecraft.server.permissions.*;
 
 class VersionPermissionsTest {
     @Test

@@ -1,20 +1,14 @@
 package com.atsukimc.anticrash.mixin;
 
+//? if (>=1.18 && <=1.21.10) {
+import net.minecraft.world.level.chunk.storage.ChunkStorage;
+//?} else {
+/*import net.minecraft.world.level.chunk.storage.SimpleRegionStorage;
+*///?}
+
 import com.atsukimc.anticrash.snapshot.SealedNbt;
 
 import net.minecraft.nbt.CompoundTag;
-
-//? if (>=1.18 && <=1.21.11) {
-//? if (>=1.18 && <=1.21.10) {
-import net.minecraft.world.level.chunk.storage.ChunkStorage;
-//?}
-//? if 1.21.11 {
-/*import net.minecraft.world.level.chunk.storage.SimpleRegionStorage;
-*///?}
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.chunk.storage.SimpleRegionStorage;
-*///?}
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

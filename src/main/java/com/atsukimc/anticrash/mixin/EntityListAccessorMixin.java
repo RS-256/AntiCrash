@@ -3,7 +3,6 @@ package com.atsukimc.anticrash.mixin;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 
 import net.minecraft.world.entity.Entity;
-
 import net.minecraft.world.level.entity.EntityTickList;
 
 import org.spongepowered.asm.mixin.Mixin;

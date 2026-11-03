@@ -9,18 +9,8 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.*;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
@@ -298,12 +288,7 @@ public final class DetachedGeneration {
                         PendingRegionWrite write = queued.write;
                         if (write.nbt() == null) {
 
-                            //? if (>=1.18 && <=1.19.1) {
                             file.clear(write.pos());
-                            //?}
-                            //? if (>=1.19.2 && <=26.3) {
-                            /*file.clear(write.pos());
-*///?}
 
                         } else {
                             if (write.nbt().contains("__context")) {

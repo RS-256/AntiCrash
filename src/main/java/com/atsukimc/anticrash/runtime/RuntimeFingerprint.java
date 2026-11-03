@@ -238,19 +238,13 @@ public final class RuntimeFingerprint {
     //? if (>=26.1 && <=26.3) {
     /*public static List<String> worldLines(RuntimeCapsule capsule) {
             List<String> lines = worldLines(capsule.worlds);
-*///?}
 
-    //? if (>=26.1 && <=26.3) {
-    /*if (capsule.clockStates == null) lines.add("clock=MISSING");
+    if (capsule.clockStates == null) lines.add("clock=MISSING");
             else for (ClockSnapshot clock : capsule.clockStates) lines.add(clock.canonical());
-*///?}
 
-    //? if (>=26.1 && <=26.3) {
-    /*lines.sort(String::compareTo);
-*///?}
+    lines.sort(String::compareTo);
 
-    //? if (>=26.1 && <=26.3) {
-    /*return lines;
+    return lines;
         }
 *///?}
 

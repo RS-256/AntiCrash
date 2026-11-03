@@ -6,36 +6,15 @@ import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
 //? if (>=1.18 && <=1.21.1) {
-import net.minecraft.nbt.CompoundTag;
-//?}
-import net.minecraft.server.level.ServerLevel;
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.chunk.ChunkAccess;
-*///?}
-
-//? if (>=1.18 && <=1.21.1) {
 import net.minecraft.world.level.chunk.storage.ChunkSerializer;
-//?}
-//? if (>=1.21.2 && <=1.21.11) {
-/*import net.minecraft.world.level.chunk.ChunkAccess;
-*///?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.nbt.CompoundTag;
+//?} else {
+/*import net.minecraft.world.level.chunk.storage.SerializableChunkData;
 *///?}
 
-//? if (>=1.18 && <=1.21.1) {
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.chunk.ChunkAccess;
-//?}
-//? if (>=1.21.2 && <=1.21.11) {
-/*import net.minecraft.world.level.chunk.storage.SerializableChunkData;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.chunk.LevelChunk;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.chunk.storage.SerializableChunkData;
-*///?}
 
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -51,23 +30,21 @@ public abstract class ChunkSerializerMixin {
      */
     @WrapMethod(method = "write")
     private static CompoundTag anticrash$scopeChunkSave(
-            ServerLevel world, ChunkAccess chunk, Operation<CompoundTag> original)
-                //?}
-                //? if (>=1.21.2 && <=26.3) {
-                /*@Mixin(SerializableChunkData.class)
-                public abstract class ChunkSerializerMixin {
-                    /^*
-                     * A wrap rather than a HEAD/RETURN pair: the scope must end when serialisation throws, or the
-                     * next unrelated saveAdditional on this thread would be taken for a save of a loaded chunk.
-                     ^/
-                    @WrapMethod(method = "copyOf")
-                    private static SerializableChunkData anticrash$scopeChunkSave(
-                            ServerLevel world, ChunkAccess chunk, Operation<SerializableChunkData> original)
+            ServerLevel world, ChunkAccess chunk, Operation<CompoundTag> original) {
+        //?} else {
+        /*@Mixin(SerializableChunkData.class)
+public abstract class ChunkSerializerMixin {
+    /^*
+     * A wrap rather than a HEAD/RETURN pair: the scope must end when serialisation throws, or the
+     * next unrelated saveAdditional on this thread would be taken for a save of a loaded chunk.
+     ^/
+    @WrapMethod(method = "copyOf")
+    private static SerializableChunkData anticrash$scopeChunkSave(
+            ServerLevel world, ChunkAccess chunk, Operation<SerializableChunkData> original
+    ) {
 *///?}
-            {
 
         LevelChunk worldChunk = chunk instanceof LevelChunk loaded ? loaded : null;
-
         boolean staysLoaded =
                 worldChunk != null
                         && ((WorldChunkAccessorMixin) worldChunk).anticrash$isLoadedToWorld();
@@ -76,10 +53,9 @@ public abstract class ChunkSerializerMixin {
 
             //? if (>=1.18 && <=1.21.1) {
             CompoundTag nbt = original.call(world, chunk);
-            //?}
-            //? if (>=1.21.2 && <=26.3) {
+            //?} else {
             /*SerializableChunkData nbt = original.call(world, chunk);
-*///?}
+            *///?}
 
             // Remembered so that an unload rewrites the chunk without the extension even when
             // nothing else changed; see ThreadedAnvilChunkStorageEntityLifecycleMixin.

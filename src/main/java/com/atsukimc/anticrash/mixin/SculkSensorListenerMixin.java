@@ -1,23 +1,18 @@
 //? if (>=1.18 && <=1.19.4) {
 package com.atsukimc.anticrash.mixin;
 
-//? if (>=1.19 && <=1.19.4) {
-/*import net.minecraft.server.level.ServerLevel;
-*///?}
-
-//? if (>=1.19 && <=1.19.4) {
+//? if (>=1.18 && <=1.18.2) {
+import java.util.Optional;
+//?} else {
 /*import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 *///?}
 
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.gameevent.PositionSource;
-//? if (>=1.18 && <=1.18.2) {
 import net.minecraft.world.level.gameevent.vibrations.VibrationListener;
-//?}
-//? if (>=1.19 && <=1.19.4) {
-/*import net.minecraft.world.level.gameevent.vibrations.VibrationListener;
-*///?}
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,24 +20,10 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//? if (>=1.19 && <=1.19.4) {
-/*import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-*///?}
 
-//? if (>=1.18 && <=1.18.2) {
-import java.util.Optional;
-
-//?}
-
-//? if (>=1.18 && <=1.18.2) {
 @Mixin(VibrationListener.class)
 public abstract class SculkSensorListenerMixin {
 
-    //?}
-    //? if (>=1.19 && <=1.19.4) {
-    /*@Mixin(VibrationListener.class)
-    public abstract class SculkSensorListenerMixin {
-*///?}
     @Shadow @Final protected PositionSource listenerSource;
 
     //? if (>=1.18 && <=1.18.2) {

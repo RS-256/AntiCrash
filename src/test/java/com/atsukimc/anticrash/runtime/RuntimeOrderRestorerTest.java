@@ -35,9 +35,7 @@ class RuntimeOrderRestorerTest {
 
             //? if (>=1.18 && <=1.21.4) {
             long newAge = 37;
-            //?}
 
-            //? if (>=1.18 && <=1.21.4) {
             long restoredCreated = RuntimeOrderRestorer.tickCreatedFor(newAge, expiry, remaining);
             //?}
             //? if (>=1.21.5 && <=26.3) {
@@ -45,27 +43,17 @@ class RuntimeOrderRestorerTest {
                                 expiry == 300
                                         ? net.minecraft.server.level.TicketType.PORTAL
                                         : net.minecraft.server.level.TicketType.UNKNOWN;
-*///?}
 
-            //? if (>=1.21.5 && <=26.3) {
-            /*var nbt = new net.minecraft.nbt.CompoundTag();
-*///?}
+            var nbt = new net.minecraft.nbt.CompoundTag();
 
-            //? if (>=1.21.5 && <=26.3) {
-            /*nbt.putString(
+            nbt.putString(
                                 "type", net.minecraft.core.registries.BuiltInRegistries.TICKET_TYPE.getKey(type).toString());
-*///?}
 
-            //? if (>=1.21.5 && <=26.3) {
-            /*nbt.putInt("level", 31);
-*///?}
+            nbt.putInt("level", 31);
 
-            //? if (>=1.21.5 && <=26.3) {
-            /*nbt.putLong("ticks_left", remaining);
-*///?}
+            nbt.putLong("ticks_left", remaining);
 
-            //? if (>=1.21.5 && <=26.3) {
-            /*var restored =
+            var restored =
                                 net.minecraft.server.level.Ticket.CODEC
                                         .codec()
                                         .parse(net.minecraft.nbt.NbtOps.INSTANCE, nbt)
@@ -85,19 +73,15 @@ class RuntimeOrderRestorerTest {
                                         remaining - ticks < 0,
                                         restored.isTimedOut(),
                                         "expiry " + expiry + " remaining " + remaining + " after " + ticks);
-*///?}
 
-                //? if (>=1.21.5 && <=26.3) {
-                /*restored.decreaseTicksLeft();
+                restored.decreaseTicksLeft();
 *///?}
 
             }
 
             //? if (>=1.18 && <=1.21.4) {
             assertFalse(expired(newAge + remaining, restoredCreated, expiry));
-            //?}
 
-            //? if (>=1.18 && <=1.21.4) {
             assertTrue(expired(newAge + remaining + 1, restoredCreated, expiry));
             //?}
 

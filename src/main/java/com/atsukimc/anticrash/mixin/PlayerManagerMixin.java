@@ -4,36 +4,17 @@ import com.atsukimc.anticrash.AntiCrashController;
 import com.atsukimc.anticrash.AntiCrashMod;
 import com.atsukimc.anticrash.i18n.MessageCatalog;
 
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.Connection;
-*///?}
-
-//? if (>=1.18 && <=1.21.8) {
-import com.mojang.authlib.GameProfile;
-//?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.network.Connection;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.chat.Component;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.players.PlayerList;
-//?}
 import net.minecraft.server.level.ServerPlayer;
 
 //? if (>=1.18 && <=1.18.2) {
 import net.minecraft.network.chat.TextComponent;
 //?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.network.chat.Component;
+//? if (>=1.18 && <=1.21.8) {
+import com.mojang.authlib.GameProfile;
 //?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.players.PlayerList;
-*///?}
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

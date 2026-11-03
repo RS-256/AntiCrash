@@ -5,11 +5,8 @@ import com.atsukimc.anticrash.AntiCrashMod;
 import com.atsukimc.anticrash.network.DeferredPayloads;
 
 import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
-
 import net.minecraft.server.network.ServerCommonPacketListenerImpl;
-
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
-
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

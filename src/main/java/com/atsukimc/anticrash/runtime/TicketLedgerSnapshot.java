@@ -6,42 +6,16 @@ import com.atsukimc.anticrash.mixin.ChunkTicketManagerAccessorMixin;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.server.level.Ticket;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.ServerLevel;
-*///?}
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.ChunkPos;
 
-//? if (>=1.18 && <=1.21.11) {
 //? if (>=1.18 && <=1.21.4) {
 import net.minecraft.server.level.DistanceManager;
-//?}
-//? if (>=1.21.5 && <=1.21.11) {
-/*import net.minecraft.world.level.TicketStorage;
-*///?}
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.Ticket;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.server.level.ServerLevel;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.ChunkPos;
-*///?}
-
-//? if (>=1.18 && <=1.21.4) {
 import net.minecraft.util.SortedArraySet;
-//?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.level.ChunkPos;
-//?}
-//? if (>=26.1 && <=26.3) {
+//?} else {
 /*import net.minecraft.world.level.TicketStorage;
-*///?}
+ *///?}
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -64,13 +38,9 @@ public final class TicketLedgerSnapshot {
 
         for (ServerLevel world : worlds) {
 
-            //? if (>=1.18 && <=1.20.6) {
+            //? if (>=1.18 && <=1.21.4) {
             DistanceManager manager = world.getChunkSource().chunkMap.getDistanceManager();
             //?}
-            //? if (>=1.21 && <=1.21.4) {
-            /*DistanceManager manager =
-                                world.getChunkSource().chunkMap.getDistanceManager();
-*///?}
             //? if (>=1.21.5 && <=26.3) {
             /*TicketStorage manager =
                                 ((com.atsukimc.anticrash.mixin.ServerChunkManagerAccessorMixin)
@@ -123,20 +93,14 @@ public final class TicketLedgerSnapshot {
                     /*if (ticket.getType()
                                                 == com.atsukimc.anticrash.recovery.ChunkRecoveryManager.RECOVERY_TICKET)
                                             continue;
-*///?}
 
-                    //? if (>=1.21.5 && <=26.3) {
-                    /*var typeId =
+                    var typeId =
                                                 net.minecraft.core.registries.BuiltInRegistries.TICKET_TYPE.getKey(ticket.getType());
-*///?}
 
-                    //? if (>=1.21.5 && <=26.3) {
-                    /*if (typeId == null)
+                    if (typeId == null)
                                             throw new IllegalStateException("Unregistered chunk ticket type");
-*///?}
 
-                    //? if (>=1.21.5 && <=26.3) {
-                    /*String type =
+                    String type =
                                                 "minecraft".equals(typeId.getNamespace())
                                                         ? typeId.getPath()
                                                         : typeId.toString();
@@ -192,9 +156,7 @@ public final class TicketLedgerSnapshot {
 
                     //? if (>=1.18 && <=1.21.4) {
                     entry.tickCreated = ticketAccessor.anticrash$getTickCreated();
-                    //?}
 
-                    //? if (>=1.18 && <=1.21.4) {
                     entry.expiryTicks = ticket.getType().timeout();
                     //?}
                     //? if (>=1.21.5 && <=26.3) {

@@ -1,30 +1,19 @@
 //? if (>=1.19 && <=26.3) {
 /*package com.atsukimc.anticrash.mixin;
 
-import com.atsukimc.anticrash.runtime.RuntimeExtensionNbt;
-
-//? if (>=1.19 && <=1.21.11) {
-/^import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
-^///?}
-import net.minecraft.nbt.CompoundTag;
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.resources.Identifier;
-^///?}
-
 //? if (>=1.19 && <=1.21.1) {
 /^import net.minecraft.world.item.crafting.RecipeManager;
 ^///?}
-
 //? if (>=1.19 && <=1.21.10) {
 /^import net.minecraft.resources.ResourceLocation;
-^///?}
-//? if 1.21.11 {
-/^import net.minecraft.resources.Identifier;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
-^///?}
+^///?} else {
+import net.minecraft.resources.Identifier;
+//?}
 
+import com.atsukimc.anticrash.runtime.RuntimeExtensionNbt;
+
+import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
+import net.minecraft.nbt.CompoundTag;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

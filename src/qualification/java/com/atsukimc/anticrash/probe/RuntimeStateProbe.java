@@ -1,6 +1,12 @@
 //? if (>=1.18 && <=1.21.11) {
 package com.atsukimc.anticrash.probe;
 
+//? if (>=1.18 && <=1.19.2) {
+import net.minecraft.core.Registry;
+//?} else {
+/*import net.minecraft.core.registries.BuiltInRegistries;
+*///?}
+
 import com.atsukimc.anticrash.AntiCrashController;
 import com.atsukimc.anticrash.AntiCrashMod;
 import com.atsukimc.anticrash.mixin.LivingEntityAccessorMixin;
@@ -25,18 +31,10 @@ import net.minecraft.world.level.block.entity.TheEndGatewayBlockEntity;
 import net.minecraft.world.level.block.piston.PistonMovingBlockEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.nbt.CompoundTag;
-//? if (>=1.19.3 && <=1.21.11) {
-/*import net.minecraft.core.registries.BuiltInRegistries;
-*///?}
-
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
-//? if (>=1.18 && <=1.19.2) {
-import net.minecraft.core.Registry;
-//?}
-
 import net.minecraft.world.level.block.entity.TickingBlockEntity;
 import net.minecraft.world.level.chunk.LevelChunk;
 
@@ -601,9 +599,7 @@ public final class RuntimeStateProbe implements ModInitializer {
             //? if <=1.19 {
             default ->
                     server.getCommands().performCommand(server.createCommandSourceStack(), command);
-                //?} else if <=1.21.9 {
-                /*default -> server.getCommands().performPrefixedCommand(server.createCommandSourceStack(), command);
-*///?} else {
+                //?} else {
                 /*default -> server.getCommands().performPrefixedCommand(server.createCommandSourceStack(), command);
 *///?}
         }

@@ -1,7 +1,6 @@
 package com.atsukimc.anticrash.snapshot;
 
 import net.minecraft.nbt.CompoundTag;
-
 import net.minecraft.world.level.ChunkPos;
 
 import java.nio.file.Path;

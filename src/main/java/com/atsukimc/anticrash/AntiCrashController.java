@@ -3,32 +3,16 @@ package com.atsukimc.anticrash;
 import com.atsukimc.anticrash.checkpoint.CheckpointManager;
 import com.atsukimc.anticrash.config.AntiCrashConfig;
 import com.atsukimc.anticrash.consistency.ConsistencyManager;
-import com.atsukimc.anticrash.core.AntiCrashState;
-import com.atsukimc.anticrash.core.AntiCrashStateMachine;
-import com.atsukimc.anticrash.core.CrashCause;
-import com.atsukimc.anticrash.core.CrashDetector;
-import com.atsukimc.anticrash.core.InternalProcessLock;
-import com.atsukimc.anticrash.core.InternalStateManager;
-import com.atsukimc.anticrash.core.RecoveryStateData;
+import com.atsukimc.anticrash.core.*;
 import com.atsukimc.anticrash.i18n.MessageCatalog;
 import com.atsukimc.anticrash.integration.carpet.CarpetIntegration;
 import com.atsukimc.anticrash.integration.carpet.FakePlayerSnapshot;
 import com.atsukimc.anticrash.logging.AntiCrashLogger;
 import com.atsukimc.anticrash.player.PlayerSnapshotData;
 import com.atsukimc.anticrash.player.PlayerSnapshotManager;
-import com.atsukimc.anticrash.recovery.ChunkRecoveryManager;
-import com.atsukimc.anticrash.recovery.ChunkRecoveryPlan;
-import com.atsukimc.anticrash.recovery.PreWorldDecisionInput;
-import com.atsukimc.anticrash.recovery.RecoveryChecks;
-import com.atsukimc.anticrash.recovery.RecoveryPayloadValidator;
-import com.atsukimc.anticrash.recovery.StartupRecoveryPlan;
-import com.atsukimc.anticrash.recovery.WorldRestorer;
+import com.atsukimc.anticrash.recovery.*;
 import com.atsukimc.anticrash.restart.RestartCoordinator;
-import com.atsukimc.anticrash.runtime.BlockEventSnapshot;
-import com.atsukimc.anticrash.runtime.EquivalenceCategory;
-import com.atsukimc.anticrash.runtime.RecoveryEquivalenceReport;
-import com.atsukimc.anticrash.runtime.RuntimeCapsule;
-import com.atsukimc.anticrash.runtime.RuntimeCapsuleManager;
+import com.atsukimc.anticrash.runtime.*;
 import com.atsukimc.anticrash.snapshot.CheckpointCandidate;
 import com.atsukimc.anticrash.snapshot.CheckpointManifest;
 import com.atsukimc.anticrash.snapshot.CrashRawManager;
@@ -37,29 +21,15 @@ import com.atsukimc.anticrash.util.AtomicFiles;
 import com.google.gson.reflect.TypeToken;
 
 import net.fabricmc.loader.api.FabricLoader;
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.ChatFormatting;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.chat.Component;
-*///?}
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.ChunkPos;
 
 //? if (>=1.18 && <=1.18.2) {
 import net.minecraft.network.chat.TextComponent;
 //?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.network.chat.Component;
-//?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.ChatFormatting;
-//?}
-
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerPlayer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -1590,31 +1560,10 @@ public final class AntiCrashController {
         for (net.minecraft.server.level.ServerLevel world : server.getAllLevels()) {
             // Apply the ticket changes to the chunk holders without ageing any ticket.
 
-            //? if (>=1.18 && <=1.20.1) {
             world.getChunkSource()
                     .chunkMap
                     .getDistanceManager()
                     .runAllUpdates(world.getChunkSource().chunkMap);
-            //?}
-            //? if (>=1.20.2 && <=1.20.6) {
-            /*world.getChunkSource()
-                                .chunkMap
-                                .getDistanceManager()
-                                .runAllUpdates(world.getChunkSource().chunkMap);
-*///?}
-            //? if (>=1.21 && <=1.21.4) {
-            /*world.getChunkSource()
-                                .chunkMap
-                                .getDistanceManager()
-                                .runAllUpdates(world.getChunkSource().chunkMap);
-*///?}
-            //? if (>=1.21.5 && <=26.3) {
-            /*world.getChunkSource()
-                                .chunkMap
-                                .getDistanceManager()
-                                .runAllUpdates(world.getChunkSource().chunkMap);
-*///?}
-
         }
         com.atsukimc.anticrash.runtime.RuntimeCapsule actual =
                 runtime.captureCurrentForEquivalence(server);

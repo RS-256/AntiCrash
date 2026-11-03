@@ -2,72 +2,18 @@ package com.atsukimc.anticrash.runtime;
 
 import com.atsukimc.anticrash.mixin.ThreadedAnvilChunkStorageAccessorMixin;
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.block.entity.BlockEntity;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.core.BlockPos;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.piston.PistonMovingBlockEntity;
-//?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.entity.Entity;
-//?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.entity.item.FallingBlockEntity;
-//?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.entity.item.PrimedTnt;
-//?}
-
 import net.minecraft.nbt.CompoundTag;
-
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ChunkHolder;
-
-//? if (>=1.21 && <=26.3) {
-/*import net.minecraft.server.level.ChunkMap;
-*///?}
-
-import net.minecraft.server.level.ServerLevel;
-
-//? if (>=1.18 && <=1.20.6) {
 import net.minecraft.server.level.ChunkMap;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.entity.Entity;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.core.BlockPos;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.entity.item.FallingBlockEntity;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.chunk.LevelChunk;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.entity.item.PrimedTnt;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.entity.BlockEntity;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.piston.PistonMovingBlockEntity;
-*///?}
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.chunk.LevelChunk;
-*///?}
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -116,12 +62,7 @@ public final class TransientChunkStateMarker {
 
         for (ServerLevel world : server.getAllLevels()) {
 
-            //? if (>=1.18 && <=1.20.6) {
             ChunkMap storage = world.getChunkSource().chunkMap;
-            //?}
-            //? if (>=1.21 && <=26.3) {
-            /*ChunkMap storage = world.getChunkSource().chunkMap;
-*///?}
 
             ThreadedAnvilChunkStorageAccessorMixin accessor =
                     (ThreadedAnvilChunkStorageAccessorMixin) storage;
@@ -236,12 +177,9 @@ public final class TransientChunkStateMarker {
                 if (!chunk.isUnsaved()) {
                     chunksMadeDirty++;
 
-                    //? if (>=1.18.2 && <=1.21.1) {
+                    //? if (>=1.18 && <=1.21.1) {
                     chunk.setUnsaved(true);
                     //?}
-                    //? if (>=1.18 && <=1.18.1) {
-                    /*chunk.setUnsaved(true);
-*///?}
                     //? if (>=1.21.2 && <=26.3) {
                     /*chunk.markUnsaved();
 *///?}

@@ -38,37 +38,13 @@ import com.atsukimc.anticrash.snapshot.logical.LogicalTracking;
 import com.atsukimc.anticrash.util.AtomicFiles;
 
 import net.fabricmc.loader.api.FabricLoader;
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.core.SectionPos;
-*///?}
-
+import net.minecraft.core.SectionPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ChunkHolder;
-
 import net.minecraft.server.level.ServerLevel;
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.core.SectionPos;
-//?}
 import net.minecraft.world.level.chunk.ChunkAccess;
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.chunk.ImposterProtoChunk;
-*///?}
-
-//? if (>=1.18 && <=1.19.4) {
 import net.minecraft.world.level.chunk.ImposterProtoChunk;
-//?}
-//? if (>=1.20 && <=26.3) {
-/*import net.minecraft.world.level.chunk.LevelChunk;
-*///?}
-
-//? if (>=1.18 && <=1.19.4) {
 import net.minecraft.world.level.chunk.LevelChunk;
-//?}
-//? if (>=1.20 && <=1.21.11) {
-/*import net.minecraft.world.level.chunk.ImposterProtoChunk;
-*///?}
-
 import net.minecraft.world.level.chunk.storage.IOWorker;
 
 import java.io.IOException;
@@ -369,15 +345,8 @@ public final class CheckpointManager {
             outer:
             for (ServerLevel world : server.getAllLevels()) {
                 world.getChunkSource().pollTask();
-                //? if (>=1.18 && <=1.20.6) {
                 ThreadedAnvilChunkStorageAccessorMixin storage =
                         (ThreadedAnvilChunkStorageAccessorMixin) world.getChunkSource().chunkMap;
-                //?}
-                //? if (>=1.21 && <=26.3) {
-                /*ThreadedAnvilChunkStorageAccessorMixin storage =
-                                        (ThreadedAnvilChunkStorageAccessorMixin)
-                                                world.getChunkSource().chunkMap;
-*///?}
                 for (ChunkHolder holder : storage.anticrash$getCurrentChunkHolders().values()) {
                     if (prepared >= 16 || System.nanoTime() - started >= budget) break outer;
                     if (holder == null || !holder.wasAccessibleSinceLastSave()) continue;
@@ -406,10 +375,8 @@ public final class CheckpointManager {
 
                     //? if (>=1.21 && <=26.3) {
                     /*ChunkAccess chunk = holder.getLatestChunk();
-*///?}
 
-                    //? if (>=1.21 && <=26.3) {
-                    /*if (chunk instanceof ImposterProtoChunk readOnly)
+                    if (chunk instanceof ImposterProtoChunk readOnly)
                                             chunk = readOnly.getWrapped();
 *///?}
 
@@ -781,15 +748,8 @@ public final class CheckpointManager {
     private List<BarrierWorld> captureBarrierWorlds(MinecraftServer server) {
         List<BarrierWorld> result = new ArrayList<>();
         for (ServerLevel world : server.getAllLevels()) {
-            //? if (>=1.18 && <=1.20.6) {
             ThreadedAnvilChunkStorageAccessorMixin storage =
                     (ThreadedAnvilChunkStorageAccessorMixin) world.getChunkSource().chunkMap;
-            //?}
-            //? if (>=1.21 && <=26.3) {
-            /*ThreadedAnvilChunkStorageAccessorMixin storage =
-                                (ThreadedAnvilChunkStorageAccessorMixin)
-                                        world.getChunkSource().chunkMap;
-*///?}
 
             List<ChunkHolder> holders = new ArrayList<>();
             for (ChunkHolder holder : storage.anticrash$getCurrentChunkHolders().values()) {
@@ -904,16 +864,9 @@ public final class CheckpointManager {
             while (barrier.worldCursor < barrier.worlds.size()) {
                 BarrierWorld barrierWorld = barrier.worlds.get(barrier.worldCursor);
 
-                //? if (>=1.18 && <=1.20.6) {
                 ThreadedAnvilChunkStorageAccessorMixin storage =
                         (ThreadedAnvilChunkStorageAccessorMixin)
                                 barrierWorld.world.getChunkSource().chunkMap;
-                //?}
-                //? if (>=1.21 && <=26.3) {
-                /*ThreadedAnvilChunkStorageAccessorMixin storage =
-                                        (ThreadedAnvilChunkStorageAccessorMixin)
-                                                barrierWorld.world.getChunkSource().chunkMap;
-*///?}
 
                 while (barrier.holderCursor < barrierWorld.holders.size()) {
                     ChunkHolder holder = barrierWorld.holders.get(barrier.holderCursor++);
@@ -989,18 +942,7 @@ public final class CheckpointManager {
         /*ChunkAccess current = holder.getLatestChunk();
 *///?}
 
-        //? if (>=1.18 && <=1.19.4) {
-        if (current instanceof ImposterProtoChunk readOnly)
-            //?}
-            //? if (>=1.20 && <=1.21.11) {
-            /*if (current instanceof ImposterProtoChunk readOnly)
-*///?}
-            //? if (>=1.18 && <=1.21.11) {
-            current = readOnly.getWrapped();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*if (current instanceof ImposterProtoChunk readOnly) current = readOnly.getWrapped();
-*///?}
+        if (current instanceof ImposterProtoChunk readOnly) current = readOnly.getWrapped();
 
         if (current instanceof LevelChunk) return current;
 
@@ -1034,13 +976,7 @@ public final class CheckpointManager {
         /*ChunkAccess saved = holder.getLatestChunk();
 *///?}
 
-        //? if (>=1.18 && <=1.19.4) {
         return saved instanceof ImposterProtoChunk readOnly ? readOnly.getWrapped() : saved;
-        //?}
-        //? if (>=1.20 && <=26.3) {
-        /*return saved instanceof ImposterProtoChunk readOnly ? readOnly.getWrapped() : saved;
-*///?}
-
     }
 
     /**
@@ -1506,7 +1442,7 @@ public final class CheckpointManager {
                 /*throw new IllegalStateException(
                                         "Unsupported chunk IO worker for "
                                                 + barrierWorld.world.dimension().identifier());
-*///?}
+                *///?}
 
             }
 
@@ -2571,8 +2507,7 @@ public final class CheckpointManager {
             boolean rebase,
             String sourceCheckpointId) {}
 
-    private record BarrierWorld(ServerLevel world, List<ChunkHolder> holders) {
-    }
+    private record BarrierWorld(ServerLevel world, List<ChunkHolder> holders) {}
 
     private static final class PendingBarrier {
         private final String timelineParentCheckpointId;

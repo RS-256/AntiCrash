@@ -5,35 +5,15 @@ import com.atsukimc.anticrash.runtime.CampfireRecipeState;
 import com.atsukimc.anticrash.runtime.RecipeBoundTicker;
 
 import net.minecraft.world.level.block.entity.*;
-
-//? if (>=1.21.2 && <=1.21.11) {
-/^import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.chunk.*;
-^///?}
+
 //? if (>=26.1 && <=26.3) {
 /^import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.CampfireBlockEntity;
+import net.minecraft.world.level.block.entity.TickingBlockEntity;
+import net.minecraft.world.level.chunk.LevelChunk;
 ^///?}
-
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.block.entity.BlockEntityTicker;
-^///?}
-
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.block.entity.CampfireBlockEntity;
-^///?}
-
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.block.entity.TickingBlockEntity;
-^///?}
-
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.chunk.*;
-^///?}
-
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.chunk.LevelChunk;
-^///?}
-
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.*;

@@ -116,9 +116,7 @@ public abstract class UserCacheMixin {
         //?}
         //? if (>=1.21.9 && <=26.3) {
         /*if (profile != null)
-*///?}
-        //? if (>=1.21.9 && <=26.3) {
-        /*callback.setReturnValue(
+        callback.setReturnValue(
                             java.util.Optional.of(new net.minecraft.server.players.NameAndId(profile)));
 *///?}
 

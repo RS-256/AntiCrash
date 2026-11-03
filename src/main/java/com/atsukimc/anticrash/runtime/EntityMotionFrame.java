@@ -3,14 +3,8 @@
 
 import com.atsukimc.anticrash.mixin.EntityRuntimeAccessorMixin;
 
-//? if 1.21.11 {
-/^import net.minecraft.world.entity.Entity;
-^///?}
+import net.minecraft.world.entity.Entity;
 import net.minecraft.nbt.CompoundTag;
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.entity.Entity;
-^///?}
-
 import net.minecraft.world.phys.Vec3;
 
 

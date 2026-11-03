@@ -1,31 +1,17 @@
 //? if (>=1.21.6 && <=26.3) {
 /*package com.atsukimc.anticrash.runtime;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-//? if (>=1.21.6 && <=1.21.11) {
-/^import net.minecraft.world.entity.player.Abilities;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.core.HolderLookup;
-^///?}
-
-import net.minecraft.nbt.*;
-//? if (>=1.21.6 && <=1.21.11) {
-/^import net.minecraft.core.HolderLookup;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.entity.player.Abilities;
-^///?}
-
-import net.minecraft.world.level.storage.*;
-
 //? if (>=26.1 && <=26.3) {
 /^import net.minecraft.world.level.storage.TagValueInput;
 ^///?}
 
-
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+
+import net.minecraft.world.entity.player.Abilities;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.*;
+import net.minecraft.world.level.storage.*;
 
 class VersionStorageTest {
     @org.junit.jupiter.api.AfterEach

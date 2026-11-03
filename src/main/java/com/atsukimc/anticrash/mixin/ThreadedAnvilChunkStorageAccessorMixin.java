@@ -1,29 +1,13 @@
 package com.atsukimc.anticrash.mixin;
 
-import it.unimi.dsi.fastutil.longs.Long2ObjectLinkedOpenHashMap;
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.ChunkHolder;
-*///?}
-
 //? if (>=1.18 && <=1.20.6) {
 import it.unimi.dsi.fastutil.longs.LongSet;
 //?}
 
-//? if (>=1.18 && <=1.21.11) {
+import it.unimi.dsi.fastutil.longs.Long2ObjectLinkedOpenHashMap;
+
 import net.minecraft.server.level.ChunkHolder;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.ChunkMap;
-*///?}
-
-//? if (>=1.18 && <=1.20.6) {
 import net.minecraft.server.level.ChunkMap;
-//?}
-//? if (>=1.21 && <=1.21.11) {
-/*import net.minecraft.server.level.ChunkMap;
-*///?}
-
 import net.minecraft.world.level.chunk.ChunkAccess;
 
 import org.spongepowered.asm.mixin.Mixin;

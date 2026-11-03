@@ -25,12 +25,10 @@ public final class FluidInteractionSnapshot {
         FLUID,
         CURRENT
     }
-^///?}
 
 
 
-//? if 26.3 {
-/^public record State(
+public record State(
             Kind kind,
 ^///?}
 String tag, double height, boolean eyes, Vec3 current, int count) {
@@ -108,34 +106,26 @@ throw new IllegalArgumentException("Invalid fluid interaction state");
     //? if (>=26.1 && <=26.2) {
 
     /^}
-    ^///?}
 
 
 
-//? if (>=26.1 && <=26.2) {
-/^private static Map<String, FluidTrackerAccessor> trackers(Entity entity) {
+private static Map<String, FluidTrackerAccessor> trackers(Entity entity) {
         var source =
                 ((FluidInteractionAccessor) ((EntityFluidAccessor) entity).anticrash$fluids())
                         .anticrash$trackers();
-^///?}
 
 
-//? if (>=26.1 && <=26.2) {
-/^Map<String, FluidTrackerAccessor> result = new TreeMap<>();
-^///?}
+Map<String, FluidTrackerAccessor> result = new TreeMap<>();
 
 
-//? if (>=26.1 && <=26.2) {
-/^source.forEach((tag, tracker) -> {
+source.forEach((tag, tracker) -> {
             if (result.put(tag.location().toString(), (FluidTrackerAccessor) tracker) != null)
                 throw new IllegalStateException("Duplicate fluid tag");
         });
-^///?}
 
 
-//? if (>=26.1 && <=26.2) {
-/^return result;
-^///?}
+return result;
+    ^///?}
 
     }
 
@@ -143,11 +133,9 @@ throw new IllegalArgumentException("Invalid fluid interaction state");
 
 //? if 26.3 {
 /^var interaction = ((EntityFluidAccessor) entity).anticrash$fluids();
-^///?}
 
 
-//? if 26.3 {
-/^var access = (FluidInteractionAccessor) interaction;
+var access = (FluidInteractionAccessor) interaction;
 ^///?}
 
         var n = new ListTag();
@@ -167,11 +155,9 @@ throw new IllegalArgumentException("Invalid fluid interaction state");
 //? if 26.3 {
 /^for (Object tracker : access.anticrash$trackers()) {
             var t = (FluidTrackerAccessor) tracker;
-^///?}
 
 
-//? if 26.3 {
-/^n.add(
+n.add(
                     new State(
                                     Kind.FLUID,
                                     t.anticrash$type()
@@ -185,18 +171,14 @@ throw new IllegalArgumentException("Invalid fluid interaction state");
                                     0)
                             .write());
         }
-^///?}
 
 
-//? if 26.3 {
-/^access.anticrash$currents()
+access.anticrash$currents()
                 .forEach((tag, value) -> {
                     var c = (FluidCurrentAccessor) value;
-^///?}
 
 
-//? if 26.3 {
-/^n.add(
+n.add(
                             new State(
                                             Kind.CURRENT,
                                             tag.location().toString(),
@@ -234,11 +216,9 @@ throw new IllegalArgumentException("Duplicate fluid entry");
                     && (!state.current().equals(Vec3.ZERO) || state.count() != 0))
                 throw new IllegalArgumentException(
                         "A fluid tracker cannot own a current accumulator");
-^///?}
 
 
-//? if 26.3 {
-/^if (state.kind() == Kind.CURRENT && state.eyes())
+if (state.kind() == Kind.CURRENT && state.eyes())
                 throw new IllegalArgumentException("A tag current cannot own eye contact");
 ^///?}
 
@@ -249,12 +229,10 @@ throw new IllegalArgumentException("Duplicate fluid entry");
 //? if 26.3 {
 /^return List.copyOf(result);
     }
-^///?}
 
 
 
-//? if 26.3 {
-/^static void validateDomains(
+static void validateDomains(
             List<State> expected, List<String> existingFluids, List<String> currentTags) {
         var fluids = expected.stream().filter(s -> s.kind() == Kind.FLUID).map(State::tag).toList();
 ^///?}
@@ -296,33 +274,25 @@ throw new IllegalArgumentException("Duplicate fluid entry");
             throw new IllegalStateException("Native fluid tracker creation failed", error);
         }
     }
-^///?}
 
 
 
-//? if 26.3 {
-/^private static final class TrackerFactory {
+private static final class TrackerFactory {
         static final java.lang.reflect.Method METHOD = method();
-^///?}
 
 
 
-//? if 26.3 {
-/^private static java.lang.reflect.Method method() {
+private static java.lang.reflect.Method method() {
             try {
                 var m =
                         net.minecraft.world.entity.EntityFluidInteraction.class.getDeclaredMethod(
                                 "getOrCreateTrackerFor", net.minecraft.core.Holder.class);
-^///?}
 
 
-//? if 26.3 {
-/^m.setAccessible(true);
-^///?}
+m.setAccessible(true);
 
 
-//? if 26.3 {
-/^return m;
+return m;
             } catch (ReflectiveOperationException error) {
                 throw new IllegalStateException("Unsupported fluid tracker factory", error);
             }
@@ -348,23 +318,17 @@ throw new IllegalArgumentException("Duplicate fluid entry");
 ^///?}
 //? if 26.3 {
 /^var access = (FluidInteractionAccessor) interaction;
-^///?}
 
 
-//? if 26.3 {
-/^var currents = new LinkedHashMap<String, FluidCurrentAccessor>();
-^///?}
+var currents = new LinkedHashMap<String, FluidCurrentAccessor>();
 
 
-//? if 26.3 {
-/^access.anticrash$currents()
+access.anticrash$currents()
                 .forEach((tag, value) ->
                         currents.put(tag.location().toString(), (FluidCurrentAccessor) value));
-^///?}
 
 
-//? if 26.3 {
-/^var existing =
+var existing =
                 access.anticrash$trackers().stream()
                         .map(t ->
                                 ((FluidTrackerAccessor) t)
@@ -374,34 +338,26 @@ throw new IllegalArgumentException("Duplicate fluid entry");
                                         .identifier()
                                         .toString())
                         .toList();
-^///?}
 
 
-//? if 26.3 {
-/^validateDomains(expected, existing, List.copyOf(currents.keySet()));
-^///?}
+validateDomains(expected, existing, List.copyOf(currents.keySet()));
 
 
-//? if 26.3 {
-/^var holders =
+var holders =
                 new HashMap<
                         String,
                         net.minecraft.core.Holder<net.minecraft.world.level.material.Fluid>>();
-^///?}
 
 
-//? if 26.3 {
-/^for (var s : expected)
+for (var s : expected)
             if (s.kind() == Kind.FLUID) {
                 var key =
                         net.minecraft.resources.ResourceKey.create(
                                 net.minecraft.core.registries.Registries.FLUID,
                                 net.minecraft.resources.Identifier.parse(s.tag()));
-^///?}
 
 
-//? if 26.3 {
-/^holders.put(
+holders.put(
                         s.tag(),
                         net.minecraft.core.registries.BuiltInRegistries.FLUID
                                 .get(key)
@@ -428,33 +384,25 @@ throw new IllegalArgumentException("Duplicate fluid entry");
 
 //? if (>=26.1 && <=26.2) {
 /^t.anticrash$current(s.current());
-^///?}
 
 
-//? if (>=26.1 && <=26.2) {
-/^t.anticrash$count(s.count());
+t.anticrash$count(s.count());
 ^///?}
             //? if 26.3 {
 
             /^} else {
                 var c = currents.get(s.tag());
-            ^///?}
 
 
-//? if 26.3 {
-/^c.anticrash$height(s.height());
-^///?}
+c.anticrash$height(s.height());
 
 
-//? if 26.3 {
-/^c.anticrash$current(s.current());
-^///?}
+c.anticrash$current(s.current());
 
 
-//? if 26.3 {
-/^c.anticrash$count(s.count());
+c.anticrash$count(s.count());
             }
-^///?}
+            ^///?}
 
         }
     }

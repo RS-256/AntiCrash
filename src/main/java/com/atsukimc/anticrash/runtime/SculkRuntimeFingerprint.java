@@ -1,30 +1,22 @@
 //? if (>=1.19 && <=26.3) {
 /*package com.atsukimc.anticrash.runtime;
 
-import com.mojang.serialization.JsonOps;
-
-import net.minecraft.world.level.block.entity.*;
-
+//? if (>=1.19 && <=1.19.4) {
+/^import net.minecraft.world.level.gameevent.vibrations.VibrationListener;
+^///?} else {
+import net.minecraft.world.level.gameevent.vibrations.VibrationSystem;
+//?}
 //? if (>=1.19 && <=1.21.5) {
 /^import net.minecraft.nbt.CompoundTag;
 ^///?}
 //? if (>=26.1 && <=26.3) {
 /^import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.SculkCatalystBlockEntity;
 ^///?}
 
-//? if (>=1.19 && <=1.19.4) {
-/^import net.minecraft.world.level.gameevent.vibrations.VibrationListener;
-^///?}
-//? if (>=1.20 && <=1.21.11) {
-/^import net.minecraft.world.level.gameevent.vibrations.VibrationSystem;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.block.entity.SculkCatalystBlockEntity;
-^///?}
+import com.mojang.serialization.JsonOps;
 
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.gameevent.vibrations.VibrationSystem;
-^///?}
+import net.minecraft.world.level.block.entity.*;
 
 
 /^* Version-native codecs include every persisted candidate, source UUID and spread cursor. ^/
@@ -35,11 +27,9 @@ public final class SculkRuntimeFingerprint {
 
 //? if (>=1.19 && <=1.19.4) {
 /^VibrationListener listener;
-^///?}
 
 
-//? if (>=1.19 && <=1.19.4) {
-/^if (entity instanceof SculkSensorBlockEntity sensor) listener = sensor.getListener();
+if (entity instanceof SculkSensorBlockEntity sensor) listener = sensor.getListener();
         else if (entity instanceof SculkShriekerBlockEntity shrieker)
             listener = shrieker.getListener();
         else

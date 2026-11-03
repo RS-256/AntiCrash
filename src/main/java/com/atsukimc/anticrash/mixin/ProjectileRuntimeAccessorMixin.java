@@ -2,9 +2,7 @@
 /*package com.atsukimc.anticrash.mixin;
 
 import net.minecraft.world.entity.Entity;
-
 import net.minecraft.world.entity.projectile.Projectile;
-
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
@@ -19,12 +17,10 @@ public interface ProjectileRuntimeAccessorMixin {
 //? if (>=1.21.9 && <=26.3) {
 /^@Accessor("leftOwnerChecked")
     boolean anticrash$checkedForLeftOwner();
-^///?}
 
 
 
-//? if (>=1.21.9 && <=26.3) {
-/^@Accessor("leftOwnerChecked")
+@Accessor("leftOwnerChecked")
     void anticrash$setCheckedForLeftOwner(boolean value);
 ^///?}
 

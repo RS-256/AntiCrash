@@ -1,28 +1,16 @@
 package com.atsukimc.anticrash.mixin;
 
-import com.atsukimc.anticrash.checkpoint.CutSave;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.chunk.storage.EntityStorage;
-*///?}
-
 //? if (>=1.18 && <=1.21.1) {
 import com.mojang.datafixers.util.Either;
 //?}
 
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.level.entity.PersistentEntitySectionManager;
-//?}
-import net.minecraft.world.level.entity.EntityPersistentStorage;
+import com.atsukimc.anticrash.checkpoint.CutSave;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.chunk.storage.EntityStorage;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.entity.PersistentEntitySectionManager;
-*///?}
+import net.minecraft.world.level.entity.PersistentEntitySectionManager;
+import net.minecraft.world.level.entity.EntityPersistentStorage;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -73,12 +61,6 @@ public abstract class ServerEntityManagerMixin {
                         .join();
 *///?}
 
-        //? if (>=1.18 && <=1.21.1) {
         accessor.anticrash$getTaskExecutor().runAll();
-        //?}
-        //? if (>=1.21.2 && <=26.3) {
-        /*accessor.anticrash$getTaskExecutor().runAll();
-*///?}
-
     }
 }

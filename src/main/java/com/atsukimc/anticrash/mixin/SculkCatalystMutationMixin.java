@@ -1,50 +1,21 @@
 //? if (>=1.19 && <=26.3) {
 /*package com.atsukimc.anticrash.mixin;
 
-//? if (>=1.19 && <=1.21.11) {
-/^import net.minecraft.world.level.block.state.BlockState;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.core.BlockPos;
-^///?}
-
-//? if (>=1.19 && <=1.21.11) {
-/^import net.minecraft.world.level.block.entity.SculkCatalystBlockEntity;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.Level;
-^///?}
-
 //? if (>=1.19 && <=1.19.4) {
 /^import net.minecraft.server.level.ServerLevel;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.block.entity.SculkCatalystBlockEntity;
-^///?}
-
-//? if (>=1.19 && <=1.21.11) {
-/^import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.gameevent.GameEvent;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 ^///?}
 
-//? if (>=1.19 && <=1.21.11) {
-/^import net.minecraft.world.level.Level;
-^///?}
-
-//? if (>=1.19 && <=1.19.4) {
-/^import net.minecraft.world.level.gameevent.GameEvent;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.block.state.BlockState;
-^///?}
-
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.entity.SculkCatalystBlockEntity;
+import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//? if (>=1.19 && <=1.19.4) {
-/^import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-^///?}
 
 
 /^* Vanilla writes spread cursors but their countdown does not call markDirty (1.19 bytecode). ^/

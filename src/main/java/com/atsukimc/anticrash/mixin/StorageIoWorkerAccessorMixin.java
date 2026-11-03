@@ -2,25 +2,16 @@ package com.atsukimc.anticrash.mixin;
 
 //? if (>=1.18 && <=1.21.1) {
 import com.mojang.datafixers.util.Either;
+import java.util.Map;
 //?}
 
 import net.minecraft.world.level.ChunkPos;
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.chunk.storage.RegionFileStorage;
-//?}
 import net.minecraft.world.level.chunk.storage.IOWorker;
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.chunk.storage.RegionFileStorage;
-*///?}
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
-
-//? if (>=1.18 && <=1.21.1) {
-import java.util.Map;
-//?}
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;

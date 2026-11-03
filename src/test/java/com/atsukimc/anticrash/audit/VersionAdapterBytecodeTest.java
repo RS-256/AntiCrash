@@ -20,98 +20,64 @@ class VersionAdapterBytecodeTest {
 /^@Test
     void modernSpawnPointPreservesBothAngles() {
 
-^///?}
-//? if (>=1.21.9 && <=26.3) {
-/^var spawn =
+var spawn =
                 net.minecraft.world.level.storage.LevelData.RespawnData.of(
                         net.minecraft.world.level.Level.OVERWORLD,
                         new net.minecraft.core.BlockPos(-330, 120, 122),
                         87.5f,
                         -22.25f);
-^///?}
 
 
-//? if (>=1.21.9 && <=26.3) {
-/^var respawn = new net.minecraft.server.level.ServerPlayer.RespawnConfig(spawn, true);
-^///?}
+var respawn = new net.minecraft.server.level.ServerPlayer.RespawnConfig(spawn, true);
 
 
-//? if (>=1.21.9 && <=26.3) {
-/^var encoded =
+var encoded =
                 net.minecraft.server.level.ServerPlayer.RespawnConfig.CODEC
                         .encodeStart(net.minecraft.nbt.NbtOps.INSTANCE, respawn)
                         .getOrThrow();
-^///?}
 
 
-//? if (>=1.21.9 && <=26.3) {
-/^var decoded =
+var decoded =
                 net.minecraft.server.level.ServerPlayer.RespawnConfig.CODEC
                         .parse(net.minecraft.nbt.NbtOps.INSTANCE, encoded)
                         .getOrThrow();
-^///?}
 
 
-//? if (>=1.21.9 && <=26.3) {
-/^assertEquals(respawn, decoded);
-^///?}
+assertEquals(respawn, decoded);
 
 
-//? if (>=1.21.9 && <=26.3) {
-/^assertEquals(-22.25f, decoded.respawnData().pitch());
+assertEquals(-22.25f, decoded.respawnData().pitch());
     }
-^///?}
 
 
 
-//? if (>=1.21.9 && <=26.3) {
-/^@Test
+@Test
     void borderIsPersistentStateAndRidingHasAnEventFreeRestorationPath() throws Exception {
 
-^///?}
-//? if (>=1.21.9 && <=26.3) {
-/^assertTrue(
+assertTrue(
                 net.minecraft.world.level.saveddata.SavedData.class.isAssignableFrom(
                         net.minecraft.world.level.border.WorldBorder.class));
-^///?}
 
 
-//? if (>=1.21.9 && <=26.3) {
-/^var entity = read("net/minecraft/world/entity/Entity");
-^///?}
+var entity = read("net/minecraft/world/entity/Entity");
 
 
-//? if (>=1.21.9 && <=1.21.11) {
-/^assertTrue(
+assertTrue(
                 entity.methods.stream()
                         .anyMatch(m ->
                                 m.name.equals("startRiding")
                                         && m.desc.equals("(Lnet/minecraft/world/entity/Entity;ZZ)Z")));
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^assertTrue(
-                entity.methods.stream()
-                        .anyMatch(m ->
-                                m.name.equals("startRiding")
-                                        && m.desc.equals(
-                                                "(Lnet/minecraft/world/entity/Entity;ZZ)Z")));
-^///?}
 
 
-//? if (>=1.21.9 && <=26.3) {
-/^var projectile = read("net/minecraft/world/entity/projectile/Projectile");
-^///?}
+var projectile = read("net/minecraft/world/entity/projectile/Projectile");
 
 
-//? if (>=1.21.9 && <=26.3) {
-/^assertTrue(
+assertTrue(
                 projectile.fields.stream()
                         .anyMatch(f -> f.name.equals("leftOwnerChecked") && f.desc.equals("Z")));
-^///?}
-    //? if (>=1.21.9 && <=26.3) {
 
-    /^}
-    ^///?}
+    }
+^///?}
 
 
 
@@ -145,56 +111,34 @@ class VersionAdapterBytecodeTest {
 ^///?}
 //? if (>=1.21.5 && <=26.3) {
 /^assertTrue(type.doesLoad());
-^///?}
 
 
-//? if (>=1.21.5 && <=26.3) {
-/^assertTrue(type.doesSimulate());
-^///?}
+assertTrue(type.doesSimulate());
 
 
-//? if (>=1.21.5 && <=1.21.8) {
-/^assertTrue(net.minecraft.server.level.TicketType.PORTAL.persist());
-^///?}
-//? if (>=1.21.9 && <=26.3) {
-/^assertTrue(net.minecraft.server.level.TicketType.PORTAL.persist());
-^///?}
+assertTrue(net.minecraft.server.level.TicketType.PORTAL.persist());
 
 
-//? if (>=1.21.5 && <=26.3) {
-/^assertEquals(
+assertEquals(
                 "minecraft:ender_pearl",
                 net.minecraft.core.registries.BuiltInRegistries.TICKET_TYPE.getKey(type).toString());
-^///?}
 
 
-//? if (>=1.21.5 && <=26.3) {
-/^var ticket = read("net/minecraft/server/level/Ticket");
-^///?}
+var ticket = read("net/minecraft/server/level/Ticket");
 
 
-//? if (>=1.21.5 && <=26.3) {
-/^assertTrue(ticket.fields.stream().anyMatch(f -> f.name.equals("ticksLeft")));
-^///?}
+assertTrue(ticket.fields.stream().anyMatch(f -> f.name.equals("ticksLeft")));
 
 
-//? if (>=1.21.5 && <=26.3) {
-/^assertFalse(
+assertFalse(
                 ticket.fields.stream()
                         .anyMatch(f -> f.name.equals("key") || f.name.equals("createdTick")));
-^///?}
 
 
-//? if (>=1.21.5 && <=26.3) {
-/^var recovery = com.atsukimc.anticrash.recovery.ChunkRecoveryManager.RECOVERY_TICKET;
-^///?}
+var recovery = com.atsukimc.anticrash.recovery.ChunkRecoveryManager.RECOVERY_TICKET;
 
 
-//? if (>=1.21.5 && <=1.21.8) || (>=26.1 && <=26.3) {
-/^assertFalse(recovery.persist());
-^///?}
-//? if (>=1.21.9 && <=1.21.11) {
-/^assertFalse(recovery.persist());
+assertFalse(recovery.persist());
 ^///?}
 
 
@@ -207,70 +151,46 @@ class VersionAdapterBytecodeTest {
     //? if (>=1.21.4 && <=26.3) {
 
     /^}
-    ^///?}
 
 
 
-//? if (>=1.21.4 && <=26.3) {
-/^@Test
+@Test
     void newPickPacketsAreRoutedThroughTheServerThread() throws Exception {
 
-^///?}
-//? if (>=1.21.4 && <=26.3) {
-/^var handler = read("net/minecraft/server/network/ServerGamePacketListenerImpl");
-^///?}
+var handler = read("net/minecraft/server/network/ServerGamePacketListenerImpl");
 
 
-//? if (>=1.21.4 && <=26.3) {
-/^for (String name : new String[] {"handlePickItemFromBlock", "handlePickItemFromEntity"})
+for (String name : new String[] {"handlePickItemFromBlock", "handlePickItemFromEntity"})
             assertTrue(
                     invokes(
                             handler,
                             name,
                             "net/minecraft/network/protocol/PacketUtils",
                             "ensureRunningOnSameThread"));
-^///?}
 
 
-//? if (>=1.21.4 && <=26.3) {
-/^assertFalse(handler.methods.stream().anyMatch(m -> m.name.equals("handlePickItem")));
+assertFalse(handler.methods.stream().anyMatch(m -> m.name.equals("handlePickItem")));
     }
-^///?}
 
 
 
-//? if (>=1.21.4 && <=26.3) {
-/^@Test
+@Test
     void furnacePersistsAllFourRenamedTimers() throws Exception {
 
-^///?}
-//? if (>=1.21.4 && <=26.3) {
-/^var furnace = read("net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity");
-^///?}
+var furnace = read("net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity");
 
 
-//? if (>=1.21.4 && <=26.3) {
-/^for (String field :
+for (String field :
                 new String[] {
                     "litTimeRemaining", "litTotalTime", "cookingTimer", "cookingTotalTime"
                 })
-^///?}
-//? if (>=1.21.4 && <=26.3) {
-/^{
+{
             assertTrue(furnace.fields.stream().anyMatch(f -> f.name.equals(field)));
-^///?}
 
 
-//? if (>=1.21.4 && <=1.21.5) {
-/^for (String method : new String[] {"loadAdditional", "saveAdditional"})
+for (String method : new String[] {"loadAdditional", "saveAdditional"})
 
-^///?}
-//? if (>=1.21.6 && <=26.3) {
-/^for (String method : new String[] {"loadAdditional", "saveAdditional"})
-
-^///?}
-//? if (>=1.21.4 && <=26.3) {
-/^assertTrue(
+assertTrue(
                         furnace.methods.stream()
                                 .filter(m -> m.name.equals(method))
                                 .anyMatch(m -> {
@@ -278,16 +198,14 @@ class VersionAdapterBytecodeTest {
                                         if (insn instanceof FieldInsnNode f
                                                 && f.owner.equals(furnace.name)
                                                 && f.name.equals(field)) return true;
-^///?}
 
 
-//? if (>=1.21.4 && <=26.3) {
-/^return false;
+return false;
                                 }),
                         field + ": " + method);
         }
     }
-^///?}
+    ^///?}
 
 
     private ClassNode read(String name) throws Exception {
@@ -324,16 +242,8 @@ var sensor = read("net/minecraft/world/level/block/entity/SculkSensorBlockEntity
 //? if 1.21.5 {
 /^assertTrue(invokes(sensor, "saveAdditional", "net/minecraft/nbt/CompoundTag", "store"));
 ^///?}
-//? if (>=1.21.6 && <=1.21.11) {
+//? if (>=1.21.6 && <=26.3) {
 /^assertTrue(invokes(sensor, "saveAdditional", "net/minecraft/world/level/storage/ValueOutput", "store"));
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^assertTrue(
-                invokes(
-                        sensor,
-                        "saveAdditional",
-                        "net/minecraft/world/level/storage/ValueOutput",
-                        "store"));
 ^///?}
 
 
@@ -346,16 +256,8 @@ var sensor = read("net/minecraft/world/level/block/entity/SculkSensorBlockEntity
 //? if 1.21.5 {
 /^assertTrue(invokes(sensor, "loadAdditional", "net/minecraft/nbt/CompoundTag", "read"));
 ^///?}
-//? if (>=1.21.6 && <=1.21.11) {
+//? if (>=1.21.6 && <=26.3) {
 /^assertTrue(invokes(sensor, "loadAdditional", "net/minecraft/world/level/storage/ValueInput", "read"));
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^assertTrue(
-                invokes(
-                        sensor,
-                        "loadAdditional",
-                        "net/minecraft/world/level/storage/ValueInput",
-                        "read"));
 ^///?}
 
 
@@ -372,14 +274,7 @@ var sensor = read("net/minecraft/world/level/block/entity/SculkSensorBlockEntity
                 listener.fields.stream()
                         .anyMatch(f -> f.name.equals("receivingDistance") && f.desc.equals("F")));
 ^///?}
-//? if (>=1.19.3 && <=1.19.4) {
-/^assertTrue(
-                listener.fields.stream()
-                        .anyMatch(f ->
-                                f.name.equals("selectionStrategy")
-                                        && f.desc.endsWith("/VibrationSelector;")));
-^///?}
-//? if (>=1.20 && <=26.3) {
+//? if (>=1.19.3 && <=26.3) {
 /^assertTrue(
                 listener.fields.stream()
                         .anyMatch(f ->
@@ -418,12 +313,7 @@ assertTrue(invokes(handler, "ackBlockChangesUpTo", "java/lang/Math", "max"));
     @Test
     void recipeMatchCacheIsSemanticStateNotJustAConstructorValue() throws Exception {
 
-//? if (>=1.19 && <=1.21.1) {
-/^var getter = read("net/minecraft/world/item/crafting/RecipeManager$1");
-^///?}
-//? if (>=1.21.2 && <=26.3) {
-/^var getter = read("net/minecraft/world/item/crafting/RecipeManager$1");
-^///?}
+var getter = read("net/minecraft/world/item/crafting/RecipeManager$1");
 
 
 //? if (>=1.19 && <=1.21.1) {
@@ -438,22 +328,12 @@ assertTrue(invokes(handler, "ackBlockChangesUpTo", "java/lang/Math", "max"));
 ^///?}
 
 
-//? if (>=1.19 && <=1.21.1) {
-/^assertTrue(
+assertTrue(
                 invokes(
                         getter,
                         "getRecipeFor",
                         "net/minecraft/world/item/crafting/RecipeManager",
                         "getRecipeFor"));
-^///?}
-//? if (>=1.21.2 && <=26.3) {
-/^assertTrue(
-                invokes(
-                        getter,
-                        "getRecipeFor",
-                        "net/minecraft/world/item/crafting/RecipeManager",
-                        "getRecipeFor"));
-^///?}
 
     }
 
@@ -462,95 +342,58 @@ assertTrue(invokes(handler, "ackBlockChangesUpTo", "java/lang/Math", "max"));
 /^@Test
     void tickingGetterIsNotAnExactLoadedChunkSet() throws Exception {
 
-^///?}
-//? if (>=1.21 && <=26.3) {
-/^var holder = read("net/minecraft/server/level/ChunkHolder");
-^///?}
+var holder = read("net/minecraft/server/level/ChunkHolder");
 
 
-//? if (>=1.21 && <=26.3) {
-/^assertTrue(invokes(holder, "getTickingChunk", holder.name, "getTickingChunkFuture"));
-^///?}
+assertTrue(invokes(holder, "getTickingChunk", holder.name, "getTickingChunkFuture"));
 
 
-//? if (>=1.21 && <=26.3) {
-/^var adapter = read("com/atsukimc/anticrash/runtime/VersionChunkView");
-^///?}
+var adapter = read("com/atsukimc/anticrash/runtime/VersionChunkView");
 
 
-//? if (>=1.21 && <=26.3) {
-/^assertTrue(invokes(adapter, "worldChunk", holder.name, "getLatestChunk"));
-^///?}
-    //? if (>=1.21 && <=26.3) {
+assertTrue(invokes(adapter, "worldChunk", holder.name, "getLatestChunk"));
 
-    /^}
-    ^///?}
+    }
 
 
 
-//? if (>=1.21 && <=26.3) {
-/^@Test
+@Test
     void newPortalAndTntRuntimeFieldsExistAndAreNotVanillaNbtAuthority() throws Exception {
 
-^///?}
-//? if (>=1.21 && <=26.3) {
-/^var portal = read("net/minecraft/world/entity/PortalProcessor");
-^///?}
+var portal = read("net/minecraft/world/entity/PortalProcessor");
 
 
-//? if (>=1.21 && <=26.3) {
-/^for (String field : new String[] {"portal", "entryPosition", "portalTime", "insidePortalThisTick"})
+for (String field : new String[] {"portal", "entryPosition", "portalTime", "insidePortalThisTick"})
 
-^///?}
-//? if (>=1.21 && <=26.3) {
-/^assertTrue(portal.fields.stream().anyMatch(f -> f.name.equals(field)), field);
-^///?}
+assertTrue(portal.fields.stream().anyMatch(f -> f.name.equals(field)), field);
 
 
-//? if (>=1.21 && <=26.3) {
-/^var tnt = read("net/minecraft/world/entity/item/PrimedTnt");
-^///?}
+var tnt = read("net/minecraft/world/entity/item/PrimedTnt");
 
 
-//? if (>=1.21 && <=26.3) {
-/^assertTrue(
+assertTrue(
                 tnt.fields.stream()
                         .anyMatch(f -> f.name.equals("usedPortal") && f.desc.equals("Z")));
-^///?}
 
 
-//? if (>=1.21 && <=26.3) {
-/^for (var method : tnt.methods) {
+for (var method : tnt.methods) {
 
-^///?}
-//? if (>=1.21 && <=1.21.5) {
-/^if (!method.name.equals("addAdditionalSaveData"))
-^///?}
-//? if (>=1.21.6 && <=26.3) {
-/^if (!method.name.equals("addAdditionalSaveData"))
-^///?}
-//? if (>=1.21 && <=26.3) {
-/^continue;
-^///?}
+if (!method.name.equals("addAdditionalSaveData"))
+continue;
 
 
-//? if (>=1.21 && <=26.3) {
-/^for (var insn : method.instructions)
+for (var insn : method.instructions)
                 if (insn instanceof FieldInsnNode f)
 
-^///?}
-//? if (>=1.21 && <=26.3) {
-/^assertNotEquals(
+assertNotEquals(
                             "usedPortal",
                             f.name,
                             "If Vanilla gains this state, remove the duplicate extension after"
                                     + " reviewing it");
-^///?}
-        //? if (>=1.21 && <=26.3) {
 
-        /^}
+        }
     }
-        ^///?}
+^///?}
 
 }
 *///?}

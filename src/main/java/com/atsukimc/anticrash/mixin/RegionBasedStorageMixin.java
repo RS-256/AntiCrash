@@ -3,9 +3,7 @@ package com.atsukimc.anticrash.mixin;
 import com.atsukimc.anticrash.snapshot.LiveFileTracker;
 
 import net.minecraft.nbt.CompoundTag;
-
 import net.minecraft.world.level.ChunkPos;
-
 import net.minecraft.world.level.chunk.storage.RegionFileStorage;
 
 import org.spongepowered.asm.mixin.Final;

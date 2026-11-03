@@ -1,41 +1,18 @@
 //? if (>=1.21.5 && <=26.3) {
 /*package com.atsukimc.anticrash.runtime;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-//? if (>=1.21.5 && <=1.21.11) {
-/^import net.minecraft.world.effect.*;
-^///?}
-
-//? if (>=1.21.5 && <=1.21.11) {
-/^import net.minecraft.world.item.ItemStack;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.core.HolderLookup;
-^///?}
-
-import net.minecraft.nbt.*;
-//? if (>=1.21.5 && <=1.21.11) {
-/^import net.minecraft.core.HolderLookup;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.effect.*;
-^///?}
-
 //? if (>=26.1 && <=26.3) {
 /^import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 ^///?}
 
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.effect.MobEffects;
-^///?}
-
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.item.ItemStack;
-^///?}
-
-
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+
+import net.minecraft.world.effect.*;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.*;
 
 class VersionNbtTest {
     @Test

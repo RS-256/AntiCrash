@@ -973,8 +973,7 @@ public final class AntiCrashCommand {
 
         //? if (>=1.18 && <=1.19.4) {
         source.sendSuccess(text(message), broadcast);
-        //?}
-        //? if (>=1.20 && <=26.3) {
+        //?} else {
         /*source.sendSuccess(() -> text(message), broadcast);
 *///?}
 

@@ -1,49 +1,21 @@
 package com.atsukimc.anticrash.runtime;
 
 import com.atsukimc.anticrash.mixin.ServerWorldAccessorMixin;
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.level.block.Block;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.core.BlockPos;
-*///?}
-
-//? if (>=1.19.3 && <=26.3) {
-/*import net.minecraft.core.registries.BuiltInRegistries;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.level.BlockEventData;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.resources.Identifier;
-*///?}
-
-import net.minecraft.server.level.ServerLevel;
-
-//? if (>=1.18 && <=1.21.11) {
-//? if (>=1.18 && <=1.21.10) {
-import net.minecraft.resources.ResourceLocation;
-//?}
-//? if 1.21.11 {
-/*import net.minecraft.resources.Identifier;
-*///?}
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.BlockEventData;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.core.BlockPos;
-//?}
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.BlockEventData;
+import net.minecraft.world.level.block.Block;
 
 //? if (>=1.18 && <=1.19.2) {
 import net.minecraft.core.Registry;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.Block;
-*///?}
+//?} else {
+/*import net.minecraft.core.registries.BuiltInRegistries;
+ *///?}
+//? if (>=1.18 && <=1.21.10) {
+import net.minecraft.resources.ResourceLocation;
+//?} else {
+/*import net.minecraft.resources.Identifier;
+ *///?}
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

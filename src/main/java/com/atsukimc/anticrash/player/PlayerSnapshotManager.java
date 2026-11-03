@@ -5,55 +5,19 @@ import com.atsukimc.anticrash.integration.carpet.CarpetIntegration;
 import com.atsukimc.anticrash.logging.AntiCrashLogger;
 import com.atsukimc.anticrash.runtime.CheckpointPlayerSnapshot;
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.effect.MobEffectInstance;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.core.BlockPos;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.nbt.Tag;
-//?}
-import net.minecraft.nbt.ListTag;
-
-//? if (>=1.19.3 && <=1.21.4) {
-/*import net.minecraft.resources.ResourceKey;
-*///?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.nbt.Tag;
-*///?}
-
-import net.minecraft.server.MinecraftServer;
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.server.level.ServerPlayer;
-//?}
-import net.minecraft.server.level.ServerLevel;
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.ServerPlayer;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.core.BlockPos;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.effect.MobEffectInstance;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
+import net.minecraft.nbt.Tag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.phys.Vec3;
-//?}
-
-//? if (>=1.18 && <=1.19.2) {
-import net.minecraft.resources.ResourceKey;
-//?}
 
 //? if (>=1.18 && <=1.21.4) {
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
 //?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.phys.Vec3;
-*///?}
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -197,9 +161,7 @@ public final class PlayerSnapshotManager {
 
             //? if (>=1.18 && <=1.21.5) {
             net.minecraft.nbt.CompoundTag abilities = new net.minecraft.nbt.CompoundTag();
-            //?}
 
-            //? if (>=1.18 && <=1.21.5) {
             player.getAbilities().addSaveData(abilities);
             //?}
             //? if (>=1.21.6 && <=26.3) {
@@ -641,17 +603,9 @@ public final class PlayerSnapshotManager {
 
             }
             if (config.playerSnapshot.gamemode && data.gamemode != null)
-
-                //? if (>=1.18 && <=1.21.4) {
                 player.setGameMode(
                         net.minecraft.world.level.GameType.byName(
                                 data.gamemode, player.gameMode.getGameModeForPlayer()));
-            //?}
-            //? if (>=1.21.5 && <=26.3) {
-            /*player.setGameMode(
-                                    net.minecraft.world.level.GameType.byName(
-                                            data.gamemode, player.gameMode.getGameModeForPlayer()));
-*///?}
 
             if (abilities != null) {
 

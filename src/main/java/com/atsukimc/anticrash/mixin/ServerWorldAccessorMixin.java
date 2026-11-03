@@ -2,34 +2,11 @@ package com.atsukimc.anticrash.mixin;
 
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.entity.Entity;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.ServerLevel;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.level.BlockEventData;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.entity.Entity;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.level.entity.PersistentEntitySectionManager;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.BlockEventData;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.server.level.ServerLevel;
-//?}
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.BlockEventData;
 import net.minecraft.world.level.entity.EntityTickList;
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.entity.PersistentEntitySectionManager;
-*///?}
+import net.minecraft.world.level.entity.PersistentEntitySectionManager;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;

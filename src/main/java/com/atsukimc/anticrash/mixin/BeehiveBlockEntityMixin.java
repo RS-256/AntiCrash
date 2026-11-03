@@ -1,32 +1,9 @@
 package com.atsukimc.anticrash.mixin;
 
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.level.block.state.BlockState;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.core.BlockPos;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.Level;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.core.BlockPos;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.Level;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.state.BlockState;
-*///?}
+import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

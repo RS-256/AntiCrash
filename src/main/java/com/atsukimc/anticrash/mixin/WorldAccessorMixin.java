@@ -1,7 +1,6 @@
 package com.atsukimc.anticrash.mixin;
 
 import net.minecraft.world.level.Level;
-
 import net.minecraft.world.level.block.entity.TickingBlockEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -39,15 +38,8 @@ public interface WorldAccessorMixin {
     @Accessor("rainLevel")
     void anticrash$setRainGradientValue(float value);
 
-    //? if (>=1.18 && <=1.21.4) {
     @Accessor("oRainLevel")
     void anticrash$setRainGradientPrev(float value);
-
-    //?}
-    //? if (>=1.21.5 && <=26.3) {
-    /*@Accessor("oRainLevel")
-        void anticrash$setRainGradientPrev(float value);
-*///?}
 
     @Accessor("thunderLevel")
     float anticrash$getThunderGradient();
@@ -55,13 +47,6 @@ public interface WorldAccessorMixin {
     @Accessor("thunderLevel")
     void anticrash$setThunderGradientValue(float value);
 
-    //? if (>=1.18 && <=1.21.4) {
     @Accessor("oThunderLevel")
     void anticrash$setThunderGradientPrev(float value);
-    //?}
-    //? if (>=1.21.5 && <=26.3) {
-    /*@Accessor("oThunderLevel")
-        void anticrash$setThunderGradientPrev(float value);
-*///?}
-
 }

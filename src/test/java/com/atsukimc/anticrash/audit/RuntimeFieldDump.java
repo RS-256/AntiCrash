@@ -2,20 +2,11 @@ package com.atsukimc.anticrash.audit;
 
 //? if (>=1.18 && <=1.19.2) {
 import java.lang.reflect.Field;
-//?}
-//? if (>=1.19.3 && <=26.3) {
-/*import org.objectweb.asm.ClassReader;
-*///?}
-
-//? if (>=1.18 && <=1.19.2) {
 import java.lang.reflect.Modifier;
-//?}
-//? if (>=1.19.3 && <=26.3) {
-/*import org.objectweb.asm.Opcodes;
-*///?}
-
-//? if (>=1.19.3 && <=26.3) {
-/*import org.objectweb.asm.tree.ClassNode;
+//?} else {
+/*import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.tree.ClassNode;
 *///?}
 
 import java.net.URI;
@@ -75,9 +66,7 @@ final class RuntimeFieldDump {
                         } catch (Throwable unloadable) {
                             continue;
                         }
-                        //?}
 
-                        //? if (>=1.18 && <=1.19.2) {
                         if (!base.isAssignableFrom(type))
                             //?}
                             //? if (>=1.19.3 && <=26.3) {
@@ -122,36 +111,26 @@ final class RuntimeFieldDump {
     //? if (>=1.19.3 && <=26.3) {
     /*private static boolean inherits(ClassNode type, String base) throws Exception {
             if (type.name.equals(base)) return true;
-*///?}
 
-    //? if (>=1.19.3 && <=26.3) {
-    /*if (type.superName == null || type.superName.equals("java/lang/Object")) return false;
-*///?}
+    if (type.superName == null || type.superName.equals("java/lang/Object")) return false;
 
-    //? if (>=1.19.3 && <=26.3) {
-    /*try (var input =
+    try (var input =
                     RuntimeFieldDump.class
                             .getClassLoader()
                             .getResourceAsStream(type.superName + ".class")) {
                 if (input == null)
                     throw new IllegalStateException("Missing superclass: " + type.superName);
-*///?}
 
-    //? if (>=1.19.3 && <=26.3) {
-    /*ClassNode parent = new ClassNode();
-*///?}
+    ClassNode parent = new ClassNode();
 
-    //? if (>=1.19.3 && <=26.3) {
-    /*new ClassReader(input)
+    new ClassReader(input)
                         .accept(
                                 parent,
                                 ClassReader.SKIP_CODE
                                         | ClassReader.SKIP_DEBUG
                                         | ClassReader.SKIP_FRAMES);
-*///?}
 
-    //? if (>=1.19.3 && <=26.3) {
-    /*return inherits(parent, base);
+    return inherits(parent, base);
             }
         }
 *///?}

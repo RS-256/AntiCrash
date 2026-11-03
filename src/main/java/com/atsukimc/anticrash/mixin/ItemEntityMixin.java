@@ -3,40 +3,11 @@ package com.atsukimc.anticrash.mixin;
 import com.atsukimc.anticrash.AntiCrashController;
 import com.atsukimc.anticrash.AntiCrashMod;
 
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.entity.item.ItemEntity;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.core.BlockPos;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.entity.player.Player;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.ServerPlayer;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.item.ItemStack;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.entity.item.ItemEntity;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.server.level.ServerPlayer;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.entity.player.Player;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.core.BlockPos;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.item.ItemStack;
-*///?}
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -122,25 +93,14 @@ public abstract class ItemEntityMixin implements com.atsukimc.anticrash.runtime.
                     "player",
                     new BlockPos(item.position()),
                     pickedStack);
-        //?}
-        //? if (>=1.19.4 && <=1.21.8) {
+        //?} else {
         /*controller.recordTransaction(
-                            "ITEM_PICKUP",
-                            serverPlayer,
-                            "world",
-                            "player",
-                            BlockPos.containing(item.position()),
-                            pickedStack);
-*///?}
-        //? if (>=1.21.9 && <=26.3) {
-        /*controller.recordTransaction(
-                            "ITEM_PICKUP",
-                            serverPlayer,
-                            "world",
-                            "player",
-                            BlockPos.containing(item.position()),
-                            pickedStack);
-*///?}
-
+                    "ITEM_PICKUP",
+                    serverPlayer,
+                    "world",
+                    "player",
+                    BlockPos.containing(item.position()),
+                    pickedStack);
+            *///?}
     }
 }

@@ -2,34 +2,11 @@ package com.atsukimc.anticrash.mixin;
 
 import com.atsukimc.anticrash.runtime.RuntimeExtensionNbt;
 
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.level.block.state.BlockState;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.core.BlockPos;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.level.block.piston.PistonMovingBlockEntity;
-//?}
-import net.minecraft.nbt.CompoundTag;
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.Level;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.core.BlockPos;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.piston.PistonMovingBlockEntity;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.state.BlockState;
-*///?}
+import net.minecraft.world.level.block.piston.PistonMovingBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -147,9 +124,7 @@ public abstract class PistonBlockEntityMixin {
         //?}
         //? if (>=1.21.5 && <=26.3) {
         /*if (com.atsukimc.anticrash.runtime.VersionNbt.contains(extension, "SavedWorldTime", 99))
-*///?}
-        //? if (>=1.21.5 && <=26.3) {
-        /*lastTicked = extension.getLong("SavedWorldTime").orElseThrow();
+        lastTicked = extension.getLong("SavedWorldTime").orElseThrow();
 *///?}
 
     }

@@ -1,7 +1,6 @@
 package com.atsukimc.anticrash.mixin;
 
 import net.minecraft.world.entity.LivingEntity;
-
 import net.minecraft.world.item.ItemStack;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,12 +12,10 @@ public interface LivingEntityAccessorMixin {
     //? if (>=1.21.11 && <=26.3) {
     /*@Accessor("lastKineticHitFeedbackTime")
         long anticrash$lastKineticAttackTime();
-*///?}
 
-    //? if (>=1.21.11 && <=26.3) {
-    /*@Accessor("lastKineticHitFeedbackTime")
+    @Accessor("lastKineticHitFeedbackTime")
         void anticrash$setLastKineticAttackTime(long value);
-*///?}
+    *///?}
 
     @Accessor("lastHurt")
     float anticrash$getLastDamageTaken();
@@ -26,25 +23,11 @@ public interface LivingEntityAccessorMixin {
     @Accessor("lastHurt")
     void anticrash$setLastDamageTaken(float value);
 
-    //? if (>=1.18 && <=1.21.10) {
     @Accessor("attackStrengthTicker")
     int anticrash$getLastAttackedTicks();
 
-    //?}
-    //? if (>=1.21.11 && <=26.3) {
-    /*@Accessor("attackStrengthTicker")
-        int anticrash$getLastAttackedTicks();
-*///?}
-
-    //? if (>=1.18 && <=1.21.10) {
     @Accessor("attackStrengthTicker")
     void anticrash$setLastAttackedTicks(int ticks);
-
-    //?}
-    //? if (>=1.21.11 && <=26.3) {
-    /*@Accessor("attackStrengthTicker")
-        void anticrash$setLastAttackedTicks(int ticks);
-*///?}
 
     @Accessor("useItemRemaining")
     int anticrash$getItemUseTimeLeft();

@@ -1,22 +1,9 @@
 //? if (>=1.20.3 && <=26.3) {
 /*package com.atsukimc.anticrash.mixin;
 
-//? if (>=1.20.3 && <=1.21.11) {
-/^import net.minecraft.world.level.block.entity.trialspawner.TrialSpawner;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.core.BlockPos;
-^///?}
-
+import net.minecraft.world.level.block.entity.trialspawner.TrialSpawner;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-
-//? if (>=1.20.3 && <=1.21.11) {
-/^import net.minecraft.core.BlockPos;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.block.entity.trialspawner.TrialSpawner;
-^///?}
-
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

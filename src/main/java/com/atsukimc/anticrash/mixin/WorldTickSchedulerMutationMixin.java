@@ -3,31 +3,12 @@ package com.atsukimc.anticrash.mixin;
 import com.atsukimc.anticrash.runtime.ScheduledTickMutationTracer;
 import com.atsukimc.anticrash.snapshot.logical.ChunkMutationTracker;
 
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.core.Vec3i;
-*///?}
-
-import net.minecraft.world.level.ChunkPos;
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.core.Vec3i;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.levelgen.structure.BoundingBox;
-*///?}
-
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.ticks.LevelChunkTicks;
-
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.ticks.ScheduledTick;
-//?}
 import net.minecraft.world.ticks.LevelTicks;
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.ticks.ScheduledTick;
-*///?}
+import net.minecraft.world.ticks.ScheduledTick;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -136,9 +117,7 @@ public abstract class WorldTickSchedulerMutationMixin {
                 at = @At("HEAD"))
         private void anticrash$copyTicks(
                 LevelTicks<?> source, BoundingBox box, Vec3i offset, CallbackInfo ci)
-*///?}
-    //? if (>=1.19.4 && <=26.3) {
-    /*{
+    {
             // The three-argument API may be called directly by mods/clone commands.
             ChunkMutationTracker.markSchedulerUncertain("copy.scheduleTicks");
         }

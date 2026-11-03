@@ -5,41 +5,23 @@ import com.atsukimc.anticrash.logging.AntiCrashLogger;
 import com.atsukimc.anticrash.mixin.ServerChunkManagerAccessorMixin;
 import com.atsukimc.anticrash.mixin.ThreadedAnvilChunkStorageAccessorMixin;
 import com.atsukimc.anticrash.runtime.RuntimeCapsule;
-//? if (>=1.18 && <=1.20.4) {
-import com.mojang.datafixers.util.Either;
-//?}
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ChunkHolder;
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.server.level.TicketType;
-//?}
 import net.minecraft.server.level.ServerLevel;
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.TicketType;
-*///?}
+import net.minecraft.world.level.ChunkPos;
 
+//? if (>=1.18 && <=1.20.4) {
+import com.mojang.datafixers.util.Either;
+import net.minecraft.world.level.chunk.ChunkStatus;
+import net.minecraft.world.level.chunk.LevelChunk;
+//?} else {
+/*import net.minecraft.world.level.chunk.status.ChunkStatus;
+ *///?}
 //? if (>=1.18 && <=1.21.4) {
 import net.minecraft.util.Unit;
 //?}
-import net.minecraft.world.level.ChunkPos;
-
-//? if (>=1.18 && <=1.21.11) {
-//? if (>=1.18 && <=1.20.4) {
-import net.minecraft.world.level.chunk.ChunkStatus;
-//?}
-//? if (>=1.20.5 && <=1.21.11) {
-/*import net.minecraft.world.level.chunk.status.ChunkStatus;
-*///?}
-//?}
-
-//? if (>=1.18 && <=1.20.4) {
-import net.minecraft.world.level.chunk.LevelChunk;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.chunk.status.ChunkStatus;
-*///?}
 
 import java.io.IOException;
 import java.util.ArrayDeque;
@@ -74,9 +56,7 @@ public final class ChunkRecoveryManager {
     /*public final class ChunkRecoveryManager {
         // An ephemeral, non-persisted type, distinct from Vanilla's finite spawn-search tickets;
         // only public ticket APIs are used, and every abort/completion explicitly releases it.
-*///?}
-    //? if (>=1.21.9 && <=26.3) {
-    /*public static final TicketType RECOVERY_TICKET =
+    public static final TicketType RECOVERY_TICKET =
                 new TicketType(
                         Long.MAX_VALUE, TicketType.FLAG_LOADING | TicketType.FLAG_SIMULATION);
 *///?}
@@ -598,19 +578,12 @@ public final class ChunkRecoveryManager {
 *///?}
             return false;
 
-        //? if (>=1.18 && <=1.20.6) {
+        //? if (>=1.18 && <=1.21.11) {
         ChunkHolder holder =
                 ((ThreadedAnvilChunkStorageAccessorMixin) ticket.world.getChunkSource().chunkMap)
                         .anticrash$getCurrentChunkHolders()
                         .get(ticket.pos.toLong());
         //?}
-        //? if (>=1.21 && <=1.21.11) {
-        /*ChunkHolder holder =
-                        ((ThreadedAnvilChunkStorageAccessorMixin)
-                                        ticket.world.getChunkSource().chunkMap)
-                                .anticrash$getCurrentChunkHolders()
-                                .get(ticket.pos.toLong());
-*///?}
         //? if (>=26.1 && <=26.3) {
         /*ChunkHolder holder =
                         ((ThreadedAnvilChunkStorageAccessorMixin) ticket.world.getChunkSource().chunkMap)
@@ -869,9 +842,7 @@ public final class ChunkRecoveryManager {
             //?}
             //? if (>=1.20.5 && <=26.3) {
             /*,
-*///?}
-            //? if (>=1.20.5 && <=26.3) {
-            /*CompletableFuture<
+            CompletableFuture<
                                         net.minecraft.server.level.ChunkResult<
                                                 net.minecraft.world.level.chunk.ChunkAccess>>
                                 future

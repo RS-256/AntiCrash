@@ -100,13 +100,7 @@ class PendingRegionWriteOverlayTest {
             //? if (>=1.18 && <=1.20.1) {
             return input == null ? null : NbtIo.read(input);
             //?}
-            //? if (>=1.20.2 && <=1.20.3) {
-            /*return input == null
-                                ? null
-                                : NbtIo.read(
-                                        input, net.minecraft.nbt.NbtAccounter.create(16 * 1024 * 1024));
-*///?}
-            //? if (>=1.20.4 && <=26.3) {
+            //? if (>=1.20.2 && <=26.3) {
             /*return input == null
                                 ? null
                                 : NbtIo.read(

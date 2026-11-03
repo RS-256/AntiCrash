@@ -1,24 +1,12 @@
 //? if (>=1.20 && <=26.3) {
 /*package com.atsukimc.anticrash.mixin;
 
-//? if (>=1.20 && <=1.21.11) {
-/^import net.minecraft.server.level.ServerLevel;
-^///?}
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.server.level.ServerLevel;
-^///?}
-
-//? if (>=1.20 && <=1.21.11) {
-/^import net.minecraft.world.phys.Vec3;
-^///?}
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.gameevent.PositionSource;
 import net.minecraft.world.level.gameevent.vibrations.VibrationSystem;
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.phys.Vec3;
-^///?}
-
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

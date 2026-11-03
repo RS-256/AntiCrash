@@ -3,16 +3,8 @@ package com.atsukimc.anticrash.snapshot.logical;
 import it.unimi.dsi.fastutil.longs.Long2LongMap;
 import it.unimi.dsi.fastutil.longs.Long2LongOpenHashMap;
 
-//? if (>=1.19.3 && <=26.3) {
-/*import net.minecraft.resources.ResourceKey;
-*///?}
-
-import net.minecraft.world.level.ChunkPos;
-
-//? if (>=1.18 && <=1.19.2) {
 import net.minecraft.resources.ResourceKey;
-//?}
-
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 
 import java.util.HashMap;

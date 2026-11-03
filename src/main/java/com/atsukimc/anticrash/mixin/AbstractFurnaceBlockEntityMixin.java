@@ -1,24 +1,12 @@
 package com.atsukimc.anticrash.mixin;
 
-//? if (>=1.18 && <=1.21.11) {
-import net.minecraft.world.level.block.state.BlockState;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.core.BlockPos;
-*///?}
-
-import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.core.BlockPos;
-//?}
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 
 //? if (>=1.18 && <=1.21.1) {
 import net.minecraft.world.level.Level;
 //?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.state.BlockState;
-*///?}
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -41,15 +29,14 @@ public abstract class AbstractFurnaceBlockEntityMixin {
             BlockState state,
             AbstractFurnaceBlockEntity furnace,
             CallbackInfo callbackInfo)
-                //?}
-                //? if (>=1.21.2 && <=26.3) {
+                //?} else {
                 /*@Inject(method = "serverTick", at = @At("HEAD"))
-                    private static void anticrash$markProgressDirty(
-                            net.minecraft.server.level.ServerLevel world,
-                            BlockPos pos,
-                            BlockState state,
-                            AbstractFurnaceBlockEntity furnace,
-                            CallbackInfo callbackInfo)
+    private static void anticrash$markProgressDirty(
+            net.minecraft.server.level.ServerLevel world,
+            BlockPos pos,
+            BlockState state,
+            AbstractFurnaceBlockEntity furnace,
+            CallbackInfo callbackInfo)
 *///?}
             {
         AbstractFurnaceBlockEntityTimerAccessor timer =
