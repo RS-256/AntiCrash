@@ -12,13 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.block.piston.PistonMovingBlockEntity;
 //?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.nbt.CompoundTag;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.nbt.CompoundTag;
-//?}
 //? if (>=26.1 && <=26.3) {
 /*import net.minecraft.world.level.Level;
 *///?}
@@ -43,66 +37,31 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-//? if (>=1.18 && <=1.21.11) {
 @Mixin(PistonMovingBlockEntity.class)
 public abstract class PistonBlockEntityMixin {
 
-    //?}
-    //? if (>=26.1 && <=26.3) {
-    /*@Mixin(PistonMovingBlockEntity.class)
-    public abstract class PistonBlockEntityMixin {
-*///?}
     @Shadow private float progress;
 
-    //? if (>=1.18 && <=1.21.11) {
     @Shadow private float progressO;
-    //?}
-    //? if (>=26.1 && <=26.3) {
-    /*@Shadow private float progressO;
-*///?}
 
-    //? if (>=1.18 && <=1.21.11) {
     @Shadow private long lastTicked;
-
-    //?}
-    //? if (>=26.1 && <=26.3) {
-    /*@Shadow private long lastTicked;
-*///?}
 
     /**
      * Vanilla advances piston progress without notifying the owning chunk that its block entity
      * data changed. Keep ordinary saves and AntiCrash checkpoints from retaining stale progress.
      */
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "tick", at = @At("TAIL"))
     private static void anticrash$markChunkDirty(
             Level world,
             BlockPos pos,
             BlockState state,
             PistonMovingBlockEntity piston,
-            CallbackInfo callbackInfo)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "tick", at = @At("TAIL"))
-                    private static void anticrash$markChunkDirty(
-                            Level world,
-                            BlockPos pos,
-                            BlockState state,
-                            PistonMovingBlockEntity piston,
-                            CallbackInfo callbackInfo)
-*///?}
-            {
+            CallbackInfo callbackInfo) {
         // World#markDirty only sets the loaded chunk's needsSaving flag. Calling
         // BlockEntity#markDirty here would also run comparator updates on every piston tick.
 
-        //? if (>=1.18 && <=1.21.11) {
         world.blockEntityChanged(pos);
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*world.blockEntityChanged(pos);
-*///?}
-
     }
 
     /**
@@ -125,12 +84,7 @@ public abstract class PistonBlockEntityMixin {
                             net.minecraft.core.HolderLookup.Provider registries,
                             CallbackInfo callbackInfo)
 *///?}
-                //? if (>=1.21.6 && <=1.21.11) {
-                /*@Inject(method = "saveAdditional", at = @At("TAIL"))
-                    private void anticrash$saveExactProgress(
-                            net.minecraft.world.level.storage.ValueOutput nbt, CallbackInfo callbackInfo)
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.6 && <=26.3) {
                 /*@Inject(method = "saveAdditional", at = @At("TAIL"))
                     private void anticrash$saveExactProgress(
                             net.minecraft.world.level.storage.ValueOutput nbt, CallbackInfo callbackInfo)
@@ -142,13 +96,7 @@ public abstract class PistonBlockEntityMixin {
                 extension -> {
                     extension.putFloat("Progress", progress);
 
-                    //? if (>=1.18 && <=1.21.11) {
                     extension.putLong("SavedWorldTime", lastTicked);
-                    //?}
-                    //? if (>=26.1 && <=26.3) {
-                    /*extension.putLong("SavedWorldTime", lastTicked);
-*///?}
-
                 });
     }
 
@@ -163,24 +111,14 @@ public abstract class PistonBlockEntityMixin {
                             net.minecraft.core.HolderLookup.Provider registries,
                             CallbackInfo callbackInfo)
 *///?}
-                //? if (>=1.21.6 && <=1.21.11) {
-                /*@Inject(method = "loadAdditional", at = @At("TAIL"))
-                    private void anticrash$loadExactProgress(
-                            net.minecraft.world.level.storage.ValueInput nbt, CallbackInfo callbackInfo)
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.6 && <=26.3) {
                 /*@Inject(method = "loadAdditional", at = @At("TAIL"))
                     private void anticrash$loadExactProgress(
                             net.minecraft.world.level.storage.ValueInput nbt, CallbackInfo callbackInfo)
 *///?}
             {
 
-        //? if (>=1.18 && <=1.21.11) {
         CompoundTag extension = RuntimeExtensionNbt.read(nbt);
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*CompoundTag extension = RuntimeExtensionNbt.read(nbt);
-*///?}
 
         //? if (>=1.18 && <=1.21.4) {
         if (extension == null || !extension.contains("Progress", 99))
@@ -201,13 +139,7 @@ public abstract class PistonBlockEntityMixin {
         // Progress only moves forward from lastProgress to 1; anything else is not a state the
         // game can be in, so Vanilla's own value is kept.
 
-        //? if (>=1.18 && <=1.21.11) {
-        if (exact >= progressO && exact <= 1.0f)
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*if (exact >= progressO && exact <= 1.0f)
-*///?}
-            progress = exact;
+        if (exact >= progressO && exact <= 1.0f) progress = exact;
 
         //? if (>=1.18 && <=1.21.4) {
         if (extension.contains("SavedWorldTime", 99))
@@ -216,10 +148,7 @@ public abstract class PistonBlockEntityMixin {
         //? if (>=1.21.5 && <=26.3) {
         /*if (com.atsukimc.anticrash.runtime.VersionNbt.contains(extension, "SavedWorldTime", 99))
 *///?}
-        //? if (>=1.21.5 && <=1.21.11) {
-        /*lastTicked = extension.getLong("SavedWorldTime").orElseThrow();
-*///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if (>=1.21.5 && <=26.3) {
         /*lastTicked = extension.getLong("SavedWorldTime").orElseThrow();
 *///?}
 

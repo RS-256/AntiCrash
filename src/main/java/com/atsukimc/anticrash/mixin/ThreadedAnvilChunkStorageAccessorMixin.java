@@ -24,12 +24,7 @@ import net.minecraft.server.level.ChunkMap;
 /*import net.minecraft.server.level.ChunkMap;
 *///?}
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.chunk.ChunkAccess;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.chunk.ChunkAccess;
-*///?}
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
@@ -64,28 +59,14 @@ public interface ThreadedAnvilChunkStorageAccessorMixin {
      * still hold changes: the unload task is what saves it, one tick or more later.
      */
 
-    //? if (>=1.18 && <=1.21.11) {
     @Accessor("pendingUnloads")
     Long2ObjectLinkedOpenHashMap<ChunkHolder> anticrash$getChunksToUnload();
-
-    //?}
-    //? if (>=26.1 && <=26.3) {
-    /*@Accessor("pendingUnloads")
-        Long2ObjectLinkedOpenHashMap<ChunkHolder> anticrash$getChunksToUnload();
-*///?}
 
     /**
      * Serializes one already-loaded dirty chunk without joining every ChunkHolder future.
      * CheckpointManager calls this in small, IO-drained batches while simulation is frozen.
      */
 
-    //? if (>=1.18 && <=1.21.11) {
     @Invoker("save")
     boolean anticrash$saveChunk(ChunkAccess chunk);
-    //?}
-    //? if (>=26.1 && <=26.3) {
-    /*@Invoker("save")
-        boolean anticrash$saveChunk(ChunkAccess chunk);
-*///?}
-
 }

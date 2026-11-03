@@ -5,12 +5,7 @@ import com.atsukimc.anticrash.integration.carpet.TickSpeedSnapshot;
 import com.atsukimc.anticrash.util.Hashing;
 
 import net.minecraft.server.MinecraftServer;
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.server.level.ServerPlayer;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.ServerPlayer;
-*///?}
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -329,13 +324,7 @@ public final class RuntimeFingerprint {
         List<String> lines = new ArrayList<>();
         if (server == null) return lines;
 
-        //? if (>=1.18 && <=1.21.11) {
-        for (ServerPlayer player : server.getPlayerList().getPlayers())
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*for (ServerPlayer player : server.getPlayerList().getPlayers())
-*///?}
-        {
+        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             if (com.atsukimc.anticrash.integration.carpet.CarpetIntegration.isFakePlayer(player)) {
                 continue;
             }

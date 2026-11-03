@@ -7,27 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.nbt.CompoundTag;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.nbt.CompoundTag;
-*///?}
 
 import net.minecraft.nbt.NbtIo;
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.ChunkPos;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.ChunkPos;
-*///?}
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.chunk.storage.RegionFile;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.chunk.storage.RegionFile;
-*///?}
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -50,33 +35,16 @@ class PendingRegionWriteOverlayTest {
         SealedNbt.clear();
     }
 
-    //? if (>=1.18 && <=1.21.11) {
-    private static CompoundTag chunk(String marker)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*private static CompoundTag chunk(String marker)
-*///?}
-            {
+    private static CompoundTag chunk(String marker) {
 
-        //? if (>=1.18 && <=1.21.11) {
         CompoundTag nbt = new CompoundTag();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*CompoundTag nbt = new CompoundTag();
-*///?}
 
         nbt.putString("marker", marker);
         nbt.putLongArray("data", new long[] {1L, 2L, 3L});
         return nbt;
     }
 
-    //? if (>=1.18 && <=1.21.11) {
-    private static void write(Path region, ChunkPos pos, CompoundTag nbt) throws IOException
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*private static void write(Path region, ChunkPos pos, CompoundTag nbt) throws IOException
-*///?}
-            {
+    private static void write(Path region, ChunkPos pos, CompoundTag nbt) throws IOException {
         Files.createDirectories(region.getParent());
 
         //? if (>=1.18 && <=1.20.4) {
@@ -91,13 +59,7 @@ class PendingRegionWriteOverlayTest {
                                 false);
 *///?}
 
-        //? if (>=1.18 && <=1.21.11) {
-        try (DataOutputStream output = file.getChunkDataOutputStream(pos))
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*try (DataOutputStream output = file.getChunkDataOutputStream(pos))
-*///?}
-        {
+        try (DataOutputStream output = file.getChunkDataOutputStream(pos)) {
 
             //? if (>=1.18 && <=1.21.11) {
             //? if (>=1.18 && <=1.20.1) {
@@ -119,13 +81,7 @@ class PendingRegionWriteOverlayTest {
         }
     }
 
-    //? if (>=1.18 && <=1.21.11) {
-    private static CompoundTag read(Path region, ChunkPos pos) throws IOException
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*private static CompoundTag read(Path region, ChunkPos pos) throws IOException
-*///?}
-            {
+    private static CompoundTag read(Path region, ChunkPos pos) throws IOException {
 
         //? if (>=1.18 && <=1.20.4) {
         RegionFile file = new RegionFile(region, region.getParent(), false);
@@ -139,13 +95,7 @@ class PendingRegionWriteOverlayTest {
                                 false);
 *///?}
 
-        //? if (>=1.18 && <=1.21.11) {
-        try (DataInputStream input = file.getChunkDataInputStream(pos))
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*try (DataInputStream input = file.getChunkDataInputStream(pos))
-*///?}
-        {
+        try (DataInputStream input = file.getChunkDataInputStream(pos)) {
 
             //? if (>=1.18 && <=1.20.1) {
             return input == null ? null : NbtIo.read(input);
@@ -156,16 +106,11 @@ class PendingRegionWriteOverlayTest {
                                 : NbtIo.read(
                                         input, net.minecraft.nbt.NbtAccounter.create(16 * 1024 * 1024));
 *///?}
-            //? if (>=1.20.4 && <=1.21.11) {
+            //? if (>=1.20.4 && <=26.3) {
             /*return input == null
                                 ? null
                                 : NbtIo.read(
                                         input, net.minecraft.nbt.NbtAccounter.create(16 * 1024 * 1024));
-*///?}
-            //? if (>=26.1 && <=26.3) {
-            /*return input == null
-                                ? null
-                                : NbtIo.read(input, net.minecraft.nbt.NbtAccounter.create(16 * 1024 * 1024));
 *///?}
 
         } finally {
@@ -199,12 +144,7 @@ class PendingRegionWriteOverlayTest {
 
         Path directory = live.resolve("region").toAbsolutePath();
 
-        //? if (>=1.18 && <=1.21.11) {
         CompoundTag queuedChunk = chunk("queued");
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*CompoundTag queuedChunk = chunk("queued");
-*///?}
 
         List<PendingRegionWrite> pending =
                 List.of(
@@ -279,12 +219,7 @@ class PendingRegionWriteOverlayTest {
         Files.createDirectories(live.resolve("region"));
         Files.writeString(live.resolve("level.dat"), "level");
 
-        //? if (>=1.18 && <=1.21.11) {
         CompoundTag touched = chunk("touched");
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*CompoundTag touched = chunk("touched");
-*///?}
 
         touched.putString("__context", "partially updated");
         List<PendingRegionWrite> pending =
@@ -307,12 +242,7 @@ class PendingRegionWriteOverlayTest {
         Path live = temp.resolve("live");
         Files.createDirectories(live.resolve("region"));
 
-        //? if (>=1.18 && <=1.21.11) {
         CompoundTag queued = chunk("queued");
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*CompoundTag queued = chunk("queued");
-*///?}
 
         DetachedGeneration generation =
                 DetachedGeneration.capture(

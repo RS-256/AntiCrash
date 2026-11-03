@@ -9,12 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 /*import net.minecraft.core.BlockPos;
 *///?}
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.block.entity.BlockEntity;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.entity.BlockEntity;
-*///?}
 
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.core.BlockPos;
@@ -23,12 +18,7 @@ import net.minecraft.core.BlockPos;
 /*import net.minecraft.world.level.block.state.BlockState;
 *///?}
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.chunk.LevelChunk;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.chunk.LevelChunk;
-*///?}
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -64,57 +54,24 @@ public abstract class WorldChunkMutationMixin {
 *///?}
             {
 
-        //? if (>=1.18 && <=1.21.11) {
         LevelChunk chunk = (LevelChunk) (Object) this;
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*LevelChunk chunk = (LevelChunk) (Object) this;
-*///?}
 
-        //? if (>=1.18 && <=1.21.11) {
         ChunkMutationTracker.record(chunk.getLevel(), chunk.getPos(), "setBlockState");
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*ChunkMutationTracker.record(chunk.getLevel(), chunk.getPos(), "setBlockState");
-*///?}
-
     }
 
     @Inject(method = "setBlockEntity", at = @At("TAIL"))
     private void anticrash$blockEntityMutation(BlockEntity blockEntity, CallbackInfo callbackInfo) {
 
-        //? if (>=1.18 && <=1.21.11) {
         LevelChunk chunk = (LevelChunk) (Object) this;
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*LevelChunk chunk = (LevelChunk) (Object) this;
-*///?}
 
-        //? if (>=1.18 && <=1.21.11) {
         ChunkMutationTracker.record(chunk.getLevel(), chunk.getPos(), "setBlockEntity");
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*ChunkMutationTracker.record(chunk.getLevel(), chunk.getPos(), "setBlockEntity");
-*///?}
-
     }
 
     @Inject(method = "removeBlockEntity", at = @At("TAIL"))
     private void anticrash$removeBlockEntityMutation(BlockPos pos, CallbackInfo callbackInfo) {
 
-        //? if (>=1.18 && <=1.21.11) {
         LevelChunk chunk = (LevelChunk) (Object) this;
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*LevelChunk chunk = (LevelChunk) (Object) this;
-*///?}
 
-        //? if (>=1.18 && <=1.21.11) {
         ChunkMutationTracker.record(chunk.getLevel(), chunk.getPos(), "removeBlockEntity");
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*ChunkMutationTracker.record(chunk.getLevel(), chunk.getPos(), "removeBlockEntity");
-*///?}
-
     }
 }

@@ -15,13 +15,7 @@ import com.mojang.datafixers.util.Either;
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.entity.PersistentEntitySectionManager;
 //?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.entity.EntityPersistentStorage;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.entity.EntityPersistentStorage;
-//?}
 
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.chunk.storage.EntityStorage;
@@ -33,7 +27,6 @@ import net.minecraft.world.level.chunk.storage.EntityStorage;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-//? if (>=1.18 && <=1.21.11) {
 @Mixin(PersistentEntitySectionManager.class)
 public abstract class ServerEntityManagerMixin {
     /**
@@ -50,36 +43,9 @@ public abstract class ServerEntityManagerMixin {
                             target =
                                     "Lnet/minecraft/world/level/entity/EntityPersistentStorage;flush(Z)V"))
     private void anticrash$awaitLoadsOnlyAtCut(
-            EntityPersistentStorage<?> access, boolean sync, Operation<Void> original)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Mixin(PersistentEntitySectionManager.class)
-                public abstract class ServerEntityManagerMixin {
-                    /^*
-                     * At a checkpoint cut the entity flush waits only for entity sections that are still loading,
-                     * which it must add to the world before saving them. It does not wait for queued writes to
-                     * reach the disk, nor fsync: the cut seals the queue and takes the queued writes itself (see
-                     * {@link CutSave}).
-                     ^/
-                    @WrapOperation(
-                            method = "saveAll",
-                            at =
-                                    @At(
-                                            value = "INVOKE",
-                                            target =
-                                                    "Lnet/minecraft/world/level/entity/EntityPersistentStorage;flush(Z)V"))
-                    private void anticrash$awaitLoadsOnlyAtCut(
-                            EntityPersistentStorage<?> access, boolean sync, Operation<Void> original)
-*///?}
-            {
+            EntityPersistentStorage<?> access, boolean sync, Operation<Void> original) {
 
-        //? if (>=1.18 && <=1.21.11) {
-        if (!CutSave.active() || !(access instanceof EntityStorage entities))
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*if (!CutSave.active() || !(access instanceof EntityStorage entities))
-*///?}
-        {
+        if (!CutSave.active() || !(access instanceof EntityStorage entities)) {
             original.call(access, sync);
             return;
         }

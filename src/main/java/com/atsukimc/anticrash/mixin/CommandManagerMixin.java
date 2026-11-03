@@ -10,13 +10,7 @@ import com.mojang.brigadier.CommandDispatcher;
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.commands.Commands;
 //?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.commands.CommandSourceStack;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.commands.CommandSourceStack;
-//?}
 //? if (>=26.1 && <=26.3) {
 /*import net.minecraft.commands.Commands;
 *///?}
@@ -30,28 +24,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 //?}
 
-//? if (>=1.18 && <=1.21.11) {
 @Mixin(Commands.class)
 public abstract class CommandManagerMixin {
 
-    //?}
-    //? if (>=26.1 && <=26.3) {
-    /*@Mixin(Commands.class)
-    public abstract class CommandManagerMixin {
-*///?}
     @Inject(method = "<init>", at = @At("RETURN"))
     private void anticrash$register(CallbackInfo callbackInfo) {
         AntiCrashController controller = AntiCrashMod.controller();
         if (controller != null) {
 
-            //? if (>=1.18 && <=1.21.11) {
             CommandDispatcher<CommandSourceStack> dispatcher =
                     ((Commands) (Object) this).getDispatcher();
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*CommandDispatcher<CommandSourceStack> dispatcher =
-                                ((Commands) (Object) this).getDispatcher();
-*///?}
 
             AntiCrashCommand.register(dispatcher, controller);
         }
@@ -71,14 +53,7 @@ public abstract class CommandManagerMixin {
                             String command,
                             CallbackInfoReturnable<Integer> callbackInfo)
 *///?}
-                //? if (>=1.20.3 && <=1.21.11) {
-                /*@Inject(method = "performCommand", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$blockCommandsDuringCheckpoint(
-                            com.mojang.brigadier.ParseResults<CommandSourceStack> parse,
-                            String command,
-                            CallbackInfo callbackInfo)
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.20.3 && <=26.3) {
                 /*@Inject(method = "performCommand", at = @At("HEAD"), cancellable = true)
                     private void anticrash$blockCommandsDuringCheckpoint(
                             com.mojang.brigadier.ParseResults<CommandSourceStack> parse,
@@ -87,10 +62,7 @@ public abstract class CommandManagerMixin {
 *///?}
             {
 
-        //? if (>=1.19.1 && <=1.21.11) {
-        /*CommandSourceStack source = parse.getContext().getSource();
-*///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if (>=1.19.1 && <=26.3) {
         /*CommandSourceStack source = parse.getContext().getSource();
 *///?}
 
@@ -105,20 +77,11 @@ public abstract class CommandManagerMixin {
             // say why and let the operator simply run it again.
             if (!RecoveryCommandPolicy.allowedDuringCheckpoint(normalized)) {
 
-                //? if (>=1.18 && <=1.21.11) {
                 source.sendFailure(
                         controller.chat(
                                 MessageCatalog.text(
                                         controller.config().language, "checkpoint.command_blocked"),
                                 null));
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*source.sendFailure(
-                                        controller.chat(
-                                                MessageCatalog.text(
-                                                        controller.config().language, "checkpoint.command_blocked"),
-                                                null));
-*///?}
 
                 //? if (>=1.18 && <=1.20.2) {
                 callbackInfo.setReturnValue(0);
@@ -137,22 +100,12 @@ public abstract class CommandManagerMixin {
         if (!RecoveryCommandPolicy.allowed(
                 normalized, controller.config().recovery.lock.allowCommands)) {
 
-            //? if (>=1.18 && <=1.21.11) {
             source.sendFailure(
                     controller.chat(
                             MessageCatalog.text(
                                     controller.config().language,
                                     "recovery.command_mutation_blocked"),
                             null));
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*source.sendFailure(
-                                controller.chat(
-                                        MessageCatalog.text(
-                                                controller.config().language,
-                                                "recovery.command_mutation_blocked"),
-                                        null));
-*///?}
 
             //? if (>=1.18 && <=1.20.2) {
             callbackInfo.setReturnValue(0);

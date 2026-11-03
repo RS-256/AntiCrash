@@ -30,13 +30,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 //? if (>=1.21.2 && <=1.21.11) {
 /^import net.minecraft.world.item.crafting.*;
 ^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.Level;
-^///?}
-
-//? if (>=1.21.2 && <=1.21.11) {
-/^import net.minecraft.world.level.Level;
-^///?}
+import net.minecraft.world.level.Level;
 //? if (>=26.1 && <=26.3) {
 /^import net.minecraft.world.level.block.CampfireBlock;
 ^///?}
@@ -77,22 +71,12 @@ public abstract class CampfireTickerBindingMixin {
             anticrash$scopes = ThreadLocal.withInitial(java.util.ArrayDeque::new);
 
 
-//? if (>=1.21.2 && <=1.21.11) {
-/^@WrapMethod(method = "getTicker")
+@WrapMethod(method = "getTicker")
     private <T extends BlockEntity> BlockEntityTicker<T> anticrash$bind(
             Level world,
             BlockState state,
             BlockEntityType<T> type,
             Operation<BlockEntityTicker<T>> original)
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^@WrapMethod(method = "getTicker")
-    private <T extends BlockEntity> BlockEntityTicker<T> anticrash$bind(
-            Level world,
-            BlockState state,
-            BlockEntityType<T> type,
-            Operation<BlockEntityTicker<T>> original)
-^///?}
 {
         var stack = anticrash$scopes.get();
         RecipeMatchGetterAccessorMixin[] scope = new RecipeMatchGetterAccessorMixin[1];
@@ -105,12 +89,7 @@ public abstract class CampfireTickerBindingMixin {
                     ? ticker
                     : new RecipeBoundTicker<>(ticker, scope[0]);
 ^///?}
-//? if (>=1.21.9 && <=1.21.11) {
-/^return ticker == null || world.isClientSide()
-                    ? ticker
-                    : new RecipeBoundTicker<>(ticker, scope[0]);
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.9 && <=26.3) {
 /^return ticker == null || world.isClientSide()
                     ? ticker
                     : new RecipeBoundTicker<>(ticker, scope[0]);
@@ -123,8 +102,7 @@ public abstract class CampfireTickerBindingMixin {
     }
 
 
-//? if (>=1.21.2 && <=1.21.11) {
-/^@WrapOperation(
+@WrapOperation(
             method = "getTicker",
             at =
                     @At(
@@ -133,18 +111,6 @@ public abstract class CampfireTickerBindingMixin {
                                     "Lnet/minecraft/world/item/crafting/RecipeManager;createCheck(Lnet/minecraft/world/item/crafting/RecipeType;)Lnet/minecraft/world/item/crafting/RecipeManager$CachedCheck;"))
     private RecipeManager.CachedCheck<?, ?> anticrash$capture(
             RecipeType<?> type, Operation<RecipeManager.CachedCheck<?, ?>> original)
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^@WrapOperation(
-            method = "getTicker",
-            at =
-                    @At(
-                            value = "INVOKE",
-                            target =
-                                    "Lnet/minecraft/world/item/crafting/RecipeManager;createCheck(Lnet/minecraft/world/item/crafting/RecipeType;)Lnet/minecraft/world/item/crafting/RecipeManager$CachedCheck;"))
-    private RecipeManager.CachedCheck<?, ?> anticrash$capture(
-            RecipeType<?> type, Operation<RecipeManager.CachedCheck<?, ?>> original)
-^///?}
 {
         var getter = original.call(type);
         var stack = anticrash$scopes.get();

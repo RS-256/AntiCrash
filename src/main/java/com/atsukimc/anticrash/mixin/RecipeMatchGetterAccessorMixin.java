@@ -16,18 +16,11 @@ public interface RecipeMatchGetterAccessorMixin {
     @Accessor("lastRecipe")
     ResourceLocation anticrash$getRecipeId();
 ^///?}
-//? if (>=1.21.2 && <=1.21.11) {
+//? if (>=1.21.2 && <=26.3) {
 /^@Mixin(targets = "net.minecraft.world.item.crafting.RecipeManager$1")
 public interface RecipeMatchGetterAccessorMixin {
     @Accessor("lastRecipe")
     net.minecraft.resources.ResourceKey<net.minecraft.world.item.crafting.Recipe<?>> anticrash$getRecipeId();
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^@Mixin(targets = "net.minecraft.world.item.crafting.RecipeManager$1")
-public interface RecipeMatchGetterAccessorMixin {
-    @Accessor("lastRecipe")
-    net.minecraft.resources.ResourceKey<net.minecraft.world.item.crafting.Recipe<?>>
-            anticrash$getRecipeId();
 ^///?}
 
 
@@ -36,12 +29,7 @@ public interface RecipeMatchGetterAccessorMixin {
 /^@Accessor("lastRecipe")
     void anticrash$setRecipeId(ResourceLocation id);
 ^///?}
-//? if (>=1.21.2 && <=1.21.11) {
-/^@Accessor("lastRecipe")
-    void anticrash$setRecipeId(
-            net.minecraft.resources.ResourceKey<net.minecraft.world.item.crafting.Recipe<?>> id);
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.2 && <=26.3) {
 /^@Accessor("lastRecipe")
     void anticrash$setRecipeId(
             net.minecraft.resources.ResourceKey<net.minecraft.world.item.crafting.Recipe<?>> id);

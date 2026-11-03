@@ -6,12 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.nbt.CompoundTag;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.nbt.CompoundTag;
-*///?}
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -27,12 +22,7 @@ class RuntimeExtensionNbtTest {
     @Test
     void extensionIsOneVersionedCompoundBesideVanillaKeys() {
 
-        //? if (>=1.18 && <=1.21.11) {
         CompoundTag nbt = new CompoundTag();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*CompoundTag nbt = new CompoundTag();
-*///?}
 
         nbt.putFloat("progress", 0.5f);
         RuntimeExtensionNbt.write(nbt, extension -> extension.putFloat("Progress", 1.0f));
@@ -44,12 +34,7 @@ class RuntimeExtensionNbtTest {
         /*assertEquals(0.5f, nbt.getFloat("progress").orElseThrow());
 *///?}
 
-        //? if (>=1.18 && <=1.21.11) {
         CompoundTag extension = RuntimeExtensionNbt.read(nbt);
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*CompoundTag extension = RuntimeExtensionNbt.read(nbt);
-*///?}
 
         assertNotNull(extension);
 
@@ -75,12 +60,7 @@ class RuntimeExtensionNbtTest {
     @Test
     void nothingIsAddedWhenThereIsNothingToSave() {
 
-        //? if (>=1.18 && <=1.21.11) {
         CompoundTag nbt = new CompoundTag();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*CompoundTag nbt = new CompoundTag();
-*///?}
 
         RuntimeExtensionNbt.write(nbt, extension -> {});
         assertFalse(nbt.contains(RuntimeExtensionNbt.KEY));
@@ -94,19 +74,9 @@ class RuntimeExtensionNbtTest {
     @Test
     void aNewerFormatIsIgnoredInsteadOfGuessed() {
 
-        //? if (>=1.18 && <=1.21.11) {
         CompoundTag nbt = new CompoundTag();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*CompoundTag nbt = new CompoundTag();
-*///?}
 
-        //? if (>=1.18 && <=1.21.11) {
         CompoundTag future = new CompoundTag();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*CompoundTag future = new CompoundTag();
-*///?}
 
         future.putInt("v", RuntimeExtensionNbt.VERSION + 1);
         future.putFloat("Progress", 1.0f);

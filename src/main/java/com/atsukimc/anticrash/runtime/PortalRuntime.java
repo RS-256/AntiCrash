@@ -13,13 +13,7 @@ import com.atsukimc.anticrash.mixin.PortalManagerAccessorMixin;
 //? if (>=1.21 && <=1.21.11) {
 /^import net.minecraft.world.level.block.Portal;
 ^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.nbt.CompoundTag;
-^///?}
-
-//? if (>=1.21 && <=1.21.11) {
-/^import net.minecraft.nbt.CompoundTag;
-^///?}
+import net.minecraft.nbt.CompoundTag;
 //? if (>=26.1 && <=26.3) {
 /^import net.minecraft.resources.Identifier;
 ^///?}
@@ -57,83 +51,43 @@ public final class PortalRuntime {
     private PortalRuntime() {}
 
 
-//? if (>=1.21 && <=1.21.11) {
-/^public static String type(PortalProcessor manager)
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^public static String type(PortalProcessor manager)
-^///?}
+public static String type(PortalProcessor manager)
 {
         Portal portal = ((PortalManagerAccessorMixin) manager).anticrash$getPortal();
 
-//? if (>=1.21 && <=1.21.11) {
-/^return portal instanceof Block block ? BuiltInRegistries.BLOCK.getKey(block).toString() : null;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^return portal instanceof Block block
-                ? BuiltInRegistries.BLOCK.getKey(block).toString()
-                : null;
-^///?}
+return portal instanceof Block block ? BuiltInRegistries.BLOCK.getKey(block).toString() : null;
 
     }
 
 
-//? if (>=1.21 && <=1.21.11) {
-/^public static CompoundTag write(PortalProcessor manager)
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^public static CompoundTag write(PortalProcessor manager)
-^///?}
+public static CompoundTag write(PortalProcessor manager)
 {
         String type = type(manager);
         if (type == null)
             throw new IllegalStateException("UNSUPPORTED non-block Portal implementation");
 
-//? if (>=1.21 && <=1.21.11) {
-/^CompoundTag nbt = new CompoundTag();
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^CompoundTag nbt = new CompoundTag();
-^///?}
+CompoundTag nbt = new CompoundTag();
 
         nbt.putString("Type", type);
 
 //? if (>=1.21 && <=1.21.4) {
 /^nbt.put("Pos", NbtUtils.writeBlockPos(manager.getEntryPosition()));
 ^///?}
-//? if (>=1.21.5 && <=1.21.11) {
-/^nbt.store("Pos", net.minecraft.core.BlockPos.CODEC, manager.getEntryPosition());
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.5 && <=26.3) {
 /^nbt.store("Pos", net.minecraft.core.BlockPos.CODEC, manager.getEntryPosition());
 ^///?}
 
 
-//? if (>=1.21 && <=1.21.11) {
-/^nbt.putInt("Time", manager.getPortalTime());
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^nbt.putInt("Time", manager.getPortalTime());
-^///?}
+nbt.putInt("Time", manager.getPortalTime());
 
 
-//? if (>=1.21 && <=1.21.11) {
-/^nbt.putBoolean("In", manager.isInsidePortalThisTick());
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^nbt.putBoolean("In", manager.isInsidePortalThisTick());
-^///?}
+nbt.putBoolean("In", manager.isInsidePortalThisTick());
 
         return nbt;
     }
 
 
-//? if (>=1.21 && <=1.21.11) {
-/^public static PortalProcessor read(CompoundTag nbt)
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^public static PortalProcessor read(CompoundTag nbt)
-^///?}
+public static PortalProcessor read(CompoundTag nbt)
 {
 
 //? if (>=1.21 && <=1.21.4) {
@@ -171,13 +125,7 @@ throw new IllegalArgumentException("Invalid saved Portal type");
                         .orElseThrow(() ->
                                 new IllegalArgumentException("Missing saved Portal position"));
 ^///?}
-//? if (>=1.21.5 && <=1.21.11) {
-/^var pos =
-                nbt.read("Pos", net.minecraft.core.BlockPos.CODEC)
-                        .orElseThrow(() ->
-                                new IllegalArgumentException("Missing saved Portal position"));
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.5 && <=26.3) {
 /^var pos =
                 nbt.read("Pos", net.minecraft.core.BlockPos.CODEC)
                         .orElseThrow(() ->
@@ -194,21 +142,13 @@ throw new IllegalArgumentException("Invalid saved Portal type");
 
         if (ticks < 0) throw new IllegalArgumentException("Negative saved Portal time");
 
-//? if (>=1.21 && <=1.21.11) {
-/^PortalProcessor manager = new PortalProcessor(portal, pos);
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^PortalProcessor manager = new PortalProcessor(portal, pos);
-^///?}
+PortalProcessor manager = new PortalProcessor(portal, pos);
 
 
 //? if (>=1.21 && <=1.21.4) {
 /^manager.setAsInsidePortalThisTick(nbt.getBoolean("In"));
 ^///?}
-//? if (>=1.21.5 && <=1.21.11) {
-/^manager.setAsInsidePortalThisTick(nbt.getBoolean("In").orElseThrow());
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.5 && <=26.3) {
 /^manager.setAsInsidePortalThisTick(nbt.getBoolean("In").orElseThrow());
 ^///?}
 
@@ -217,32 +157,16 @@ throw new IllegalArgumentException("Invalid saved Portal type");
     }
 
 
-//? if (>=1.21 && <=1.21.11) {
-/^public static String canonical(PortalProcessor manager)
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^public static String canonical(PortalProcessor manager)
-^///?}
+public static String canonical(PortalProcessor manager)
 {
 
-//? if (>=1.21 && <=1.21.11) {
-/^return type(manager)
+return type(manager)
                 + "|pos="
                 + manager.getEntryPosition().asLong()
                 + "|ticks="
                 + manager.getPortalTime()
                 + "|in="
                 + manager.isInsidePortalThisTick();
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^return type(manager)
-                + "|pos="
-                + manager.getEntryPosition().asLong()
-                + "|ticks="
-                + manager.getPortalTime()
-                + "|in="
-                + manager.isInsidePortalThisTick();
-^///?}
 
     }
 }

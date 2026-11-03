@@ -12,12 +12,7 @@ public final class VersionNbt {
 
     /^* Sparse true-only flags default to false only when absent, never when malformed. ^/
 
-//? if (>=1.21.5 && <=1.21.11) {
-/^public static boolean sparseFlag(CompoundTag nbt, String key)
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^public static boolean sparseFlag(CompoundTag nbt, String key)
-^///?}
+public static boolean sparseFlag(CompoundTag nbt, String key)
 {
         return !nbt.contains(key)
                 ? false
@@ -28,154 +23,69 @@ public final class VersionNbt {
     }
 
 
-//? if (>=1.21.5 && <=1.21.11) {
-/^public static Tag item(
+public static Tag item(
             net.minecraft.world.item.ItemStack stack,
             net.minecraft.core.HolderLookup.Provider registries)
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^public static Tag item(
-            net.minecraft.world.item.ItemStack stack,
-            net.minecraft.core.HolderLookup.Provider registries)
-^///?}
 {
 
-//? if (>=1.21.5 && <=1.21.11) {
-/^return net.minecraft.world.item.ItemStack.OPTIONAL_CODEC
+return net.minecraft.world.item.ItemStack.OPTIONAL_CODEC
                 .encodeStart(registries.createSerializationContext(NbtOps.INSTANCE), stack)
                 .getOrThrow();
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^return net.minecraft.world.item.ItemStack.OPTIONAL_CODEC
-                .encodeStart(registries.createSerializationContext(NbtOps.INSTANCE), stack)
-                .getOrThrow();
-^///?}
 
     }
 
 
-//? if (>=1.21.5 && <=1.21.11) {
-/^public static Tag effect(net.minecraft.world.effect.MobEffectInstance effect)
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^public static Tag effect(net.minecraft.world.effect.MobEffectInstance effect)
-^///?}
+public static Tag effect(net.minecraft.world.effect.MobEffectInstance effect)
 {
         // MobEffect.ENTRY_CODEC uses the static STATUS_EFFECT registry, as verified in bytecode.
 
-//? if (>=1.21.5 && <=1.21.11) {
-/^return net.minecraft.world.effect.MobEffectInstance.CODEC
+return net.minecraft.world.effect.MobEffectInstance.CODEC
                 .encodeStart(NbtOps.INSTANCE, effect)
                 .getOrThrow();
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^return net.minecraft.world.effect.MobEffectInstance.CODEC
-                .encodeStart(NbtOps.INSTANCE, effect)
-                .getOrThrow();
-^///?}
 
     }
 
 
-//? if (>=1.21.5 && <=1.21.11) {
-/^public static net.minecraft.world.effect.MobEffectInstance effect(CompoundTag nbt)
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^public static net.minecraft.world.effect.MobEffectInstance effect(CompoundTag nbt)
-^///?}
+public static net.minecraft.world.effect.MobEffectInstance effect(CompoundTag nbt)
 {
 
-//? if (>=1.21.5 && <=1.21.11) {
-/^return net.minecraft.world.effect.MobEffectInstance.CODEC
+return net.minecraft.world.effect.MobEffectInstance.CODEC
                 .parse(NbtOps.INSTANCE, nbt)
                 .getOrThrow();
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^return net.minecraft.world.effect.MobEffectInstance.CODEC
-                .parse(NbtOps.INSTANCE, nbt)
-                .getOrThrow();
-^///?}
 
     }
 
 
-//? if (>=1.21.5 && <=1.21.11) {
-/^public static boolean contains(CompoundTag nbt, String key, int type)
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^public static boolean contains(CompoundTag nbt, String key, int type)
-^///?}
+public static boolean contains(CompoundTag nbt, String key, int type)
 {
 
-//? if (>=1.21.5 && <=1.21.11) {
-/^Tag value = nbt.get(key);
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^Tag value = nbt.get(key);
-^///?}
+Tag value = nbt.get(key);
 
 
-//? if (>=1.21.5 && <=1.21.11) {
-/^return value != null
+return value != null
                 && (type == 99 ? value instanceof NumericTag : value.getId() == type);
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^return value != null && (type == 99 ? value instanceof NumericTag : value.getId() == type);
-^///?}
 
     }
 
 
-//? if (>=1.21.5 && <=1.21.11) {
-/^public static ListTag list(CompoundTag nbt, String key, int type)
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^public static ListTag list(CompoundTag nbt, String key, int type)
-^///?}
+public static ListTag list(CompoundTag nbt, String key, int type)
 {
 
-//? if (>=1.21.5 && <=1.21.11) {
-/^Tag value = nbt.get(key);
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^Tag value = nbt.get(key);
-^///?}
+Tag value = nbt.get(key);
 
         if (value == null)
-//? if (>=1.21.5 && <=1.21.11) {
-/^return new ListTag();
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^return new ListTag();
-^///?}
+return new ListTag();
 
 
-//? if (>=1.21.5 && <=1.21.11) {
-/^if (!(value instanceof ListTag list))
+if (!(value instanceof ListTag list))
 
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^if (!(value instanceof ListTag list))
-
-^///?}
 throw new IllegalArgumentException("Expected NBT list: " + key);
 
-//? if (>=1.21.5 && <=1.21.11) {
-/^for (Tag entry : list)
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^for (Tag entry : list)
-^///?}
+for (Tag entry : list)
 {
 
-//? if (>=1.21.5 && <=1.21.11) {
-/^if (entry.getId() != type)
+if (entry.getId() != type)
 
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^if (entry.getId() != type)
-
-^///?}
 throw new IllegalArgumentException("Wrong NBT list element type: " + key);
         }
         return list;

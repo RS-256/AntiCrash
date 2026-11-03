@@ -5,13 +5,7 @@ import com.atsukimc.anticrash.snapshot.logical.ChunkMutationTracker;
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.block.entity.BlockEntity;
 //?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.ChunkPos;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.ChunkPos;
-//?}
 //? if (>=26.1 && <=26.3) {
 /*import net.minecraft.world.level.block.entity.BlockEntity;
 *///?}
@@ -29,29 +23,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(BlockEntity.class)
 public abstract class BlockEntityMutationMixin {
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "setChanged()V", at = @At("HEAD"))
-    private void anticrash$markDirty(CallbackInfo callbackInfo)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "setChanged()V", at = @At("HEAD"))
-                    private void anticrash$markDirty(CallbackInfo callbackInfo)
-*///?}
-            {
+    private void anticrash$markDirty(CallbackInfo callbackInfo) {
         if (!com.atsukimc.anticrash.snapshot.logical.LogicalTracking.enabled()) return;
         BlockEntity blockEntity = (BlockEntity) (Object) this;
 
-        //? if (>=1.18 && <=1.21.11) {
         if (!blockEntity.hasLevel()
                 || blockEntity.getLevel() == null
-                || blockEntity.getBlockPos() == null)
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*if (!blockEntity.hasLevel()
-                            || blockEntity.getLevel() == null
-                            || blockEntity.getBlockPos() == null)
-*///?}
-            return;
+                || blockEntity.getBlockPos() == null) return;
 
         //? if (>=1.18 && <=1.21.11) {
         ChunkMutationTracker.record(

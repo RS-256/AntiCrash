@@ -6,13 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.block.entity.BlockEntity;
 //?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.entity.Entity;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.entity.Entity;
-//?}
 //? if (>=26.1 && <=26.3) {
 /*import net.minecraft.world.level.block.entity.BlockEntity;
 *///?}
@@ -213,14 +207,8 @@ class RuntimeStateAuditCoverageTest {
     void everyFieldOfTheMachineRelevantEntitiesHasADecision() throws Exception {
         Map<String, Set<String>> audited = matrix("/runtime-audit/entities.tsv");
 
-        //? if (>=1.18 && <=1.21.11) {
         Map<String, List<String>> actual =
                 RuntimeFieldDump.declaredFields(Entity.class, "net/minecraft/world/entity");
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*Map<String, List<String>> actual =
-                        RuntimeFieldDump.declaredFields(Entity.class, "net/minecraft/world/entity");
-*///?}
 
         List<String> problems = new ArrayList<>();
         for (String required : REQUIRED_ENTITIES) {

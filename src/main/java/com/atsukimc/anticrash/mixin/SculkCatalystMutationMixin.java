@@ -51,24 +51,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(SculkCatalystBlockEntity.class)
 public abstract class SculkCatalystMutationMixin {
 
-//? if (>=1.19 && <=1.21.11) {
-/^@Inject(method = "serverTick", at = @At("HEAD"))
+@Inject(method = "serverTick", at = @At("HEAD"))
     private static void anticrash$markCursorTick(
             Level world,
             BlockPos pos,
             BlockState state,
             SculkCatalystBlockEntity catalyst,
             CallbackInfo ci)
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^@Inject(method = "serverTick", at = @At("HEAD"))
-    private static void anticrash$markCursorTick(
-            Level world,
-            BlockPos pos,
-            BlockState state,
-            SculkCatalystBlockEntity catalyst,
-            CallbackInfo ci)
-^///?}
 {
 
 //? if (>=1.19 && <=1.21.8) {

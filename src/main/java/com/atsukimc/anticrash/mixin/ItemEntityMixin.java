@@ -66,39 +66,20 @@ public abstract class ItemEntityMixin implements com.atsukimc.anticrash.runtime.
         anticrash$idPhase = Math.floorMod(phase, 4);
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @com.llamalad7.mixinextras.injector.ModifyExpressionValue(
             method = "tick",
             at =
                     @At(
                             value = "INVOKE",
                             target = "Lnet/minecraft/world/entity/item/ItemEntity;getId()I"))
-    private int anticrash$stableMovePhase(int networkId)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@com.llamalad7.mixinextras.injector.ModifyExpressionValue(
-                            method = "tick",
-                            at =
-                                    @At(
-                                            value = "INVOKE",
-                                            target = "Lnet/minecraft/world/entity/item/ItemEntity;getId()I"))
-                    private int anticrash$stableMovePhase(int networkId)
-*///?}
-            {
+    private int anticrash$stableMovePhase(int networkId) {
         return anticrash$idPhase >= 0 ? anticrash$idPhase : networkId;
     }
 
     @Unique private ItemStack anticrash$pickupBefore = ItemStack.EMPTY;
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "playerTouch", at = @At("HEAD"), cancellable = true)
-    private void anticrash$beforePickup(Player player, CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "playerTouch", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$beforePickup(Player player, CallbackInfo info)
-*///?}
-            {
+    private void anticrash$beforePickup(Player player, CallbackInfo info) {
         anticrash$pickupBefore = ItemStack.EMPTY;
         AntiCrashController controller = AntiCrashMod.controller();
         if (controller != null && controller.isCheckpointFrozen()) {
@@ -112,44 +93,19 @@ public abstract class ItemEntityMixin implements com.atsukimc.anticrash.runtime.
             return;
         }
 
-        //? if (>=1.18 && <=1.21.11) {
         if (player instanceof ServerPlayer)
             anticrash$pickupBefore = ((ItemEntity) (Object) this).getItem().copy();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*if (player instanceof ServerPlayer)
-                    anticrash$pickupBefore = ((ItemEntity) (Object) this).getItem().copy();
-*///?}
-
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "playerTouch", at = @At("RETURN"))
-    private void anticrash$afterPickup(Player player, CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "playerTouch", at = @At("RETURN"))
-                    private void anticrash$afterPickup(Player player, CallbackInfo info)
-*///?}
-            {
+    private void anticrash$afterPickup(Player player, CallbackInfo info) {
         ItemStack before = anticrash$pickupBefore;
         anticrash$pickupBefore = ItemStack.EMPTY;
 
-        //? if (>=1.18 && <=1.21.11) {
-        if (!(player instanceof ServerPlayer serverPlayer) || before.isEmpty())
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*if (!(player instanceof ServerPlayer serverPlayer) || before.isEmpty())
-*///?}
-            return;
+        if (!(player instanceof ServerPlayer serverPlayer) || before.isEmpty()) return;
         ItemEntity item = (ItemEntity) (Object) this;
 
-        //? if (>=1.18 && <=1.21.11) {
         int remaining = item.isRemoved() ? 0 : item.getItem().getCount();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*int remaining = item.isRemoved() ? 0 : item.getItem().getCount();
-*///?}
 
         int picked = before.getCount() - remaining;
         if (picked <= 0) return;
@@ -176,16 +132,7 @@ public abstract class ItemEntityMixin implements com.atsukimc.anticrash.runtime.
                             BlockPos.containing(item.position()),
                             pickedStack);
 *///?}
-        //? if (>=1.21.9 && <=1.21.11) {
-        /*controller.recordTransaction(
-                            "ITEM_PICKUP",
-                            serverPlayer,
-                            "world",
-                            "player",
-                            BlockPos.containing(item.position()),
-                            pickedStack);
-*///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if (>=1.21.9 && <=26.3) {
         /*controller.recordTransaction(
                             "ITEM_PICKUP",
                             serverPlayer,

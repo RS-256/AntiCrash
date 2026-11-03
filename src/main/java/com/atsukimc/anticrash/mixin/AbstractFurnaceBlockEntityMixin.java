@@ -7,12 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 /*import net.minecraft.core.BlockPos;
 *///?}
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
-*///?}
 
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.core.BlockPos;
@@ -47,16 +42,7 @@ public abstract class AbstractFurnaceBlockEntityMixin {
             AbstractFurnaceBlockEntity furnace,
             CallbackInfo callbackInfo)
                 //?}
-                //? if (>=1.21.2 && <=1.21.11) {
-                /*@Inject(method = "serverTick", at = @At("HEAD"))
-                    private static void anticrash$markProgressDirty(
-                            net.minecraft.server.level.ServerLevel world,
-                            BlockPos pos,
-                            BlockState state,
-                            AbstractFurnaceBlockEntity furnace,
-                            CallbackInfo callbackInfo)
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.2 && <=26.3) {
                 /*@Inject(method = "serverTick", at = @At("HEAD"))
                     private static void anticrash$markProgressDirty(
                             net.minecraft.server.level.ServerLevel world,
@@ -69,13 +55,6 @@ public abstract class AbstractFurnaceBlockEntityMixin {
         AbstractFurnaceBlockEntityTimerAccessor timer =
                 (AbstractFurnaceBlockEntityTimerAccessor) furnace;
         if (timer.anticrash$getBurnTime() > 0 || timer.anticrash$getCookTime() > 0)
-
-            //? if (>=1.18 && <=1.21.11) {
             world.blockEntityChanged(pos);
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*world.blockEntityChanged(pos);
-*///?}
-
     }
 }

@@ -7,13 +7,7 @@ import com.mojang.datafixers.util.Either;
 //? if (>=1.18 && <=1.20.4) {
 import net.minecraft.server.level.ChunkHolder;
 //?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.ServerChunkCache;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.server.level.ServerChunkCache;
-//?}
 
 //? if (>=1.18 && <=1.21.11) {
 //? if (>=1.18 && <=1.20.4) {
@@ -67,16 +61,9 @@ public interface ServerChunkManagerAccessorMixin {
         net.minecraft.world.level.TicketStorage anticrash$getTicketManager();
 *///?}
 
-    //? if (>=1.20.5 && <=1.21.11) {
+    //? if (>=1.20.5 && <=26.3) {
     /*@Invoker("getChunkFutureMainThread")
         CompletableFuture<net.minecraft.server.level.ChunkResult<net.minecraft.world.level.chunk.ChunkAccess>>
-                anticrash$getChunkFuture(int chunkX, int chunkZ, ChunkStatus status, boolean addTicket);
-*///?}
-    //? if (>=26.1 && <=26.3) {
-    /*@Invoker("getChunkFutureMainThread")
-        CompletableFuture<
-                        net.minecraft.server.level.ChunkResult<
-                                net.minecraft.world.level.chunk.ChunkAccess>>
                 anticrash$getChunkFuture(int chunkX, int chunkZ, ChunkStatus status, boolean addTicket);
 *///?}
 
@@ -84,11 +71,7 @@ public interface ServerChunkManagerAccessorMixin {
     @org.spongepowered.asm.mixin.gen.Accessor("lastInhabitedUpdate")
     void anticrash$setLastMobSpawningTime(long time);
     //?}
-    //? if (>=1.21.2 && <=1.21.11) {
-    /*@org.spongepowered.asm.mixin.gen.Accessor("lastInhabitedUpdate")
-        void anticrash$setLastMobSpawningTime(long time);
-*///?}
-    //? if (>=26.1 && <=26.2) {
+    //? if (>=1.21.2 && <=26.2) {
     /*@org.spongepowered.asm.mixin.gen.Accessor("lastInhabitedUpdate")
         void anticrash$setLastMobSpawningTime(long time);
 *///?}

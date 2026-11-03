@@ -8,12 +8,7 @@
 /^import net.minecraft.core.BlockPos;
 ^///?}
 
-//? if (>=1.20.3 && <=1.21.11) {
-/^import net.minecraft.server.level.ServerLevel;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.server.level.ServerLevel;
-^///?}
+import net.minecraft.server.level.ServerLevel;
 
 //? if (>=1.20.3 && <=1.21.11) {
 /^import net.minecraft.core.BlockPos;
@@ -52,12 +47,7 @@ public abstract class TrialSpawnerRuntimeMixin {
 {
         // Codec-owned spawn deadlines, player and mob sets may change without a block transition.
 
-//? if (>=1.20.3 && <=1.21.11) {
-/^world.blockEntityChanged(pos);
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^world.blockEntityChanged(pos);
-^///?}
+world.blockEntityChanged(pos);
 
     }
 }

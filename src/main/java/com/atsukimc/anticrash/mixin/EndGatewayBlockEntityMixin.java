@@ -12,13 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.block.entity.TheEndGatewayBlockEntity;
 //?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.nbt.CompoundTag;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.nbt.CompoundTag;
-//?}
 //? if (>=26.1 && <=26.3) {
 /*import net.minecraft.world.level.Level;
 *///?}
@@ -43,15 +37,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-//? if (>=1.18 && <=1.21.11) {
 @Mixin(TheEndGatewayBlockEntity.class)
 public abstract class EndGatewayBlockEntityMixin {
 
-    //?}
-    //? if (>=26.1 && <=26.3) {
-    /*@Mixin(TheEndGatewayBlockEntity.class)
-    public abstract class EndGatewayBlockEntityMixin {
-*///?}
     @Shadow private int teleportCooldown;
 
     /**
@@ -85,13 +73,7 @@ public abstract class EndGatewayBlockEntityMixin {
 *///?}
             {
 
-        //? if (>=1.18 && <=1.21.11) {
         world.blockEntityChanged(pos);
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*world.blockEntityChanged(pos);
-*///?}
-
     }
 
     /**
@@ -109,12 +91,7 @@ public abstract class EndGatewayBlockEntityMixin {
                             net.minecraft.core.HolderLookup.Provider registries,
                             CallbackInfo callbackInfo)
 *///?}
-                //? if (>=1.21.6 && <=1.21.11) {
-                /*@Inject(method = "saveAdditional", at = @At("TAIL"))
-                    private void anticrash$saveTeleportCooldown(
-                            net.minecraft.world.level.storage.ValueOutput nbt, CallbackInfo callbackInfo)
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.6 && <=26.3) {
                 /*@Inject(method = "saveAdditional", at = @At("TAIL"))
                     private void anticrash$saveTeleportCooldown(
                             net.minecraft.world.level.storage.ValueOutput nbt, CallbackInfo callbackInfo)
@@ -141,24 +118,14 @@ public abstract class EndGatewayBlockEntityMixin {
                             net.minecraft.core.HolderLookup.Provider registries,
                             CallbackInfo callbackInfo)
 *///?}
-                //? if (>=1.21.6 && <=1.21.11) {
-                /*@Inject(method = "loadAdditional", at = @At("TAIL"))
-                    private void anticrash$loadTeleportCooldown(
-                            net.minecraft.world.level.storage.ValueInput nbt, CallbackInfo callbackInfo)
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.6 && <=26.3) {
                 /*@Inject(method = "loadAdditional", at = @At("TAIL"))
                     private void anticrash$loadTeleportCooldown(
                             net.minecraft.world.level.storage.ValueInput nbt, CallbackInfo callbackInfo)
 *///?}
             {
 
-        //? if (>=1.18 && <=1.21.11) {
         CompoundTag extension = RuntimeExtensionNbt.read(nbt);
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*CompoundTag extension = RuntimeExtensionNbt.read(nbt);
-*///?}
 
         //? if (>=1.18 && <=1.21.4) {
         if (extension != null && extension.contains("TeleportCooldown", 99))

@@ -14,10 +14,7 @@ import net.minecraft.world.level.material.Fluid;
 /*import net.minecraft.core.Registry;
 *///?}
 
-//? if (>=1.19.3 && <=1.21.11) {
-/*import net.minecraft.core.registries.BuiltInRegistries;
-*///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.19.3 && <=26.3) {
 /*import net.minecraft.core.registries.BuiltInRegistries;
 *///?}
 
@@ -76,10 +73,7 @@ import net.minecraft.world.ticks.LevelChunkTicks;
 import net.minecraft.world.ticks.ScheduledTick;
 //?}
 
-//? if (>=1.19.3 && <=1.21.11) {
-/*import net.minecraft.world.ticks.TickPriority;
-*///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.19.3 && <=26.3) {
 /*import net.minecraft.world.ticks.TickPriority;
 *///?}
 
@@ -128,32 +122,20 @@ public final class ScheduledTickSnapshot {
     public int priority;
     public long subTickOrder;
 
-    //? if (>=1.18 && <=1.21.11) {
-    public static List<ScheduledTickSnapshot> capture(String dimension, LevelChunk chunk)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*public static List<ScheduledTickSnapshot> capture(String dimension, LevelChunk chunk)
-*///?}
-            {
+    public static List<ScheduledTickSnapshot> capture(String dimension, LevelChunk chunk) {
         List<ScheduledTickSnapshot> result = new ArrayList<>();
 
         //? if (>=1.18 && <=1.19.2) {
         captureQueue(result, dimension, BLOCK, blockScheduler(chunk), Registry.BLOCK);
         //?}
-        //? if (>=1.19.3 && <=1.21.11) {
-        /*captureQueue(result, dimension, BLOCK, blockScheduler(chunk), BuiltInRegistries.BLOCK);
-*///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if (>=1.19.3 && <=26.3) {
         /*captureQueue(result, dimension, BLOCK, blockScheduler(chunk), BuiltInRegistries.BLOCK);
 *///?}
 
         //? if (>=1.18 && <=1.19.2) {
         captureQueue(result, dimension, FLUID, fluidScheduler(chunk), Registry.FLUID);
         //?}
-        //? if (>=1.19.3 && <=1.21.11) {
-        /*captureQueue(result, dimension, FLUID, fluidScheduler(chunk), BuiltInRegistries.FLUID);
-*///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if (>=1.19.3 && <=26.3) {
         /*captureQueue(result, dimension, FLUID, fluidScheduler(chunk), BuiltInRegistries.FLUID);
 *///?}
 
@@ -181,82 +163,31 @@ public final class ScheduledTickSnapshot {
 
     public TickPriority tickPriority() {
 
-        //? if (>=1.18 && <=1.21.11) {
         return TickPriority.byValue(priority);
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*return TickPriority.byValue(priority);
-*///?}
-
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @SuppressWarnings("unchecked")
-    static LevelChunkTicks<Block> blockScheduler(LevelChunk chunk)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@SuppressWarnings("unchecked")
-                    static LevelChunkTicks<Block> blockScheduler(LevelChunk chunk)
-*///?}
-            {
+    static LevelChunkTicks<Block> blockScheduler(LevelChunk chunk) {
 
-        //? if (>=1.18 && <=1.21.11) {
         return (LevelChunkTicks<Block>) chunk.getBlockTicks();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*return (LevelChunkTicks<Block>) chunk.getBlockTicks();
-*///?}
-
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @SuppressWarnings("unchecked")
-    static LevelChunkTicks<Fluid> fluidScheduler(LevelChunk chunk)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@SuppressWarnings("unchecked")
-                    static LevelChunkTicks<Fluid> fluidScheduler(LevelChunk chunk)
-*///?}
-            {
+    static LevelChunkTicks<Fluid> fluidScheduler(LevelChunk chunk) {
 
-        //? if (>=1.18 && <=1.21.11) {
         return (LevelChunkTicks<Fluid>) chunk.getFluidTicks();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*return (LevelChunkTicks<Fluid>) chunk.getFluidTicks();
-*///?}
-
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     private static <T> void captureQueue(
             List<ScheduledTickSnapshot> output,
             String dimension,
             String kind,
             LevelChunkTicks<T> scheduler,
-            Registry<T> registry)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*private static <T> void captureQueue(
-                            List<ScheduledTickSnapshot> output,
-                            String dimension,
-                            String kind,
-                            LevelChunkTicks<T> scheduler,
-                            Registry<T> registry)
-*///?}
-            {
+            Registry<T> registry) {
 
-        //? if (>=1.18 && <=1.21.11) {
         scheduler
                 .getAll()
-                .forEach(ordered ->
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*scheduler
-                                .getAll()
-                                .forEach(ordered ->
-*///?}
-                {
+                .forEach(ordered -> {
 
                     //? if (>=1.18 && <=1.21.11) {
                     //? if (>=1.18 && <=1.21.10) {
@@ -282,12 +213,7 @@ public final class ScheduledTickSnapshot {
                     snapshot.z = ordered.pos().getZ();
                     snapshot.triggerTick = ordered.triggerTick();
 
-                    //? if (>=1.18 && <=1.21.11) {
                     snapshot.priority = ordered.priority().getValue();
-                    //?}
-                    //? if (>=26.1 && <=26.3) {
-                    /*snapshot.priority = ordered.priority().getValue();
-*///?}
 
                     snapshot.subTickOrder = ordered.subTickOrder();
                     output.add(snapshot);

@@ -72,16 +72,7 @@ public abstract class JukeboxRuntimeMixin {
             net.minecraft.core.HolderLookup.Provider registries,
             CallbackInfo ci)
 ^///?}
-//? if (>=1.21 && <=1.21.11) {
-/^@Inject(method = "tick", at = @At("HEAD"))
-    private static void anticrash$markPlaybackTick(
-            Level world,
-            BlockPos pos,
-            BlockState state,
-            JukeboxBlockEntity jukebox,
-            CallbackInfo ci)
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21 && <=26.3) {
 /^@Inject(method = "tick", at = @At("HEAD"))
     private static void anticrash$markPlaybackTick(
             Level world,

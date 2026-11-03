@@ -40,36 +40,20 @@ class RuntimeOrderRestorerTest {
             //? if (>=1.18 && <=1.21.4) {
             long restoredCreated = RuntimeOrderRestorer.tickCreatedFor(newAge, expiry, remaining);
             //?}
-            //? if (>=1.21.5 && <=1.21.11) {
-            /*var type =
-                                expiry == 300
-                                        ? net.minecraft.server.level.TicketType.PORTAL
-                                        : net.minecraft.server.level.TicketType.UNKNOWN;
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.5 && <=26.3) {
             /*var type =
                                 expiry == 300
                                         ? net.minecraft.server.level.TicketType.PORTAL
                                         : net.minecraft.server.level.TicketType.UNKNOWN;
 *///?}
 
-            //? if (>=1.21.5 && <=1.21.11) {
-            /*var nbt = new net.minecraft.nbt.CompoundTag();
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.5 && <=26.3) {
             /*var nbt = new net.minecraft.nbt.CompoundTag();
 *///?}
 
-            //? if (>=1.21.5 && <=1.21.11) {
+            //? if (>=1.21.5 && <=26.3) {
             /*nbt.putString(
                                 "type", net.minecraft.core.registries.BuiltInRegistries.TICKET_TYPE.getKey(type).toString());
-*///?}
-            //? if (>=26.1 && <=26.3) {
-            /*nbt.putString(
-                                "type",
-                                net.minecraft.core.registries.BuiltInRegistries.TICKET_TYPE
-                                        .getKey(type)
-                                        .toString());
 *///?}
 
             //? if (>=1.21.5 && <=26.3) {
@@ -80,14 +64,7 @@ class RuntimeOrderRestorerTest {
             /*nbt.putLong("ticks_left", remaining);
 *///?}
 
-            //? if (>=1.21.5 && <=1.21.11) {
-            /*var restored =
-                                net.minecraft.server.level.Ticket.CODEC
-                                        .codec()
-                                        .parse(net.minecraft.nbt.NbtOps.INSTANCE, nbt)
-                                        .getOrThrow();
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.5 && <=26.3) {
             /*var restored =
                                 net.minecraft.server.level.Ticket.CODEC
                                         .codec()
@@ -103,23 +80,14 @@ class RuntimeOrderRestorerTest {
                         expired(newAge + ticks, restoredCreated, expiry),
                         "expiry " + expiry + " remaining " + remaining + " after " + ticks);
                 //?}
-                //? if (>=1.21.5 && <=1.21.11) {
-                /*assertEquals(
-                                        remaining - ticks < 0,
-                                        restored.isTimedOut(),
-                                        "expiry " + expiry + " remaining " + remaining + " after " + ticks);
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.5 && <=26.3) {
                 /*assertEquals(
                                         remaining - ticks < 0,
                                         restored.isTimedOut(),
                                         "expiry " + expiry + " remaining " + remaining + " after " + ticks);
 *///?}
 
-                //? if (>=1.21.5 && <=1.21.11) {
-                /*restored.decreaseTicksLeft();
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.5 && <=26.3) {
                 /*restored.decreaseTicksLeft();
 *///?}
 

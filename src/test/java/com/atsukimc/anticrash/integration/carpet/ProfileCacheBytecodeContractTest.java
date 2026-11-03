@@ -37,17 +37,9 @@ class ProfileCacheBytecodeContractTest {
                                         String signature,
                                         String[] exceptions) {
 
-                                    //? if (>=1.18 && <=1.21.11) {
                                     if (name.equals("get")
                                             && descriptor.equals(
                                                     "(Ljava/lang/String;)Ljava/util/Optional;"))
-
-                                        //?}
-                                        //? if (>=26.1 && <=26.3) {
-                                        /*if (name.equals("get")
-                                                                                    && descriptor.equals(
-                                                                                            "(Ljava/lang/String;)Ljava/util/Optional;"))
-*///?}
                                         found[0] = true;
                                     return null;
                                 }

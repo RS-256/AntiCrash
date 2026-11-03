@@ -12,20 +12,10 @@ public class RegistryBootstrapExtension implements BeforeAllCallback {
     @Override
     public void beforeAll(ExtensionContext context) {
 
-//? if (>=1.21.2 && <=1.21.11) {
-/^net.minecraft.SharedConstants.tryDetectVersion();
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^net.minecraft.SharedConstants.tryDetectVersion();
-^///?}
+net.minecraft.SharedConstants.tryDetectVersion();
 
 
-//? if (>=1.21.2 && <=1.21.11) {
-/^net.minecraft.server.Bootstrap.bootStrap();
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^net.minecraft.server.Bootstrap.bootStrap();
-^///?}
+net.minecraft.server.Bootstrap.bootStrap();
 
     }
 }

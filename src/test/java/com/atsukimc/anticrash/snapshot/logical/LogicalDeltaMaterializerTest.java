@@ -8,12 +8,7 @@ import com.atsukimc.anticrash.snapshot.JavaIncrementalBackend;
 import com.atsukimc.anticrash.snapshot.SnapshotFile;
 import com.atsukimc.anticrash.snapshot.SnapshotResult;
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.nbt.CompoundTag;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.nbt.CompoundTag;
-*///?}
 
 //? if (>=26.1 && <=26.3) {
 /*import net.minecraft.nbt.ListTag;
@@ -23,20 +18,9 @@ import net.minecraft.nbt.NbtIo;
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.nbt.ListTag;
 //?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.ChunkPos;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.ChunkPos;
-//?}
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.chunk.storage.RegionFile;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.chunk.storage.RegionFile;
-*///?}
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -58,34 +42,16 @@ class LogicalDeltaMaterializerTest {
 
         UUID removed = UUID.fromString("00000000-0000-0000-0000-000000000001");
 
-        //? if (>=1.18 && <=1.21.11) {
         CompoundTag entities = new CompoundTag();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*CompoundTag entities = new CompoundTag();
-*///?}
 
-        //? if (>=1.18 && <=1.21.11) {
         ListTag list = new ListTag();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*ListTag list = new ListTag();
-*///?}
 
-        //? if (>=1.18 && <=1.21.11) {
         CompoundTag entity = new CompoundTag();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*CompoundTag entity = new CompoundTag();
-*///?}
 
         //? if (>=1.18 && <=1.21.4) {
         entity.putUUID("UUID", removed);
         //?}
-        //? if (>=1.21.5 && <=1.21.11) {
-        /*entity.store("UUID", net.minecraft.core.UUIDUtil.CODEC, removed);
-*///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if (>=1.21.5 && <=26.3) {
         /*entity.store("UUID", net.minecraft.core.UUIDUtil.CODEC, removed);
 *///?}
 
@@ -315,46 +281,22 @@ class LogicalDeltaMaterializerTest {
 
     }
 
-    //? if (>=1.18 && <=1.21.11) {
-    private static CompoundTag entityChunk(UUID... uuids)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*private static CompoundTag entityChunk(UUID... uuids)
-*///?}
-            {
+    private static CompoundTag entityChunk(UUID... uuids) {
 
-        //? if (>=1.18 && <=1.21.11) {
         CompoundTag root = new CompoundTag();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*CompoundTag root = new CompoundTag();
-*///?}
 
-        //? if (>=1.18 && <=1.21.11) {
         ListTag list = new ListTag();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*ListTag list = new ListTag();
-*///?}
 
         for (UUID uuid : uuids) {
 
-            //? if (>=1.18 && <=1.21.11) {
             CompoundTag entity = new CompoundTag();
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*CompoundTag entity = new CompoundTag();
-*///?}
 
             entity.putString("id", "minecraft:armor_stand");
 
             //? if (>=1.18 && <=1.21.4) {
             entity.putUUID("UUID", uuid);
             //?}
-            //? if (>=1.21.5 && <=1.21.11) {
-            /*entity.store("UUID", net.minecraft.core.UUIDUtil.CODEC, uuid);
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.5 && <=26.3) {
             /*entity.store("UUID", net.minecraft.core.UUIDUtil.CODEC, uuid);
 *///?}
 
@@ -364,34 +306,16 @@ class LogicalDeltaMaterializerTest {
         return root;
     }
 
-    //? if (>=1.18 && <=1.21.11) {
-    private static CompoundTag marker(String value)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*private static CompoundTag marker(String value)
-*///?}
-            {
+    private static CompoundTag marker(String value) {
 
-        //? if (>=1.18 && <=1.21.11) {
         CompoundTag root = new CompoundTag();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*CompoundTag root = new CompoundTag();
-*///?}
 
         root.putString("marker", value);
         return root;
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     private static void writeRegion(
-            Path world, String directoryName, ChunkPos pos, CompoundTag root) throws Exception
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*private static void writeRegion(
-                            Path world, String directoryName, ChunkPos pos, CompoundTag root) throws Exception
-*///?}
-            {
+            Path world, String directoryName, ChunkPos pos, CompoundTag root) throws Exception {
         Path directory = world.resolve(directoryName);
         Files.createDirectories(directory);
 
@@ -415,13 +339,7 @@ class LogicalDeltaMaterializerTest {
 *///?}
         {
 
-            //? if (>=1.18 && <=1.21.11) {
-            try (DataOutputStream output = region.getChunkDataOutputStream(pos))
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*try (DataOutputStream output = region.getChunkDataOutputStream(pos))
-*///?}
-            {
+            try (DataOutputStream output = region.getChunkDataOutputStream(pos)) {
 
                 //? if (>=1.18 && <=1.21.11) {
                 //? if (>=1.18 && <=1.20.1) {
@@ -440,25 +358,12 @@ class LogicalDeltaMaterializerTest {
 
             }
 
-            //? if (>=1.18 && <=1.21.11) {
             region.flush();
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*region.flush();
-*///?}
-
         }
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     private static CompoundTag readRegion(Path world, String directoryName, ChunkPos pos)
-            throws Exception
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*private static CompoundTag readRegion(Path world, String directoryName, ChunkPos pos)
-                            throws Exception
-*///?}
-            {
+            throws Exception {
         Path directory = world.resolve(directoryName);
 
         //? if (>=1.18 && <=1.21.11) {
@@ -472,16 +377,7 @@ class LogicalDeltaMaterializerTest {
         try (RegionFile region = new RegionFile(file, directory, false);
                 var input = region.getChunkDataInputStream(pos))
         //?}
-        //? if (>=1.20.5 && <=1.21.11) {
-        /*try (RegionFile region =
-                                new RegionFile(
-                                        com.atsukimc.anticrash.snapshot.RegionStorageAdapter.KEY,
-                                        file,
-                                        directory,
-                                        false);
-                        var input = region.getChunkDataInputStream(pos))
-*///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if (>=1.20.5 && <=26.3) {
         /*try (RegionFile region =
                                 new RegionFile(
                                         com.atsukimc.anticrash.snapshot.RegionStorageAdapter.KEY,
@@ -499,10 +395,7 @@ class LogicalDeltaMaterializerTest {
             /*return NbtIo.read(
                                 input, net.minecraft.nbt.NbtAccounter.create(16 * 1024 * 1024));
 *///?}
-            //? if (>=1.20.4 && <=1.21.11) {
-            /*return NbtIo.read(input, net.minecraft.nbt.NbtAccounter.create(16 * 1024 * 1024));
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.20.4 && <=26.3) {
             /*return NbtIo.read(input, net.minecraft.nbt.NbtAccounter.create(16 * 1024 * 1024));
 *///?}
 

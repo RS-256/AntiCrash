@@ -59,35 +59,16 @@ public abstract class ThreadedAnvilChunkStorageEntityLifecycleMixin {
      * serialised without the extension.
      */
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "save(Lnet/minecraft/world/level/chunk/ChunkAccess;)Z", at = @At("HEAD"))
     private void anticrash$rewriteExtensionOnUnload(
             net.minecraft.world.level.chunk.ChunkAccess chunk,
             org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable<Boolean>
-                    callbackInfo)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "save(Lnet/minecraft/world/level/chunk/ChunkAccess;)Z", at = @At("HEAD"))
-                    private void anticrash$rewriteExtensionOnUnload(
-                            net.minecraft.world.level.chunk.ChunkAccess chunk,
-                            org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable<Boolean>
-                                    callbackInfo)
-*///?}
-            {
+                    callbackInfo) {
 
-        //? if (>=1.18 && <=1.21.11) {
         if (chunk instanceof net.minecraft.world.level.chunk.LevelChunk worldChunk
                 && !((WorldChunkAccessorMixin) worldChunk).anticrash$isLoadedToWorld()
                 && ((com.atsukimc.anticrash.runtime.ExtensionCarrier) worldChunk)
-                        .anticrash$extensionOnDisk())
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*if (chunk instanceof net.minecraft.world.level.chunk.LevelChunk worldChunk
-                        && !((WorldChunkAccessorMixin) worldChunk).anticrash$isLoadedToWorld()
-                        && ((com.atsukimc.anticrash.runtime.ExtensionCarrier) worldChunk)
-                                .anticrash$extensionOnDisk())
-*///?}
-        {
+                        .anticrash$extensionOnDisk()) {
 
             //? if (>=1.18.2 && <=1.21.1) {
             worldChunk.setUnsaved(true);
@@ -95,10 +76,7 @@ public abstract class ThreadedAnvilChunkStorageEntityLifecycleMixin {
             //? if (>=1.18 && <=1.18.1) {
             /*worldChunk.setUnsaved(true);
 *///?}
-            //? if (>=1.21.2 && <=1.21.11) {
-            /*worldChunk.markUnsaved();
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.2 && <=26.3) {
             /*worldChunk.markUnsaved();
 *///?}
 

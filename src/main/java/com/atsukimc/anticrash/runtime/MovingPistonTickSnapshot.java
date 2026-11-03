@@ -9,30 +9,13 @@ import net.minecraft.world.level.block.piston.PistonMovingBlockEntity;
 /*import net.minecraft.core.BlockPos;
 *///?}
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.server.level.ServerLevel;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.ServerLevel;
-*///?}
 
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.core.BlockPos;
 //?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.ChunkPos;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.ChunkPos;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.entity.TickingBlockEntity;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.block.entity.TickingBlockEntity;
-//?}
 //? if (>=26.1 && <=26.3) {
 /*import net.minecraft.world.level.block.piston.PistonMovingBlockEntity;
 *///?}
@@ -57,15 +40,8 @@ public final class MovingPistonTickSnapshot {
 
     public Float lastProgress;
 
-    //? if (>=1.18 && <=1.21.11) {
     public static List<MovingPistonTickSnapshot> capture(
-            ServerLevel world, Set<Long> protectedChunks)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*public static List<MovingPistonTickSnapshot> capture(
-                            ServerLevel world, Set<Long> protectedChunks)
-*///?}
-            {
+            ServerLevel world, Set<Long> protectedChunks) {
         List<MovingPistonTickSnapshot> result = new ArrayList<>();
         if (protectedChunks == null || protectedChunks.isEmpty()) return result;
 
@@ -102,33 +78,15 @@ public final class MovingPistonTickSnapshot {
         return result;
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     private static void captureTickers(
             List<MovingPistonTickSnapshot> result,
             Set<BlockPos> seen,
             ServerLevel world,
             String dimension,
             Set<Long> protectedChunks,
-            List<TickingBlockEntity> tickers)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*private static void captureTickers(
-                            List<MovingPistonTickSnapshot> result,
-                            Set<BlockPos> seen,
-                            ServerLevel world,
-                            String dimension,
-                            Set<Long> protectedChunks,
-                            List<TickingBlockEntity> tickers)
-*///?}
-            {
+            List<TickingBlockEntity> tickers) {
 
-        //? if (>=1.18 && <=1.21.11) {
-        for (TickingBlockEntity ticker : tickers)
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*for (TickingBlockEntity ticker : tickers)
-*///?}
-        {
+        for (TickingBlockEntity ticker : tickers) {
             if (BlockEntityTickerSnapshot.removed(ticker)) continue;
             BlockPos position = ticker.getPos();
 
@@ -153,15 +111,8 @@ public final class MovingPistonTickSnapshot {
             snapshot.y = position.getY();
             snapshot.z = position.getZ();
 
-            //? if (>=1.18 && <=1.21.11) {
             if (BlockEntityTickerSnapshot.loadedBlockEntity(world, position)
-                    instanceof PistonMovingBlockEntity piston)
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*if (BlockEntityTickerSnapshot.loadedBlockEntity(world, position)
-                                instanceof PistonMovingBlockEntity piston)
-*///?}
-            {
+                    instanceof PistonMovingBlockEntity piston) {
                 com.atsukimc.anticrash.mixin.PistonBlockEntityAccessorMixin accessor =
                         (com.atsukimc.anticrash.mixin.PistonBlockEntityAccessorMixin) piston;
                 snapshot.progress = accessor.anticrash$getProgress();

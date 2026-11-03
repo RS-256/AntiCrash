@@ -17,12 +17,7 @@ import com.mojang.datafixers.util.Either;
 import net.minecraft.world.level.ChunkPos;
 //?}
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.chunk.storage.IOWorker;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.chunk.storage.IOWorker;
-*///?}
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -69,13 +64,7 @@ final class IoSeal implements AutoCloseable {
      * #writes}.
      */
 
-    //? if (>=1.18 && <=1.21.11) {
-    static IoSeal seal(List<IOWorker> workers, long timeoutNanos) throws IOException
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*static IoSeal seal(List<IOWorker> workers, long timeoutNanos) throws IOException
-*///?}
-            {
+    static IoSeal seal(List<IOWorker> workers, long timeoutNanos) throws IOException {
         IoSeal seal = new IoSeal();
         List<CompletableFuture<List<PendingRegionWrite>>> captured =
                 new ArrayList<>(workers.size());
@@ -83,13 +72,7 @@ final class IoSeal implements AutoCloseable {
         long[] sealedAt = new long[workers.size()];
         long started = System.nanoTime();
 
-        //? if (>=1.18 && <=1.21.11) {
-        for (IOWorker worker : workers)
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*for (IOWorker worker : workers)
-*///?}
-        {
+        for (IOWorker worker : workers) {
             StorageIoWorkerAccessorMixin accessor = (StorageIoWorkerAccessorMixin) worker;
             Path directory =
                     ((RegionBasedStorageAccessorMixin) (Object) accessor.anticrash$getStorage())

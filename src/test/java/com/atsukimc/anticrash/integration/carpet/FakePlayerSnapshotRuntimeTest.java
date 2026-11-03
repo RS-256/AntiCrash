@@ -19,14 +19,7 @@ class FakePlayerSnapshotRuntimeTest {
             var snapshot = player();
 *///?}
 
-    //? if 1.21.11 {
-    /*snapshot.motionFrameNbt =
-                    com.atsukimc.anticrash.player.NbtCodec.encode(
-                            new com.atsukimc.anticrash.runtime.EntityMotionFrame(
-                                            new net.minecraft.world.phys.Vec3(1, 0, 0), null, true)
-                                    .write());
-*///?}
-    //? if (>=26.1 && <=26.3) {
+    //? if (>=1.21.11 && <=26.3) {
     /*snapshot.motionFrameNbt =
                     com.atsukimc.anticrash.player.NbtCodec.encode(
                             new com.atsukimc.anticrash.runtime.EntityMotionFrame(
@@ -115,14 +108,9 @@ class FakePlayerSnapshotRuntimeTest {
             var game = new org.objectweb.asm.tree.ClassNode();
 *///?}
 
-    //? if 1.21.11 {
+    //? if (>=1.21.11 && <=26.3) {
     /*try (var input =
                     net.minecraft.world.entity.LivingEntity.class.getResourceAsStream("LivingEntity.class"))
-*///?}
-    //? if (>=26.1 && <=26.3) {
-    /*try (var input =
-                    net.minecraft.world.entity.LivingEntity.class.getResourceAsStream(
-                            "LivingEntity.class"))
 *///?}
     //? if (>=1.21.11 && <=26.3) {
     /*{
@@ -137,14 +125,7 @@ class FakePlayerSnapshotRuntimeTest {
                             .anyMatch(m -> {
                                 for (var instruction : m.instructions) {
 *///?}
-    //? if 1.21.11 {
-    /*if (!(instruction
-                                                    instanceof
-                                                    org.objectweb.asm.tree.FieldInsnNode field)
-                                            || field.getOpcode() != org.objectweb.asm.Opcodes.PUTFIELD
-                                            || !field.name.equals("lastKineticHitFeedbackTime"))
-*///?}
-    //? if (>=26.1 && <=26.3) {
+    //? if (>=1.21.11 && <=26.3) {
     /*if (!(instruction
                                                     instanceof
                                                     org.objectweb.asm.tree.FieldInsnNode field)

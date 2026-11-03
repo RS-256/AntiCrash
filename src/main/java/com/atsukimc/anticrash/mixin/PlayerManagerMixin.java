@@ -22,13 +22,7 @@ import net.minecraft.network.Connection;
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.server.players.PlayerList;
 //?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.ServerPlayer;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.server.level.ServerPlayer;
-//?}
 
 //? if (>=1.18 && <=1.18.2) {
 import net.minecraft.network.chat.TextComponent;
@@ -92,13 +86,7 @@ public abstract class PlayerManagerMixin {
                             MessageCatalog.text(
                                     controller.config().language, "recovery.login_blocked")));
             //?}
-            //? if (>=1.19 && <=1.21.11) {
-            /*callbackInfo.setReturnValue(
-                                Component.literal(
-                                        MessageCatalog.text(
-                                                controller.config().language, "recovery.login_blocked")));
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.19 && <=26.3) {
             /*callbackInfo.setReturnValue(
                                 Component.literal(
                                         MessageCatalog.text(
@@ -113,15 +101,7 @@ public abstract class PlayerManagerMixin {
     private void anticrash$playerConnected(
             Connection connection, ServerPlayer player, CallbackInfo callbackInfo)
                 //?}
-                //? if (>=1.20.2 && <=1.21.11) {
-                /*@Inject(method = "placeNewPlayer", at = @At("RETURN"))
-                    private void anticrash$playerConnected(
-                            Connection connection,
-                            ServerPlayer player,
-                            net.minecraft.server.network.CommonListenerCookie clientData,
-                            CallbackInfo callbackInfo)
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.20.2 && <=26.3) {
                 /*@Inject(method = "placeNewPlayer", at = @At("RETURN"))
                     private void anticrash$playerConnected(
                             Connection connection,

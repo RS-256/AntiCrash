@@ -47,11 +47,7 @@ public interface EntityChunkDataAccessAccessorMixin {
     @Accessor("entityDeserializerQueue")
     ProcessorMailbox<Runnable> anticrash$getTaskExecutor();
     //?}
-    //? if (>=1.21.2 && <=1.21.11) {
-    /*@Accessor("entityDeserializerQueue")
-        net.minecraft.util.thread.ConsecutiveExecutor anticrash$getTaskExecutor();
-*///?}
-    //? if (>=26.1 && <=26.3) {
+    //? if (>=1.21.2 && <=26.3) {
     /*@Accessor("entityDeserializerQueue")
         net.minecraft.util.thread.ConsecutiveExecutor anticrash$getTaskExecutor();
 *///?}

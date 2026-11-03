@@ -25,34 +25,16 @@ import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.item.PrimedTnt;
 //?}
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.nbt.CompoundTag;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.nbt.CompoundTag;
-*///?}
 
 import net.minecraft.server.MinecraftServer;
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.server.level.ChunkHolder;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.ChunkHolder;
-*///?}
 
-//? if (>=1.21 && <=1.21.11) {
-/*import net.minecraft.server.level.ChunkMap;
-*///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21 && <=26.3) {
 /*import net.minecraft.server.level.ChunkMap;
 *///?}
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.server.level.ServerLevel;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.ServerLevel;
-*///?}
 
 //? if (>=1.18 && <=1.20.6) {
 import net.minecraft.server.level.ChunkMap;
@@ -132,21 +114,12 @@ public final class TransientChunkStateMarker {
         Set<ChunkReference> criticalChunks = new LinkedHashSet<>();
         List<ScheduledTickSnapshot> orderedScheduledTicks = new ArrayList<>();
 
-        //? if (>=1.18 && <=1.21.11) {
-        for (ServerLevel world : server.getAllLevels())
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*for (ServerLevel world : server.getAllLevels())
-*///?}
-        {
+        for (ServerLevel world : server.getAllLevels()) {
 
             //? if (>=1.18 && <=1.20.6) {
             ChunkMap storage = world.getChunkSource().chunkMap;
             //?}
-            //? if (>=1.21 && <=1.21.11) {
-            /*ChunkMap storage = world.getChunkSource().chunkMap;
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21 && <=26.3) {
             /*ChunkMap storage = world.getChunkSource().chunkMap;
 *///?}
 
@@ -155,12 +128,7 @@ public final class TransientChunkStateMarker {
             for (ChunkHolder holder : accessor.anticrash$getCurrentChunkHolders().values()) {
                 if (holder == null) continue;
 
-                //? if (>=1.18 && <=1.21.11) {
                 LevelChunk chunk = accessibleChunk(holder);
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*LevelChunk chunk = accessibleChunk(holder);
-*///?}
 
                 if (chunk == null) continue;
                 inspectedChunks++;
@@ -197,19 +165,9 @@ public final class TransientChunkStateMarker {
                 // mutation tracer covers a concurrent add/remove between this count and the
                 // read; we never infer a mixed epoch from two list observations.
 
-                //? if (>=1.18 && <=1.21.11) {
                 int blockTicks = chunk.getBlockTicks().count();
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*int blockTicks = chunk.getBlockTicks().count();
-*///?}
 
-                //? if (>=1.18 && <=1.21.11) {
                 int fluidTicks = chunk.getFluidTicks().count();
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*int fluidTicks = chunk.getFluidTicks().count();
-*///?}
 
                 long advertisedScheduledTicks = (long) blockTicks + fluidTicks;
 
@@ -275,13 +233,7 @@ public final class TransientChunkStateMarker {
                     scheduledTicks += chunkScheduledTicks;
                 }
 
-                //? if (>=1.18 && <=1.21.11) {
-                if (!chunk.isUnsaved())
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*if (!chunk.isUnsaved())
-*///?}
-                {
+                if (!chunk.isUnsaved()) {
                     chunksMadeDirty++;
 
                     //? if (>=1.18.2 && <=1.21.1) {
@@ -290,10 +242,7 @@ public final class TransientChunkStateMarker {
                     //? if (>=1.18 && <=1.18.1) {
                     /*chunk.setUnsaved(true);
 *///?}
-                    //? if (>=1.21.2 && <=1.21.11) {
-                    /*chunk.markUnsaved();
-*///?}
-                    //? if (>=26.1 && <=26.3) {
+                    //? if (>=1.21.2 && <=26.3) {
                     /*chunk.markUnsaved();
 *///?}
 
@@ -304,13 +253,7 @@ public final class TransientChunkStateMarker {
             // entity NBT is flushed by the normal save, but their chunks must also reach
             // entity-ticking readiness before restored simulation resumes.
 
-            //? if (>=1.18 && <=1.21.11) {
-            for (Entity entity : world.getAllEntities())
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*for (Entity entity : world.getAllEntities())
-*///?}
-            {
+            for (Entity entity : world.getAllEntities()) {
                 if (!isCheckpointCriticalEntity(entity)) continue;
                 transientPhysicsEntities++;
 
@@ -354,33 +297,14 @@ public final class TransientChunkStateMarker {
 
     static boolean isCheckpointCriticalEntity(Entity entity) {
 
-        //? if (>=1.18 && <=1.21.11) {
         return entity != null
                 && !entity.isRemoved()
                 && (entity instanceof PrimedTnt || entity instanceof FallingBlockEntity);
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*return entity != null
-                        && !entity.isRemoved()
-                        && (entity instanceof PrimedTnt || entity instanceof FallingBlockEntity);
-*///?}
-
     }
 
-    //? if (>=1.18 && <=1.21.11) {
-    private static LevelChunk accessibleChunk(ChunkHolder holder)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*private static LevelChunk accessibleChunk(ChunkHolder holder)
-*///?}
-            {
+    private static LevelChunk accessibleChunk(ChunkHolder holder) {
 
-        //? if (>=1.18 && <=1.21.11) {
         var future = holder.getFullChunkFuture();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*var future = holder.getFullChunkFuture();
-*///?}
 
         if (!future.isDone() || future.isCompletedExceptionally()) return null;
         try {
@@ -400,44 +324,21 @@ public final class TransientChunkStateMarker {
         }
     }
 
-    //? if (>=1.18 && <=1.21.11) {
-    private static int countMovingPistons(LevelChunk chunk)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*private static int countMovingPistons(LevelChunk chunk)
-*///?}
-            {
+    private static int countMovingPistons(LevelChunk chunk) {
         Map<BlockPos, BlockEntity> liveBlockEntities = chunk.getBlockEntities();
         int count = 0;
         for (BlockEntity blockEntity : liveBlockEntities.values()) {
 
-            //? if (>=1.18 && <=1.21.11) {
-            if (blockEntity instanceof PistonMovingBlockEntity)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*if (blockEntity instanceof PistonMovingBlockEntity)
-*///?}
-                count++;
+            if (blockEntity instanceof PistonMovingBlockEntity) count++;
         }
 
         // LevelChunk can retain a pending NBT entry before the block entity is materialized.
         // Include that representation too, while avoiding a duplicate for a live entry.
 
-        //? if (>=1.18 && <=1.21.11) {
-        for (BlockPos position : chunk.getBlockEntitiesPos())
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*for (BlockPos position : chunk.getBlockEntitiesPos())
-*///?}
-        {
+        for (BlockPos position : chunk.getBlockEntitiesPos()) {
             if (liveBlockEntities.containsKey(position)) continue;
 
-            //? if (>=1.18 && <=1.21.11) {
             CompoundTag pending = chunk.getBlockEntityNbt(position);
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*CompoundTag pending = chunk.getBlockEntityNbt(position);
-*///?}
 
             if (pending != null && PISTON_BLOCK_ENTITY_ID.equals(pending.getString("id"))) count++;
         }

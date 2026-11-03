@@ -1,9 +1,6 @@
 package com.atsukimc.anticrash.runtime;
 
-//? if (>=1.19.3 && <=1.21.11) {
-/*import net.minecraft.core.registries.BuiltInRegistries;
-*///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.19.3 && <=26.3) {
 /*import net.minecraft.core.registries.BuiltInRegistries;
 *///?}
 
@@ -85,13 +82,7 @@ public final class EntityRuntimeSnapshot {
                 + removed;
     }
 
-    //? if (>=1.18 && <=1.21.11) {
-    public static List<EntityRuntimeSnapshot> capture(ServerLevel world)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*public static List<EntityRuntimeSnapshot> capture(ServerLevel world)
-*///?}
-            {
+    public static List<EntityRuntimeSnapshot> capture(ServerLevel world) {
         List<EntityRuntimeSnapshot> result = new ArrayList<>();
 
         //? if (>=1.18 && <=1.21.11) {
@@ -113,12 +104,7 @@ public final class EntityRuntimeSnapshot {
                     EntityRuntimeSnapshot snapshot = new EntityRuntimeSnapshot();
                     snapshot.dimension = dimension;
 
-                    //? if (>=1.18 && <=1.21.11) {
                     snapshot.uuid = entity.getStringUUID();
-                    //?}
-                    //? if (>=26.1 && <=26.3) {
-                    /*snapshot.uuid = entity.getStringUUID();
-*///?}
 
                     //? if (>=1.18 && <=1.19.2) {
                     ResourceLocation id = Registry.ENTITY_TYPE.getKey(entity.getType());
@@ -126,22 +112,14 @@ public final class EntityRuntimeSnapshot {
                     //? if (>=1.19.3 && <=1.21.10) {
                     /*ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
                     *///?}
-                    //? if 1.21.11 {
+                    //? if (>=1.21.11 && <=26.3) {
                     /*Identifier id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
                     *///?}
-                    //? if (>=26.1 && <=26.3) {
-                    /*Identifier id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
-*///?}
 
                     snapshot.type = id == null ? entity.getType().toString() : id.toString();
                     snapshot.networkEntityId = entity.getId();
 
-                    //? if (>=1.18 && <=1.21.11) {
                     ChunkPos chunk = entity.chunkPosition();
-                    //?}
-                    //? if (>=26.1 && <=26.3) {
-                    /*ChunkPos chunk = entity.chunkPosition();
-*///?}
 
                     //? if (>=1.18 && <=1.21.11) {
                     snapshot.chunkX = chunk.x;

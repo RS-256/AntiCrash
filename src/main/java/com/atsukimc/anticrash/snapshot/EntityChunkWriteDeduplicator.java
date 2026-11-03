@@ -1,11 +1,6 @@
 package com.atsukimc.anticrash.snapshot;
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.nbt.CompoundTag;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.nbt.CompoundTag;
-*///?}
 
 import net.minecraft.nbt.NbtIo;
 
@@ -38,13 +33,7 @@ public final class EntityChunkWriteDeduplicator {
      * @return the digest to submit with, or null when an identical write was already submitted
      */
 
-    //? if (>=1.18 && <=1.21.11) {
-    public byte[] digestIfChanged(long chunk, CompoundTag nbt)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*public byte[] digestIfChanged(long chunk, CompoundTag nbt)
-*///?}
-            {
+    public byte[] digestIfChanged(long chunk, CompoundTag nbt) {
         byte[] digest = digest(nbt);
         if (digest == null) {
             submitted.remove(chunk);
@@ -64,13 +53,7 @@ public final class EntityChunkWriteDeduplicator {
         submitted.remove(chunk);
     }
 
-    //? if (>=1.18 && <=1.21.11) {
-    private static byte[] digest(CompoundTag nbt)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*private static byte[] digest(CompoundTag nbt)
-*///?}
-            {
+    private static byte[] digest(CompoundTag nbt) {
         try {
             MessageDigest sha = MessageDigest.getInstance("SHA-256");
             try (DataOutputStream out =

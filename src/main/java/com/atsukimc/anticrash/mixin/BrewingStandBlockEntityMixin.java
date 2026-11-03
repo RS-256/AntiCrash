@@ -37,7 +37,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(BrewingStandBlockEntity.class)
 public abstract class BrewingStandBlockEntityMixin {
 
-    //? if (>=1.18 && <=1.21.11) {
+    //? if (>=1.18 && <=26.2) {
     @Inject(method = "serverTick", at = @At("HEAD"))
     private static void anticrash$markBrewTimeDirty(
             Level world,
@@ -46,15 +46,6 @@ public abstract class BrewingStandBlockEntityMixin {
             BrewingStandBlockEntity stand,
             CallbackInfo callbackInfo)
                 //?}
-                //? if (>=26.1 && <=26.2) {
-                /*@Inject(method = "serverTick", at = @At("HEAD"))
-                    private static void anticrash$markBrewTimeDirty(
-                            Level world,
-                            BlockPos pos,
-                            BlockState state,
-                            BrewingStandBlockEntity stand,
-                            CallbackInfo callbackInfo)
-*///?}
                 //? if 26.3 {
                 /*@Inject(method = "serverTick", at = @At("HEAD"))
                     private static void anticrash$markBrewTimeDirty(
@@ -66,25 +57,12 @@ public abstract class BrewingStandBlockEntityMixin {
 *///?}
             {
         if (((BrewingStandBlockEntityTimerAccessor) stand).anticrash$getBrewTime() > 0)
-
-            //? if (>=1.18 && <=1.21.11) {
             world.blockEntityChanged(pos);
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*world.blockEntityChanged(pos);
-*///?}
-
     }
 
     @org.spongepowered.asm.mixin.Shadow private int brewTime;
 
-    //? if (>=1.18 && <=1.21.11) {
     @org.spongepowered.asm.mixin.Shadow private net.minecraft.world.item.Item ingredient;
-
-    //?}
-    //? if (>=26.1 && <=26.3) {
-    /*@org.spongepowered.asm.mixin.Shadow private net.minecraft.world.item.Item ingredient;
-*///?}
 
     /**
      * Vanilla does not save which ingredient the running brew started with. After a load it is
@@ -104,12 +82,7 @@ public abstract class BrewingStandBlockEntityMixin {
                             net.minecraft.core.HolderLookup.Provider registries,
                             CallbackInfo callbackInfo)
 *///?}
-                //? if (>=1.21.6 && <=1.21.11) {
-                /*@Inject(method = "saveAdditional", at = @At("TAIL"))
-                    private void anticrash$saveBrewingItem(
-                            net.minecraft.world.level.storage.ValueOutput nbt, CallbackInfo callbackInfo)
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.6 && <=26.3) {
                 /*@Inject(method = "saveAdditional", at = @At("TAIL"))
                     private void anticrash$saveBrewingItem(
                             net.minecraft.world.level.storage.ValueOutput nbt, CallbackInfo callbackInfo)
@@ -121,27 +94,14 @@ public abstract class BrewingStandBlockEntityMixin {
                 extension -> {
                     extension.remove("ItemBrewing");
 
-                    //? if (>=1.18 && <=1.21.11) {
-                    if (brewTime > 0 && ingredient != null)
-                    //?}
-                    //? if (>=26.1 && <=26.3) {
-                    /*if (brewTime > 0 && ingredient != null)
-*///?}
-                    {
+                    if (brewTime > 0 && ingredient != null) {
 
                         //? if (>=1.18 && <=1.19.2) {
                         extension.putString(
                                 "ItemBrewing",
                                 net.minecraft.core.Registry.ITEM.getKey(ingredient).toString());
                         //?}
-                        //? if (>=1.19.3 && <=1.21.11) {
-                        /*extension.putString(
-                                                        "ItemBrewing",
-                                                        net.minecraft.core.registries.BuiltInRegistries.ITEM
-                                                                .getKey(ingredient)
-                                                                .toString());
-*///?}
-                        //? if (>=26.1 && <=26.3) {
+                        //? if (>=1.19.3 && <=26.3) {
                         /*extension.putString(
                                                         "ItemBrewing",
                                                         net.minecraft.core.registries.BuiltInRegistries.ITEM
@@ -165,26 +125,15 @@ public abstract class BrewingStandBlockEntityMixin {
                             net.minecraft.core.HolderLookup.Provider registries,
                             CallbackInfo callbackInfo)
 *///?}
-                //? if (>=1.21.6 && <=1.21.11) {
-                /*@Inject(method = "loadAdditional", at = @At("TAIL"))
-                    private void anticrash$loadBrewingItem(
-                            net.minecraft.world.level.storage.ValueInput nbt, CallbackInfo callbackInfo)
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.6 && <=26.3) {
                 /*@Inject(method = "loadAdditional", at = @At("TAIL"))
                     private void anticrash$loadBrewingItem(
                             net.minecraft.world.level.storage.ValueInput nbt, CallbackInfo callbackInfo)
 *///?}
             {
 
-        //? if (>=1.18 && <=1.21.11) {
         net.minecraft.nbt.CompoundTag extension =
                 com.atsukimc.anticrash.runtime.RuntimeExtensionNbt.read(nbt);
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*net.minecraft.nbt.CompoundTag extension =
-                        com.atsukimc.anticrash.runtime.RuntimeExtensionNbt.read(nbt);
-*///?}
 
         //? if (>=1.18 && <=1.21.4) {
         if (extension == null || !extension.contains("ItemBrewing", 8) || brewTime <= 0)
@@ -225,10 +174,7 @@ public abstract class BrewingStandBlockEntityMixin {
         //? if (>=1.18 && <=1.19.2) {
         if (id != null && net.minecraft.core.Registry.ITEM.containsKey(id))
         //?}
-        //? if (>=1.19.3 && <=1.21.11) {
-        /*if (id != null && net.minecraft.core.registries.BuiltInRegistries.ITEM.containsKey(id))
-*///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if (>=1.19.3 && <=26.3) {
         /*if (id != null && net.minecraft.core.registries.BuiltInRegistries.ITEM.containsKey(id))
 *///?}
         {
@@ -239,12 +185,9 @@ public abstract class BrewingStandBlockEntityMixin {
             //? if (>=1.19.3 && <=1.21.1) {
             /*ingredient = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(id);
             *///?}
-            //? if (>=1.21.2 && <=1.21.11) {
+            //? if (>=1.21.2 && <=26.3) {
             /*ingredient = net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(id);
             *///?}
-            //? if (>=26.1 && <=26.3) {
-            /*ingredient = net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(id);
-*///?}
 
         }
     }

@@ -42,13 +42,6 @@ public interface ItemCooldownManagerAccessorMixin {
         Map<net.minecraft.resources.Identifier, Object> anticrash$getEntries();
 *///?}
 
-    //? if (>=1.18 && <=1.21.11) {
     @Accessor("tickCount")
     int anticrash$getTick();
-    //?}
-    //? if (>=26.1 && <=26.3) {
-    /*@Accessor("tickCount")
-        int anticrash$getTick();
-*///?}
-
 }

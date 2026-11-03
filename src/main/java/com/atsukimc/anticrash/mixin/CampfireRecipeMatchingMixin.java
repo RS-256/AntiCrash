@@ -6,13 +6,7 @@ import com.atsukimc.anticrash.runtime.RuntimeExtensionNbt;
 //? if (>=1.19 && <=1.21.11) {
 /^import net.minecraft.world.level.block.entity.CampfireBlockEntity;
 ^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.nbt.CompoundTag;
-^///?}
-
-//? if (>=1.19 && <=1.21.11) {
-/^import net.minecraft.nbt.CompoundTag;
-^///?}
+import net.minecraft.nbt.CompoundTag;
 //? if (>=26.1 && <=26.3) {
 /^import net.minecraft.resources.Identifier;
 ^///?}
@@ -64,14 +58,9 @@ public abstract class CampfireRecipeMatchingMixin
 /^@Inject(method = "saveAdditional", at = @At("TAIL"))
     private void anticrash$saveRecipeMatch(CompoundTag nbt, CallbackInfo ci)
 ^///?}
-//? if (>=1.21.2 && <=1.21.11) {
+//? if (>=1.21.2 && <=26.3) {
 /^@org.spongepowered.asm.mixin.Unique
     private net.minecraft.resources.ResourceKey<net.minecraft.world.item.crafting.Recipe<?>> anticrash$savedId;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^@org.spongepowered.asm.mixin.Unique
-    private net.minecraft.resources.ResourceKey<net.minecraft.world.item.crafting.Recipe<?>>
-            anticrash$savedId;
 ^///?}
 
 
@@ -115,17 +104,7 @@ public abstract class CampfireRecipeMatchingMixin
 
 
 
-//? if (>=1.21.2 && <=1.21.11) {
-/^@Inject(method = "cookTick", at = @At("HEAD"))
-    private static void anticrash$restoreRecipeBeforeFirstTick(
-            net.minecraft.server.level.ServerLevel world,
-            net.minecraft.core.BlockPos pos,
-            net.minecraft.world.level.block.state.BlockState state,
-            CampfireBlockEntity campfire,
-            net.minecraft.world.item.crafting.RecipeManager.CachedCheck getter,
-            CallbackInfo ci)
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.2 && <=26.3) {
 /^@Inject(method = "cookTick", at = @At("HEAD"))
     private static void anticrash$restoreRecipeBeforeFirstTick(
             net.minecraft.server.level.ServerLevel world,
@@ -151,14 +130,9 @@ public abstract class CampfireRecipeMatchingMixin
             net.minecraft.core.HolderLookup.Provider registries,
             CallbackInfo ci)
 ^///?}
-//? if (>=1.21.6 && <=1.21.11) {
+//? if (>=1.21.6 && <=26.3) {
 /^@Inject(method = "saveAdditional", at = @At("TAIL"))
     private void anticrash$saveRecipeMatch(net.minecraft.world.level.storage.ValueOutput nbt, CallbackInfo ci)
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^@Inject(method = "saveAdditional", at = @At("TAIL"))
-    private void anticrash$saveRecipeMatch(
-            net.minecraft.world.level.storage.ValueOutput nbt, CallbackInfo ci)
 ^///?}
 {
         if (!RuntimeExtensionNbt.savingLoadedChunk()) return;
@@ -184,10 +158,7 @@ public abstract class CampfireRecipeMatchingMixin
 //? if (>=1.21.2 && <=1.21.10) {
 /^extension.putString("RecipeMatch", id.location().toString());
 ^///?}
-//? if 1.21.11 {
-/^extension.putString("RecipeMatch", id.identifier().toString());
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.11 && <=26.3) {
 /^extension.putString("RecipeMatch", id.identifier().toString());
 ^///?}
 
@@ -206,23 +177,13 @@ public abstract class CampfireRecipeMatchingMixin
             net.minecraft.core.HolderLookup.Provider registries,
             CallbackInfo ci)
 ^///?}
-//? if (>=1.21.6 && <=1.21.11) {
+//? if (>=1.21.6 && <=26.3) {
 /^@Inject(method = "loadAdditional", at = @At("TAIL"))
     private void anticrash$loadRecipeMatch(net.minecraft.world.level.storage.ValueInput nbt, CallbackInfo ci)
 ^///?}
-//? if (>=26.1 && <=26.3) {
-/^@Inject(method = "loadAdditional", at = @At("TAIL"))
-    private void anticrash$loadRecipeMatch(
-            net.minecraft.world.level.storage.ValueInput nbt, CallbackInfo ci)
-^///?}
 {
 
-//? if (>=1.19 && <=1.21.11) {
-/^CompoundTag extension = RuntimeExtensionNbt.read(nbt);
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^CompoundTag extension = RuntimeExtensionNbt.read(nbt);
-^///?}
+CompoundTag extension = RuntimeExtensionNbt.read(nbt);
 
         if (extension == null) return;
 

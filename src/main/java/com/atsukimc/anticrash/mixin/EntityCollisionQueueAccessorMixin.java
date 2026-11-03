@@ -1,12 +1,7 @@
 //? if (>=1.21.2 && <=26.3) {
 /*package com.atsukimc.anticrash.mixin;
 
-//? if (>=1.21.2 && <=1.21.11) {
-/^import net.minecraft.world.entity.Entity;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.entity.Entity;
-^///?}
+import net.minecraft.world.entity.Entity;
 
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,11 +14,7 @@ public interface EntityCollisionQueueAccessorMixin {
 /^@Accessor("movementThisTick")
     java.util.List<?> anticrash$collisionChecks();
 ^///?}
-//? if (>=1.21.6 && <=1.21.11) {
-/^@Accessor("movementThisTick")
-    java.util.ArrayDeque<?> anticrash$collisionChecks();
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.6 && <=26.3) {
 /^@Accessor("movementThisTick")
     java.util.ArrayDeque<?> anticrash$collisionChecks();
 ^///?}

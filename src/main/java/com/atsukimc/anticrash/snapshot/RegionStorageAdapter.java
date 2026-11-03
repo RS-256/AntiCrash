@@ -4,13 +4,7 @@
 //? if (>=1.20.5 && <=1.21.11) {
 /^import net.minecraft.resources.ResourceKey;
 ^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.core.registries.Registries;
-^///?}
-
-//? if (>=1.20.5 && <=1.21.11) {
-/^import net.minecraft.core.registries.Registries;
-^///?}
+import net.minecraft.core.registries.Registries;
 //? if (>=26.1 && <=26.3) {
 /^import net.minecraft.resources.Identifier;
 ^///?}
@@ -25,12 +19,7 @@
 /^import net.minecraft.resources.ResourceKey;
 ^///?}
 
-//? if (>=1.20.5 && <=1.21.11) {
-/^import net.minecraft.world.level.chunk.storage.RegionStorageInfo;
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^import net.minecraft.world.level.chunk.storage.RegionStorageInfo;
-^///?}
+import net.minecraft.world.level.chunk.storage.RegionStorageInfo;
 
 
 /^* The StorageKey labels diagnostics/JFR; detached file contents/coordinates stay authoritative. ^/

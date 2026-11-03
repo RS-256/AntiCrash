@@ -2,26 +2,11 @@ package com.atsukimc.anticrash.mixin;
 
 import com.atsukimc.anticrash.snapshot.logical.EntityLifecycleTracker;
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.entity.Entity;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.entity.Entity;
-*///?}
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.entity.Entity.RemovalReason;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.entity.Entity.RemovalReason;
-*///?}
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.ChunkPos;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.ChunkPos;
-*///?}
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -34,28 +19,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Entity.class)
 public abstract class EntityLifecycleMixin {
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "remove(Lnet/minecraft/world/entity/Entity$RemovalReason;)V", at = @At("HEAD"))
-    private void anticrash$removed(RemovalReason reason, CallbackInfo callbackInfo)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "remove(Lnet/minecraft/world/entity/Entity$RemovalReason;)V", at = @At("HEAD"))
-                    private void anticrash$removed(RemovalReason reason, CallbackInfo callbackInfo)
-*///?}
-            {
+    private void anticrash$removed(RemovalReason reason, CallbackInfo callbackInfo) {
         EntityLifecycleTracker.recordRemoval(
                 (Entity) (Object) this, reason == null ? "unknown" : reason.name());
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "setPos(DDD)V", at = @At("HEAD"))
-    private void anticrash$setPosition(double x, double y, double z, CallbackInfo callbackInfo)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "setPos(DDD)V", at = @At("HEAD"))
-                    private void anticrash$setPosition(double x, double y, double z, CallbackInfo callbackInfo)
-*///?}
-            {
+    private void anticrash$setPosition(double x, double y, double z, CallbackInfo callbackInfo) {
         recordMove(x, z);
     }
 
@@ -91,10 +62,7 @@ public abstract class EntityLifecycleMixin {
             /*if (entity.level() == null)
         *///?}
             //?}
-            //? if (>=1.21.9 && <=1.21.11) {
-            /*if (entity.level() == null)
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.9 && <=26.3) {
             /*if (entity.level() == null)
 *///?}
             return;

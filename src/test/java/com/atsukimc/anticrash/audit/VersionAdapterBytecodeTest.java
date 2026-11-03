@@ -21,15 +21,7 @@ class VersionAdapterBytecodeTest {
     void modernSpawnPointPreservesBothAngles() {
 
 ^///?}
-//? if (>=1.21.9 && <=1.21.11) {
-/^var spawn =
-                net.minecraft.world.level.storage.LevelData.RespawnData.of(
-                        net.minecraft.world.level.Level.OVERWORLD,
-                        new net.minecraft.core.BlockPos(-330, 120, 122),
-                        87.5f,
-                        -22.25f);
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.9 && <=26.3) {
 /^var spawn =
                 net.minecraft.world.level.storage.LevelData.RespawnData.of(
                         net.minecraft.world.level.Level.OVERWORLD,
@@ -39,21 +31,12 @@ class VersionAdapterBytecodeTest {
 ^///?}
 
 
-//? if (>=1.21.9 && <=1.21.11) {
-/^var respawn = new net.minecraft.server.level.ServerPlayer.RespawnConfig(spawn, true);
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.9 && <=26.3) {
 /^var respawn = new net.minecraft.server.level.ServerPlayer.RespawnConfig(spawn, true);
 ^///?}
 
 
-//? if (>=1.21.9 && <=1.21.11) {
-/^var encoded =
-                net.minecraft.server.level.ServerPlayer.RespawnConfig.CODEC
-                        .encodeStart(net.minecraft.nbt.NbtOps.INSTANCE, respawn)
-                        .getOrThrow();
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.9 && <=26.3) {
 /^var encoded =
                 net.minecraft.server.level.ServerPlayer.RespawnConfig.CODEC
                         .encodeStart(net.minecraft.nbt.NbtOps.INSTANCE, respawn)
@@ -61,13 +44,7 @@ class VersionAdapterBytecodeTest {
 ^///?}
 
 
-//? if (>=1.21.9 && <=1.21.11) {
-/^var decoded =
-                net.minecraft.server.level.ServerPlayer.RespawnConfig.CODEC
-                        .parse(net.minecraft.nbt.NbtOps.INSTANCE, encoded)
-                        .getOrThrow();
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.9 && <=26.3) {
 /^var decoded =
                 net.minecraft.server.level.ServerPlayer.RespawnConfig.CODEC
                         .parse(net.minecraft.nbt.NbtOps.INSTANCE, encoded)
@@ -92,22 +69,14 @@ class VersionAdapterBytecodeTest {
     void borderIsPersistentStateAndRidingHasAnEventFreeRestorationPath() throws Exception {
 
 ^///?}
-//? if (>=1.21.9 && <=1.21.11) {
-/^assertTrue(
-                net.minecraft.world.level.saveddata.SavedData.class.isAssignableFrom(
-                        net.minecraft.world.level.border.WorldBorder.class));
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.9 && <=26.3) {
 /^assertTrue(
                 net.minecraft.world.level.saveddata.SavedData.class.isAssignableFrom(
                         net.minecraft.world.level.border.WorldBorder.class));
 ^///?}
 
 
-//? if (>=1.21.9 && <=1.21.11) {
-/^var entity = read("net/minecraft/world/entity/Entity");
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.9 && <=26.3) {
 /^var entity = read("net/minecraft/world/entity/Entity");
 ^///?}
 
@@ -129,20 +98,12 @@ class VersionAdapterBytecodeTest {
 ^///?}
 
 
-//? if (>=1.21.9 && <=1.21.11) {
-/^var projectile = read("net/minecraft/world/entity/projectile/Projectile");
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.9 && <=26.3) {
 /^var projectile = read("net/minecraft/world/entity/projectile/Projectile");
 ^///?}
 
 
-//? if (>=1.21.9 && <=1.21.11) {
-/^assertTrue(
-                projectile.fields.stream()
-                        .anyMatch(f -> f.name.equals("leftOwnerChecked") && f.desc.equals("Z")));
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.9 && <=26.3) {
 /^assertTrue(
                 projectile.fields.stream()
                         .anyMatch(f -> f.name.equals("leftOwnerChecked") && f.desc.equals("Z")));
@@ -165,10 +126,7 @@ class VersionAdapterBytecodeTest {
 //? if 1.21.4 {
 /^assertEquals(40, net.minecraft.server.level.TicketType.ENDER_PEARL.timeout());
 ^///?}
-//? if (>=1.21.5 && <=1.21.11) {
-/^var type = net.minecraft.server.level.TicketType.ENDER_PEARL;
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.5 && <=26.3) {
 /^var type = net.minecraft.server.level.TicketType.ENDER_PEARL;
 ^///?}
 
@@ -177,10 +135,7 @@ class VersionAdapterBytecodeTest {
 /^net.minecraft.server.level.TicketType<net.minecraft.world.level.ChunkPos> type =
                 net.minecraft.server.level.TicketType.ENDER_PEARL;
 ^///?}
-//? if (>=1.21.5 && <=1.21.11) {
-/^assertEquals(40, type.timeout());
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.5 && <=26.3) {
 /^assertEquals(40, type.timeout());
 ^///?}
 
@@ -188,18 +143,12 @@ class VersionAdapterBytecodeTest {
 //? if 1.21.4 {
 /^assertEquals("ender_pearl", type.toString());
 ^///?}
-//? if (>=1.21.5 && <=1.21.11) {
-/^assertTrue(type.doesLoad());
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.5 && <=26.3) {
 /^assertTrue(type.doesLoad());
 ^///?}
 
 
-//? if (>=1.21.5 && <=1.21.11) {
-/^assertTrue(type.doesSimulate());
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.5 && <=26.3) {
 /^assertTrue(type.doesSimulate());
 ^///?}
 
@@ -207,32 +156,19 @@ class VersionAdapterBytecodeTest {
 //? if (>=1.21.5 && <=1.21.8) {
 /^assertTrue(net.minecraft.server.level.TicketType.PORTAL.persist());
 ^///?}
-//? if (>=1.21.9 && <=1.21.11) {
-/^assertTrue(net.minecraft.server.level.TicketType.PORTAL.persist());
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.9 && <=26.3) {
 /^assertTrue(net.minecraft.server.level.TicketType.PORTAL.persist());
 ^///?}
 
 
-//? if (>=1.21.5 && <=1.21.11) {
+//? if (>=1.21.5 && <=26.3) {
 /^assertEquals(
                 "minecraft:ender_pearl",
                 net.minecraft.core.registries.BuiltInRegistries.TICKET_TYPE.getKey(type).toString());
 ^///?}
-//? if (>=26.1 && <=26.3) {
-/^assertEquals(
-                "minecraft:ender_pearl",
-                net.minecraft.core.registries.BuiltInRegistries.TICKET_TYPE
-                        .getKey(type)
-                        .toString());
-^///?}
 
 
-//? if (>=1.21.5 && <=1.21.11) {
-/^var ticket = read("net/minecraft/server/level/Ticket");
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.5 && <=26.3) {
 /^var ticket = read("net/minecraft/server/level/Ticket");
 ^///?}
 
@@ -265,10 +201,7 @@ class VersionAdapterBytecodeTest {
 //? if (>=1.21.5 && <=1.21.8) {
 /^assertNotEquals(net.minecraft.server.level.TicketType.START, recovery);
 ^///?}
-//? if (>=1.21.9 && <=1.21.11) {
-/^assertNotEquals(net.minecraft.server.level.TicketType.DRAGON, recovery);
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.9 && <=26.3) {
 /^assertNotEquals(net.minecraft.server.level.TicketType.DRAGON, recovery);
 ^///?}
     //? if (>=1.21.4 && <=26.3) {
@@ -283,24 +216,12 @@ class VersionAdapterBytecodeTest {
     void newPickPacketsAreRoutedThroughTheServerThread() throws Exception {
 
 ^///?}
-//? if (>=1.21.4 && <=1.21.11) {
-/^var handler = read("net/minecraft/server/network/ServerGamePacketListenerImpl");
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.4 && <=26.3) {
 /^var handler = read("net/minecraft/server/network/ServerGamePacketListenerImpl");
 ^///?}
 
 
-//? if (>=1.21.4 && <=1.21.11) {
-/^for (String name : new String[] {"handlePickItemFromBlock", "handlePickItemFromEntity"})
-            assertTrue(
-                    invokes(
-                            handler,
-                            name,
-                            "net/minecraft/network/protocol/PacketUtils",
-                            "ensureRunningOnSameThread"));
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.4 && <=26.3) {
 /^for (String name : new String[] {"handlePickItemFromBlock", "handlePickItemFromEntity"})
             assertTrue(
                     invokes(
@@ -323,21 +244,12 @@ class VersionAdapterBytecodeTest {
     void furnacePersistsAllFourRenamedTimers() throws Exception {
 
 ^///?}
-//? if (>=1.21.4 && <=1.21.11) {
-/^var furnace = read("net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity");
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.4 && <=26.3) {
 /^var furnace = read("net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity");
 ^///?}
 
 
-//? if (>=1.21.4 && <=1.21.11) {
-/^for (String field :
-                new String[] {
-                    "litTimeRemaining", "litTotalTime", "cookingTimer", "cookingTotalTime"
-                })
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.4 && <=26.3) {
 /^for (String field :
                 new String[] {
                     "litTimeRemaining", "litTotalTime", "cookingTimer", "cookingTotalTime"
@@ -353,11 +265,7 @@ class VersionAdapterBytecodeTest {
 /^for (String method : new String[] {"loadAdditional", "saveAdditional"})
 
 ^///?}
-//? if (>=1.21.6 && <=1.21.11) {
-/^for (String method : new String[] {"loadAdditional", "saveAdditional"})
-
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.6 && <=26.3) {
 /^for (String method : new String[] {"loadAdditional", "saveAdditional"})
 
 ^///?}
@@ -407,12 +315,7 @@ class VersionAdapterBytecodeTest {
     @Test
     void vanillaOwnsSensorSerializationSince119() throws Exception {
 
-//? if (>=1.19 && <=1.21.11) {
-/^var sensor = read("net/minecraft/world/level/block/entity/SculkSensorBlockEntity");
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^var sensor = read("net/minecraft/world/level/block/entity/SculkSensorBlockEntity");
-^///?}
+var sensor = read("net/minecraft/world/level/block/entity/SculkSensorBlockEntity");
 
 
 //? if (>=1.19 && <=1.21.4) {
@@ -459,10 +362,7 @@ class VersionAdapterBytecodeTest {
 //? if (>=1.19 && <=1.19.4) {
 /^var listener = read("net/minecraft/world/level/gameevent/vibrations/VibrationListener");
 ^///?}
-//? if (>=1.20 && <=1.21.11) {
-/^var listener = read("net/minecraft/world/level/gameevent/vibrations/VibrationSystem$Data");
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.20 && <=26.3) {
 /^var listener = read("net/minecraft/world/level/gameevent/vibrations/VibrationSystem$Data");
 ^///?}
 
@@ -479,14 +379,7 @@ class VersionAdapterBytecodeTest {
                                 f.name.equals("selectionStrategy")
                                         && f.desc.endsWith("/VibrationSelector;")));
 ^///?}
-//? if (>=1.20 && <=1.21.11) {
-/^assertTrue(
-                listener.fields.stream()
-                        .anyMatch(f ->
-                                f.name.equals("selectionStrategy")
-                                        && f.desc.endsWith("/VibrationSelector;")));
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.20 && <=26.3) {
 /^assertTrue(
                 listener.fields.stream()
                         .anyMatch(f ->
@@ -507,39 +400,18 @@ class VersionAdapterBytecodeTest {
     @Test
     void predictionAckIsCumulativeAndUsedByVanilla() throws Exception {
 
-//? if (>=1.19 && <=1.21.11) {
-/^var handler = read("net/minecraft/server/network/ServerGamePacketListenerImpl");
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^var handler = read("net/minecraft/server/network/ServerGamePacketListenerImpl");
-^///?}
+var handler = read("net/minecraft/server/network/ServerGamePacketListenerImpl");
 
 
-//? if (>=1.19 && <=1.21.11) {
-/^for (String method :
+for (String method :
                 new String[] {"handlePlayerAction", "handleUseItemOn", "handleUseItem"})
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^for (String method :
-                new String[] {"handlePlayerAction", "handleUseItemOn", "handleUseItem"})
-^///?}
 {
 
-//? if (>=1.19 && <=1.21.11) {
-/^assertTrue(invokes(handler, method, handler.name, "ackBlockChangesUpTo"), method);
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^assertTrue(invokes(handler, method, handler.name, "ackBlockChangesUpTo"), method);
-^///?}
+assertTrue(invokes(handler, method, handler.name, "ackBlockChangesUpTo"), method);
 
         }
 
-//? if (>=1.19 && <=1.21.11) {
-/^assertTrue(invokes(handler, "ackBlockChangesUpTo", "java/lang/Math", "max"));
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^assertTrue(invokes(handler, "ackBlockChangesUpTo", "java/lang/Math", "max"));
-^///?}
+assertTrue(invokes(handler, "ackBlockChangesUpTo", "java/lang/Math", "max"));
 
     }
 
@@ -549,10 +421,7 @@ class VersionAdapterBytecodeTest {
 //? if (>=1.19 && <=1.21.1) {
 /^var getter = read("net/minecraft/world/item/crafting/RecipeManager$1");
 ^///?}
-//? if (>=1.21.2 && <=1.21.11) {
-/^var getter = read("net/minecraft/world/item/crafting/RecipeManager$1");
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.2 && <=26.3) {
 /^var getter = read("net/minecraft/world/item/crafting/RecipeManager$1");
 ^///?}
 
@@ -562,16 +431,10 @@ class VersionAdapterBytecodeTest {
                 getter.fields.stream()
                         .anyMatch(f -> f.name.equals("lastRecipe") && f.desc.endsWith("/ResourceLocation;")));
 ^///?}
-//? if (>=1.21.2 && <=1.21.11) {
+//? if (>=1.21.2 && <=26.3) {
 /^assertTrue(
                 getter.fields.stream()
                         .anyMatch(f -> f.name.equals("lastRecipe") && f.desc.endsWith("/ResourceKey;")));
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^assertTrue(
-                getter.fields.stream()
-                        .anyMatch(f ->
-                                f.name.equals("lastRecipe") && f.desc.endsWith("/ResourceKey;")));
 ^///?}
 
 
@@ -583,15 +446,7 @@ class VersionAdapterBytecodeTest {
                         "net/minecraft/world/item/crafting/RecipeManager",
                         "getRecipeFor"));
 ^///?}
-//? if (>=1.21.2 && <=1.21.11) {
-/^assertTrue(
-                invokes(
-                        getter,
-                        "getRecipeFor",
-                        "net/minecraft/world/item/crafting/RecipeManager",
-                        "getRecipeFor"));
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.2 && <=26.3) {
 /^assertTrue(
                 invokes(
                         getter,
@@ -608,18 +463,12 @@ class VersionAdapterBytecodeTest {
     void tickingGetterIsNotAnExactLoadedChunkSet() throws Exception {
 
 ^///?}
-//? if (>=1.21 && <=1.21.11) {
-/^var holder = read("net/minecraft/server/level/ChunkHolder");
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21 && <=26.3) {
 /^var holder = read("net/minecraft/server/level/ChunkHolder");
 ^///?}
 
 
-//? if (>=1.21 && <=1.21.11) {
-/^assertTrue(invokes(holder, "getTickingChunk", holder.name, "getTickingChunkFuture"));
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21 && <=26.3) {
 /^assertTrue(invokes(holder, "getTickingChunk", holder.name, "getTickingChunkFuture"));
 ^///?}
 
@@ -629,10 +478,7 @@ class VersionAdapterBytecodeTest {
 ^///?}
 
 
-//? if (>=1.21 && <=1.21.11) {
-/^assertTrue(invokes(adapter, "worldChunk", holder.name, "getLatestChunk"));
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21 && <=26.3) {
 /^assertTrue(invokes(adapter, "worldChunk", holder.name, "getLatestChunk"));
 ^///?}
     //? if (>=1.21 && <=26.3) {
@@ -647,21 +493,13 @@ class VersionAdapterBytecodeTest {
     void newPortalAndTntRuntimeFieldsExistAndAreNotVanillaNbtAuthority() throws Exception {
 
 ^///?}
-//? if (>=1.21 && <=1.21.11) {
-/^var portal = read("net/minecraft/world/entity/PortalProcessor");
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21 && <=26.3) {
 /^var portal = read("net/minecraft/world/entity/PortalProcessor");
 ^///?}
 
 
-//? if (>=1.21 && <=1.21.11) {
+//? if (>=1.21 && <=26.3) {
 /^for (String field : new String[] {"portal", "entryPosition", "portalTime", "insidePortalThisTick"})
-
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^for (String field :
-                new String[] {"portal", "entryPosition", "portalTime", "insidePortalThisTick"})
 
 ^///?}
 //? if (>=1.21 && <=26.3) {
@@ -669,20 +507,12 @@ class VersionAdapterBytecodeTest {
 ^///?}
 
 
-//? if (>=1.21 && <=1.21.11) {
-/^var tnt = read("net/minecraft/world/entity/item/PrimedTnt");
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21 && <=26.3) {
 /^var tnt = read("net/minecraft/world/entity/item/PrimedTnt");
 ^///?}
 
 
-//? if (>=1.21 && <=1.21.11) {
-/^assertTrue(
-                tnt.fields.stream()
-                        .anyMatch(f -> f.name.equals("usedPortal") && f.desc.equals("Z")));
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21 && <=26.3) {
 /^assertTrue(
                 tnt.fields.stream()
                         .anyMatch(f -> f.name.equals("usedPortal") && f.desc.equals("Z")));
@@ -696,10 +526,7 @@ class VersionAdapterBytecodeTest {
 //? if (>=1.21 && <=1.21.5) {
 /^if (!method.name.equals("addAdditionalSaveData"))
 ^///?}
-//? if (>=1.21.6 && <=1.21.11) {
-/^if (!method.name.equals("addAdditionalSaveData"))
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21.6 && <=26.3) {
 /^if (!method.name.equals("addAdditionalSaveData"))
 ^///?}
 //? if (>=1.21 && <=26.3) {
@@ -712,14 +539,7 @@ class VersionAdapterBytecodeTest {
                 if (insn instanceof FieldInsnNode f)
 
 ^///?}
-//? if (>=1.21 && <=1.21.11) {
-/^assertNotEquals(
-                            "usedPortal",
-                            f.name,
-                            "If Vanilla gains this state, remove the duplicate extension after"
-                                    + " reviewing it");
-^///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.21 && <=26.3) {
 /^assertNotEquals(
                             "usedPortal",
                             f.name,

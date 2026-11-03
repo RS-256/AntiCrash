@@ -8,13 +8,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 //? if (>=1.18 && <=1.21.1) {
 import net.minecraft.nbt.CompoundTag;
 //?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.ServerLevel;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.server.level.ServerLevel;
-//?}
 //? if (>=26.1 && <=26.3) {
 /*import net.minecraft.world.level.chunk.ChunkAccess;
 *///?}
@@ -59,18 +53,7 @@ public abstract class ChunkSerializerMixin {
     private static CompoundTag anticrash$scopeChunkSave(
             ServerLevel world, ChunkAccess chunk, Operation<CompoundTag> original)
                 //?}
-                //? if (>=1.21.2 && <=1.21.11) {
-                /*@Mixin(SerializableChunkData.class)
-                public abstract class ChunkSerializerMixin {
-                    /^*
-                     * A wrap rather than a HEAD/RETURN pair: the scope must end when serialisation throws, or the
-                     * next unrelated saveAdditional on this thread would be taken for a save of a loaded chunk.
-                     ^/
-                    @WrapMethod(method = "copyOf")
-                    private static SerializableChunkData anticrash$scopeChunkSave(
-                            ServerLevel world, ChunkAccess chunk, Operation<SerializableChunkData> original)
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.2 && <=26.3) {
                 /*@Mixin(SerializableChunkData.class)
                 public abstract class ChunkSerializerMixin {
                     /^*
@@ -83,12 +66,7 @@ public abstract class ChunkSerializerMixin {
 *///?}
             {
 
-        //? if (>=1.18 && <=1.21.11) {
         LevelChunk worldChunk = chunk instanceof LevelChunk loaded ? loaded : null;
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*LevelChunk worldChunk = chunk instanceof LevelChunk loaded ? loaded : null;
-*///?}
 
         boolean staysLoaded =
                 worldChunk != null
@@ -99,10 +77,7 @@ public abstract class ChunkSerializerMixin {
             //? if (>=1.18 && <=1.21.1) {
             CompoundTag nbt = original.call(world, chunk);
             //?}
-            //? if (>=1.21.2 && <=1.21.11) {
-            /*SerializableChunkData nbt = original.call(world, chunk);
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.2 && <=26.3) {
             /*SerializableChunkData nbt = original.call(world, chunk);
 *///?}
 

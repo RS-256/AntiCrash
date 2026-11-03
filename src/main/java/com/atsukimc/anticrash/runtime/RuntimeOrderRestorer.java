@@ -34,12 +34,7 @@ import net.minecraft.server.level.DistanceManager;
 /*import net.minecraft.server.level.Ticket;
 *///?}
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.server.level.TicketType;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.TicketType;
-*///?}
 
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.server.level.ServerLevel;
@@ -66,12 +61,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ChunkPos;
 //?}
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.block.entity.TickingBlockEntity;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.block.entity.TickingBlockEntity;
-*///?}
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -112,70 +102,27 @@ public final class RuntimeOrderRestorer {
      * @return null when the live lists are not in a state that can be reordered safely
      */
 
-    //? if (>=1.18 && <=1.21.11) {
     public static Result blockEntityTickers(
-            ServerLevel world, List<BlockEntityTickerSnapshot> expected)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*public static Result blockEntityTickers(
-                            ServerLevel world, List<BlockEntityTickerSnapshot> expected)
-*///?}
-            {
+            ServerLevel world, List<BlockEntityTickerSnapshot> expected) {
         WorldAccessorMixin accessor = (WorldAccessorMixin) world;
 
-        //? if (>=1.18 && <=1.21.11) {
         List<TickingBlockEntity> current = accessor.anticrash$getBlockEntityTickers();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*List<TickingBlockEntity> current = accessor.anticrash$getBlockEntityTickers();
-*///?}
 
-        //? if (>=1.18 && <=1.21.11) {
         List<TickingBlockEntity> pending = accessor.anticrash$getPendingBlockEntityTickers();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*List<TickingBlockEntity> pending = accessor.anticrash$getPendingBlockEntityTickers();
-*///?}
 
-        //? if (>=1.18 && <=1.21.11) {
         Map<String, TickingBlockEntity> live = new LinkedHashMap<>();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*Map<String, TickingBlockEntity> live = new LinkedHashMap<>();
-*///?}
 
-        //? if (>=1.18 && <=1.21.11) {
-        for (List<TickingBlockEntity> list : List.of(current, pending))
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*for (List<TickingBlockEntity> list : List.of(current, pending))
-*///?}
-        {
+        for (List<TickingBlockEntity> list : List.of(current, pending)) {
 
-            //? if (>=1.18 && <=1.21.11) {
-            for (TickingBlockEntity ticker : list)
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*for (TickingBlockEntity ticker : list)
-*///?}
-            {
+            for (TickingBlockEntity ticker : list) {
                 // Vanilla drops a removed ticker unrun on its next pass; it carries no order.
                 if (BlockEntityTickerSnapshot.removed(ticker)) continue;
                 BlockPos pos = ticker.getPos();
 
-                //? if (>=1.18 && <=1.21.11) {
                 if (live.put(
                                 tickerKey(pos.getX(), pos.getY(), pos.getZ(), ticker.getType()),
                                 ticker)
-                        != null)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*if (live.put(
-                                                tickerKey(pos.getX(), pos.getY(), pos.getZ(), ticker.getType()),
-                                                ticker)
-                                        != null)
-*///?}
-                {
+                        != null) {
                     return null;
                 }
             }
@@ -183,31 +130,15 @@ public final class RuntimeOrderRestorer {
         // World#tickBlockEntities appends PENDING to CURRENT and then runs CURRENT in order, so
         // where a live ticker sits today does not matter, only the two lists' final contents.
 
-        //? if (>=1.18 && <=1.21.11) {
         List<TickingBlockEntity> orderedCurrent = new ArrayList<>();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*List<TickingBlockEntity> orderedCurrent = new ArrayList<>();
-*///?}
 
-        //? if (>=1.18 && <=1.21.11) {
         List<TickingBlockEntity> orderedPending = new ArrayList<>();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*List<TickingBlockEntity> orderedPending = new ArrayList<>();
-*///?}
 
         int missing = 0;
         for (BlockEntityTickerSnapshot snapshot : expected) {
 
-            //? if (>=1.18 && <=1.21.11) {
             TickingBlockEntity ticker =
                     live.remove(tickerKey(snapshot.x, snapshot.y, snapshot.z, snapshot.name));
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*TickingBlockEntity ticker =
-                                live.remove(tickerKey(snapshot.x, snapshot.y, snapshot.z, snapshot.name));
-*///?}
 
             if (ticker == null) {
                 missing++;
@@ -231,13 +162,7 @@ public final class RuntimeOrderRestorer {
      * @return null while the entity list is being iterated
      */
 
-    //? if (>=1.18 && <=1.21.11) {
-    public static Result entities(ServerLevel world, List<EntityRuntimeSnapshot> expected)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*public static Result entities(ServerLevel world, List<EntityRuntimeSnapshot> expected)
-*///?}
-            {
+    public static Result entities(ServerLevel world, List<EntityRuntimeSnapshot> expected) {
         EntityListAccessorMixin accessor =
                 (EntityListAccessorMixin)
                         ((ServerWorldAccessorMixin) world).anticrash$getEntityList();
@@ -246,13 +171,7 @@ public final class RuntimeOrderRestorer {
         Map<String, Entity> live = new LinkedHashMap<>();
         for (Entity entity : entities.values()) {
 
-            //? if (>=1.18 && <=1.21.11) {
-            if (live.put(entity.getStringUUID(), entity) != null)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*if (live.put(entity.getStringUUID(), entity) != null)
-*///?}
-                return null;
+            if (live.put(entity.getStringUUID(), entity) != null) return null;
         }
         List<Entity> ordered = new ArrayList<>(live.size());
         int missing = 0;
@@ -346,25 +265,12 @@ public final class RuntimeOrderRestorer {
      * @return the number of tickets removed
      */
 
-    //? if (>=1.18 && <=1.21.11) {
     public static int removeStrayExpiringTickets(
-            Map<String, ServerLevel> worlds, List<TicketLedgerSnapshot.Entry> ledger)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*public static int removeStrayExpiringTickets(
-                            Map<String, ServerLevel> worlds, List<TicketLedgerSnapshot.Entry> ledger)
-*///?}
-            {
+            Map<String, ServerLevel> worlds, List<TicketLedgerSnapshot.Entry> ledger) {
         java.util.Set<String> expected = expiringKeys(ledger);
         int removed = 0;
 
-        //? if (>=1.18 && <=1.21.11) {
-        for (Map.Entry<String, ServerLevel> world : worlds.entrySet())
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*for (Map.Entry<String, ServerLevel> world : worlds.entrySet())
-*///?}
-        {
+        for (Map.Entry<String, ServerLevel> world : worlds.entrySet()) {
 
             //? if (>=1.18 && <=1.20.6) {
             DistanceManager manager =
@@ -374,13 +280,7 @@ public final class RuntimeOrderRestorer {
             /*DistanceManager manager =
                                 world.getValue().getChunkSource().chunkMap.getDistanceManager();
 *///?}
-            //? if (>=1.21.5 && <=1.21.11) {
-            /*TicketStorage manager =
-                                ((com.atsukimc.anticrash.mixin.ServerChunkManagerAccessorMixin)
-                                                world.getValue().getChunkSource())
-                                        .anticrash$getTicketManager();
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.5 && <=26.3) {
             /*TicketStorage manager =
                                 ((com.atsukimc.anticrash.mixin.ServerChunkManagerAccessorMixin)
                                                 world.getValue().getChunkSource())
@@ -401,10 +301,7 @@ public final class RuntimeOrderRestorer {
                 //? if (>=1.18 && <=1.21.4) {
                 for (Ticket<?> ticket : position.getValue())
                 //?}
-                //? if (>=1.21.5 && <=1.21.11) {
-                /*for (Ticket ticket : position.getValue())
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.5 && <=26.3) {
                 /*for (Ticket ticket : position.getValue())
 *///?}
                 {
@@ -412,10 +309,7 @@ public final class RuntimeOrderRestorer {
                     //? if (>=1.18 && <=1.21.4) {
                     TicketType<?> type = ticket.getType();
                     //?}
-                    //? if (>=1.21.5 && <=1.21.11) {
-                    /*TicketType type = ticket.getType();
-*///?}
-                    //? if (>=26.1 && <=26.3) {
+                    //? if (>=1.21.5 && <=26.3) {
                     /*TicketType type = ticket.getType();
 *///?}
 
@@ -424,12 +318,7 @@ public final class RuntimeOrderRestorer {
                             && type != TicketType.POST_TELEPORT
                             && type != TicketType.PORTAL)
                         //?}
-                        //? if (>=1.21.4 && <=1.21.11) {
-                        /*if (type != TicketType.UNKNOWN
-                                                    && type != TicketType.ENDER_PEARL
-                                                    && type != TicketType.PORTAL)
-*///?}
-                        //? if (>=26.1 && <=26.3) {
+                        //? if (>=1.21.4 && <=26.3) {
                         /*if (type != TicketType.UNKNOWN
                                                     && type != TicketType.ENDER_PEARL
                                                     && type != TicketType.PORTAL)
@@ -440,15 +329,9 @@ public final class RuntimeOrderRestorer {
                     Object argument =
                             ((ChunkTicketAccessorMixin) (Object) ticket).anticrash$getArgument();
                     //?}
-                    //? if (>=1.21.5 && <=1.21.11) {
+                    //? if (>=1.21.5 && <=26.3) {
                     /*String name =
                                                 net.minecraft.core.registries.BuiltInRegistries.TICKET_TYPE.getKey(type).getPath();
-*///?}
-                    //? if (>=26.1 && <=26.3) {
-                    /*String name =
-                                                net.minecraft.core.registries.BuiltInRegistries.TICKET_TYPE
-                                                        .getKey(type)
-                                                        .getPath();
 *///?}
 
                     //? if (>=1.18 && <=1.21.4) {
@@ -503,10 +386,7 @@ public final class RuntimeOrderRestorer {
                         (Integer) ticket[2],
                         ticket[3]);
                 //?}
-                //? if (>=1.21.5 && <=1.21.11) {
-                /*manager.removeTicket((Ticket) ticket[0], (ChunkPos) ticket[1]);
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.5 && <=26.3) {
                 /*manager.removeTicket((Ticket) ticket[0], (ChunkPos) ticket[1]);
 *///?}
 
@@ -536,15 +416,8 @@ public final class RuntimeOrderRestorer {
 
     //?}
 
-    //? if (>=1.18 && <=1.21.11) {
     public static int expiringTickets(
-            Map<String, ServerLevel> worlds, List<TicketLedgerSnapshot.Entry> ledger)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*public static int expiringTickets(
-                            Map<String, ServerLevel> worlds, List<TicketLedgerSnapshot.Entry> ledger)
-*///?}
-            {
+            Map<String, ServerLevel> worlds, List<TicketLedgerSnapshot.Entry> ledger) {
         int restored = 0;
         for (TicketLedgerSnapshot.Entry entry : ledger) {
             if (entry == null
@@ -553,12 +426,7 @@ public final class RuntimeOrderRestorer {
                     || entry.remainingTicks < 0
                     || entry.argument == null) continue;
 
-            //? if (>=1.18 && <=1.21.11) {
             ServerLevel world = worlds.get(entry.dimension);
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*ServerLevel world = worlds.get(entry.dimension);
-*///?}
 
             if (world == null || entry.level < 0 || entry.level > 64) continue;
             ChunkPos chunk = new ChunkPos(entry.x, entry.z);
@@ -570,13 +438,7 @@ public final class RuntimeOrderRestorer {
             /*DistanceManager manager =
                                 world.getChunkSource().chunkMap.getDistanceManager();
 *///?}
-            //? if (>=1.21.5 && <=1.21.11) {
-            /*TicketStorage manager =
-                                ((com.atsukimc.anticrash.mixin.ServerChunkManagerAccessorMixin)
-                                                world.getChunkSource())
-                                        .anticrash$getTicketManager();
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.5 && <=26.3) {
             /*TicketStorage manager =
                                 ((com.atsukimc.anticrash.mixin.ServerChunkManagerAccessorMixin)
                                                 world.getChunkSource())
@@ -586,28 +448,17 @@ public final class RuntimeOrderRestorer {
             //? if (>=1.18 && <=1.21.4) {
             TicketType<?> type;
             //?}
-            //? if (>=1.21.5 && <=1.21.11) {
-            /*TicketType type =
-                                switch (entry.type) {
-                                    case "portal" -> TicketType.PORTAL;
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.5 && <=26.3) {
             /*TicketType type =
                                 switch (entry.type) {
                                     case "portal" -> TicketType.PORTAL;
 *///?}
 
-            //? if (>=1.21.5 && <=1.21.11) {
-            /*case "ender_pearl" -> TicketType.ENDER_PEARL;
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.5 && <=26.3) {
             /*case "ender_pearl" -> TicketType.ENDER_PEARL;
 *///?}
 
-            //? if (>=1.21.5 && <=1.21.11) {
-            /*case "unknown" -> TicketType.UNKNOWN;
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.5 && <=26.3) {
             /*case "unknown" -> TicketType.UNKNOWN;
 *///?}
 
@@ -738,10 +589,7 @@ public final class RuntimeOrderRestorer {
             // Public addition deduplicates by type identity + level. PORTAL is now persisted by
             // Vanilla; refresh the existing ticket, rather than introducing a second ledger entry.
 
-            //? if (>=1.21.5 && <=1.21.11) {
-            /*manager.addTicketWithRadius(type, chunk, entry.level);
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.5 && <=26.3) {
             /*manager.addTicketWithRadius(type, chunk, entry.level);
 *///?}
 
@@ -764,20 +612,14 @@ public final class RuntimeOrderRestorer {
             //? if (>=1.18 && <=1.21.4) {
             long expiry = type.timeout();
             //?}
-            //? if (>=1.21.5 && <=1.21.11) {
-            /*long expiry = type.timeout();
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.5 && <=26.3) {
             /*long expiry = type.timeout();
 *///?}
 
             //? if (>=1.18 && <=1.21.4) {
             for (Ticket<?> ticket : tickets)
             //?}
-            //? if (>=1.21.5 && <=1.21.11) {
-            /*for (Ticket ticket : tickets)
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.5 && <=26.3) {
             /*for (Ticket ticket : tickets)
 *///?}
             {
@@ -789,11 +631,7 @@ public final class RuntimeOrderRestorer {
                         && ticket.getTicketLevel() == entry.level
                         && argument.equals(ticketAccessor.anticrash$getArgument()))
                 //?}
-                //? if (>=1.21.5 && <=1.21.11) {
-                /*if (ticketAccessor.anticrash$getType() == type
-                                        && ticket.getTicketLevel() == entry.level)
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.5 && <=26.3) {
                 /*if (ticketAccessor.anticrash$getType() == type
                                         && ticket.getTicketLevel() == entry.level)
 *///?}
@@ -846,15 +684,8 @@ public final class RuntimeOrderRestorer {
      * first tick, instead of keeping chunks loaded that were about to unload.
      */
 
-    //? if (>=1.18 && <=1.21.11) {
     public static boolean permanentTicketsCovered(
-            Iterable<ServerLevel> worlds, List<TicketLedgerSnapshot.Entry> ledger)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*public static boolean permanentTicketsCovered(
-                            Iterable<ServerLevel> worlds, List<TicketLedgerSnapshot.Entry> ledger)
-*///?}
-            {
+            Iterable<ServerLevel> worlds, List<TicketLedgerSnapshot.Entry> ledger) {
         return permanentTicketsCovered(TicketLedgerSnapshot.capture(worlds), ledger);
     }
 
@@ -891,20 +722,9 @@ public final class RuntimeOrderRestorer {
                 + entry.level;
     }
 
-    //? if (>=1.18 && <=1.21.11) {
-    public static Map<String, ServerLevel> worlds(Iterable<ServerLevel> worlds)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*public static Map<String, ServerLevel> worlds(Iterable<ServerLevel> worlds)
-*///?}
-            {
+    public static Map<String, ServerLevel> worlds(Iterable<ServerLevel> worlds) {
 
-        //? if (>=1.18 && <=1.21.11) {
         Map<String, ServerLevel> byId = new HashMap<>();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*Map<String, ServerLevel> byId = new HashMap<>();
-*///?}
 
         //? if (>=1.18 && <=1.21.11) {
         for (ServerLevel world : worlds)

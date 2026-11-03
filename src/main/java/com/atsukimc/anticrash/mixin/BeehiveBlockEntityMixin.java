@@ -42,7 +42,6 @@ public abstract class BeehiveBlockEntityMixin {
      * marked for saving. A checkpoint therefore kept an old count and the bees left late.
      */
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "tickOccupants", at = @At("TAIL"))
     private static void anticrash$markChunkDirty(
             Level world,
@@ -50,26 +49,7 @@ public abstract class BeehiveBlockEntityMixin {
             BlockState state,
             List<?> bees,
             BlockPos flowerPos,
-            CallbackInfo callbackInfo)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "tickOccupants", at = @At("TAIL"))
-                    private static void anticrash$markChunkDirty(
-                            Level world,
-                            BlockPos pos,
-                            BlockState state,
-                            List<?> bees,
-                            BlockPos flowerPos,
-                            CallbackInfo callbackInfo)
-*///?}
-            {
-        if (!bees.isEmpty())
-            //? if (>=1.18 && <=1.21.11) {
-            world.blockEntityChanged(pos);
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*world.blockEntityChanged(pos);
-*///?}
-
+            CallbackInfo callbackInfo) {
+        if (!bees.isEmpty()) world.blockEntityChanged(pos);
     }
 }

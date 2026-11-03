@@ -80,13 +80,7 @@ public final class TransientEntityTickSnapshot {
     public int chunkX;
     public int chunkZ;
 
-    //? if (>=1.18 && <=1.21.11) {
-    public static List<TransientEntityTickSnapshot> capture(ServerLevel world)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*public static List<TransientEntityTickSnapshot> capture(ServerLevel world)
-*///?}
-            {
+    public static List<TransientEntityTickSnapshot> capture(ServerLevel world) {
         List<TransientEntityTickSnapshot> result = new ArrayList<>();
 
         //? if (>=1.18 && <=1.21.11) {
@@ -111,12 +105,7 @@ public final class TransientEntityTickSnapshot {
                             || entity.isRemoved()
                             || !world.isPositionEntityTicking(entity.blockPosition()))
                         //?}
-                        //? if (>=1.21.5 && <=1.21.11) {
-                        /*if (kind == null
-                                                    || entity.isRemoved()
-                                                    || !world.isPositionEntityTicking(entity.blockPosition()))
-*///?}
-                        //? if (>=26.1 && <=26.3) {
+                        //? if (>=1.21.5 && <=26.3) {
                         /*if (kind == null
                                                     || entity.isRemoved()
                                                     || !world.isPositionEntityTicking(entity.blockPosition()))
@@ -125,12 +114,7 @@ public final class TransientEntityTickSnapshot {
                     TransientEntityTickSnapshot snapshot = new TransientEntityTickSnapshot();
                     snapshot.dimension = dimension;
 
-                    //? if (>=1.18 && <=1.21.11) {
                     snapshot.uuid = entity.getStringUUID();
-                    //?}
-                    //? if (>=26.1 && <=26.3) {
-                    /*snapshot.uuid = entity.getStringUUID();
-*///?}
 
                     snapshot.kind = kind;
 
@@ -155,13 +139,7 @@ public final class TransientEntityTickSnapshot {
 
     public static String kind(Entity entity) {
 
-        //? if (>=1.18 && <=1.21.11) {
-        if (entity instanceof PrimedTnt)
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*if (entity instanceof PrimedTnt)
-*///?}
-            return TNT;
+        if (entity instanceof PrimedTnt) return TNT;
         if (entity instanceof FallingBlockEntity) return FALLING_BLOCK;
         return null;
     }

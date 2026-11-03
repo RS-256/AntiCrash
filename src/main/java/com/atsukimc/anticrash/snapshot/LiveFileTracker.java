@@ -1,11 +1,6 @@
 package com.atsukimc.anticrash.snapshot;
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.ChunkPos;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.ChunkPos;
-*///?}
 
 import java.nio.file.Path;
 import java.util.Set;

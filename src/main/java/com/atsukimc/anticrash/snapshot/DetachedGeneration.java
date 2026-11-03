@@ -284,15 +284,7 @@ public final class DetachedGeneration {
                         new net.minecraft.world.level.chunk.storage.RegionFile(
                                 target, target.getParent(), false);
                 //?}
-                //? if (>=1.20.5 && <=1.21.11) {
-                /*net.minecraft.world.level.chunk.storage.RegionFile file =
-                                        new net.minecraft.world.level.chunk.storage.RegionFile(
-                                                com.atsukimc.anticrash.snapshot.RegionStorageAdapter.KEY,
-                                                target,
-                                                target.getParent(),
-                                                false);
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.20.5 && <=26.3) {
                 /*net.minecraft.world.level.chunk.storage.RegionFile file =
                                         new net.minecraft.world.level.chunk.storage.RegionFile(
                                                 com.atsukimc.anticrash.snapshot.RegionStorageAdapter.KEY,
@@ -309,10 +301,7 @@ public final class DetachedGeneration {
                             //? if (>=1.18 && <=1.19.1) {
                             file.clear(write.pos());
                             //?}
-                            //? if (>=1.19.2 && <=1.21.11) {
-                            /*file.clear(write.pos());
-*///?}
-                            //? if (>=26.1 && <=26.3) {
+                            //? if (>=1.19.2 && <=26.3) {
                             /*file.clear(write.pos());
 *///?}
 
@@ -322,15 +311,8 @@ public final class DetachedGeneration {
                                         "Queued chunk data was being modified: " + write.pos());
                             }
 
-                            //? if (>=1.18 && <=1.21.11) {
                             try (java.io.DataOutputStream output =
-                                    file.getChunkDataOutputStream(write.pos()))
-                            //?}
-                            //? if (>=26.1 && <=26.3) {
-                            /*try (java.io.DataOutputStream output =
-                                                                file.getChunkDataOutputStream(write.pos()))
-*///?}
-                            {
+                                    file.getChunkDataOutputStream(write.pos())) {
 
                                 //? if (>=1.18 && <=1.21.11) {
                                 //? if (>=1.18 && <=1.20.1) {

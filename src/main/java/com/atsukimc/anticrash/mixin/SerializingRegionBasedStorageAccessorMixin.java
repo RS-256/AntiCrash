@@ -2,12 +2,7 @@ package com.atsukimc.anticrash.mixin;
 
 import it.unimi.dsi.fastutil.longs.LongLinkedOpenHashSet;
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.ChunkPos;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.ChunkPos;
-*///?}
 
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.chunk.storage.SectionStorage;

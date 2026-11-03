@@ -9,30 +9,14 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.entity.Entity;
 //?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.ServerChunkCache;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.server.level.ServerChunkCache;
-//?}
 //? if (>=26.1 && <=26.2) {
 /*import net.minecraft.world.entity.Entity;
 *///?}
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.LocalMobCapCalculator;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.LocalMobCapCalculator;
-*///?}
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.level.NaturalSpawner;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.level.NaturalSpawner;
-*///?}
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -83,26 +67,11 @@ public abstract class ServerChunkManagerMixin {
         private net.minecraft.server.level.ServerLevel level;
 *///?}
 
-    //? if (>=26.1 && <=26.3) {
-    /*@Unique private NaturalSpawner.SpawnState anticrash$emptySpawnInfo;
-*///?}
-
-    //? if (>=1.18 && <=1.21.11) {
     @Unique private NaturalSpawner.SpawnState anticrash$emptySpawnInfo;
 
-    //?}
-
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "getLastSpawnState", at = @At("RETURN"), cancellable = true)
     private void anticrash$nonNullSpawnInfoDuringRecovery(
-            CallbackInfoReturnable<NaturalSpawner.SpawnState> callbackInfo)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "getLastSpawnState", at = @At("RETURN"), cancellable = true)
-                    private void anticrash$nonNullSpawnInfoDuringRecovery(
-                            CallbackInfoReturnable<NaturalSpawner.SpawnState> callbackInfo)
-*///?}
-            {
+            CallbackInfoReturnable<NaturalSpawner.SpawnState> callbackInfo) {
         if (callbackInfo.getReturnValue() != null) return;
 
         AntiCrashController controller = AntiCrashMod.controller();
@@ -110,27 +79,15 @@ public abstract class ServerChunkManagerMixin {
 
         if (anticrash$emptySpawnInfo == null) {
 
-            //? if (>=1.18 && <=1.21.11) {
             ServerChunkCache manager = (ServerChunkCache) (Object) this;
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*ServerChunkCache manager = (ServerChunkCache) (Object) this;
-*///?}
 
-            //? if (>=1.18 && <=1.21.11) {
+            //? if (>=1.18 && <=26.2) {
             anticrash$emptySpawnInfo =
                     NaturalSpawner.createState(
                             0,
                             List.<Entity>of(),
                             (chunkPos, consumer) ->
                             //?}
-                            //? if (>=26.1 && <=26.2) {
-                            /*anticrash$emptySpawnInfo =
-                                                NaturalSpawner.createState(
-                                                        0,
-                                                        List.<Entity>of(),
-                                                        (chunkPos, consumer) ->
-*///?}
                             //? if 26.3 {
                             /*anticrash$emptySpawnInfo =
                                                 NaturalSpawner.createState(
@@ -143,11 +100,7 @@ public abstract class ServerChunkManagerMixin {
                             ,
                             new LocalMobCapCalculator(manager.chunkMap));
             //?}
-            //? if (>=1.21 && <=1.21.11) {
-            /*,
-                                        new LocalMobCapCalculator(manager.chunkMap));
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21 && <=26.3) {
             /*,
                                         new LocalMobCapCalculator(manager.chunkMap));
 *///?}
@@ -173,18 +126,7 @@ public abstract class ServerChunkManagerMixin {
     private boolean anticrash$keepTicketsAtCut(
             ServerChunkCache manager, Operation<Boolean> original)
                 //?}
-                //? if (>=1.20.2 && <=1.21.11) {
-                /*@WrapOperation(
-                            method = "save",
-                            at =
-                                    @At(
-                                            value = "INVOKE",
-                                            target =
-                                                    "Lnet/minecraft/server/level/ServerChunkCache;runDistanceManagerUpdates()Z"))
-                    private boolean anticrash$keepTicketsAtCut(
-                            ServerChunkCache manager, Operation<Boolean> original)
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.20.2 && <=26.3) {
                 /*@WrapOperation(
                             method = "save",
                             at =

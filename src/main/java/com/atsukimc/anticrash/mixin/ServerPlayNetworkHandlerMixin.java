@@ -14,23 +14,12 @@ import net.minecraft.world.item.BlockItem;
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.item.ItemStack;
 //?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.*;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.network.protocol.game.*;
-//?}
 //? if (>=26.1 && <=26.3) {
 /*import net.minecraft.network.protocol.game.ClientboundBlockChangedAckPacket;
 *///?}
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket;
-*///?}
 
 //? if (>=1.18 && <=1.21.11) {
 //? if (>=1.18 && <=1.18.2) {
@@ -173,34 +162,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * answered so the client can undo its prediction. A checkpoint never refuses anything: its packets
  * wait in the held server task queue (see MinecraftServerMixin) and run once the cut is taken.
  */
-//? if (>=1.18 && <=1.21.11) {
 @Mixin(ServerGamePacketListenerImpl.class)
 public abstract class ServerPlayNetworkHandlerMixin {
 
-    //?}
-    //? if (>=26.1 && <=26.3) {
-    /*@Mixin(ServerGamePacketListenerImpl.class)
-    public abstract class ServerPlayNetworkHandlerMixin {
-*///?}
     private AntiCrashController anticrash$controller() {
         return AntiCrashMod.controller();
     }
 
-    //? if (>=1.18 && <=1.21.11) {
-    private ServerPlayer anticrash$player()
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*private ServerPlayer anticrash$player()
-*///?}
-            {
+    private ServerPlayer anticrash$player() {
 
-        //? if (>=1.18 && <=1.21.11) {
         return ((ServerGamePacketListenerImpl) (Object) this).player;
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*return ((ServerGamePacketListenerImpl) (Object) this).player;
-*///?}
-
     }
 
     private boolean anticrash$frozen() {
@@ -208,21 +179,9 @@ public abstract class ServerPlayNetworkHandlerMixin {
         return controller != null && controller.isRecoveryFrozen();
     }
 
-    //? if (>=1.18 && <=1.21.11) {
-    private ServerGamePacketListenerImpl anticrash$handler()
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*private ServerGamePacketListenerImpl anticrash$handler()
-*///?}
-            {
+    private ServerGamePacketListenerImpl anticrash$handler() {
 
-        //? if (>=1.18 && <=1.21.11) {
         return (ServerGamePacketListenerImpl) (Object) this;
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*return (ServerGamePacketListenerImpl) (Object) this;
-*///?}
-
     }
 
     /** Runs on the server thread; malformed input must not throw from an unwrapped task. */
@@ -231,13 +190,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
     /*private void anticrash$ackPrediction(int sequence) {
             if (sequence < 0) {
 *///?}
-    //? if (>=1.19 && <=1.21.11) {
-    /*anticrash$handler()
-                        .disconnect(
-                                net.minecraft.network.chat.Component.translatable(
-                                        "multiplayer.disconnect.invalid_packet"));
-*///?}
-    //? if (>=26.1 && <=26.3) {
+    //? if (>=1.19 && <=26.3) {
     /*anticrash$handler()
                         .disconnect(
                                 net.minecraft.network.chat.Component.translatable(
@@ -247,10 +200,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
 
     /*} else {
 *///?}
-    //? if (>=1.19 && <=1.21.11) {
-    /*anticrash$handler().ackBlockChangesUpTo(sequence);
-*///?}
-    //? if (>=26.1 && <=26.3) {
+    //? if (>=1.19 && <=26.3) {
     /*anticrash$handler().ackBlockChangesUpTo(sequence);
 *///?}
     //? if (>=1.19 && <=26.3) {
@@ -290,12 +240,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
      */
     private void anticrash$resyncBlocks(BlockPos first, BlockPos second) {
 
-        //? if (>=1.18 && <=1.21.11) {
         ServerPlayer player = anticrash$player();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*ServerPlayer player = anticrash$player();
-*///?}
 
         if (player == null) return;
 
@@ -315,12 +260,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
                     /*player.getServer()
                                     .execute(() ->
 *///?}
-                    //? if (>=1.21.9 && <=1.21.11) {
-                    /*player.level()
-                                    .getServer()
-                                    .execute(() ->
-*///?}
-                    //? if (>=26.1 && <=26.3) {
+                    //? if (>=1.21.9 && <=26.3) {
                     /*player.level()
                                     .getServer()
                                     .execute(() ->
@@ -332,11 +272,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
                     /*anticrash$handler()
                                                 .send(new ClientboundBlockUpdatePacket(player.level(), first));
 *///?}
-                    //? if (>=1.21.9 && <=1.21.11) {
-                    /*anticrash$handler()
-                                                .send(new ClientboundBlockUpdatePacket(player.level(), first));
-*///?}
-                    //? if (>=26.1 && <=26.3) {
+                    //? if (>=1.21.9 && <=26.3) {
                     /*anticrash$handler()
                                                 .send(new ClientboundBlockUpdatePacket(player.level(), first));
 *///?}
@@ -361,14 +297,10 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 /*anticrash$handler()
                                                 .send(new ClientboundBlockUpdatePacket(player.level(), second));
 *///?}
-                //? if (>=1.21.9 && <=1.21.11) {
+                //? if (>=1.21.9 && <=26.3) {
                 /*anticrash$handler()
                                                 .send(
                                                         new ClientboundBlockUpdatePacket(player.level(), second));
-*///?}
-                //? if (>=26.1 && <=26.3) {
-                /*anticrash$handler()
-                                                .send(new ClientboundBlockUpdatePacket(player.level(), second));
 *///?}
                 //? if (>=1.21.6 && <=26.3) {
 
@@ -380,20 +312,9 @@ public abstract class ServerPlayNetworkHandlerMixin {
 
     /** Tells the client the mining action was not approved so it restores the block it removed. */
 
-    //? if (>=1.18 && <=1.21.11) {
-    private void anticrash$resyncBlockBreak(ServerboundPlayerActionPacket packet)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*private void anticrash$resyncBlockBreak(ServerboundPlayerActionPacket packet)
-*///?}
-            {
+    private void anticrash$resyncBlockBreak(ServerboundPlayerActionPacket packet) {
 
-        //? if (>=1.18 && <=1.21.11) {
         ServerPlayer player = anticrash$player();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*ServerPlayer player = anticrash$player();
-*///?}
 
         if (player == null) return;
         BlockPos pos = packet.getPos();
@@ -428,12 +349,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
         /*player.getServer()
                         .execute(() ->
 *///?}
-        //? if (>=1.21.9 && <=1.21.11) {
-        /*player.level()
-                        .getServer()
-                        .execute(() ->
-*///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if (>=1.21.9 && <=26.3) {
         /*player.level()
                         .getServer()
                         .execute(() ->
@@ -446,12 +362,9 @@ public abstract class ServerPlayNetworkHandlerMixin {
         /*anticrash$handler()
                                     .send(new ClientboundBlockUpdatePacket(player.level(), pos));
 *///?}
-        //? if (>=1.21.9 && <=1.21.11) {
+        //? if (>=1.21.9 && <=26.3) {
         /*anticrash$handler()
                                     .send(new ClientboundBlockUpdatePacket(player.level(), pos));
-*///?}
-        //? if (>=26.1 && <=26.3) {
-        /*anticrash$handler().send(new ClientboundBlockUpdatePacket(player.level(), pos));
 *///?}
 
         //? if (>=1.19 && <=26.3) {
@@ -474,12 +387,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
     /** Re-sends the authoritative ability flags after a refused toggle. */
     private void anticrash$resyncAbilities() {
 
-        //? if (>=1.18 && <=1.21.11) {
         ServerPlayer player = anticrash$player();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*ServerPlayer player = anticrash$player();
-*///?}
 
         if (player == null) return;
 
@@ -489,10 +397,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
         //? if (>=1.21.6 && <=1.21.8) {
         /*player.getServer().execute(player::onUpdateAbilities);
 *///?}
-        //? if (>=1.21.9 && <=1.21.11) {
-        /*player.level().getServer().execute(player::onUpdateAbilities);
-*///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if (>=1.21.9 && <=26.3) {
         /*player.level().getServer().execute(player::onUpdateAbilities);
 *///?}
 
@@ -501,12 +406,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
     /** Restores the client's predicted inventory, cursor stack and container contents. */
     private void anticrash$resyncInventory() {
 
-        //? if (>=1.18 && <=1.21.11) {
         ServerPlayer player = anticrash$player();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*ServerPlayer player = anticrash$player();
-*///?}
 
         if (player == null) return;
 
@@ -519,12 +419,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
                     /*player.getServer()
                                     .execute(() ->
 *///?}
-                    //? if (>=1.21.9 && <=1.21.11) {
-                    /*player.level()
-                                    .getServer()
-                                    .execute(() ->
-*///?}
-                    //? if (>=26.1 && <=26.3) {
+                    //? if (>=1.21.9 && <=26.3) {
                     /*player.level()
                                     .getServer()
                                     .execute(() ->
@@ -532,13 +427,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
                     //? if (>=1.21.6 && <=26.3) {
                     /*{
 *///?}
-                    //? if (>=1.18 && <=1.21.11) {
                     AbstractContainerMenu handler = player.containerMenu;
-                    //?}
-
-                    //? if (>=26.1 && <=26.3) {
-                    /*AbstractContainerMenu handler = player.containerMenu;
-*///?}
 
                     if (handler != null)
                         //? if (>=1.18 && <=1.21.11) {
@@ -560,25 +449,13 @@ public abstract class ServerPlayNetworkHandlerMixin {
 
     /** Records a mutation only when the controller exists, matching the freeze checks above. */
 
-    //? if (>=1.18 && <=1.21.11) {
     private void anticrash$record(
             String type,
             ServerPlayer player,
             String source,
             String destination,
             BlockPos position,
-            ItemStack stack)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*private void anticrash$record(
-                            String type,
-                            ServerPlayer player,
-                            String source,
-                            String destination,
-                            BlockPos position,
-                            ItemStack stack)
-*///?}
-            {
+            ItemStack stack) {
         // Mutation packets pass this HEAD injection twice: on the network thread and again
         // after Minecraft re-queues them to the server thread. Record only the authoritative pass.
 
@@ -588,10 +465,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
             //? if (>=1.21.6 && <=1.21.8) {
             /*if (player == null || !player.getServer().isSameThread())
 *///?}
-            //? if (>=1.21.9 && <=1.21.11) {
-            /*if (player == null || !player.level().getServer().isSameThread())
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.9 && <=26.3) {
             /*if (player == null || !player.level().getServer().isSameThread())
 *///?}
             return;
@@ -627,12 +501,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 // processed
                 // ACKs.
 
-                //? if (>=1.19.1 && <=1.21.11) {
-                /*@Inject(method = "broadcastChatMessage", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$chat(
-                            net.minecraft.network.chat.PlayerChatMessage packet, CallbackInfo info)
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.19.1 && <=26.3) {
                 /*@Inject(method = "broadcastChatMessage", at = @At("HEAD"), cancellable = true)
                     private void anticrash$chat(
                             net.minecraft.network.chat.PlayerChatMessage packet, CallbackInfo info)
@@ -646,10 +515,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
         //? if (>=1.19.1 && <=1.19.2) {
         /*String message = packet.signedContent().plain();
 *///?}
-        //? if (>=1.19.3 && <=1.21.11) {
-        /*String message = packet.signedContent();
-*///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if (>=1.19.3 && <=26.3) {
         /*String message = packet.signedContent();
 *///?}
 
@@ -659,12 +525,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
             // stops the server, which must happen on the server thread like /ac y does.
             info.cancel();
 
-            //? if (>=1.18 && <=1.21.11) {
             ServerPlayer player = anticrash$player();
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*ServerPlayer player = anticrash$player();
-*///?}
 
             //? if (>=1.18 && <=1.21.5) {
             player.server.execute(() -> controller.answerRecoveryFromChat(player, message));
@@ -672,12 +533,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
             //? if (>=1.21.6 && <=1.21.8) {
             /*player.getServer().execute(() -> controller.answerRecoveryFromChat(player, message));
 *///?}
-            //? if (>=1.21.9 && <=1.21.11) {
-            /*player.level()
-                                .getServer()
-                                .execute(() -> controller.answerRecoveryFromChat(player, message));
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.9 && <=26.3) {
             /*player.level()
                                 .getServer()
                                 .execute(() -> controller.answerRecoveryFromChat(player, message));
@@ -693,46 +549,20 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 || (!message.startsWith("/") && !lock.allowChat)) info.cancel();
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handleMovePlayer", at = @At("HEAD"), cancellable = true)
-    private void anticrash$move(ServerboundMovePlayerPacket packet, CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handleMovePlayer", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$move(ServerboundMovePlayerPacket packet, CallbackInfo info)
-*///?}
-            {
+    private void anticrash$move(ServerboundMovePlayerPacket packet, CallbackInfo info) {
         if (!anticrash$frozen()) return;
         var lock = anticrash$controller().config().recovery.lock;
 
-        //? if (>=1.18 && <=1.21.11) {
         if ((packet.hasPosition() && !lock.allowPlayerMovement)
-                || (packet.hasRotation() && !lock.allowPlayerLook))
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*if ((packet.hasPosition() && !lock.allowPlayerMovement)
-                            || (packet.hasRotation() && !lock.allowPlayerLook))
-*///?}
-            info.cancel();
+                || (packet.hasRotation() && !lock.allowPlayerLook)) info.cancel();
     }
 
     //? if (>=1.18 && <=1.21.5) {
     @Inject(method = "handlePlayerInput", at = @At("HEAD"), cancellable = true)
     private void anticrash$input(ServerboundPlayerInputPacket packet, CallbackInfo info)
                 //?}
-                //? if (>=1.21.6 && <=1.21.11) {
-                /*@Inject(
-                            method = "handlePlayerInput",
-                            at =
-                                    @At(
-                                            value = "INVOKE",
-                                            target =
-                                                    "Lnet/minecraft/network/protocol/PacketUtils;ensureRunningOnSameThread(Lnet/minecraft/network/protocol/Packet;Lnet/minecraft/network/PacketListener;Lnet/minecraft/server/level/ServerLevel;)V",
-                                            shift = At.Shift.AFTER),
-                            cancellable = true)
-                    private void anticrash$input(ServerboundPlayerInputPacket packet, CallbackInfo info)
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.6 && <=26.3) {
                 /*@Inject(
                             method = "handlePlayerInput",
                             at =
@@ -766,14 +596,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
                                             || input.right()
                                             || input.jump())))
 *///?}
-            //? if (>=1.21.6 && <=1.21.11) {
-            /*if (!com.atsukimc.anticrash.integration.carpet.PlayerInputCodec.allowedDuringFreeze(
-                            anticrash$player().getLastClientInput(),
-                            input,
-                            lock.allowPlayerMovement,
-                            lock.allowSneak))
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.6 && <=26.3) {
             /*if (!com.atsukimc.anticrash.integration.carpet.PlayerInputCodec.allowedDuringFreeze(
                             anticrash$player().getLastClientInput(),
                             input,
@@ -783,65 +606,29 @@ public abstract class ServerPlayNetworkHandlerMixin {
             info.cancel();
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handleMoveVehicle", at = @At("HEAD"), cancellable = true)
-    private void anticrash$vehicleMove(ServerboundMoveVehiclePacket packet, CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handleMoveVehicle", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$vehicleMove(ServerboundMoveVehiclePacket packet, CallbackInfo info)
-*///?}
-            {
+    private void anticrash$vehicleMove(ServerboundMoveVehiclePacket packet, CallbackInfo info) {
         if (anticrash$frozen()
                 && !anticrash$controller().config().recovery.lock.allowPlayerMovement)
             info.cancel();
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handlePlayerAction", at = @At("HEAD"), cancellable = true)
-    private void anticrash$action(ServerboundPlayerActionPacket packet, CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handlePlayerAction", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$action(ServerboundPlayerActionPacket packet, CallbackInfo info)
-*///?}
-            {
+    private void anticrash$action(ServerboundPlayerActionPacket packet, CallbackInfo info) {
         var action = packet.getAction();
 
-        //? if (>=1.18 && <=1.21.11) {
         boolean block =
                 action == ServerboundPlayerActionPacket.Action.START_DESTROY_BLOCK
                         || action == ServerboundPlayerActionPacket.Action.STOP_DESTROY_BLOCK
                         || action == ServerboundPlayerActionPacket.Action.ABORT_DESTROY_BLOCK;
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*boolean block =
-                        action == ServerboundPlayerActionPacket.Action.START_DESTROY_BLOCK
-                                || action == ServerboundPlayerActionPacket.Action.STOP_DESTROY_BLOCK
-                                || action == ServerboundPlayerActionPacket.Action.ABORT_DESTROY_BLOCK;
-*///?}
 
-        //? if (>=1.18 && <=1.21.11) {
         boolean drop =
                 action == ServerboundPlayerActionPacket.Action.DROP_ITEM
                         || action == ServerboundPlayerActionPacket.Action.DROP_ALL_ITEMS;
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*boolean drop =
-                        action == ServerboundPlayerActionPacket.Action.DROP_ITEM
-                                || action == ServerboundPlayerActionPacket.Action.DROP_ALL_ITEMS;
-*///?}
 
-        //? if (>=1.18 && <=1.21.11) {
         boolean use =
                 action == ServerboundPlayerActionPacket.Action.RELEASE_USE_ITEM
                         || action == ServerboundPlayerActionPacket.Action.SWAP_ITEM_WITH_OFFHAND;
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*boolean use =
-                        action == ServerboundPlayerActionPacket.Action.RELEASE_USE_ITEM
-                                || action == ServerboundPlayerActionPacket.Action.SWAP_ITEM_WITH_OFFHAND;
-*///?}
 
         AntiCrashController controller = anticrash$controller();
         boolean refused = false;
@@ -860,8 +647,6 @@ public abstract class ServerPlayNetworkHandlerMixin {
         }
         // Actual block breaks are recorded at ServerPlayerGameMode.tryBreakBlock.
         if (drop)
-
-            //? if (>=1.18 && <=1.21.11) {
             anticrash$record(
                     "ITEM_DROP",
                     anticrash$player(),
@@ -869,64 +654,32 @@ public abstract class ServerPlayNetworkHandlerMixin {
                     "world",
                     packet.getPos(),
                     anticrash$player().getMainHandItem());
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*anticrash$record(
-                            "ITEM_DROP",
-                            anticrash$player(),
-                            "player",
-                            "world",
-                            packet.getPos(),
-                            anticrash$player().getMainHandItem());
-*///?}
-
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handleUseItemOn", at = @At("HEAD"), cancellable = true)
-    private void anticrash$blockInteract(ServerboundUseItemOnPacket packet, CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handleUseItemOn", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$blockInteract(ServerboundUseItemOnPacket packet, CallbackInfo info)
-*///?}
-            {
+    private void anticrash$blockInteract(ServerboundUseItemOnPacket packet, CallbackInfo info) {
 
-        //? if (>=1.18 && <=1.21.11) {
         ServerPlayer player = anticrash$player();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*ServerPlayer player = anticrash$player();
-*///?}
 
-        //? if (>=1.18 && <=1.21.11) {
+        //? if (>=1.18 && <=26.2) {
         BlockPos pos = packet.getHitResult().getBlockPos();
         //?}
-        //? if (>=26.1 && <=26.2) {
-        /*BlockPos pos = packet.getHitResult().getBlockPos();
-*///?}
         //? if 26.3 {
         /*BlockPos pos = packet.hitResult().getBlockPos();
 *///?}
 
-        //? if (>=1.18 && <=1.21.11) {
+        //? if (>=1.18 && <=26.2) {
         BlockPos placement = pos.relative(packet.getHitResult().getDirection());
         //?}
-        //? if (>=26.1 && <=26.2) {
-        /*BlockPos placement = pos.relative(packet.getHitResult().getDirection());
-*///?}
         //? if 26.3 {
         /*BlockPos placement = pos.relative(packet.hitResult().getDirection());
 *///?}
 
         AntiCrashController controller = anticrash$controller();
 
-        //? if (>=1.18 && <=1.21.11) {
+        //? if (>=1.18 && <=26.2) {
         boolean place = player.getItemInHand(packet.getHand()).getItem() instanceof BlockItem;
         //?}
-        //? if (>=26.1 && <=26.2) {
-        /*boolean place = player.getItemInHand(packet.getHand()).getItem() instanceof BlockItem;
-*///?}
         //? if 26.3 {
         /*boolean place = player.getItemInHand(packet.hand()).getItem() instanceof BlockItem;
 *///?}
@@ -945,10 +698,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
                     //? if (>=1.21.6 && <=1.21.8) {
                     /*if (Thread.currentThread() != player.getServer().getRunningThread())
 *///?}
-                    //? if (>=1.21.9 && <=1.21.11) {
-                    /*if (Thread.currentThread() != player.level().getServer().getRunningThread())
-*///?}
-                    //? if (>=26.1 && <=26.3) {
+                    //? if (>=1.21.9 && <=26.3) {
                     /*if (Thread.currentThread() != player.level().getServer().getRunningThread())
 *///?}
                     return;
@@ -961,10 +711,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 /*refused = player.level().getBlockEntity(pos) != null;
                 *///?}
                 //?}
-                //? if (>=1.21.9 && <=1.21.11) {
-                /*refused = player.level().getBlockEntity(pos) != null;
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.9 && <=26.3) {
                 /*refused = player.level().getBlockEntity(pos) != null;
 *///?}
 
@@ -979,12 +726,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 //? if (>=1.21.6 && <=1.21.8) {
                 /*player.getServer().execute(() -> anticrash$ackPrediction(packet.getSequence()));
 *///?}
-                //? if (>=1.21.9 && <=1.21.11) {
-                /*player.level()
-                                        .getServer()
-                                        .execute(() -> anticrash$ackPrediction(packet.getSequence()));
-*///?}
-                //? if (>=26.1 && <=26.2) {
+                //? if (>=1.21.9 && <=26.2) {
                 /*player.level()
                                         .getServer()
                                         .execute(() -> anticrash$ackPrediction(packet.getSequence()));
@@ -1000,7 +742,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
             }
         }
 
-        //? if (>=1.18 && <=1.21.11) {
+        //? if (>=1.18 && <=26.2) {
         anticrash$record(
                 place ? "BLOCK_PLACE" : "ITEM_USE",
                 player,
@@ -1009,15 +751,6 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 pos,
                 player.getItemInHand(packet.getHand()));
         //?}
-        //? if (>=26.1 && <=26.2) {
-        /*anticrash$record(
-                        place ? "BLOCK_PLACE" : "ITEM_USE",
-                        player,
-                        "player",
-                        "world",
-                        pos,
-                        player.getItemInHand(packet.getHand()));
-*///?}
         //? if 26.3 {
         /*anticrash$record(
                         place ? "BLOCK_PLACE" : "ITEM_USE",
@@ -1030,23 +763,13 @@ public abstract class ServerPlayNetworkHandlerMixin {
 
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handleUseItem", at = @At("HEAD"), cancellable = true)
-    private void anticrash$itemInteract(ServerboundUseItemPacket packet, CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handleUseItem", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$itemInteract(ServerboundUseItemPacket packet, CallbackInfo info)
-*///?}
-            {
+    private void anticrash$itemInteract(ServerboundUseItemPacket packet, CallbackInfo info) {
         if (anticrash$frozen() && !anticrash$controller().config().recovery.lock.allowItemUse) {
             info.cancel();
             anticrash$resyncInventory();
 
-            //? if (>=1.19 && <=1.21.11) {
-            /*ServerPlayer player = anticrash$player();
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.19 && <=26.3) {
             /*ServerPlayer player = anticrash$player();
 *///?}
 
@@ -1056,13 +779,10 @@ public abstract class ServerPlayNetworkHandlerMixin {
             //? if (>=1.21.6 && <=1.21.8) {
             /*player.getServer().execute(() -> anticrash$ackPrediction(packet.getSequence()));
 *///?}
-            //? if (>=1.21.9 && <=1.21.11) {
+            //? if (>=1.21.9 && <=26.2) {
             /*player.level()
                                 .getServer()
                                 .execute(() -> anticrash$ackPrediction(packet.getSequence()));
-*///?}
-            //? if (>=26.1 && <=26.2) {
-            /*player.level().getServer().execute(() -> anticrash$ackPrediction(packet.getSequence()));
 *///?}
             //? if 26.3 {
             /*player.level().getServer().execute(() -> anticrash$ackPrediction(packet.sequence()));
@@ -1071,7 +791,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
             return;
         }
 
-        //? if (>=1.18 && <=1.21.11) {
+        //? if (>=1.18 && <=26.2) {
         anticrash$record(
                 "ITEM_USE",
                 anticrash$player(),
@@ -1080,15 +800,6 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 null,
                 anticrash$player().getItemInHand(packet.getHand()));
         //?}
-        //? if (>=26.1 && <=26.2) {
-        /*anticrash$record(
-                        "ITEM_USE",
-                        anticrash$player(),
-                        "player",
-                        "world",
-                        null,
-                        anticrash$player().getItemInHand(packet.getHand()));
-*///?}
         //? if 26.3 {
         /*anticrash$record(
                         "ITEM_USE",
@@ -1202,19 +913,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
     @Inject(method = "handleContainerClick", at = @At("HEAD"), cancellable = true)
     private void anticrash$click(ServerboundContainerClickPacket packet, CallbackInfo info)
                 //?}
-                //? if (>=1.21.5 && <=1.21.11) {
-                /*@Inject(
-                            method = "handleContainerClick",
-                            at =
-                                    @At(
-                                            value = "INVOKE",
-                                            target =
-                                                    "Lnet/minecraft/network/protocol/PacketUtils;ensureRunningOnSameThread(Lnet/minecraft/network/protocol/Packet;Lnet/minecraft/network/PacketListener;Lnet/minecraft/server/level/ServerLevel;)V",
-                                            shift = At.Shift.AFTER),
-                            cancellable = true)
-                    private void anticrash$click(ServerboundContainerClickPacket packet, CallbackInfo info)
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.5 && <=26.3) {
                 /*@Inject(
                             method = "handleContainerClick",
                             at =
@@ -1386,15 +1085,8 @@ public abstract class ServerPlayNetworkHandlerMixin {
 
     //?}
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handleContainerClose", at = @At("HEAD"), cancellable = true)
-    private void anticrash$closeScreen(ServerboundContainerClosePacket packet, CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handleContainerClose", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$closeScreen(ServerboundContainerClosePacket packet, CallbackInfo info)
-*///?}
-            {
+    private void anticrash$closeScreen(ServerboundContainerClosePacket packet, CallbackInfo info) {
         if (anticrash$frozen()
                 && !anticrash$controller().config().recovery.lock.allowContainerInteraction) {
             info.cancel();
@@ -1423,15 +1115,8 @@ public abstract class ServerPlayNetworkHandlerMixin {
 
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handleSelectTrade", at = @At("HEAD"), cancellable = true)
-    private void anticrash$merchant(ServerboundSelectTradePacket packet, CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handleSelectTrade", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$merchant(ServerboundSelectTradePacket packet, CallbackInfo info)
-*///?}
-            {
+    private void anticrash$merchant(ServerboundSelectTradePacket packet, CallbackInfo info) {
         if (anticrash$frozen()
                 && !anticrash$controller().config().recovery.lock.allowContainerInteraction) {
             info.cancel();
@@ -1439,7 +1124,6 @@ public abstract class ServerPlayNetworkHandlerMixin {
             return;
         }
 
-        //? if (>=1.18 && <=1.21.11) {
         anticrash$record(
                 "MERCHANT_SELECTION",
                 anticrash$player(),
@@ -1447,36 +1131,13 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 "merchant",
                 null,
                 anticrash$player().getMainHandItem());
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*anticrash$record(
-                        "MERCHANT_SELECTION",
-                        anticrash$player(),
-                        "player",
-                        "merchant",
-                        null,
-                        anticrash$player().getMainHandItem());
-*///?}
-
     }
 
     //? if (>=1.18 && <=1.21.3) {
     @Inject(method = "handlePickItem", at = @At("HEAD"), cancellable = true)
     private void anticrash$pickInventory(ServerboundPickItemPacket packet, CallbackInfo info)
                 //?}
-                //? if (>=1.21.4 && <=1.21.11) {
-                /*@Inject(
-                            method = "handlePickItemFromBlock",
-                            at =
-                                    @At(
-                                            value = "INVOKE",
-                                            target =
-                                                    "Lnet/minecraft/network/protocol/PacketUtils;ensureRunningOnSameThread(Lnet/minecraft/network/protocol/Packet;Lnet/minecraft/network/PacketListener;Lnet/minecraft/server/level/ServerLevel;)V",
-                                            shift = At.Shift.AFTER),
-                            cancellable = true)
-                    private void anticrash$pickBlock(ServerboundPickItemFromBlockPacket packet, CallbackInfo info)
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.4 && <=26.3) {
                 /*@Inject(
                             method = "handlePickItemFromBlock",
                             at =
@@ -1494,7 +1155,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
                     }
 *///?}
 
-                //? if (>=1.21.4 && <=1.21.11) {
+                //? if (>=1.21.4 && <=26.3) {
                 /*@Inject(
                             method = "handlePickItemFromEntity",
                             at =
@@ -1505,19 +1166,6 @@ public abstract class ServerPlayNetworkHandlerMixin {
                                             shift = At.Shift.AFTER),
                             cancellable = true)
                     private void anticrash$pickEntity(ServerboundPickItemFromEntityPacket packet, CallbackInfo info)
-*///?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(
-                            method = "handlePickItemFromEntity",
-                            at =
-                                    @At(
-                                            value = "INVOKE",
-                                            target =
-                                                    "Lnet/minecraft/network/protocol/PacketUtils;ensureRunningOnSameThread(Lnet/minecraft/network/protocol/Packet;Lnet/minecraft/network/PacketListener;Lnet/minecraft/server/level/ServerLevel;)V",
-                                            shift = At.Shift.AFTER),
-                            cancellable = true)
-                    private void anticrash$pickEntity(
-                            ServerboundPickItemFromEntityPacket packet, CallbackInfo info)
 *///?}
                 //? if (>=1.21.4 && <=26.3) {
                 /*{
@@ -1557,41 +1205,20 @@ public abstract class ServerPlayNetworkHandlerMixin {
 
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handleTeleportToEntityPacket", at = @At("HEAD"), cancellable = true)
-    private void anticrash$spectator(ServerboundTeleportToEntityPacket packet, CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handleTeleportToEntityPacket", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$spectator(ServerboundTeleportToEntityPacket packet, CallbackInfo info)
-*///?}
-            {
+    private void anticrash$spectator(ServerboundTeleportToEntityPacket packet, CallbackInfo info) {
         if (anticrash$frozen()
                 && !anticrash$controller().config().recovery.lock.allowPlayerMovement)
             info.cancel();
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handleClientCommand", at = @At("HEAD"), cancellable = true)
-    private void anticrash$status(ServerboundClientCommandPacket packet, CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handleClientCommand", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$status(ServerboundClientCommandPacket packet, CallbackInfo info)
-*///?}
-            {
+    private void anticrash$status(ServerboundClientCommandPacket packet, CallbackInfo info) {
         if (anticrash$frozen()) info.cancel();
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handlePlayerAbilities", at = @At("HEAD"), cancellable = true)
-    private void anticrash$abilities(ServerboundPlayerAbilitiesPacket packet, CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handlePlayerAbilities", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$abilities(ServerboundPlayerAbilitiesPacket packet, CallbackInfo info)
-*///?}
-            {
+    private void anticrash$abilities(ServerboundPlayerAbilitiesPacket packet, CallbackInfo info) {
         // Vanilla only copies the client's flying flag onto the player here. Dropping it left the
         // server-side abilities.flying stale, which is exactly the flag Carpet's creativeNoClip
         // reads, so only the explicit recovery lock refuses it (and then re-sends the flags).
@@ -1602,152 +1229,67 @@ public abstract class ServerPlayNetworkHandlerMixin {
         }
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handleChangeDifficulty", at = @At("HEAD"), cancellable = true)
-    private void anticrash$difficulty(ServerboundChangeDifficultyPacket packet, CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handleChangeDifficulty", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$difficulty(ServerboundChangeDifficultyPacket packet, CallbackInfo info)
-*///?}
-            {
+    private void anticrash$difficulty(ServerboundChangeDifficultyPacket packet, CallbackInfo info) {
         if (anticrash$frozen()) info.cancel();
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handleLockDifficulty", at = @At("HEAD"), cancellable = true)
     private void anticrash$difficultyLock(
-            ServerboundLockDifficultyPacket packet, CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handleLockDifficulty", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$difficultyLock(
-                            ServerboundLockDifficultyPacket packet, CallbackInfo info)
-*///?}
-            {
+            ServerboundLockDifficultyPacket packet, CallbackInfo info) {
         if (anticrash$frozen()) info.cancel();
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handleSetCommandBlock", at = @At("HEAD"), cancellable = true)
-    private void anticrash$commandBlock(CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handleSetCommandBlock", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$commandBlock(CallbackInfo info)
-*///?}
-            {
+    private void anticrash$commandBlock(CallbackInfo info) {
         if (anticrash$frozen()) info.cancel();
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handleSetCommandMinecart", at = @At("HEAD"), cancellable = true)
-    private void anticrash$commandBlockMinecart(CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handleSetCommandMinecart", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$commandBlockMinecart(CallbackInfo info)
-*///?}
-            {
+    private void anticrash$commandBlockMinecart(CallbackInfo info) {
         if (anticrash$frozen()) info.cancel();
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handleSetBeaconPacket", at = @At("HEAD"), cancellable = true)
-    private void anticrash$beacon(CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handleSetBeaconPacket", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$beacon(CallbackInfo info)
-*///?}
-            {
+    private void anticrash$beacon(CallbackInfo info) {
         if (anticrash$frozen()) info.cancel();
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handleSetStructureBlock", at = @At("HEAD"), cancellable = true)
-    private void anticrash$structure(CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handleSetStructureBlock", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$structure(CallbackInfo info)
-*///?}
-            {
+    private void anticrash$structure(CallbackInfo info) {
         if (anticrash$frozen()) info.cancel();
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handleSetJigsawBlock", at = @At("HEAD"), cancellable = true)
-    private void anticrash$jigsaw(CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handleSetJigsawBlock", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$jigsaw(CallbackInfo info)
-*///?}
-            {
+    private void anticrash$jigsaw(CallbackInfo info) {
         if (anticrash$frozen()) info.cancel();
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handleJigsawGenerate", at = @At("HEAD"), cancellable = true)
-    private void anticrash$jigsawGenerate(CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handleJigsawGenerate", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$jigsawGenerate(CallbackInfo info)
-*///?}
-            {
+    private void anticrash$jigsawGenerate(CallbackInfo info) {
         if (anticrash$frozen()) info.cancel();
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handleEditBook", at = @At("HEAD"), cancellable = true)
-    private void anticrash$book(CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handleEditBook", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$book(CallbackInfo info)
-*///?}
-            {
+    private void anticrash$book(CallbackInfo info) {
         if (anticrash$frozen()) info.cancel();
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handleRenameItem", at = @At("HEAD"), cancellable = true)
-    private void anticrash$rename(CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handleRenameItem", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$rename(CallbackInfo info)
-*///?}
-            {
+    private void anticrash$rename(CallbackInfo info) {
         if (anticrash$frozen()) {
             info.cancel();
             anticrash$resyncInventory();
         }
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handleSignUpdate", at = @At("HEAD"), cancellable = true)
-    private void anticrash$sign(CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handleSignUpdate", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$sign(CallbackInfo info)
-*///?}
-            {
+    private void anticrash$sign(CallbackInfo info) {
         if (anticrash$frozen()) info.cancel();
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handlePlaceRecipe", at = @At("HEAD"), cancellable = true)
-    private void anticrash$craft(CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handlePlaceRecipe", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$craft(CallbackInfo info)
-*///?}
-            {
+    private void anticrash$craft(CallbackInfo info) {
         if (anticrash$frozen()
                 && !anticrash$controller().config().recovery.lock.allowContainerInteraction) {
             info.cancel();
@@ -1755,15 +1297,8 @@ public abstract class ServerPlayNetworkHandlerMixin {
         }
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handleContainerButtonClick", at = @At("HEAD"), cancellable = true)
-    private void anticrash$button(CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handleContainerButtonClick", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$button(CallbackInfo info)
-*///?}
-            {
+    private void anticrash$button(CallbackInfo info) {
         if (anticrash$frozen()
                 && !anticrash$controller().config().recovery.lock.allowContainerInteraction) {
             info.cancel();
@@ -1771,15 +1306,8 @@ public abstract class ServerPlayNetworkHandlerMixin {
         }
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handlePlayerCommand", at = @At("HEAD"), cancellable = true)
-    private void anticrash$clientCommand(ServerboundPlayerCommandPacket packet, CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handlePlayerCommand", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$clientCommand(ServerboundPlayerCommandPacket packet, CallbackInfo info)
-*///?}
-            {
+    private void anticrash$clientCommand(ServerboundPlayerCommandPacket packet, CallbackInfo info) {
         if (!anticrash$frozen()) return;
         var lock = anticrash$controller().config().recovery.lock;
 
@@ -1808,15 +1336,8 @@ public abstract class ServerPlayNetworkHandlerMixin {
         if (!allowed) info.cancel();
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "handlePaddleBoat", at = @At("HEAD"), cancellable = true)
-    private void anticrash$boatPaddle(CallbackInfo info)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "handlePaddleBoat", at = @At("HEAD"), cancellable = true)
-                    private void anticrash$boatPaddle(CallbackInfo info)
-*///?}
-            {
+    private void anticrash$boatPaddle(CallbackInfo info) {
         if (anticrash$frozen()
                 && !anticrash$controller().config().recovery.lock.allowPlayerMovement)
             info.cancel();

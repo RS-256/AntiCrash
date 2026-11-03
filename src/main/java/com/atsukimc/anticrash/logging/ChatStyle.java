@@ -10,13 +10,7 @@ import net.minecraft.network.chat.TextComponent;
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.network.chat.MutableComponent;
 //?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.network.chat.Component;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.network.chat.Component;
-//?}
 
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.ChatFormatting;
@@ -35,21 +29,12 @@ public final class ChatStyle {
      *     Vanilla wraps the text as a command error)
      */
 
-    //? if (>=1.18 && <=1.21.11) {
-    public static Component text(String message, ChatFormatting base, boolean coloured)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*public static Component text(String message, ChatFormatting base, boolean coloured)
-*///?}
-            {
+    public static Component text(String message, ChatFormatting base, boolean coloured) {
         if (message == null)
             //? if (>=1.18 && <=1.18.2) {
             return new TextComponent("");
         //?}
-        //? if (>=1.19 && <=1.21.11) {
-        /*return Component.literal("");
-*///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if (>=1.19 && <=26.3) {
         /*return Component.literal("");
 *///?}
 
@@ -58,39 +43,21 @@ public final class ChatStyle {
             //? if (>=1.18 && <=1.18.2) {
             MutableComponent plain = new TextComponent(message);
             //?}
-            //? if (>=1.19 && <=1.21.11) {
-            /*MutableComponent plain = Component.literal(message);
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.19 && <=26.3) {
             /*MutableComponent plain = Component.literal(message);
 *///?}
 
-            //? if (>=1.18 && <=1.21.11) {
             return base == null ? plain : plain.withStyle(base);
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*return base == null ? plain : plain.withStyle(base);
-*///?}
-
         }
 
         //? if (>=1.18 && <=1.18.2) {
         MutableComponent result = new TextComponent("");
         //?}
-        //? if (>=1.19 && <=1.21.11) {
-        /*MutableComponent result = Component.literal("");
-*///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if (>=1.19 && <=26.3) {
         /*MutableComponent result = Component.literal("");
 *///?}
 
-        if (base != null)
-            //? if (>=1.18 && <=1.21.11) {
-            result.withStyle(base);
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*result.withStyle(base);
-*///?}
+        if (base != null) result.withStyle(base);
 
         String[] lines = message.split("\n", -1);
         for (int index = 0; index < lines.length; index++) {
@@ -100,21 +67,12 @@ public final class ChatStyle {
                 //? if (>=1.18 && <=1.18.2) {
                 MutableComponent part = new TextComponent(span.text());
                 //?}
-                //? if (>=1.19 && <=1.21.11) {
-                /*MutableComponent part = Component.literal(span.text());
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.19 && <=26.3) {
                 /*MutableComponent part = Component.literal(span.text());
 *///?}
 
                 switch (span.kind()) {
-                    case HEADER ->
-                            //? if (>=1.18 && <=1.21.11) {
-                            part.withStyle(ChatFormatting.BOLD);
-                    //?}
-                    //? if (>=26.1 && <=26.3) {
-                    /*part.withStyle(ChatFormatting.BOLD);
-*///?}
+                    case HEADER -> part.withStyle(ChatFormatting.BOLD);
 
                     case PREFIX, PLAIN -> {}
                 }

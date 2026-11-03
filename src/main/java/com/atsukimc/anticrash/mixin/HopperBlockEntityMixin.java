@@ -42,33 +42,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(HopperBlockEntity.class)
 public abstract class HopperBlockEntityMixin {
 
-    //? if (>=1.18 && <=1.21.11) {
     @Inject(method = "pushItemsTick", at = @At("HEAD"))
     private static void anticrash$markCooldownDirty(
             Level world,
             BlockPos pos,
             BlockState state,
             HopperBlockEntity hopper,
-            CallbackInfo callbackInfo)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*@Inject(method = "pushItemsTick", at = @At("HEAD"))
-                    private static void anticrash$markCooldownDirty(
-                            Level world,
-                            BlockPos pos,
-                            BlockState state,
-                            HopperBlockEntity hopper,
-                            CallbackInfo callbackInfo)
-*///?}
-            {
+            CallbackInfo callbackInfo) {
         if (((HopperBlockEntityTimerAccessor) hopper).anticrash$getTransferCooldown() > 0)
-
-            //? if (>=1.18 && <=1.21.11) {
             world.blockEntityChanged(pos);
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*world.blockEntityChanged(pos);
-*///?}
-
     }
 }

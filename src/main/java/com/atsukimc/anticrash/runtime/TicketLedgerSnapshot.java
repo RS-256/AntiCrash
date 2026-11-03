@@ -59,22 +59,10 @@ public final class TicketLedgerSnapshot {
     public int formatVersion = 1;
     public final List<Entry> entries = new ArrayList<>();
 
-    //? if (>=1.18 && <=1.21.11) {
-    public static List<Entry> capture(Iterable<ServerLevel> worlds)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*public static List<Entry> capture(Iterable<ServerLevel> worlds)
-*///?}
-            {
+    public static List<Entry> capture(Iterable<ServerLevel> worlds) {
         List<Entry> result = new ArrayList<>();
 
-        //? if (>=1.18 && <=1.21.11) {
-        for (ServerLevel world : worlds)
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*for (ServerLevel world : worlds)
-*///?}
-        {
+        for (ServerLevel world : worlds) {
 
             //? if (>=1.18 && <=1.20.6) {
             DistanceManager manager = world.getChunkSource().chunkMap.getDistanceManager();
@@ -83,13 +71,7 @@ public final class TicketLedgerSnapshot {
             /*DistanceManager manager =
                                 world.getChunkSource().chunkMap.getDistanceManager();
 *///?}
-            //? if (>=1.21.5 && <=1.21.11) {
-            /*TicketStorage manager =
-                                ((com.atsukimc.anticrash.mixin.ServerChunkManagerAccessorMixin)
-                                                world.getChunkSource())
-                                        .anticrash$getTicketManager();
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.5 && <=26.3) {
             /*TicketStorage manager =
                                 ((com.atsukimc.anticrash.mixin.ServerChunkManagerAccessorMixin)
                                                 world.getChunkSource())
@@ -102,11 +84,7 @@ public final class TicketLedgerSnapshot {
             Long2ObjectOpenHashMap<SortedArraySet<Ticket<?>>> tickets =
                     accessor.anticrash$getTicketsByPosition();
             //?}
-            //? if (>=1.21.5 && <=1.21.11) {
-            /*Long2ObjectOpenHashMap<List<Ticket>> tickets =
-                                accessor.anticrash$getTicketsByPosition();
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.5 && <=26.3) {
             /*Long2ObjectOpenHashMap<List<Ticket>> tickets =
                                 accessor.anticrash$getTicketsByPosition();
 *///?}
@@ -115,12 +93,9 @@ public final class TicketLedgerSnapshot {
             for (Long2ObjectMap.Entry<SortedArraySet<Ticket<?>>> positionEntry :
                     tickets.long2ObjectEntrySet())
             //?}
-            //? if (>=1.21.5 && <=1.21.11) {
+            //? if (>=1.21.5 && <=26.3) {
             /*for (Long2ObjectMap.Entry<List<Ticket>> positionEntry :
                                 tickets.long2ObjectEntrySet())
-*///?}
-            //? if (>=26.1 && <=26.3) {
-            /*for (Long2ObjectMap.Entry<List<Ticket>> positionEntry : tickets.long2ObjectEntrySet())
 *///?}
             {
 
@@ -134,10 +109,7 @@ public final class TicketLedgerSnapshot {
                 //? if (>=1.18 && <=1.21.4) {
                 for (Ticket<?> ticket : positionEntry.getValue())
                 //?}
-                //? if (>=1.21.5 && <=1.21.11) {
-                /*for (Ticket ticket : positionEntry.getValue())
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.5 && <=26.3) {
                 /*for (Ticket ticket : positionEntry.getValue())
 *///?}
                 {
@@ -153,14 +125,9 @@ public final class TicketLedgerSnapshot {
                                             continue;
 *///?}
 
-                    //? if (>=1.21.5 && <=1.21.11) {
+                    //? if (>=1.21.5 && <=26.3) {
                     /*var typeId =
                                                 net.minecraft.core.registries.BuiltInRegistries.TICKET_TYPE.getKey(ticket.getType());
-*///?}
-                    //? if (>=26.1 && <=26.3) {
-                    /*var typeId =
-                                                net.minecraft.core.registries.BuiltInRegistries.TICKET_TYPE.getKey(
-                                                        ticket.getType());
 *///?}
 
                     //? if (>=1.21.5 && <=26.3) {
@@ -208,12 +175,7 @@ public final class TicketLedgerSnapshot {
 
                     entry.type = type;
 
-                    //? if (>=1.18 && <=1.21.11) {
                     entry.level = ticket.getTicketLevel();
-                    //?}
-                    //? if (>=26.1 && <=26.3) {
-                    /*entry.level = ticket.getTicketLevel();
-*///?}
 
                     //? if (>=1.18 && <=1.21.4) {
                     entry.argument = String.valueOf(ticketAccessor.anticrash$getArgument());
@@ -235,10 +197,7 @@ public final class TicketLedgerSnapshot {
                     //? if (>=1.18 && <=1.21.4) {
                     entry.expiryTicks = ticket.getType().timeout();
                     //?}
-                    //? if (>=1.21.5 && <=1.21.11) {
-                    /*entry.expiryTicks = ticket.getType().timeout();
-*///?}
-                    //? if (>=26.1 && <=26.3) {
+                    //? if (>=1.21.5 && <=26.3) {
                     /*entry.expiryTicks = ticket.getType().timeout();
 *///?}
 

@@ -15,13 +15,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.nbt.Tag;
 //?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.nbt.ListTag;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.nbt.ListTag;
-//?}
 
 //? if (>=1.19.3 && <=1.21.4) {
 /*import net.minecraft.resources.ResourceKey;
@@ -34,13 +28,7 @@ import net.minecraft.server.MinecraftServer;
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.server.level.ServerPlayer;
 //?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.ServerLevel;
-*///?}
-
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.server.level.ServerLevel;
-//?}
 //? if (>=26.1 && <=26.3) {
 /*import net.minecraft.server.level.ServerPlayer;
 *///?}
@@ -91,13 +79,7 @@ public final class PlayerSnapshotManager {
         List<PlayerSnapshotData> result = new ArrayList<>();
         if (!config.playerSnapshot.enabled) return result;
 
-        //? if (>=1.18 && <=1.21.11) {
-        for (ServerPlayer player : server.getPlayerList().getPlayers())
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*for (ServerPlayer player : server.getPlayerList().getPlayers())
-*///?}
-        {
+        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             if (CarpetIntegration.isFakePlayer(player)) continue;
             try {
                 result.add(captureOne(player));
@@ -124,22 +106,11 @@ public final class PlayerSnapshotManager {
         List<CheckpointPlayerSnapshot> result = new ArrayList<>();
         try {
 
-            //? if (>=1.18 && <=1.21.11) {
-            for (ServerPlayer player : server.getPlayerList().getPlayers())
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*for (ServerPlayer player : server.getPlayerList().getPlayers())
-*///?}
-            {
+            for (ServerPlayer player : server.getPlayerList().getPlayers()) {
                 if (CarpetIntegration.isFakePlayer(player)) continue;
                 CheckpointPlayerSnapshot snapshot = new CheckpointPlayerSnapshot();
 
-                //? if (>=1.18 && <=1.21.11) {
                 snapshot.uuid = player.getStringUUID();
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*snapshot.uuid = player.getStringUUID();
-*///?}
 
                 //? if (>=1.18 && <=1.21.8) {
                 snapshot.name = player.getGameProfile().getName();
@@ -159,12 +130,9 @@ public final class PlayerSnapshotManager {
                 //? if (>=1.21.9 && <=1.21.10) {
                 /*snapshot.dimension = player.level().dimension().location().toString();
                 *///?}
-                //? if 1.21.11 {
+                //? if (>=1.21.11 && <=26.3) {
                 /*snapshot.dimension = player.level().dimension().identifier().toString();
                 *///?}
-                //? if (>=26.1 && <=26.3) {
-                /*snapshot.dimension = player.level().dimension().identifier().toString();
-*///?}
 
                 result.add(snapshot);
             }
@@ -176,21 +144,10 @@ public final class PlayerSnapshotManager {
         return List.copyOf(result);
     }
 
-    //? if (>=1.18 && <=1.21.11) {
-    private PlayerSnapshotData captureOne(ServerPlayer player) throws IOException
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*private PlayerSnapshotData captureOne(ServerPlayer player) throws IOException
-*///?}
-            {
+    private PlayerSnapshotData captureOne(ServerPlayer player) throws IOException {
         PlayerSnapshotData data = new PlayerSnapshotData();
 
-        //? if (>=1.18 && <=1.21.11) {
         data.uuid = player.getStringUUID();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*data.uuid = player.getStringUUID();
-*///?}
 
         //? if (>=1.18 && <=1.21.8) {
         data.name = player.getGameProfile().getName();
@@ -212,12 +169,9 @@ public final class PlayerSnapshotManager {
         //? if (>=1.21.9 && <=1.21.10) {
         /*data.dimension = player.level().dimension().location().toString();
         *///?}
-        //? if 1.21.11 {
+        //? if (>=1.21.11 && <=26.3) {
         /*data.dimension = player.level().dimension().identifier().toString();
         *///?}
-        //? if (>=26.1 && <=26.3) {
-        /*data.dimension = player.level().dimension().identifier().toString();
-*///?}
 
         if (config.playerSnapshot.position) {
             data.x = player.getX();
@@ -226,30 +180,16 @@ public final class PlayerSnapshotManager {
         }
         if (config.playerSnapshot.rotation) {
 
-            //? if (>=1.18 && <=1.21.11) {
             data.yaw = player.getViewYRot(0);
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*data.yaw = player.getViewYRot(0);
-*///?}
 
-            //? if (>=1.18 && <=1.21.11) {
             data.pitch = player.getViewXRot(0);
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*data.pitch = player.getViewXRot(0);
-*///?}
-
         }
         if (config.playerSnapshot.gamemode)
 
             //? if (>=1.18 && <=1.21.4) {
             data.gamemode = player.gameMode.getGameModeForPlayer().getName();
         //?}
-        //? if (>=1.21.5 && <=1.21.11) {
-        /*data.gamemode = player.gameMode.getGameModeForPlayer().getSerializedName();
-*///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if (>=1.21.5 && <=26.3) {
         /*data.gamemode = player.gameMode.getGameModeForPlayer().getSerializedName();
 *///?}
 
@@ -262,11 +202,7 @@ public final class PlayerSnapshotManager {
             //? if (>=1.18 && <=1.21.5) {
             player.getAbilities().addSaveData(abilities);
             //?}
-            //? if (>=1.21.6 && <=1.21.11) {
-            /*net.minecraft.nbt.CompoundTag abilities =
-                                com.atsukimc.anticrash.runtime.VersionStorage.abilities(player.getAbilities());
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.6 && <=26.3) {
             /*net.minecraft.nbt.CompoundTag abilities =
                                 com.atsukimc.anticrash.runtime.VersionStorage.abilities(player.getAbilities());
 *///?}
@@ -294,13 +230,7 @@ public final class PlayerSnapshotManager {
                             NbtCodec.encode(
                                     player.getEnderChestInventory().createTag(player.registryAccess()));
 *///?}
-        //? if (>=1.21.6 && <=1.21.11) {
-        /*data.enderChestNbt =
-                            NbtCodec.encode(
-                                    com.atsukimc.anticrash.runtime.VersionStorage.inventory(
-                                            player.getEnderChestInventory(), player.registryAccess()));
-*///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if (>=1.21.6 && <=26.3) {
         /*data.enderChestNbt =
                             NbtCodec.encode(
                                     com.atsukimc.anticrash.runtime.VersionStorage.inventory(
@@ -310,36 +240,20 @@ public final class PlayerSnapshotManager {
         if (config.playerSnapshot.health) data.health = player.getHealth();
         if (config.playerSnapshot.absorption) data.absorption = player.getAbsorptionAmount();
 
-        //? if (>=1.18 && <=1.21.11) {
         if (config.playerSnapshot.foodLevel) data.foodLevel = player.getFoodData().getFoodLevel();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*if (config.playerSnapshot.foodLevel) data.foodLevel = player.getFoodData().getFoodLevel();
-*///?}
 
         if (config.playerSnapshot.foodSaturation)
-
-            //? if (>=1.18 && <=1.21.11) {
             data.foodSaturation = player.getFoodData().getSaturationLevel();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*data.foodSaturation = player.getFoodData().getSaturationLevel();
-*///?}
 
         if (config.playerSnapshot.foodExhaustion)
 
             //? if (>=1.18 && <=1.21.1) {
             data.foodExhaustion = player.getFoodData().getExhaustionLevel();
         //?}
-        //? if (>=1.21.2 && <=1.21.11) {
+        //? if (>=1.21.2 && <=26.3) {
         /*data.foodExhaustion =
                             ((com.atsukimc.anticrash.mixin.HungerManagerAccessorMixin)
                                             player.getFoodData())
-                                    .anticrash$getExhaustion();
-*///?}
-        //? if (>=26.1 && <=26.3) {
-        /*data.foodExhaustion =
-                            ((com.atsukimc.anticrash.mixin.HungerManagerAccessorMixin) player.getFoodData())
                                     .anticrash$getExhaustion();
 *///?}
 
@@ -366,49 +280,26 @@ public final class PlayerSnapshotManager {
 
         if (config.playerSnapshot.velocity) {
 
-            //? if (>=1.18 && <=1.21.11) {
             Vec3 velocity = player.getDeltaMovement();
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*Vec3 velocity = player.getDeltaMovement();
-*///?}
 
             data.velocityX = velocity.x;
             data.velocityY = velocity.y;
             data.velocityZ = velocity.z;
         }
         if (config.playerSnapshot.fallDistance) data.fallDistance = player.fallDistance;
-        if (config.playerSnapshot.fireTicks)
-            //? if (>=1.18 && <=1.21.11) {
-            data.fireTicks = player.getRemainingFireTicks();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*data.fireTicks = player.getRemainingFireTicks();
-*///?}
+        if (config.playerSnapshot.fireTicks) data.fireTicks = player.getRemainingFireTicks();
 
-        if (config.playerSnapshot.air)
-            //? if (>=1.18 && <=1.21.11) {
-            data.air = player.getAirSupply();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*data.air = player.getAirSupply();
-*///?}
+        if (config.playerSnapshot.air) data.air = player.getAirSupply();
 
         //? if (>=1.18 && <=1.21.4) {
         if (config.playerSnapshot.spawnPoint && player.getRespawnPosition() != null)
         //?}
-        //? if (>=1.21.5 && <=1.21.11) {
-        /*if (config.playerSnapshot.spawnPoint && player.getRespawnConfig() != null)
-*///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if (>=1.21.5 && <=26.3) {
         /*if (config.playerSnapshot.spawnPoint && player.getRespawnConfig() != null)
 *///?}
         {
 
-            //? if (>=1.21.5 && <=1.21.11) {
-            /*var respawn = player.getRespawnConfig();
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.5 && <=26.3) {
             /*var respawn = player.getRespawnConfig();
 *///?}
 
@@ -424,10 +315,7 @@ public final class PlayerSnapshotManager {
             //? if (>=1.21.5 && <=1.21.8) {
             /*BlockPos pos = respawn.pos();
 *///?}
-            //? if (>=1.21.9 && <=1.21.11) {
-            /*BlockPos pos = spawn.pos();
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.9 && <=26.3) {
             /*BlockPos pos = spawn.pos();
 *///?}
 
@@ -478,12 +366,9 @@ public final class PlayerSnapshotManager {
             //? if (>=1.21.9 && <=1.21.10) {
             /*data.spawnDimension = spawn.dimension().location().toString();
             *///?}
-            //? if 1.21.11 {
+            //? if (>=1.21.11 && <=26.3) {
             /*data.spawnDimension = spawn.dimension().identifier().toString();
             *///?}
-            //? if (>=26.1 && <=26.3) {
-            /*data.spawnDimension = spawn.dimension().identifier().toString();
-*///?}
 
         }
         return data;
@@ -549,13 +434,7 @@ public final class PlayerSnapshotManager {
             if (data.enderChestNbt == null)
                 throw new IOException("Enabled Ender Chest snapshot is missing");
 
-            //? if (>=1.18 && <=1.21.11) {
-            if (!(NbtCodec.decode(data.enderChestNbt) instanceof ListTag))
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*if (!(NbtCodec.decode(data.enderChestNbt) instanceof ListTag))
-*///?}
-            {
+            if (!(NbtCodec.decode(data.enderChestNbt) instanceof ListTag)) {
                 throw new IOException("Ender Chest snapshot is not an NBT list");
             }
         }
@@ -565,22 +444,13 @@ public final class PlayerSnapshotManager {
             }
             for (String encoded : data.effectsNbt) {
 
-                //? if (>=1.18 && <=1.21.11) {
                 Tag decoded = NbtCodec.decode(encoded);
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*Tag decoded = NbtCodec.decode(encoded);
-*///?}
 
                 //? if (>=1.18 && <=1.21.4) {
                 if (!(decoded instanceof net.minecraft.nbt.CompoundTag compound)
                         || MobEffectInstance.load(compound) == null)
                 //?}
-                //? if (>=1.21.5 && <=1.21.11) {
-                /*if (!(decoded instanceof net.minecraft.nbt.CompoundTag compound)
-                                        || com.atsukimc.anticrash.runtime.VersionNbt.effect(compound) == null)
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.5 && <=26.3) {
                 /*if (!(decoded instanceof net.minecraft.nbt.CompoundTag compound)
                                         || com.atsukimc.anticrash.runtime.VersionNbt.effect(compound) == null)
 *///?}
@@ -598,28 +468,11 @@ public final class PlayerSnapshotManager {
         }
     }
 
-    //? if (>=1.18 && <=1.21.11) {
-    public boolean restoreOnJoin(ServerPlayer player)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*public boolean restoreOnJoin(ServerPlayer player)
-*///?}
-            {
+    public boolean restoreOnJoin(ServerPlayer player) {
 
-        //? if (>=1.18 && <=1.21.11) {
-        if (!config.playerSnapshot.enabled || restored.contains(player.getUUID()))
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*if (!config.playerSnapshot.enabled || restored.contains(player.getUUID()))
-*///?}
-            return true;
+        if (!config.playerSnapshot.enabled || restored.contains(player.getUUID())) return true;
 
-        //? if (>=1.18 && <=1.21.11) {
         PlayerSnapshotData data = snapshots.get(player.getUUID());
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*PlayerSnapshotData data = snapshots.get(player.getUUID());
-*///?}
 
         if (data == null) return true;
         try {
@@ -630,10 +483,7 @@ public final class PlayerSnapshotManager {
             //? if (>=1.21.6 && <=1.21.8) {
             /*MinecraftServer server = player.getServer();
 *///?}
-            //? if (>=1.21.9 && <=1.21.11) {
-            /*MinecraftServer server = player.level().getServer();
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.9 && <=26.3) {
             /*MinecraftServer server = player.level().getServer();
 *///?}
 
@@ -645,10 +495,7 @@ public final class PlayerSnapshotManager {
             /*ServerLevel target = (ServerLevel) player.level();
             *///?}
             //?}
-            //? if (>=1.21.9 && <=1.21.11) {
-            /*ServerLevel target = (ServerLevel) player.level();
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.9 && <=26.3) {
             /*ServerLevel target = (ServerLevel) player.level();
 *///?}
 
@@ -667,10 +514,7 @@ public final class PlayerSnapshotManager {
             //? if (>=1.18 && <=1.21.5) {
             net.minecraft.nbt.CompoundTag abilities = null;
             //?}
-            //? if (>=1.21.6 && <=1.21.11) {
-            /*net.minecraft.world.entity.player.Abilities.Packed abilities = null;
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.6 && <=26.3) {
             /*net.minecraft.world.entity.player.Abilities.Packed abilities = null;
 *///?}
 
@@ -707,10 +551,7 @@ public final class PlayerSnapshotManager {
             //? if (>=1.18 && <=1.21.5) {
             ListTag enderChest = null;
             //?}
-            //? if (>=1.21.6 && <=1.21.11) {
-            /*List<net.minecraft.world.item.ItemStack> enderChest = null;
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.6 && <=26.3) {
             /*List<net.minecraft.world.item.ItemStack> enderChest = null;
 *///?}
 
@@ -718,33 +559,15 @@ public final class PlayerSnapshotManager {
                 if (data.enderChestNbt == null)
                     throw new IOException("Enabled Ender Chest snapshot is missing");
 
-                //? if (>=1.18 && <=1.21.11) {
                 Tag decoded = NbtCodec.decode(data.enderChestNbt);
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*Tag decoded = NbtCodec.decode(data.enderChestNbt);
-*///?}
 
-                //? if (>=1.18 && <=1.21.11) {
                 if (!(decoded instanceof ListTag list))
-
-                    //?}
-                    //? if (>=26.1 && <=26.3) {
-                    /*if (!(decoded instanceof ListTag list))
-*///?}
                     throw new IOException("Ender Chest snapshot is not an NBT list");
 
                 //? if (>=1.18 && <=1.21.5) {
                 enderChest = list;
                 //?}
-                //? if (>=1.21.6 && <=1.21.11) {
-                /*enderChest =
-                                        com.atsukimc.anticrash.runtime.VersionStorage.inventory(
-                                                list,
-                                                player.getEnderChestInventory().getContainerSize(),
-                                                player.registryAccess());
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.6 && <=26.3) {
                 /*enderChest =
                                         com.atsukimc.anticrash.runtime.VersionStorage.inventory(
                                                 list,
@@ -754,12 +577,7 @@ public final class PlayerSnapshotManager {
 
             }
 
-            //? if (>=1.18 && <=1.21.11) {
             List<MobEffectInstance> effects = null;
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*List<MobEffectInstance> effects = null;
-*///?}
 
             if (config.playerSnapshot.potionEffects) {
                 if (data.effectsNbt == null)
@@ -767,31 +585,16 @@ public final class PlayerSnapshotManager {
                 effects = new ArrayList<>(data.effectsNbt.size());
                 for (String encoded : data.effectsNbt) {
 
-                    //? if (>=1.18 && <=1.21.11) {
                     Tag decoded = NbtCodec.decode(encoded);
-                    //?}
-                    //? if (>=26.1 && <=26.3) {
-                    /*Tag decoded = NbtCodec.decode(encoded);
-*///?}
 
-                    //? if (>=1.18 && <=1.21.11) {
-                    if (!(decoded instanceof net.minecraft.nbt.CompoundTag compound))
-                    //?}
-                    //? if (>=26.1 && <=26.3) {
-                    /*if (!(decoded instanceof net.minecraft.nbt.CompoundTag compound))
-*///?}
-                    {
+                    if (!(decoded instanceof net.minecraft.nbt.CompoundTag compound)) {
                         throw new IOException("Potion effect snapshot is not an NBT compound");
                     }
 
                     //? if (>=1.18 && <=1.21.4) {
                     MobEffectInstance effect = MobEffectInstance.load(compound);
                     //?}
-                    //? if (>=1.21.5 && <=1.21.11) {
-                    /*MobEffectInstance effect =
-                                                com.atsukimc.anticrash.runtime.VersionNbt.effect(compound);
-*///?}
-                    //? if (>=26.1 && <=26.3) {
+                    //? if (>=1.21.5 && <=26.3) {
                     /*MobEffectInstance effect =
                                                 com.atsukimc.anticrash.runtime.VersionNbt.effect(compound);
 *///?}
@@ -801,12 +604,7 @@ public final class PlayerSnapshotManager {
                 }
             }
 
-            //? if (>=1.18 && <=1.21.11) {
             ServerLevel spawnWorld = null;
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*ServerLevel spawnWorld = null;
-*///?}
 
             if (config.playerSnapshot.spawnPoint && data.hasSpawnPoint) {
                 spawnWorld = findWorld(server, data.spawnDimension);
@@ -827,14 +625,8 @@ public final class PlayerSnapshotManager {
                         y = config.playerSnapshot.position ? data.y : player.getY(),
                         z = config.playerSnapshot.position ? data.z : player.getZ();
 
-                //? if (>=1.18 && <=1.21.11) {
                 float yaw = config.playerSnapshot.rotation ? data.yaw : player.getViewYRot(0),
                         pitch = config.playerSnapshot.rotation ? data.pitch : player.getViewXRot(0);
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*float yaw = config.playerSnapshot.rotation ? data.yaw : player.getViewYRot(0),
-                                        pitch = config.playerSnapshot.rotation ? data.pitch : player.getViewXRot(0);
-*///?}
 
                 // teleport() also handles the same-world case through requestTeleport, which tells
                 // the
@@ -843,10 +635,7 @@ public final class PlayerSnapshotManager {
                 //? if (>=1.18 && <=1.21.1) {
                 player.teleportTo(target, x, y, z, yaw, pitch);
                 //?}
-                //? if (>=1.21.2 && <=1.21.11) {
-                /*player.teleportTo(target, x, y, z, java.util.Set.of(), yaw, pitch, false);
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.2 && <=26.3) {
                 /*player.teleportTo(target, x, y, z, java.util.Set.of(), yaw, pitch, false);
 *///?}
 
@@ -858,12 +647,7 @@ public final class PlayerSnapshotManager {
                         net.minecraft.world.level.GameType.byName(
                                 data.gamemode, player.gameMode.getGameModeForPlayer()));
             //?}
-            //? if (>=1.21.5 && <=1.21.11) {
-            /*player.setGameMode(
-                                    net.minecraft.world.level.GameType.byName(
-                                            data.gamemode, player.gameMode.getGameModeForPlayer()));
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.5 && <=26.3) {
             /*player.setGameMode(
                                     net.minecraft.world.level.GameType.byName(
                                             data.gamemode, player.gameMode.getGameModeForPlayer()));
@@ -874,20 +658,11 @@ public final class PlayerSnapshotManager {
                 //? if (>=1.18 && <=1.21.5) {
                 player.getAbilities().loadSaveData(abilities);
                 //?}
-                //? if (>=1.21.6 && <=1.21.11) {
-                /*player.getAbilities().apply(abilities);
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.6 && <=26.3) {
                 /*player.getAbilities().apply(abilities);
 *///?}
 
-                //? if (>=1.18 && <=1.21.11) {
                 player.onUpdateAbilities();
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*player.onUpdateAbilities();
-*///?}
-
             }
             boolean inventoryChanged =
                     data.inventory != null
@@ -898,13 +673,7 @@ public final class PlayerSnapshotManager {
                                     config.playerSnapshot.inventoryOffhand,
                                     config.playerSnapshot.selectedHotbarSlot);
             if (config.playerSnapshot.experienceLevel)
-
-                //? if (>=1.18 && <=1.21.11) {
                 player.setExperienceLevels(data.experienceLevel);
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*player.setExperienceLevels(data.experienceLevel);
-*///?}
 
             if (config.playerSnapshot.experienceProgress)
                 player.experienceProgress = data.experienceProgress;
@@ -929,79 +698,35 @@ public final class PlayerSnapshotManager {
             if (config.playerSnapshot.health) player.setHealth(data.health);
             if (config.playerSnapshot.absorption) player.setAbsorptionAmount(data.absorption);
 
-            //? if (>=1.18 && <=1.21.11) {
             if (config.playerSnapshot.foodLevel) player.getFoodData().setFoodLevel(data.foodLevel);
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*if (config.playerSnapshot.foodLevel) player.getFoodData().setFoodLevel(data.foodLevel);
-*///?}
 
             if (config.playerSnapshot.foodSaturation)
-
-                //? if (>=1.18 && <=1.21.11) {
                 player.getFoodData().setSaturation(data.foodSaturation);
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*player.getFoodData().setSaturation(data.foodSaturation);
-*///?}
 
             if (config.playerSnapshot.foodExhaustion)
 
                 //? if (>=1.18 && <=1.21.1) {
                 player.getFoodData().setExhaustion(data.foodExhaustion);
             //?}
-            //? if (>=1.21.2 && <=1.21.11) {
+            //? if (>=1.21.2 && <=26.3) {
             /*((com.atsukimc.anticrash.mixin.HungerManagerAccessorMixin)
                                             player.getFoodData())
-                                    .anticrash$setExhaustion(data.foodExhaustion);
-*///?}
-            //? if (>=26.1 && <=26.3) {
-            /*((com.atsukimc.anticrash.mixin.HungerManagerAccessorMixin) player.getFoodData())
                                     .anticrash$setExhaustion(data.foodExhaustion);
 *///?}
 
             if (effects != null) {
 
-                //? if (>=1.18 && <=1.21.11) {
                 player.removeAllEffects();
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*player.removeAllEffects();
-*///?}
 
-                //? if (>=1.18 && <=1.21.11) {
                 for (MobEffectInstance effect : effects) player.addEffect(effect);
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*for (MobEffectInstance effect : effects) player.addEffect(effect);
-*///?}
-
             }
             if (config.playerSnapshot.velocity)
-
-                //? if (>=1.18 && <=1.21.11) {
                 player.setDeltaMovement(data.velocityX, data.velocityY, data.velocityZ);
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*player.setDeltaMovement(data.velocityX, data.velocityY, data.velocityZ);
-*///?}
 
             if (config.playerSnapshot.fallDistance) player.fallDistance = data.fallDistance;
-            if (config.playerSnapshot.fireTicks)
-                //? if (>=1.18 && <=1.21.11) {
-                player.setRemainingFireTicks(data.fireTicks);
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*player.setRemainingFireTicks(data.fireTicks);
-*///?}
+            if (config.playerSnapshot.fireTicks) player.setRemainingFireTicks(data.fireTicks);
 
-            if (config.playerSnapshot.air)
-                //? if (>=1.18 && <=1.21.11) {
-                player.setAirSupply(data.air);
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*player.setAirSupply(data.air);
-*///?}
+            if (config.playerSnapshot.air) player.setAirSupply(data.air);
 
             if (spawnWorld != null)
 
@@ -1022,18 +747,7 @@ public final class PlayerSnapshotManager {
                                             data.spawnForced),
                                     false);
 *///?}
-            //? if (>=1.21.9 && <=1.21.11) {
-            /*player.setRespawnPosition(
-                                    new ServerPlayer.RespawnConfig(
-                                            net.minecraft.world.level.storage.LevelData.RespawnData.of(
-                                                    spawnWorld.dimension(),
-                                                    new BlockPos(data.spawnX, data.spawnY, data.spawnZ),
-                                                    data.spawnAngle,
-                                                    data.spawnPitch),
-                                            data.spawnForced),
-                                    false);
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.21.9 && <=26.3) {
             /*player.setRespawnPosition(
                                     new ServerPlayer.RespawnConfig(
                                             net.minecraft.world.level.storage.LevelData.RespawnData.of(
@@ -1045,20 +759,9 @@ public final class PlayerSnapshotManager {
                                     false);
 *///?}
 
-            if (inventoryChanged)
-                //? if (>=1.18 && <=1.21.11) {
-                player.inventoryMenu.sendAllDataToRemote();
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*player.inventoryMenu.sendAllDataToRemote();
-*///?}
+            if (inventoryChanged) player.inventoryMenu.sendAllDataToRemote();
 
-            //? if (>=1.18 && <=1.21.11) {
             restored.add(player.getUUID());
-            //?}
-            //? if (>=26.1 && <=26.3) {
-            /*restored.add(player.getUUID());
-*///?}
 
             logger.normalKey("player.restored", data.name);
             return true;
@@ -1068,13 +771,7 @@ public final class PlayerSnapshotManager {
         }
     }
 
-    //? if (>=1.18 && <=1.21.11) {
-    private static ServerLevel findWorld(MinecraftServer server, String id)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*private static ServerLevel findWorld(MinecraftServer server, String id)
-*///?}
-            {
+    private static ServerLevel findWorld(MinecraftServer server, String id) {
         if (id == null) return null;
 
         //? if (>=1.18 && <=1.21.11) {

@@ -35,43 +35,21 @@ public final class VersionPermissions {
     private VersionPermissions() {}
 
 
-//? if 1.21.11 {
-/^public static boolean hasLevel(CommandSourceStack source, int level)
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^public static boolean hasLevel(CommandSourceStack source, int level)
-^///?}
+public static boolean hasLevel(CommandSourceStack source, int level)
 {
 
-//? if 1.21.11 {
-/^return hasLevel(source.permissions(), level);
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^return hasLevel(source.permissions(), level);
-^///?}
+return hasLevel(source.permissions(), level);
 
     }
 
 
-//? if 1.21.11 {
-/^public static boolean hasLevel(PermissionSet permissions, int level)
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^public static boolean hasLevel(PermissionSet permissions, int level)
-^///?}
+public static boolean hasLevel(PermissionSet permissions, int level)
 {
         if (level < 0 || level > 4 || permissions == null) return false;
 
-//? if 1.21.11 {
-/^return level == 0
+return level == 0
                 || permissions.hasPermission(
                         new Permission.HasCommandLevel(PermissionLevel.byId(level)));
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^return level == 0
-                || permissions.hasPermission(
-                        new Permission.HasCommandLevel(PermissionLevel.byId(level)));
-^///?}
 
     }
 }

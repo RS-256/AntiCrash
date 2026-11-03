@@ -40,24 +40,13 @@ public abstract class CrafterMutationMixin {
 
     // Vanilla persists the countdown but tickCrafting does not mark intermediate ticks dirty.
 
-//? if (>=1.20.3 && <=1.21.11) {
-/^@Inject(method = "serverTick", at = @At("HEAD"))
+@Inject(method = "serverTick", at = @At("HEAD"))
     private static void anticrash$dirty(
             Level world,
             BlockPos pos,
             BlockState state,
             CrafterBlockEntity crafter,
             CallbackInfo ci)
-^///?}
-//? if (>=26.1 && <=26.3) {
-/^@Inject(method = "serverTick", at = @At("HEAD"))
-    private static void anticrash$dirty(
-            Level world,
-            BlockPos pos,
-            BlockState state,
-            CrafterBlockEntity crafter,
-            CallbackInfo ci)
-^///?}
 {
 
 //? if (>=1.20.3 && <=1.21.8) {

@@ -1,11 +1,6 @@
 package com.atsukimc.anticrash.snapshot.logical;
 
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.world.entity.Entity;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.world.entity.Entity;
-*///?}
 
 import java.util.ArrayList;
 import java.util.List;
@@ -178,14 +173,7 @@ public final class EntityLifecycleTracker {
                 *///?}
                 && entity.getType().canSerialize();
         //?}
-        //? if (>=1.21.9 && <=1.21.11) {
-        /*return LogicalTracking.enabled()
-                        && entity != null
-                        && entity.level() != null
-                        && !entity.level().isClientSide()
-                        && entity.getType().canSerialize();
-*///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if (>=1.21.9 && <=26.3) {
         /*return LogicalTracking.enabled()
                         && entity != null
                         && entity.level() != null

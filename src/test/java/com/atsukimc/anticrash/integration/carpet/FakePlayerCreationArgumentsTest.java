@@ -15,7 +15,6 @@ class FakePlayerCreationArgumentsTest {
         data.pitch = -21;
         data.flying = true;
 
-        //? if (>=1.18 && <=1.21.11) {
         var method =
                 CarpetIntegration.class.getDeclaredMethod(
                         "arguments",
@@ -24,17 +23,6 @@ class FakePlayerCreationArgumentsTest {
                         net.minecraft.server.level.ServerLevel.class,
                         FakePlayerSnapshot.class,
                         net.minecraft.world.level.GameType.class);
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*var method =
-                        CarpetIntegration.class.getDeclaredMethod(
-                                "arguments",
-                                Class[].class,
-                                net.minecraft.server.MinecraftServer.class,
-                                net.minecraft.server.level.ServerLevel.class,
-                                FakePlayerSnapshot.class,
-                                net.minecraft.world.level.GameType.class);
-*///?}
 
         method.setAccessible(true);
 
@@ -102,12 +90,7 @@ class FakePlayerCreationArgumentsTest {
 
         assertNotNull(args);
 
-        //? if (>=1.18 && <=1.21.11) {
         assertEquals(new net.minecraft.world.phys.Vec3(120, 90, -450), args[2]);
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*assertEquals(new net.minecraft.world.phys.Vec3(120, 90, -450), args[2]);
-*///?}
 
         assertEquals(73.0D, args[3]);
         assertEquals(-21.0D, args[4]);
@@ -121,23 +104,11 @@ class FakePlayerCreationArgumentsTest {
 
     private static Class<?> dimensionKeyType() throws Exception {
 
-        //? if (>=1.18 && <=1.21.11) {
         return net.minecraft.server.level.ServerLevel.class.getMethod("dimension").getReturnType();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*return net.minecraft.server.level.ServerLevel.class.getMethod("dimension").getReturnType();
-*///?}
-
     }
 
     private static Class<?> modeType() {
 
-        //? if (>=1.18 && <=1.21.11) {
         return net.minecraft.world.level.GameType.class;
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*return net.minecraft.world.level.GameType.class;
-*///?}
-
     }
 }

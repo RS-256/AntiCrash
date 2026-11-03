@@ -12,20 +12,12 @@ import net.minecraft.world.item.ItemStack;
 /*import net.minecraft.core.BlockPos;
 *///?}
 
-//? if (>=1.19.3 && <=1.21.11) {
-/*import net.minecraft.core.registries.BuiltInRegistries;
-*///?}
-//? if (>=26.1 && <=26.3) {
+//? if (>=1.19.3 && <=26.3) {
 /*import net.minecraft.core.registries.BuiltInRegistries;
 *///?}
 
 import net.minecraft.server.MinecraftServer;
-//? if (>=1.18 && <=1.21.11) {
 import net.minecraft.server.level.ServerPlayer;
-//?}
-//? if (>=26.1 && <=26.3) {
-/*import net.minecraft.server.level.ServerPlayer;
-*///?}
 
 //? if (>=1.18 && <=1.21.11) {
 import net.minecraft.core.BlockPos;
@@ -92,7 +84,6 @@ public final class ConsistencyManager implements AutoCloseable {
         return journal.count();
     }
 
-    //? if (>=1.18 && <=1.21.11) {
     public void record(
             String type,
             ServerPlayer player,
@@ -100,19 +91,7 @@ public final class ConsistencyManager implements AutoCloseable {
             String destination,
             BlockPos pos,
             ItemStack stack,
-            MinecraftServer server)
-                //?}
-                //? if (>=26.1 && <=26.3) {
-                /*public void record(
-                            String type,
-                            ServerPlayer player,
-                            String source,
-                            String destination,
-                            BlockPos pos,
-                            ItemStack stack,
-                            MinecraftServer server)
-*///?}
-            {
+            MinecraftServer server) {
         String mode = config.consistency.mode.toUpperCase(Locale.ROOT);
         if (mode.equals("IGNORE")) return;
         warningCount.incrementAndGet();
@@ -121,21 +100,11 @@ public final class ConsistencyManager implements AutoCloseable {
         transaction.checkpointId = transactionCheckpointId;
         transaction.fallbackCheckpointId = transactionFallbackCheckpointId;
 
-        //? if (>=1.18 && <=1.21.11) {
         transaction.serverTick = server == null ? 0 : server.getTickCount();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*transaction.serverTick = server == null ? 0 : server.getTickCount();
-*///?}
 
         transaction.wallClockEpochMs = System.currentTimeMillis();
 
-        //? if (>=1.18 && <=1.21.11) {
         transaction.playerUuid = player == null ? null : player.getStringUUID();
-        //?}
-        //? if (>=26.1 && <=26.3) {
-        /*transaction.playerUuid = player == null ? null : player.getStringUUID();
-*///?}
 
         transaction.transactionType = type;
         transaction.source = source;
@@ -176,10 +145,7 @@ public final class ConsistencyManager implements AutoCloseable {
             //? if (>=1.18 && <=1.19.2) {
             transaction.itemStackId = Registry.ITEM.getKey(stack.getItem()).toString();
             //?}
-            //? if (>=1.19.3 && <=1.21.11) {
-            /*transaction.itemStackId = BuiltInRegistries.ITEM.getKey(stack.getItem()).toString();
-*///?}
-            //? if (>=26.1 && <=26.3) {
+            //? if (>=1.19.3 && <=26.3) {
             /*transaction.itemStackId = BuiltInRegistries.ITEM.getKey(stack.getItem()).toString();
 *///?}
 
@@ -205,16 +171,7 @@ public final class ConsistencyManager implements AutoCloseable {
                                                                 ? player.registryAccess()
                                                                 : server.registryAccess()));
 *///?}
-                //? if (>=1.21.5 && <=1.21.11) {
-                /*transaction.nbt =
-                                        NbtCodec.encode(
-                                                com.atsukimc.anticrash.runtime.VersionNbt.item(
-                                                        stack,
-                                                        player != null
-                                                                ? player.registryAccess()
-                                                                : server.registryAccess()));
-*///?}
-                //? if (>=26.1 && <=26.3) {
+                //? if (>=1.21.5 && <=26.3) {
                 /*transaction.nbt =
                                         NbtCodec.encode(
                                                 com.atsukimc.anticrash.runtime.VersionNbt.item(
