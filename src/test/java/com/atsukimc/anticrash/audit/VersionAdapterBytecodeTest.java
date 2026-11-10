@@ -1,4 +1,4 @@
-//? if (>=1.19 && <=26.3) {
+//? if >=1.19 {
 package com.atsukimc.anticrash.audit;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,7 +16,7 @@ class VersionAdapterBytecodeTest {
     /*@Test
     void enderPearlTicketHasChunkArgumentAndFortyTickExpiry()
     *///?}
-    //? if (>=1.21.9 && <=26.3) {
+    //? if >=1.21.9 {
     @Test
     void modernSpawnPointPreservesBothAngles() {
 
@@ -69,18 +69,18 @@ class VersionAdapterBytecodeTest {
 
     //?}
 
-    //? if (>=1.21.5 && <=26.3) {
+    //? if >=1.21.5 {
     @Test
     void ticketsUseCountdownAndSeparateLoadingAndSimulation() throws Exception
     //?}
-            //? if (>=1.21.4 && <=26.3) {
+            //? if >=1.21.4 {
             {
 
             //?}
         //? if 1.21.4 {
         /*assertEquals(40, net.minecraft.server.level.TicketType.ENDER_PEARL.timeout());
         *///?}
-        //? if (>=1.21.5 && <=26.3) {
+        //? if >=1.21.5 {
         var type = net.minecraft.server.level.TicketType.ENDER_PEARL;
         //?}
 
@@ -88,14 +88,14 @@ class VersionAdapterBytecodeTest {
         /*net.minecraft.server.level.TicketType<net.minecraft.world.level.ChunkPos> type =
                 net.minecraft.server.level.TicketType.ENDER_PEARL;
         *///?}
-        //? if (>=1.21.5 && <=26.3) {
+        //? if >=1.21.5 {
         assertEquals(40, type.timeout());
         //?}
 
         //? if 1.21.4 {
         /*assertEquals("ender_pearl", type.toString());
         *///?}
-        //? if (>=1.21.5 && <=26.3) {
+        //? if >=1.21.5 {
         assertTrue(type.doesLoad());
 
         assertTrue(type.doesSimulate());
@@ -124,10 +124,10 @@ class VersionAdapterBytecodeTest {
         //? if (>=1.21.5 && <=1.21.8) {
         /*assertNotEquals(net.minecraft.server.level.TicketType.START, recovery);
         *///?}
-        //? if (>=1.21.9 && <=26.3) {
+        //? if >=1.21.9 {
         assertNotEquals(net.minecraft.server.level.TicketType.DRAGON, recovery);
         //?}
-    //? if (>=1.21.4 && <=26.3) {
+    //? if >=1.21.4 {
 
     }
 
@@ -210,7 +210,7 @@ class VersionAdapterBytecodeTest {
         //? if 1.21.5 {
         /*assertTrue(invokes(sensor, "saveAdditional", "net/minecraft/nbt/CompoundTag", "store"));
         *///?}
-        //? if (>=1.21.6 && <=26.3) {
+        //? if >=1.21.6 {
         assertTrue(
                 invokes(
                         sensor,
@@ -228,7 +228,7 @@ class VersionAdapterBytecodeTest {
         //? if 1.21.5 {
         /*assertTrue(invokes(sensor, "loadAdditional", "net/minecraft/nbt/CompoundTag", "read"));
         *///?}
-        //? if (>=1.21.6 && <=26.3) {
+        //? if >=1.21.6 {
         assertTrue(
                 invokes(
                         sensor,
@@ -240,7 +240,7 @@ class VersionAdapterBytecodeTest {
         //? if (>=1.19 && <=1.19.4) {
         /*var listener = read("net/minecraft/world/level/gameevent/vibrations/VibrationListener");
         *///?}
-        //? if (>=1.20 && <=26.3) {
+        //? if >=1.20 {
         var listener = read("net/minecraft/world/level/gameevent/vibrations/VibrationSystem$Data");
         //?}
 
@@ -249,7 +249,7 @@ class VersionAdapterBytecodeTest {
                 listener.fields.stream()
                         .anyMatch(f -> f.name.equals("receivingDistance") && f.desc.equals("F")));
         *///?}
-        //? if (>=1.19.3 && <=26.3) {
+        //? if >=1.19.3 {
         assertTrue(
                 listener.fields.stream()
                         .anyMatch(f ->
@@ -260,7 +260,7 @@ class VersionAdapterBytecodeTest {
         //? if (>=1.19 && <=1.19.2) {
         /*assertTrue(listener.fields.stream().anyMatch(f -> f.name.equals("receivingEvent")));
         *///?}
-        //? if (>=1.19.3 && <=26.3) {
+        //? if >=1.19.3 {
         assertTrue(listener.fields.stream().anyMatch(f -> f.name.equals("currentVibration")));
         //?}
 
@@ -292,7 +292,7 @@ class VersionAdapterBytecodeTest {
                                 f.name.equals("lastRecipe")
                                         && f.desc.endsWith("/ResourceLocation;")));
         *///?}
-        //? if (>=1.21.2 && <=26.3) {
+        //? if >=1.21.2 {
         assertTrue(
                 getter.fields.stream()
                         .anyMatch(f ->
@@ -307,7 +307,7 @@ class VersionAdapterBytecodeTest {
                         "getRecipeFor"));
     }
 
-    //? if (>=1.21 && <=26.3) {
+    //? if >=1.21 {
     @Test
     void tickingGetterIsNotAnExactLoadedChunkSet() throws Exception {
 

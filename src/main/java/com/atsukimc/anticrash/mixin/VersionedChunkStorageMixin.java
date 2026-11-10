@@ -1,6 +1,6 @@
 package com.atsukimc.anticrash.mixin;
 
-//? if (>=1.18 && <=1.21.10) {
+//? if <=1.21.10 {
 /*import net.minecraft.world.level.chunk.storage.ChunkStorage;
 *///?} else {
 import net.minecraft.world.level.chunk.storage.SimpleRegionStorage;
@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-//? if (>=1.18 && <=1.21.11) {
-/*//? if (>=1.18 && <=1.21.10) {
+//? if <=1.21.11 {
+/*//? if <=1.21.10 {
 /^@Mixin(ChunkStorage.class)
 ^///?}
 //? if 1.21.11 {
@@ -31,8 +31,7 @@ public abstract class VersionedChunkStorageMixin {
     // NBT argument explicitly instead of relying on Mixin's single-candidate discriminator.
     @ModifyVariable(method = "upgradeChunkTag", at = @At("HEAD"), argsOnly = true, ordinal = 0)
     private CompoundTag anticrash$copySealedChunk(CompoundTag nbt)
-*///?}
-//? if (>=26.1 && <=26.3) {
+*///?} else {
 @Mixin(SimpleRegionStorage.class)
 public abstract class VersionedChunkStorageMixin {
     /**

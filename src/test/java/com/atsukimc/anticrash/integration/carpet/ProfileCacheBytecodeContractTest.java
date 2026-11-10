@@ -9,14 +9,13 @@ class ProfileCacheBytecodeContractTest {
     @Test
     void injectionMatchesTheExactTargetVersion() throws Exception {
 
-        //? if (>=1.18 && <=1.21.8) {
+        //? if <=1.21.8 {
         /*try (var input =
                 getClass()
                         .getClassLoader()
                         .getResourceAsStream(
                                 "net/minecraft/server/players/GameProfileCache.class"))
-        *///?}
-        //? if (>=1.21.9 && <=26.3) {
+        *///?} else {
         try (var input =
                 getClass()
                         .getClassLoader()

@@ -1,4 +1,4 @@
-//? if (>=1.19 && <=26.3) {
+//? if >=1.19 {
 package com.atsukimc.anticrash.runtime;
 
 //? if (>=1.19 && <=1.19.4) {
@@ -6,7 +6,7 @@ package com.atsukimc.anticrash.runtime;
 *///?} else {
 import net.minecraft.world.level.gameevent.vibrations.VibrationSystem;
 //?}
-//? if (>=26.1 && <=26.3) {
+//? if >=26.1 {
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SculkCatalystBlockEntity;
 //?}
@@ -35,14 +35,14 @@ public final class SculkRuntimeFingerprint {
             //? if (>=1.19 && <=1.19.4) {
             /*catalyst.getSculkSpreader().save(view);
             *///?}
-            //? if (>=1.20 && <=26.3) {
+            //? if >=1.20 {
             catalyst.getListener().getSculkSpreader().save(view);
             //?}
 
             return "catalyst|" + VersionStorage.result(view);
 
         } else
-        //? if (>=1.20 && <=26.3) {
+        //? if >=1.20 {
         if (!(entity instanceof VibrationSystem))
         //?}
             return null;
@@ -55,7 +55,7 @@ public final class SculkRuntimeFingerprint {
                         .orElseThrow(
                                 () -> new IllegalStateException("Sculk listener capture failed"));
         *///?}
-        //? if (>=1.20 && <=26.3) {
+        //? if >=1.20 {
         return "listener|"
                 + VibrationSystem.Data.CODEC
                         .encodeStart(

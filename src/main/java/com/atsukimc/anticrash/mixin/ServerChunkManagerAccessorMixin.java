@@ -1,6 +1,6 @@
 package com.atsukimc.anticrash.mixin;
 
-//? if (>=1.18 && <=1.20.4) {
+//? if <=1.20.4 {
 /*import com.mojang.datafixers.util.Either;
 import net.minecraft.server.level.ChunkHolder;
 import net.minecraft.world.level.chunk.ChunkStatus;
@@ -25,12 +25,12 @@ import java.util.concurrent.CompletableFuture;
  * the private {@code getChunkFuture} method confirmed in the 1.18.2 merged bytecode and never
  * changes the ticket manager's internal state.
  */
-//? if (>=1.18 && <=1.21.11) {
+//? if <=1.21.11 {
 /*@Mixin(ServerChunkCache.class)
 public interface ServerChunkManagerAccessorMixin {
 
 *///?}
-    //? if (>=1.18 && <=1.20.4) {
+    //? if <=1.20.4 {
     /*@Invoker("getChunkFutureMainThread")
     CompletableFuture<Either<LevelChunk, ChunkHolder.ChunkLoadingFailure>> anticrash$getChunkFuture(
             int chunkX, int chunkZ, ChunkStatus status, boolean addTicket);
@@ -41,7 +41,7 @@ public interface ServerChunkManagerAccessorMixin {
     net.minecraft.world.level.TicketStorage anticrash$getTicketManager();
 
     *///?}
-//? if (>=26.1 && <=26.3) {
+//? if >=26.1 {
 @Mixin(ServerChunkCache.class)
 public interface ServerChunkManagerAccessorMixin {
     @org.spongepowered.asm.mixin.gen.Accessor("ticketStorage")
@@ -49,7 +49,7 @@ public interface ServerChunkManagerAccessorMixin {
 
 //?}
 
-    //? if (>=1.20.5 && <=26.3) {
+    //? if >=1.20.5 {
     @Invoker("getChunkFutureMainThread")
     CompletableFuture<
                     net.minecraft.server.level.ChunkResult<
@@ -57,7 +57,7 @@ public interface ServerChunkManagerAccessorMixin {
             anticrash$getChunkFuture(int chunkX, int chunkZ, ChunkStatus status, boolean addTicket);
     //?}
 
-    //? if (>=1.18 && <=26.2) {
+    //? if <=26.2 {
     /*@org.spongepowered.asm.mixin.gen.Accessor("lastInhabitedUpdate")
     void anticrash$setLastMobSpawningTime(long time);
     *///?}

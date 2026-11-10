@@ -21,7 +21,7 @@ public final class FakePlayerSnapshot {
      * speeds.
      */
 
-    //? if (>=1.21.2 && <=26.3) {
+    //? if >=1.21.2 {
     public Integer playerInput;
 
     //?}
@@ -58,15 +58,15 @@ public final class FakePlayerSnapshot {
     /** Ticks since the last attack; decides the strength of the next hit. */
     public Integer lastAttackedTicks;
 
-    //? if (>=1.21.11 && <=26.3) {
+    //? if >=1.21.11 {
     public String motionFrameNbt;
     //?}
 
-    //? if (>=26.1 && <=26.3) {
+    //? if >=26.1 {
     public String fluidTrackersNbt;
     //?}
 
-    //? if (>=1.21.11 && <=26.3) {
+    //? if >=1.21.11 {
     public Long lastKineticAttackTime;
 
     //?}
@@ -85,7 +85,7 @@ public final class FakePlayerSnapshot {
     /** Stable semantic representation used by the equivalence report, not by restore itself. */
     public String canonical() {
 
-        //? if (>=1.18 && <=1.21.1) {
+        //? if <=1.21.1 {
         /*return String.join(
                         "|",
                         value(uuid),

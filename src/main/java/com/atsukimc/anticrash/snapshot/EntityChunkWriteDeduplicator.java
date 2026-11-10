@@ -59,8 +59,8 @@ public final class EntityChunkWriteDeduplicator {
                     new DataOutputStream(
                             new DigestOutputStream(OutputStream.nullOutputStream(), sha))) {
 
-                //? if (>=1.18 && <=1.21.11) {
-                /*//? if (>=1.18 && <=1.20.1) {
+                //? if <=1.21.11 {
+                /*//? if <=1.20.1 {
                 /^NbtIo.write(nbt, out);
                 ^///?}
                 //? if 1.20.2 {
@@ -69,8 +69,7 @@ public final class EntityChunkWriteDeduplicator {
                 //? if (>=1.20.3 && <=1.21.11) {
                 /^NbtIo.writeUnnamedTagWithFallback(nbt, out);
                 ^///?}
-                *///?}
-                //? if (>=26.1 && <=26.3) {
+                *///?} else {
                 NbtIo.writeUnnamedTagWithFallback(nbt, out);
                 //?}
 

@@ -1,4 +1,4 @@
-//? if (>=1.19 && <=26.3) {
+//? if >=1.19 {
 package com.atsukimc.anticrash.mixin;
 
 import com.atsukimc.anticrash.runtime.RuntimeExtensionNbt;
@@ -33,7 +33,7 @@ public abstract class CampfireRecipeMatchingMixin
 
 //?}
 
-    //? if (>=1.21.2 && <=26.3) {
+    //? if >=1.21.2 {
     @org.spongepowered.asm.mixin.Unique
     private net.minecraft.resources.ResourceKey<net.minecraft.world.item.crafting.Recipe<?>>
             anticrash$savedId;
@@ -136,7 +136,7 @@ public abstract class CampfireRecipeMatchingMixin
                         : null;
         //?}
 
-        //? if (>=1.21.2 && <=26.3) {
+        //? if >=1.21.2 {
         anticrash$pending = true;
         //?}
     }

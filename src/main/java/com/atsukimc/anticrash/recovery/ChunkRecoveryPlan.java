@@ -41,13 +41,13 @@ public final class ChunkRecoveryPlan {
      * would therefore turn FULL=33 into level 0 and load a huge area.
      */
 
-    //? if (>=1.18 && <=1.21.4) {
+    //? if <=1.21.4 {
     /*public static int ticketRadiusForLevel(int ticketLevel)
     *///?}
 
     /** Minecraft 1.21.5 ServerChunkCache.addTicket accepts the level directly, not radius. */
 
-    //? if (>=1.21.5 && <=26.3) {
+    //? if >=1.21.5 {
     public static int ticketArgumentForLevel(int ticketLevel)
     //?}
             {
@@ -56,10 +56,9 @@ public final class ChunkRecoveryPlan {
                     "Invalid Vanilla chunk ticket level: " + ticketLevel);
         }
 
-        //? if (>=1.18 && <=1.21.4) {
+        //? if <=1.21.4 {
         /*return FULL_TICKET_LEVEL - ticketLevel;
-        *///?}
-        //? if (>=1.21.5 && <=26.3) {
+        *///?} else {
         return ticketLevel;
         //?}
 

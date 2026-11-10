@@ -127,7 +127,7 @@ public final class CheckpointManifest {
      */
     private static String currentMinecraftVersion() {
         SharedConstants.tryDetectVersion();
-        //? if (>=1.18 && <=1.21.5) {
+        //? if <=1.21.5 {
         /*return SharedConstants.getCurrentVersion().getId();
         *///?} else {
         return SharedConstants.getCurrentVersion().id();

@@ -1,4 +1,4 @@
-//? if (>=1.20 && <=26.3) {
+//? if >=1.20 {
 package com.atsukimc.anticrash.mixin;
 
 import net.minecraft.core.BlockPos;

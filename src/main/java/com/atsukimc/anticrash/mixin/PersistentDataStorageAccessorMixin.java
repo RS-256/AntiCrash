@@ -1,4 +1,4 @@
-//? if (>=1.21.2 && <=26.3) {
+//? if >=1.21.2 {
 package com.atsukimc.anticrash.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,7 +13,7 @@ public interface PersistentDataStorageAccessorMixin {
     @Accessor("pendingWriteFuture")
     CompletableFuture<?> anticrash$getPendingWrite();
 *///?}
-//? if (>=26.1 && <=26.3) {
+//? if >=26.1 {
 @Mixin(net.minecraft.world.level.storage.SavedDataStorage.class)
 public interface PersistentDataStorageAccessorMixin {
     @Accessor("pendingWriteFuture")

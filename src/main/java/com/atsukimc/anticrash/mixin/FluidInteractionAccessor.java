@@ -1,4 +1,4 @@
-//? if (>=26.1 && <=26.3) {
+//? if >=26.1 {
 package com.atsukimc.anticrash.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;

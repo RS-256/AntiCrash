@@ -68,7 +68,7 @@ public abstract class MinecraftServerMixin {
 
     /** 26.1 clocks advance outside ServerLevel.tick, so the world freeze alone is insufficient. */
 
-    //? if (>=26.1 && <=26.3) {
+    //? if >=26.1 {
     @Redirect(
             method = "tickChildren",
             at =

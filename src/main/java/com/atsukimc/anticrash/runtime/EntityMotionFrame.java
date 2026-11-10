@@ -1,4 +1,4 @@
-//? if (>=1.21.11 && <=26.3) {
+//? if >=1.21.11 {
 package com.atsukimc.anticrash.runtime;
 
 import com.atsukimc.anticrash.mixin.EntityRuntimeAccessorMixin;

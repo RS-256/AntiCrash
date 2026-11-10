@@ -1,6 +1,6 @@
 package com.atsukimc.anticrash.snapshot;
 
-//? if (>=1.21.2 && <=26.3) {
+//? if >=1.21.2 {
 import com.atsukimc.anticrash.mixin.PersistentDataStorageAccessorMixin;
 //?}
 
@@ -8,7 +8,7 @@ import net.minecraft.server.MinecraftServer;
 
 /** These versions complete SavedData writes synchronously in the Vanilla save. */
 
-//? if (>=1.21.2 && <=26.3) {
+//? if >=1.21.2 {
 import java.util.ArrayList;
 
 import java.util.concurrent.CompletableFuture;
@@ -23,10 +23,9 @@ import java.util.concurrent.CompletableFuture;
 public final class PersistentDataFlush {
     private PersistentDataFlush() {}
 
-    //? if (>=1.18 && <=1.21.1) {
+    //? if <=1.21.1 {
     /*public static void await(MinecraftServer server) {}
-    *///?}
-    //? if (>=1.21.2 && <=26.3) {
+    *///?} else {
     public static void await(MinecraftServer server) throws Exception {
         var writes = new ArrayList<CompletableFuture<?>>();
     //?}
@@ -37,7 +36,7 @@ public final class PersistentDataFlush {
                     ((PersistentDataStorageAccessorMixin) world.getDataStorage())
                             .anticrash$getPendingWrite());
         *///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if >=26.1 {
         writes.add(
                 ((PersistentDataStorageAccessorMixin) server.getDataStorage())
                         .anticrash$getPendingWrite());
@@ -48,7 +47,7 @@ public final class PersistentDataFlush {
                             .anticrash$getPendingWrite());
         //?}
 
-        //? if (>=1.21.2 && <=26.3) {
+        //? if >=1.21.2 {
         PendingStorageWrites.await(writes, 10000L);
     }
         //?}

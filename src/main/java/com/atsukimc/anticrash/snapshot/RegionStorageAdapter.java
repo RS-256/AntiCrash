@@ -1,4 +1,4 @@
-//? if (>=1.20.5 && <=26.3) {
+//? if >=1.20.5 {
 package com.atsukimc.anticrash.snapshot;
 
 import com.atsukimc.anticrash.util.VersionIds;

@@ -1,7 +1,7 @@
-//? if (>=1.21.6 && <=26.3) {
+//? if >=1.21.6 {
 package com.atsukimc.anticrash.runtime;
 
-//? if (>=26.1 && <=26.3) {
+//? if >=26.1 {
 import net.minecraft.world.level.storage.TagValueInput;
 //?}
 

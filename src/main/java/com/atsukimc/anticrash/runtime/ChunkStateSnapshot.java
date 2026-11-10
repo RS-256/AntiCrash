@@ -1,6 +1,6 @@
 package com.atsukimc.anticrash.runtime;
 
-//? if (>=1.18 && <=1.20.4) {
+//? if <=1.20.4 {
 /*import com.mojang.datafixers.util.Either;
 import net.minecraft.world.level.chunk.ChunkStatus;
 *///?} else if <=1.20.6 {
@@ -56,14 +56,14 @@ public final class ChunkStateSnapshot {
         ThreadedAnvilChunkStorageAccessorMixin accessor =
                 (ThreadedAnvilChunkStorageAccessorMixin) storage;
 
-        //? if (>=1.18 && <=1.20.6) {
+        //? if <=1.20.6 {
         /*for (Long position : accessor.anticrash$getLoadedChunks()) loaded.add(position);
         *///?}
 
         // 1.21 removed storage.loadedChunks. Observe already-completed FULL holders and their
         // actual loadedToWorld flag, including the pending unload map; never request/load a chunk.
 
-        //? if (>=1.21 && <=26.3) {
+        //? if >=1.21 {
         for (var holders :
                 java.util.List.of(
                         accessor.anticrash$getCurrentChunkHolders(),
@@ -82,10 +82,9 @@ public final class ChunkStateSnapshot {
         snapshot.loadedChunks.addAll(loaded);
         Set<Long> forced = new LinkedHashSet<>();
 
-        //? if (>=1.18 && <=1.21.4) {
+        //? if <=1.21.4 {
         /*for (Long position : world.getForcedChunks())
-        *///?}
-        //? if (>=1.21.5 && <=26.3) {
+        *///?} else {
         for (Long position : world.getForceLoadedChunks())
         //?}
         {
@@ -97,19 +96,17 @@ public final class ChunkStateSnapshot {
 
             long packed = VersionChunkPos.pack(holder.getPos());
 
-            //? if (>=1.18 && <=1.20.6) {
+            //? if <=1.20.6 {
             /*boolean full = completed(holder.getFutureIfPresent(ChunkStatus.FULL));
-            *///?}
-            //? if (>=1.21 && <=26.3) {
+            *///?} else {
             boolean full = completed(holder.getFullChunkFuture());
             //?}
 
-            //? if (>=1.18 && <=1.19.4) {
+            //? if <=1.19.4 {
             /*boolean block =
                     holder.getFullStatus() == ChunkHolder.FullChunkStatus.TICKING
                             || holder.getFullStatus() == ChunkHolder.FullChunkStatus.ENTITY_TICKING;
-            *///?}
-            //? if (>=1.20 && <=26.3) {
+            *///?} else {
             boolean block =
                     holder.getFullStatus()
                                     == net.minecraft.server.level.FullChunkStatus.BLOCK_TICKING
@@ -122,7 +119,7 @@ public final class ChunkStateSnapshot {
                             && completed(holder.getTickingChunkFuture())
                             && world.getChunkSource().isPositionTicking(packed);
 
-            //? if (>=1.18 && <=1.19.4) {
+            //? if <=1.19.4 {
             /*boolean entity =
                     holder.getFullStatus() == ChunkHolder.FullChunkStatus.ENTITY_TICKING
                             && completed(holder.getEntityTickingChunkFuture());
@@ -133,7 +130,7 @@ public final class ChunkStateSnapshot {
                                     == net.minecraft.server.level.FullChunkStatus.ENTITY_TICKING
                             && completed(holder.getEntityTickingChunkFuture());
             *///?}
-            //? if (>=1.21.5 && <=26.3) {
+            //? if >=1.21.5 {
             boolean entity =
                     holder.getFullStatus()
                                     == net.minecraft.server.level.FullChunkStatus.ENTITY_TICKING
@@ -240,10 +237,9 @@ public final class ChunkStateSnapshot {
         return lines;
     }
 
-    //? if (>=1.18 && <=1.20.4) {
+    //? if <=1.20.4 {
     /*private static boolean completed(CompletableFuture<? extends Either<?, ?>> future)
-    *///?}
-    //? if (>=1.20.5 && <=26.3) {
+    *///?} else {
     private static boolean completed(
             CompletableFuture<? extends net.minecraft.server.level.ChunkResult<?>> future)
     //?}
@@ -251,12 +247,11 @@ public final class ChunkStateSnapshot {
         if (future == null || !future.isDone() || future.isCompletedExceptionally()) return false;
         try {
 
-            //? if (>=1.18 && <=1.20.4) {
+            //? if <=1.20.4 {
             /*Either<?, ?> result = future.getNow(null);
 
             return result != null && result.left().isPresent();
-            *///?}
-            //? if (>=1.20.5 && <=26.3) {
+            *///?} else {
             net.minecraft.server.level.ChunkResult<?> result = future.getNow(null);
 
             return result != null && result.isSuccess();

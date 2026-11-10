@@ -61,8 +61,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 /** Exact 1.21.10 mapped cache API; ordinary authentication/cache lookups are unchanged. */
 
 /** Exact 1.21.11 mapped cache API; ordinary authentication/cache lookups are unchanged. */
-//? if (>=1.18 && <=1.21.11) {
-/*//? if (>=1.18 && <=1.21.8) {
+//? if <=1.21.11 {
+/*//? if <=1.21.8 {
 /^@Mixin(net.minecraft.server.players.GameProfileCache.class)
 ^///?}
 //? if (>=1.21.9 && <=1.21.11) {
@@ -71,7 +71,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class UserCacheMixin {
 
 *///?}
-    //? if (>=1.18 && <=1.21.8) {
+    //? if <=1.21.8 {
     /*@Inject(
             method = "get(Ljava/lang/String;)Ljava/util/Optional;",
             at = @At("HEAD"),
@@ -96,7 +96,7 @@ public abstract class UserCacheMixin {
 /** Exact 26.2 mapped cache API; ordinary authentication/cache lookups are unchanged. */
 
 /** Exact 26.3 mapped cache API; ordinary authentication/cache lookups are unchanged. */
-//? if (>=26.1 && <=26.3) {
+//? if >=26.1 {
 @Mixin(net.minecraft.server.players.CachedUserNameToIdResolver.class)
 public abstract class UserCacheMixin {
     @Inject(
@@ -111,10 +111,9 @@ public abstract class UserCacheMixin {
             {
         GameProfile profile = FakePlayerProfileScope.lookup(this, name);
 
-        //? if (>=1.18 && <=1.21.8) {
+        //? if <=1.21.8 {
         /*if (profile != null) callback.setReturnValue(java.util.Optional.of(profile));
-        *///?}
-        //? if (>=1.21.9 && <=26.3) {
+        *///?} else {
         if (profile != null)
             callback.setReturnValue(
                     java.util.Optional.of(new net.minecraft.server.players.NameAndId(profile)));

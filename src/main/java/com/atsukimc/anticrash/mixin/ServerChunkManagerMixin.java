@@ -10,7 +10,7 @@ import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.world.level.LocalMobCapCalculator;
 import net.minecraft.world.level.NaturalSpawner;
 
-//? if (>=1.18 && <=26.2) {
+//? if <=26.2 {
 /*import java.util.List;
 import net.minecraft.world.entity.Entity;
 *///?}
@@ -30,12 +30,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * restored world. Instead this mixin supplies an immutable, empty view until Vanilla has produced
  * the real value. The backing field itself is never changed.
  */
-//? if (>=1.18 && <=1.21.11) {
+//? if <=1.21.11 {
 /*@Mixin(ServerChunkCache.class)
 public abstract class ServerChunkManagerMixin {
 
 *///?}
-    //? if (>=1.18 && <=1.18.1) {
+    //? if <=1.18.1 {
     /*@WrapOperation(
             method = "tick(Ljava/util/function/BooleanSupplier;)V",
             at =
@@ -50,7 +50,7 @@ public abstract class ServerChunkManagerMixin {
     }
 
     *///?}
-//? if (>=26.1 && <=26.3) {
+//? if >=26.1 {
 @Mixin(ServerChunkCache.class)
 public abstract class ServerChunkManagerMixin {
 //?}
@@ -74,7 +74,7 @@ public abstract class ServerChunkManagerMixin {
 
             ServerChunkCache manager = (ServerChunkCache) (Object) this;
 
-            //? if (>=1.18 && <=26.2) {
+            //? if <=26.2 {
             /*anticrash$emptySpawnInfo =
                     NaturalSpawner.createState(
                             0,

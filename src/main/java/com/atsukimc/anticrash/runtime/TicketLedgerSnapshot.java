@@ -12,7 +12,7 @@ import net.minecraft.server.level.Ticket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
 
-//? if (>=1.18 && <=1.21.4) {
+//? if <=1.21.4 {
 /*import net.minecraft.server.level.DistanceManager;
 import net.minecraft.util.SortedArraySet;
 *///?} else {
@@ -40,10 +40,9 @@ public final class TicketLedgerSnapshot {
 
         for (ServerLevel world : worlds) {
 
-            //? if (>=1.18 && <=1.21.4) {
+            //? if <=1.21.4 {
             /*DistanceManager manager = world.getChunkSource().chunkMap.getDistanceManager();
-            *///?}
-            //? if (>=1.21.5 && <=26.3) {
+            *///?} else {
             TicketStorage manager =
                     ((com.atsukimc.anticrash.mixin.ServerChunkManagerAccessorMixin)
                                     world.getChunkSource())
@@ -52,14 +51,13 @@ public final class TicketLedgerSnapshot {
 
             ChunkTicketManagerAccessorMixin accessor = (ChunkTicketManagerAccessorMixin) manager;
 
-            //? if (>=1.18 && <=1.21.4) {
+            //? if <=1.21.4 {
             /*Long2ObjectOpenHashMap<SortedArraySet<Ticket<?>>> tickets =
                     accessor.anticrash$getTicketsByPosition();
 
             for (Long2ObjectMap.Entry<SortedArraySet<Ticket<?>>> positionEntry :
                     tickets.long2ObjectEntrySet())
-            *///?}
-            //? if (>=1.21.5 && <=26.3) {
+            *///?} else {
             Long2ObjectOpenHashMap<List<Ticket>> tickets =
                     accessor.anticrash$getTicketsByPosition();
 
@@ -69,20 +67,18 @@ public final class TicketLedgerSnapshot {
 
                 ChunkPos pos = VersionChunkPos.unpack(positionEntry.getLongKey());
 
-                //? if (>=1.18 && <=1.21.4) {
+                //? if <=1.21.4 {
                 /*for (Ticket<?> ticket : positionEntry.getValue())
-                *///?}
-                //? if (>=1.21.5 && <=26.3) {
+                *///?} else {
                 for (Ticket ticket : positionEntry.getValue())
                 //?}
                 {
                     ChunkTicketAccessorMixin ticketAccessor =
                             (ChunkTicketAccessorMixin) (Object) ticket;
 
-                    //? if (>=1.18 && <=1.21.4) {
+                    //? if <=1.21.4 {
                     /*String type = String.valueOf(ticketAccessor.anticrash$getType());
-                    *///?}
-                    //? if (>=1.21.5 && <=26.3) {
+                    *///?} else {
                     if (ticket.getType()
                             == com.atsukimc.anticrash.recovery.ChunkRecoveryManager.RECOVERY_TICKET)
                         continue;
@@ -112,36 +108,33 @@ public final class TicketLedgerSnapshot {
 
                     entry.level = ticket.getTicketLevel();
 
-                    //? if (>=1.18 && <=1.21.4) {
+                    //? if <=1.21.4 {
                     /*entry.argument = String.valueOf(ticketAccessor.anticrash$getArgument());
-                    *///?}
-                    //? if (>=1.21.5 && <=26.3) {
+                    *///?} else {
                     entry.argument = "-";
                     //?}
                     // 1.21.5 no longer has per-ticket arguments or creation age.
 
-                    //? if (>=1.21.5 && <=26.3) {
+                    //? if >=1.21.5 {
                     entry.tickCreated = 0;
                     //?}
 
-                    //? if (>=1.18 && <=1.21.4) {
+                    //? if <=1.21.4 {
                     /*entry.tickCreated = ticketAccessor.anticrash$getTickCreated();
 
                     entry.expiryTicks = ticket.getType().timeout();
-                    *///?}
-                    //? if (>=1.21.5 && <=26.3) {
+                    *///?} else {
                     entry.expiryTicks = ticket.getType().timeout();
                     //?}
 
                     if (entry.expiryTicks > 0)
-                    //? if (>=1.18 && <=1.21.4) {
+                    //? if <=1.21.4 {
                     /*{
                         // Vanilla keeps a ticket while age - tickCreated <= expiry.
                         entry.remainingTicks =
                                 entry.expiryTicks
                                         - (accessor.anticrash$getAge() - entry.tickCreated);
-                    *///?}
-                    //? if (>=1.21.5 && <=26.3) {
+                    *///?} else {
                     {
                         entry.remainingTicks = ticketAccessor.anticrash$getTicksLeft();
                     //?}

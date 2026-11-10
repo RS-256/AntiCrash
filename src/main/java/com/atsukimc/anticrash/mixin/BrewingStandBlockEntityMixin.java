@@ -3,7 +3,7 @@ package com.atsukimc.anticrash.mixin;
 import com.atsukimc.anticrash.runtime.VersionNbt;
 import com.atsukimc.anticrash.util.VersionIds;
 
-//? if (>=1.18 && <=26.2) {
+//? if <=26.2 {
 /*import net.minecraft.world.level.Level;
 *///?}
 
@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(BrewingStandBlockEntity.class)
 public abstract class BrewingStandBlockEntityMixin {
 
-    //? if (>=1.18 && <=26.2) {
+    //? if <=26.2 {
     /*@Inject(method = "serverTick", at = @At("HEAD"))
     private static void anticrash$markBrewTimeDirty(
             Level world,
@@ -28,8 +28,7 @@ public abstract class BrewingStandBlockEntityMixin {
             BlockState state,
             BrewingStandBlockEntity stand,
             CallbackInfo callbackInfo)
-    *///?}
-    //? if >=26.3 {
+    *///?} else {
     @Inject(method = "serverTick", at = @At("HEAD"))
     private static void anticrash$markBrewTimeDirty(
             net.minecraft.server.level.ServerLevel world,
@@ -53,7 +52,7 @@ public abstract class BrewingStandBlockEntityMixin {
      * progress starts over (up to 400 ticks late).
      */
 
-    //? if (>=1.18 && <=1.20.4) {
+    //? if <=1.20.4 {
     /*@Inject(method = "saveAdditional", at = @At("TAIL"))
     private void anticrash$saveBrewingItem(
             net.minecraft.nbt.CompoundTag nbt, CallbackInfo callbackInfo)
@@ -81,7 +80,7 @@ public abstract class BrewingStandBlockEntityMixin {
                 });
     }
 
-    //? if (>=1.18 && <=1.20.4) {
+    //? if <=1.20.4 {
     /*@Inject(method = "load", at = @At("TAIL"))
     private void anticrash$loadBrewingItem(
             net.minecraft.nbt.CompoundTag nbt, CallbackInfo callbackInfo)

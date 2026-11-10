@@ -18,7 +18,7 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.storage.PrimaryLevelData;
 
-//? if (>=1.18 && <=1.21.1) {
+//? if <=1.21.1 {
 /*import net.minecraft.world.level.chunk.storage.ChunkSerializer;
 *///?} else {
 import net.minecraft.world.level.chunk.storage.SerializableChunkData;
@@ -496,7 +496,7 @@ public final class LogicalDeltaEngine {
 
             CompoundTag root = new CompoundTag();
 
-            //? if (>=1.18 && <=1.19.3) {
+            //? if <=1.19.3 {
             /*root.putInt("DataVersion", SharedConstants.getCurrentVersion().getWorldVersion());
             *///?}
             //? if (>=1.19.4 && <=1.21.5) {
@@ -504,7 +504,7 @@ public final class LogicalDeltaEngine {
                     "DataVersion",
                     SharedConstants.getCurrentVersion().getDataVersion().getVersion());
             *///?}
-            //? if (>=1.21.6 && <=26.3) {
+            //? if >=1.21.6 {
             root.putInt("DataVersion", SharedConstants.getCurrentVersion().dataVersion().version());
             //?}
 
@@ -577,7 +577,7 @@ public final class LogicalDeltaEngine {
         // properties right before writing level.dat. Without this, the world border, custom
         // boss bars and the dragon fight would be restored from the last full save instead.
 
-        //? if (>=1.18 && <=1.21.8) {
+        //? if <=1.21.8 {
         /*ServerLevel overworld = server.overworld();
         *///?}
 
@@ -586,17 +586,17 @@ public final class LogicalDeltaEngine {
         // persistent-state support; do not put their legacy fields back in level.dat.
         // Player data remains selective and must not be embedded or rolled back here.
 
-        //? if (>=26.1 && <=26.3) {
+        //? if >=26.1 {
         var profile = server.getSingleplayerProfile();
         //?}
 
-        //? if (>=1.18 && <=1.21.8) {
+        //? if <=1.21.8 {
         /*if (overworld != null) {
             properties.overworldData().setWorldBorder(overworld.getWorldBorder().createSettings());
         }
         *///?}
 
-        //? if (>=1.18 && <=1.20.4) {
+        //? if <=1.20.4 {
         /*properties.setCustomBossEvents(server.getCustomBossEvents().save());
         *///?}
 
@@ -608,9 +608,9 @@ public final class LogicalDeltaEngine {
         /*properties.setCustomBossEvents(server.getCustomBossEvents().save(server.registryAccess()));
         *///?}
 
-        //? if (>=1.18 && <=1.21.11) {
+        //? if <=1.21.11 {
         /*for (ServerLevel world : server.getAllLevels()) {
-            //? if (>=1.18 && <=1.19.4) {
+            //? if <=1.19.4 {
             /^if (world.dragonFight() != null) {
             ^///?}
             //? if (>=1.20 && <=1.21.11) {
@@ -618,13 +618,13 @@ public final class LogicalDeltaEngine {
             ^///?}
 
         *///?}
-                //? if (>=1.18 && <=1.19.4) {
+                //? if <=1.19.4 {
                 /*properties.setEndDragonFightData(world.dragonFight().saveData());
                 *///?}
                 //? if (>=1.20 && <=1.21.11) {
                 /*properties.setEndDragonFightData(world.getDragonFight().saveData());
                 *///?}
-            //? if (>=1.18 && <=1.21.11) {
+            //? if <=1.21.11 {
 
             /*}
         }
@@ -635,7 +635,7 @@ public final class LogicalDeltaEngine {
                 properties.createTag(
                         server.registryAccess(), player == null ? null : player.copy());
             *///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if >=26.1 {
         CompoundTag data = properties.createTag(profile == null ? null : profile.id());
         //?}
 
@@ -654,10 +654,9 @@ public final class LogicalDeltaEngine {
 
     private static String encodeChunk(ServerLevel world, LevelChunk chunk) throws IOException {
 
-        //? if (>=1.18 && <=1.21.1) {
+        //? if <=1.21.1 {
         /*return NbtCodec.encode(ChunkSerializer.write(world, chunk));
-        *///?}
-        //? if (>=1.21.2 && <=26.3) {
+        *///?} else {
         return NbtCodec.encode(SerializableChunkData.copyOf(world, chunk).write());
         //?}
 
@@ -683,10 +682,9 @@ public final class LogicalDeltaEngine {
                 try {
                     var ready = future.getNow(null);
 
-                    //? if (>=1.18 && <=1.20.4) {
+                    //? if <=1.20.4 {
                     /*LevelChunk chunk = ready == null ? null : ready.left().orElse(null);
-                    *///?}
-                    //? if (>=1.20.5 && <=26.3) {
+                    *///?} else {
                     LevelChunk chunk = ready == null ? null : ready.orElse(null);
                     //?}
 

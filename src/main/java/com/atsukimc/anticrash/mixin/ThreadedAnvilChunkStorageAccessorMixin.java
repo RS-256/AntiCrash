@@ -1,6 +1,6 @@
 package com.atsukimc.anticrash.mixin;
 
-//? if (>=1.18 && <=1.20.6) {
+//? if <=1.20.6 {
 /*import it.unimi.dsi.fastutil.longs.LongSet;
 *///?}
 
@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-//? if (>=1.18 && <=1.20.6) {
+//? if <=1.20.6 {
 /*@Mixin(ChunkMap.class)
 public interface ThreadedAnvilChunkStorageAccessorMixin {
     @Accessor("entitiesInLevel")
@@ -26,12 +26,12 @@ public interface ThreadedAnvilChunkStorageAccessorMixin {
 /*@Mixin(ChunkMap.class)
 public interface ThreadedAnvilChunkStorageAccessorMixin {
 *///?}
-    //? if (>=1.18 && <=1.21.11) {
+    //? if <=1.21.11 {
     /*@Accessor("updatingChunkMap")
     Long2ObjectLinkedOpenHashMap<ChunkHolder> anticrash$getCurrentChunkHolders();
 
     *///?}
-//? if (>=26.1 && <=26.3) {
+//? if >=26.1 {
 @Mixin(ChunkMap.class)
 public interface ThreadedAnvilChunkStorageAccessorMixin {
     @Accessor("updatingChunkMap")

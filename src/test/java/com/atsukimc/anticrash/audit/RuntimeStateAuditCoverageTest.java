@@ -40,7 +40,7 @@ class RuntimeStateAuditCoverageTest {
      * Entity classes that must be in the matrix; mobs are covered as a category in the document.
      */
 
-    //? if (>=1.18 && <=1.21.1) {
+    //? if <=1.21.1 {
     /*private static final List<String> REQUIRED_ENTITIES =
             List.of(
                     "net.minecraft.world.entity.Entity",
@@ -118,7 +118,7 @@ class RuntimeStateAuditCoverageTest {
 
                     ^///?}
     *///?}
-    //? if (>=26.1 && <=26.3) {
+    //? if >=26.1 {
     private static final List<String> REQUIRED_ENTITIES =
             List.of(
                     "net.minecraft.world.entity.Entity",

@@ -19,7 +19,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.phys.Vec3;
 
-//? if (>=1.18 && <=1.21.4) {
+//? if <=1.21.4 {
 /*import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
 *///?}
@@ -82,10 +82,9 @@ public final class PlayerSnapshotManager {
 
                 snapshot.uuid = player.getStringUUID();
 
-                //? if (>=1.18 && <=1.21.8) {
+                //? if <=1.21.8 {
                 /*snapshot.name = player.getGameProfile().getName();
-                *///?}
-                //? if (>=1.21.9 && <=26.3) {
+                *///?} else {
                 snapshot.name = player.getGameProfile().name();
                 //?}
 
@@ -106,10 +105,9 @@ public final class PlayerSnapshotManager {
 
         data.uuid = player.getStringUUID();
 
-        //? if (>=1.18 && <=1.21.8) {
+        //? if <=1.21.8 {
         /*data.name = player.getGameProfile().getName();
-        *///?}
-        //? if (>=1.21.9 && <=26.3) {
+        *///?} else {
         data.name = player.getGameProfile().name();
         //?}
 
@@ -128,10 +126,9 @@ public final class PlayerSnapshotManager {
         }
         if (config.playerSnapshot.gamemode)
 
-            //? if (>=1.18 && <=1.21.4) {
+            //? if <=1.21.4 {
             /*data.gamemode = player.gameMode.getGameModeForPlayer().getName();
-            *///?}
-            //? if (>=1.21.5 && <=26.3) {
+            *///?} else {
             data.gamemode = player.gameMode.getGameModeForPlayer().getSerializedName();
             //?}
 
@@ -165,10 +162,9 @@ public final class PlayerSnapshotManager {
 
         if (config.playerSnapshot.foodExhaustion)
 
-            //? if (>=1.18 && <=1.21.1) {
+            //? if <=1.21.1 {
             /*data.foodExhaustion = player.getFoodData().getExhaustionLevel();
-            *///?}
-            //? if (>=1.21.2 && <=26.3) {
+            *///?} else {
             data.foodExhaustion =
                     ((com.atsukimc.anticrash.mixin.HungerManagerAccessorMixin) player.getFoodData())
                             .anticrash$getExhaustion();
@@ -191,31 +187,30 @@ public final class PlayerSnapshotManager {
 
         if (config.playerSnapshot.air) data.air = player.getAirSupply();
 
-        //? if (>=1.18 && <=1.21.4) {
+        //? if <=1.21.4 {
         /*if (config.playerSnapshot.spawnPoint && player.getRespawnPosition() != null)
-        *///?}
-        //? if (>=1.21.5 && <=26.3) {
+        *///?} else {
         if (config.playerSnapshot.spawnPoint && player.getRespawnConfig() != null)
         //?}
         {
 
-            //? if (>=1.21.5 && <=26.3) {
+            //? if >=1.21.5 {
             var respawn = player.getRespawnConfig();
             //?}
 
-            //? if (>=1.21.9 && <=26.3) {
+            //? if >=1.21.9 {
             var spawn = respawn.respawnData();
             //?}
 
             data.hasSpawnPoint = true;
 
-            //? if (>=1.18 && <=1.21.4) {
+            //? if <=1.21.4 {
             /*BlockPos pos = player.getRespawnPosition();
             *///?}
             //? if (>=1.21.5 && <=1.21.8) {
             /*BlockPos pos = respawn.pos();
             *///?}
-            //? if (>=1.21.9 && <=26.3) {
+            //? if >=1.21.9 {
             BlockPos pos = spawn.pos();
             //?}
 
@@ -223,28 +218,28 @@ public final class PlayerSnapshotManager {
             data.spawnY = pos.getY();
             data.spawnZ = pos.getZ();
 
-            //? if (>=1.18 && <=1.21.4) {
+            //? if <=1.21.4 {
             /*data.spawnAngle = player.getRespawnAngle();
             *///?}
             //? if (>=1.21.5 && <=1.21.8) {
             /*data.spawnAngle = respawn.angle();
             *///?}
-            //? if (>=1.21.9 && <=26.3) {
+            //? if >=1.21.9 {
             data.spawnAngle = spawn.yaw();
             //?}
 
-            //? if (>=1.18 && <=1.21.4) {
+            //? if <=1.21.4 {
             /*data.spawnForced = player.isRespawnForced();
             *///?}
-            //? if (>=1.21.9 && <=26.3) {
+            //? if >=1.21.9 {
             data.spawnPitch = spawn.pitch();
             //?}
 
-            //? if (>=1.21.5 && <=26.3) {
+            //? if >=1.21.5 {
             data.spawnForced = respawn.forced();
             //?}
 
-            //? if (>=1.18 && <=1.21.4) {
+            //? if <=1.21.4 {
             /*ResourceKey<Level> key = player.getRespawnDimension();
 
             data.spawnDimension = key == null ? VersionIds.dimension(player) : VersionIds.key(key);
@@ -252,7 +247,7 @@ public final class PlayerSnapshotManager {
             //? if (>=1.21.5 && <=1.21.8) {
             /*data.spawnDimension = VersionIds.key(respawn.dimension());
             *///?}
-            //? if (>=1.21.9 && <=26.3) {
+            //? if >=1.21.9 {
             data.spawnDimension = VersionIds.key(spawn.dimension());
             //?}
 
@@ -457,10 +452,9 @@ public final class PlayerSnapshotManager {
                 // the
                 // client its new position; updatePositionAndAngles alone left the client elsewhere.
 
-                //? if (>=1.18 && <=1.21.1) {
+                //? if <=1.21.1 {
                 /*player.teleportTo(target, x, y, z, yaw, pitch);
-                *///?}
-                //? if (>=1.21.2 && <=26.3) {
+                *///?} else {
                 player.teleportTo(target, x, y, z, java.util.Set.of(), yaw, pitch, false);
                 //?}
 
@@ -503,10 +497,9 @@ public final class PlayerSnapshotManager {
 
             if (config.playerSnapshot.foodExhaustion)
 
-                //? if (>=1.18 && <=1.21.1) {
+                //? if <=1.21.1 {
                 /*player.getFoodData().setExhaustion(data.foodExhaustion);
-                *///?}
-                //? if (>=1.21.2 && <=26.3) {
+                *///?} else {
                 ((com.atsukimc.anticrash.mixin.HungerManagerAccessorMixin) player.getFoodData())
                         .anticrash$setExhaustion(data.foodExhaustion);
                 //?}
@@ -527,7 +520,7 @@ public final class PlayerSnapshotManager {
 
             if (spawnWorld != null)
 
-                //? if (>=1.18 && <=1.21.4) {
+                //? if <=1.21.4 {
                 /*player.setRespawnPosition(
                         spawnWorld.dimension(),
                         new BlockPos(data.spawnX, data.spawnY, data.spawnZ),
@@ -544,7 +537,7 @@ public final class PlayerSnapshotManager {
                                 data.spawnForced),
                         false);
                 *///?}
-                //? if (>=1.21.9 && <=26.3) {
+                //? if >=1.21.9 {
                 player.setRespawnPosition(
                         new ServerPlayer.RespawnConfig(
                                 net.minecraft.world.level.storage.LevelData.RespawnData.of(
@@ -603,22 +596,20 @@ public final class PlayerSnapshotManager {
                         && Double.isFinite(data.velocityZ)))
             throw new IOException("Velocity is not finite");
 
-        //? if (>=1.18 && <=1.21.4) {
+        //? if <=1.21.4 {
         /*if (config.playerSnapshot.fallDistance && !Float.isFinite(data.fallDistance))
 
-        *///?}
-        //? if (>=1.21.5 && <=26.3) {
+        *///?} else {
         if (config.playerSnapshot.fallDistance && !Double.isFinite(data.fallDistance))
         //?}
             throw new IOException("Fall distance is not finite");
 
-        //? if (>=1.18 && <=1.21.8) {
+        //? if <=1.21.8 {
         /*if (config.playerSnapshot.spawnPoint
                 && data.hasSpawnPoint
                 && !Float.isFinite(data.spawnAngle))
 
-        *///?}
-        //? if (>=1.21.9 && <=26.3) {
+        *///?} else {
         if (config.playerSnapshot.spawnPoint
                 && data.hasSpawnPoint
                 && (!Float.isFinite(data.spawnAngle) || !Float.isFinite(data.spawnPitch)))

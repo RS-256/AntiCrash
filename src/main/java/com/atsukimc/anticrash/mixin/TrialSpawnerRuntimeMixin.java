@@ -1,4 +1,4 @@
-//? if (>=1.20.3 && <=26.3) {
+//? if >=1.20.3 {
 package com.atsukimc.anticrash.mixin;
 
 import net.minecraft.world.level.block.entity.trialspawner.TrialSpawner;
@@ -23,7 +23,7 @@ public abstract class TrialSpawnerRuntimeMixin {
     /*@Inject(method = "tickServer", at = @At("HEAD"))
     private void anticrash$dirty(ServerLevel world, BlockPos pos, boolean ominous, CallbackInfo ci)
     *///?}
-//? if (>=26.1 && <=26.3) {
+//? if >=26.1 {
 @Mixin(TrialSpawner.class)
 public abstract class TrialSpawnerRuntimeMixin {
     @Inject(method = "tickServer", at = @At("HEAD"))

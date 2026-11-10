@@ -9,7 +9,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.chunk.storage.EntityStorage;
 
-//? if (>=1.18 && <=1.20.4) {
+//? if <=1.20.4 {
 /*import net.minecraft.world.level.chunk.storage.IOWorker;
 *///?} else {
 import net.minecraft.world.level.chunk.storage.SimpleRegionStorage;
@@ -44,7 +44,7 @@ public abstract class EntityChunkDataAccessMixin {
         }
     }
 
-    //? if (>=1.18 && <=1.20.4) {
+    //? if <=1.20.4 {
     /*@WrapOperation(
             method = "storeEntities",
             at =
@@ -90,7 +90,7 @@ public abstract class EntityChunkDataAccessMixin {
     // The empty-entity path now writes NULL_NBT_SUPPLIER. Forget its last digest so a later
     // identical entity payload cannot be incorrectly skipped after the chunk was deleted.
 
-    //? if (>=1.21.11 && <=26.3) {
+    //? if >=1.21.11 {
     @WrapOperation(
             method = "storeEntities",
             at =

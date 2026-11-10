@@ -26,7 +26,7 @@ public abstract class EndGatewayBlockEntityMixin {
      * gateway starts a 40-tick teleport cooldown; a stale age moves that moment.
      */
 
-    //? if (>=1.18 && <=1.20.6) {
+    //? if <=1.20.6 {
     /*@Inject(method = "teleportTick", at = @At("TAIL"))
     *///?} else {
     @Inject(method = "portalTick", at = @At("TAIL"))
@@ -44,7 +44,7 @@ public abstract class EndGatewayBlockEntityMixin {
      * The cooldown itself is not saved: after a restart a gateway on cooldown teleports at once.
      */
 
-    //? if (>=1.18 && <=1.20.4) {
+    //? if <=1.20.4 {
     /*@Inject(method = "saveAdditional", at = @At("TAIL"))
     private void anticrash$saveTeleportCooldown(CompoundTag nbt, CallbackInfo callbackInfo) {
     *///?} else if <= 1.21.5 {
@@ -68,7 +68,7 @@ public abstract class EndGatewayBlockEntityMixin {
                 });
     }
 
-    //? if (>=1.18 && <=1.20.4) {
+    //? if <=1.20.4 {
     /*@Inject(method = "load", at = @At("TAIL"))
     private void anticrash$loadTeleportCooldown(CompoundTag nbt, CallbackInfo callbackInfo) {
     *///?} else if <= 1.21.5 {

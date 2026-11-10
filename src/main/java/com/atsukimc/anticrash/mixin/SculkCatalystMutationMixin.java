@@ -1,4 +1,4 @@
-//? if (>=1.19 && <=26.3) {
+//? if >=1.19 {
 package com.atsukimc.anticrash.mixin;
 
 //? if (>=1.19 && <=1.19.4) {
@@ -56,10 +56,10 @@ public abstract class SculkCatalystMutationMixin {
         if (ci.getReturnValueZ())
             world.blockEntityChanged(((SculkCatalystBlockEntity) (Object) this).getBlockPos());
             *///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if >=26.1 {
         if (!world.isClientSide()) world.blockEntityChanged(pos);
         //?}
-    //? if (>=1.19 && <=1.19.4) || (>=1.21.9 && <=26.3) {
+    //? if (>=1.19 && <=1.19.4) || >=1.21.9 {
 
     }
     //?}

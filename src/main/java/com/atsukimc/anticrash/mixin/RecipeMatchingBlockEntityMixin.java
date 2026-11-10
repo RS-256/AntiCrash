@@ -1,4 +1,4 @@
-//? if (>=1.19 && <=26.3) {
+//? if >=1.19 {
 package com.atsukimc.anticrash.mixin;
 
 //? if (>=1.19 && <=1.21.1) {
@@ -27,7 +27,7 @@ public abstract class RecipeMatchingBlockEntityMixin {
     /*@Shadow @Final private RecipeManager.CachedCheck quickCheck;
 
     *///?}
-    //? if (>=1.21.2 && <=26.3) {
+    //? if >=1.21.2 {
     @Shadow @Final private net.minecraft.world.item.crafting.RecipeManager.CachedCheck quickCheck;
 
     //?}
@@ -41,7 +41,7 @@ public abstract class RecipeMatchingBlockEntityMixin {
     private void anticrash$saveRecipeMatch(
             CompoundTag nbt, net.minecraft.core.HolderLookup.Provider registries, CallbackInfo ci)
     *///?}
-    //? if (>=1.21.6 && <=26.3) {
+    //? if >=1.21.6 {
     @Inject(method = "saveAdditional", at = @At("TAIL"))
     private void anticrash$saveRecipeMatch(
             net.minecraft.world.level.storage.ValueOutput nbt, CallbackInfo ci)
@@ -59,7 +59,7 @@ public abstract class RecipeMatchingBlockEntityMixin {
                         //? if (>=1.19 && <=1.21.1) {
                         /*extension.putString("RecipeMatch", id.toString());
                         *///?}
-                        //? if (>=1.21.2 && <=26.3) {
+                        //? if >=1.21.2 {
                         extension.putString("RecipeMatch", VersionIds.key(id));
                         //?}
 
@@ -75,7 +75,7 @@ public abstract class RecipeMatchingBlockEntityMixin {
     private void anticrash$loadRecipeMatch(
             CompoundTag nbt, net.minecraft.core.HolderLookup.Provider registries, CallbackInfo ci)
     *///?}
-    //? if (>=1.21.6 && <=26.3) {
+    //? if >=1.21.6 {
     @Inject(method = "loadAdditional", at = @At("TAIL"))
     private void anticrash$loadRecipeMatch(
             net.minecraft.world.level.storage.ValueInput nbt, CallbackInfo ci)
@@ -94,7 +94,7 @@ public abstract class RecipeMatchingBlockEntityMixin {
                                         VersionNbt.getString(extension, "RecipeMatch"))
                                 : null);
         *///?}
-        //? if (>=1.21.2 && <=26.3) {
+        //? if >=1.21.2 {
         ((RecipeMatchGetterAccessorMixin) quickCheck)
                 .anticrash$setRecipeId(
                         VersionNbt.contains(extension, "RecipeMatch", 8)

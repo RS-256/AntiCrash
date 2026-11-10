@@ -112,15 +112,15 @@ public final class RuntimeCapsuleManager {
 
         capsule.serverTick = server.getTickCount();
 
-        //? if (>=1.20.3 && <=26.3) {
+        //? if >=1.20.3 {
         capsule.nativeTickState = NativeTickState.capture(server);
         //?}
 
-        //? if (>=26.1 && <=26.3) {
+        //? if >=26.1 {
         capsule.clockStates = ClockSnapshot.capture(server);
         //?}
 
-        //? if (>=1.20.3 && <=26.3) {
+        //? if >=1.20.3 {
         if (capsule.nativeTickState.sprinting)
             capsule.unsupportedRuntimeState.add("VANILLA_TICK_SPRINT");
         //?}
@@ -145,10 +145,9 @@ public final class RuntimeCapsuleManager {
 
             worldRuntime.gameTime = world.getGameTime();
 
-            //? if (>=1.18 && <=1.21.11) {
+            //? if <=1.21.11 {
             /*worldRuntime.timeOfDay = world.getDayTime();
-            *///?}
-            //? if (>=26.1 && <=26.3) {
+            *///?} else {
             worldRuntime.timeOfDay = world.getDefaultClockTime();
             //?}
 
@@ -262,11 +261,10 @@ public final class RuntimeCapsuleManager {
         recordPhase(timing, "runtime.scheduled_ticks", phaseStart);
         capsule.unsupportedRuntimeState.add("WORLD_RNG");
 
-        //? if (>=1.18 && <=26.1) {
+        //? if <=26.1 {
         /*capsule.entityIdCounter =
                 com.atsukimc.anticrash.mixin.EntityRuntimeAccessorMixin.anticrash$currentId().get();
-        *///?}
-        //? if (>=26.2 && <=26.3) {
+        *///?} else {
         capsule.entityIdCounter =
                 com.atsukimc.anticrash.mixin.ServerEntityIdAccessor.anticrash$currentId().get();
         //?}
@@ -275,13 +273,12 @@ public final class RuntimeCapsuleManager {
 
             if (player.containerMenu != null && player.containerMenu != player.inventoryMenu) {
 
-                //? if (>=1.18 && <=1.21.8) {
+                //? if <=1.21.8 {
                 /*capsule.containerSessions.add(
                         player.getGameProfile().getName()
                                 + "|"
                                 + player.containerMenu.getClass().getSimpleName());
-                *///?}
-                //? if (>=1.21.9 && <=26.3) {
+                *///?} else {
                 capsule.containerSessions.add(
                         player.getGameProfile().name()
                                 + "|"
@@ -341,20 +338,18 @@ public final class RuntimeCapsuleManager {
                 try {
                     var value = future.getNow(null);
 
-                    //? if (>=1.18 && <=1.20.4) {
+                    //? if <=1.20.4 {
                     /*if (value != null && value.left().isPresent())
-                    *///?}
-                    //? if (>=1.20.5 && <=26.3) {
+                    *///?} else {
                     if (value != null && value.isSuccess())
                     //?}
                     {
 
-                        //? if (>=1.18 && <=1.20.4) {
+                        //? if <=1.20.4 {
                         /*result.addAll(
                                 ScheduledTickSnapshot.capture(
                                         VersionIds.dimension(world), value.left().get()));
-                        *///?}
-                        //? if (>=1.20.5 && <=26.3) {
+                        *///?} else {
                         result.addAll(
                                 ScheduledTickSnapshot.capture(
                                         VersionIds.dimension(world), value.orElse(null)));
@@ -411,12 +406,11 @@ public final class RuntimeCapsuleManager {
                 EquivalenceCategory.TICKET_LEDGER,
                 RuntimeFingerprint.hashLines(RuntimeFingerprint.ticketLines(capsule.ticketLedger)));
 
-        //? if (>=1.18 && <=1.21.11) {
+        //? if <=1.21.11 {
         /*capsule.expectedFingerprints.put(
                 EquivalenceCategory.WORLD_RUNTIME,
                 RuntimeFingerprint.hashLines(RuntimeFingerprint.worldLines(capsule.worlds)));
-        *///?}
-        //? if (>=26.1 && <=26.3) {
+        *///?} else {
         capsule.expectedFingerprints.put(
                 EquivalenceCategory.WORLD_RUNTIME,
                 RuntimeFingerprint.hashLines(RuntimeFingerprint.worldLines(capsule)));
@@ -479,7 +473,7 @@ public final class RuntimeCapsuleManager {
         restoreWorldTickOrder(server, capsule);
         restoreWorldLcgBlockSeed(server, capsule);
 
-        //? if (>=1.20.3 && <=26.3) {
+        //? if >=1.20.3 {
         if (capsule.nativeTickState != null) capsule.nativeTickState.restore(server);
         //?}
 
@@ -555,7 +549,7 @@ public final class RuntimeCapsuleManager {
             // InhabitedTime. The field starts at 0 in a new JVM, so the first tick after a restart
             // would add the whole age of the world. At a tick boundary it equals the world time.
 
-            //? if (>=1.18 && <=26.2) {
+            //? if <=26.2 {
             /*((com.atsukimc.anticrash.mixin.ServerChunkManagerAccessorMixin)
                             (Object) world.getChunkSource())
                     .anticrash$setLastMobSpawningTime(world.getGameTime());
@@ -739,10 +733,9 @@ public final class RuntimeCapsuleManager {
         try {
             var value = future.getNow(null);
 
-            //? if (>=1.18 && <=1.20.4) {
+            //? if <=1.20.4 {
             /*return value == null ? null : value.left().orElse(null);
-            *///?}
-            //? if (>=1.20.5 && <=26.3) {
+            *///?} else {
             return value == null ? null : value.orElse(null);
             //?}
 
@@ -1377,15 +1370,14 @@ public final class RuntimeCapsuleManager {
                                     + " not restored"));
         }
 
-        //? if (>=1.18 && <=1.21.11) {
+        //? if <=1.21.11 {
         /*addComparison(
                 report,
                 EquivalenceCategory.WORLD_RUNTIME,
                 RuntimeFingerprint.worldLines(expected.worlds),
                 RuntimeFingerprint.worldLines(actual.worlds),
                 true);
-        *///?}
-        //? if (>=26.1 && <=26.3) {
+        *///?} else {
         addComparison(
                 report,
                 EquivalenceCategory.WORLD_RUNTIME,
@@ -1394,7 +1386,7 @@ public final class RuntimeCapsuleManager {
                 true);
         //?}
 
-        //? if (>=1.18 && <=1.18.2) {
+        //? if <=1.18.2 {
         /*report.add(
                 RecoveryEquivalenceReport.unsupportedComparison(
                         EquivalenceCategory.WORLD_RNG,
@@ -1402,8 +1394,7 @@ public final class RuntimeCapsuleManager {
                         RuntimeFingerprint.worldRngLines(),
                         true,
                         "java.util.Random internal state is not safely exposed on 1.18.2"));
-        *///?}
-        //? if (>=1.19 && <=26.3) {
+        *///?} else {
         report.add(
                 RecoveryEquivalenceReport.unsupportedComparison(
                         EquivalenceCategory.WORLD_RNG,
@@ -1588,7 +1579,7 @@ public final class RuntimeCapsuleManager {
         if (capsule.movingPistonTickOrder == null) missing.add("MOVING_PISTONS");
         if (capsule.worlds == null) missing.add("WORLD_RUNTIME");
 
-        //? if (>=26.1 && <=26.3) {
+        //? if >=26.1 {
         if (capsule.formatVersion < 8 || capsule.clockStates == null)
             missing.add("WORLD_CLOCKS_V8");
         //?}
@@ -1860,7 +1851,7 @@ public final class RuntimeCapsuleManager {
         if (capsule.chunks == null || capsule.worlds == null)
             throw new IllegalStateException("Runtime capsule is incomplete");
 
-        //? if (>=26.1 && <=26.3) {
+        //? if >=26.1 {
         if (capsule.formatVersion >= 8 && capsule.clockStates == null)
             throw new IllegalStateException("Runtime capsule is missing world clocks");
 
@@ -1877,7 +1868,7 @@ public final class RuntimeCapsuleManager {
 
                 // Validate deserialized state too; the Gson version need not invoke a constructor.
 
-                //? if (>=26.1 && <=26.3) {
+                //? if >=26.1 {
                 new ClockSnapshot(
                         clock.id(),
                         clock.totalTicks(),

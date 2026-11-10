@@ -26,7 +26,7 @@ class FakePlayerCreationArgumentsTest {
 
         method.setAccessible(true);
 
-        //? if (>=1.18 && <=1.20.1) || (>=1.20.3 && <=1.21.11) {
+        //? if <=1.20.1 || (>=1.20.3 && <=1.21.11) {
         /*Object[] args =
                 (Object[])
                         method.invoke(
@@ -67,7 +67,7 @@ class FakePlayerCreationArgumentsTest {
                                 data,
                                 null);
         *///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if >=26.1 {
         Object[] args =
                 (Object[])
                         method.invoke(

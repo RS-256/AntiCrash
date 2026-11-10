@@ -1,4 +1,4 @@
-//? if (>=1.21.5 && <=26.3) {
+//? if >=1.21.5 {
 package com.atsukimc.anticrash.mixin;
 
 //? if (>=1.21.5 && <=1.21.10) {

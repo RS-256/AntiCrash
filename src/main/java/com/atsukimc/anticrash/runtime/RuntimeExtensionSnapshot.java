@@ -1,6 +1,6 @@
 package com.atsukimc.anticrash.runtime;
 
-//? if (>=1.18 && <=1.18.2) {
+//? if <=1.18.2 {
 /*import com.atsukimc.anticrash.mixin.SculkSensorListenerAccessorMixin;
 import net.minecraft.world.level.block.entity.SculkSensorBlockEntity;
 *///?}
@@ -49,11 +49,11 @@ public final class RuntimeExtensionSnapshot {
     public static final String CHUNK = "CHUNK_RUNTIME";
     public static final String ENTITY_ID = "ENTITY_ID_PHASE";
 
-    //? if (>=1.20.3 && <=26.3) {
+    //? if >=1.20.3 {
     public static final String NATIVE_TICK = "VANILLA_TICK_RUNTIME";
     //?}
 
-    //? if (>=26.2 && <=26.3) {
+    //? if >=26.2 {
     public static final String SULFUR = "SULFUR_RUNTIME";
 
     //?}
@@ -61,7 +61,7 @@ public final class RuntimeExtensionSnapshot {
     /** Every id-dependent rule AntiCrash keeps exact uses the id modulo 4 or modulo 40. */
     public static final int ENTITY_ID_MODULUS = 40;
 
-    //? if (>=1.18 && <=1.20.2) {
+    //? if <=1.20.2 {
     /*public static final List<String> CATEGORIES =
             List.of(
                     BREWING,
@@ -92,7 +92,7 @@ public final class RuntimeExtensionSnapshot {
                     NATIVE_TICK);
 
     *///?}
-    //? if (>=26.2 && <=26.3) {
+    //? if >=26.2 {
     public static final List<String> CATEGORIES =
             List.of(
                     BREWING,
@@ -117,7 +117,7 @@ public final class RuntimeExtensionSnapshot {
         Map<String, List<String>> lines = new LinkedHashMap<>();
         for (String category : CATEGORIES) lines.put(category, new ArrayList<>());
 
-        //? if (>=1.20.3 && <=26.3) {
+        //? if >=1.20.3 {
         lines.get(NATIVE_TICK).addAll(NativeTickState.capture(server).lines());
         //?}
 
@@ -186,25 +186,25 @@ public final class RuntimeExtensionSnapshot {
 
     /** Block-entity traversal stays in the original world/ticker order. */
 
-    //? if (>=1.18 && <=1.21.11) {
+    //? if <=1.21.11 {
     /*private static void captureBlockRuntime(
             ServerLevel world,
             String dimension,
             Map<String, List<String>> lines,
             RuntimeCapsule capsule)
     *///?}
-            //? if (>=1.18 && <=1.20.2) {
+            //? if <=1.20.2 {
             /*{
 
             *///?}
-    //? if (>=26.1 && <=26.3) {
+    //? if >=26.1 {
     private static void captureBlockRuntime(
             ServerLevel world,
             String dimension,
             Map<String, List<String>> lines,
             RuntimeCapsule capsule)
     //?}
-            //? if (>=1.20.3 && <=26.3) {
+            //? if >=1.20.3 {
             {
         // Experimental trial-spawner logic has non-codec detector/force-activation state.
         // Do not claim exact runtime support merely because its ordinary data has a codec.
@@ -218,11 +218,11 @@ public final class RuntimeExtensionSnapshot {
             //? if (>=1.20.3 && <=1.20.6) {
             /*LevelChunk loaded = holder.getTickingChunk();
             *///?}
-            //? if (>=1.21 && <=26.3) {
+            //? if >=1.21 {
             LevelChunk loaded = VersionChunkView.worldChunk(holder);
             //?}
 
-            //? if (>=1.20.3 && <=26.3) {
+            //? if >=1.20.3 {
             if (loaded == null) continue;
 
             for (BlockEntity entity : loaded.getBlockEntities().values()) {
@@ -279,7 +279,7 @@ public final class RuntimeExtensionSnapshot {
                 }
                 //?}
 
-                //? if (>=26.2 && <=26.3) {
+                //? if >=26.2 {
                 if (entity
                         instanceof
                         net.minecraft.world.level.block.entity.PotentSulfurBlockEntity sulfur) {
@@ -302,7 +302,7 @@ public final class RuntimeExtensionSnapshot {
                 }
                 //?}
 
-                //? if (>=26.1 && <=26.3) {
+                //? if >=26.1 {
                 if ((entity instanceof net.minecraft.world.level.block.entity.TestBlockEntity
                                 || entity
                                         instanceof
@@ -310,11 +310,11 @@ public final class RuntimeExtensionSnapshot {
                                                 .TestInstanceBlockEntity)
                         && !capsule.unsupportedRuntimeState.contains("GAMETEST_RUNTIME"))
                 //?}
-                    //? if (>=1.21.5 && <=26.3) {
+                    //? if >=1.21.5 {
                     capsule.unsupportedRuntimeState.add("GAMETEST_RUNTIME");
                     //?}
 
-                //? if (>=1.21.2 && <=26.3) {
+                //? if >=1.21.2 {
                 if (entity
                                 instanceof
                                 net.minecraft.world.level.block.entity.CreakingHeartBlockEntity
@@ -322,12 +322,12 @@ public final class RuntimeExtensionSnapshot {
                     capsule.unsupportedRuntimeState.add("CREAKING_HEART_RUNTIME");
                 //?}
 
-                //? if (>=1.20.3 && <=26.3) {
+                //? if >=1.20.3 {
                 if (entity instanceof net.minecraft.world.level.block.entity.TrialSpawnerBlockEntity
                         && !capsule.unsupportedRuntimeState.contains("TRIAL_SPAWNER_RUNTIME")) {
                     capsule.unsupportedRuntimeState.add("TRIAL_SPAWNER_RUNTIME");
                 //?}
-                //? if (>=1.20.5 && <=26.3) {
+                //? if >=1.20.5 {
 
                 }
 
@@ -335,7 +335,7 @@ public final class RuntimeExtensionSnapshot {
                         && !capsule.unsupportedRuntimeState.contains("VAULT_RUNTIME")) {
                     capsule.unsupportedRuntimeState.add("VAULT_RUNTIME");
                 //?}
-                //? if (>=1.20.3 && <=26.3) {
+                //? if >=1.20.3 {
 
                 }
             }
@@ -359,7 +359,7 @@ public final class RuntimeExtensionSnapshot {
                 BlockEntity blockEntity = chunk == null ? null : chunk.getBlockEntities().get(pos);
                 String where = dimension + "|" + pos.getX() + "," + pos.getY() + "," + pos.getZ();
 
-                //? if (>=1.18 && <=26.2) {
+                //? if <=26.2 {
                 /*if (blockEntity instanceof BrewingStandBlockEntity) {
                     BrewingStandBlockEntityTimerAccessor stand =
                             (BrewingStandBlockEntityTimerAccessor) blockEntity;
@@ -385,11 +385,11 @@ public final class RuntimeExtensionSnapshot {
                             ((EndGatewayBlockEntityAccessorMixin) blockEntity)
                                     .anticrash$getTeleportCooldown();
                     if (cooldown > 0) lines.get(END_GATEWAY).add(where + "|" + cooldown);
-                //? if (>=1.18 && <=1.19.2) {
+                //? if <=1.19.2 {
 
                 /*}
                 *///?}
-                //? if (>=1.18 && <=1.18.2) {
+                //? if <=1.18.2 {
                 /*else if (blockEntity instanceof SculkSensorBlockEntity sensor) {
                     SculkSensorListenerAccessorMixin listener =
                             (SculkSensorListenerAccessorMixin) sensor.getListener();
@@ -408,12 +408,12 @@ public final class RuntimeExtensionSnapshot {
                                                 + listener.anticrash$getDelay());
                     }
                 *///?}
-                //? if (>=1.18 && <=1.18.2) || (>=1.19.3 && <=26.3) {
+                //? if <=1.18.2 || >=1.19.3 {
 
                 }
                 //?}
 
-                //? if (>=1.19 && <=26.3) {
+                //? if >=1.19 {
                 String sculk = SculkRuntimeFingerprint.capture(blockEntity);
 
                 if (sculk != null) lines.get(SCULK).add(where + "|" + sculk);
@@ -439,15 +439,14 @@ public final class RuntimeExtensionSnapshot {
 
         String id = dimension + "|" + entity.getStringUUID();
 
-        //? if (>=1.18 && <=1.20.6) {
+        //? if <=1.20.6 {
         /*if (runtime.anticrash$isInNetherPortal() || runtime.anticrash$getNetherPortalTime() > 0)
-        *///?}
-        //? if (>=1.21 && <=26.3) {
+        *///?} else {
         if (entity.portalProcess != null)
         //?}
         {
 
-            //? if (>=1.18 && <=1.20.6) {
+            //? if <=1.20.6 {
             /*lines.get(PORTAL)
                     .add(
                             id
@@ -455,8 +454,7 @@ public final class RuntimeExtensionSnapshot {
                                     + runtime.anticrash$isInNetherPortal()
                                     + "|"
                                     + runtime.anticrash$getNetherPortalTime());
-            *///?}
-            //? if (>=1.21 && <=26.3) {
+            *///?} else {
             lines.get(PORTAL).add(id + "|" + PortalRuntime.canonical(entity.portalProcess));
 
             if (PortalRuntime.type(entity.portalProcess) == null
@@ -479,7 +477,7 @@ public final class RuntimeExtensionSnapshot {
                         != null
                 && !capsule.unsupportedRuntimeState.contains("TNT_MINECART_DAMAGE_SOURCE"))
                 *///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if >=26.1 {
         line.append("|fluidTrackers=").append(FluidInteractionSnapshot.capture(entity));
 
         if (entity instanceof net.minecraft.world.entity.vehicle.minecart.MinecartTNT
@@ -488,7 +486,7 @@ public final class RuntimeExtensionSnapshot {
                         != null
                 && !capsule.unsupportedRuntimeState.contains("TNT_MINECART_DAMAGE_SOURCE"))
         //?}
-            //? if (>=1.21.5 && <=26.3) {
+            //? if >=1.21.5 {
             capsule.unsupportedRuntimeState.add("TNT_MINECART_DAMAGE_SOURCE");
             //?}
 
@@ -508,13 +506,13 @@ public final class RuntimeExtensionSnapshot {
                         ^///?}
                 && !capsule.unsupportedRuntimeState.contains("EXPERIMENTAL_MINECART_RUNTIME"))
                 *///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if >=26.1 {
         if (entity instanceof net.minecraft.world.entity.vehicle.minecart.AbstractMinecart cart
                 && cart.getBehavior()
                         instanceof net.minecraft.world.entity.vehicle.minecart.NewMinecartBehavior
                 && !capsule.unsupportedRuntimeState.contains("EXPERIMENTAL_MINECART_RUNTIME"))
         //?}
-            //? if (>=1.21.2 && <=26.3) {
+            //? if >=1.21.2 {
             capsule.unsupportedRuntimeState.add("EXPERIMENTAL_MINECART_RUNTIME");
             //?}
 
@@ -527,11 +525,11 @@ public final class RuntimeExtensionSnapshot {
                 //? if (>=1.21.2 && <=1.21.11) {
                 /*&& !capsule.unsupportedRuntimeState.contains("HOPPER_MINECART_RUNTIME"))
                 *///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if >=26.1 {
         if (entity instanceof net.minecraft.world.entity.vehicle.minecart.MinecartHopper
                 && !capsule.unsupportedRuntimeState.contains("HOPPER_MINECART_RUNTIME"))
         //?}
-            //? if (>=1.21.2 && <=26.3) {
+            //? if >=1.21.2 {
             capsule.unsupportedRuntimeState.add("HOPPER_MINECART_RUNTIME");
             //?}
 
@@ -544,11 +542,11 @@ public final class RuntimeExtensionSnapshot {
                 //? if (>=1.21.2 && <=1.21.11) {
                 /*&& !capsule.unsupportedRuntimeState.contains("BOAT_TURN_UNDERWATER_RUNTIME"))
                 *///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if >=26.1 {
         if (entity instanceof net.minecraft.world.entity.vehicle.boat.AbstractBoat
                 && !capsule.unsupportedRuntimeState.contains("BOAT_TURN_UNDERWATER_RUNTIME"))
         //?}
-            //? if (>=1.21.2 && <=26.3) {
+            //? if >=1.21.2 {
             capsule.unsupportedRuntimeState.add("BOAT_TURN_UNDERWATER_RUNTIME");
 
         int collisionChecks =
@@ -564,7 +562,7 @@ public final class RuntimeExtensionSnapshot {
         }
             //?}
 
-        //? if (>=1.21 && <=26.3) {
+        //? if >=1.21 {
         if (entity instanceof net.minecraft.world.entity.item.PrimedTnt)
             line.append("|teleportedTnt=")
                     .append(
@@ -576,14 +574,14 @@ public final class RuntimeExtensionSnapshot {
 
         if (entity instanceof net.minecraft.world.entity.projectile.Projectile) {
         //?}
-            //? if (>=1.21.9 && <=26.3) {
+            //? if >=1.21.9 {
             line.append("|checkedOwner=")
                     .append(
                             ((com.atsukimc.anticrash.mixin.ProjectileRuntimeAccessorMixin) entity)
                                     .anticrash$checkedForLeftOwner());
             //?}
 
-            //? if (>=1.21 && <=26.3) {
+            //? if >=1.21 {
             var deflected =
                     ((com.atsukimc.anticrash.mixin.ProjectileRuntimeAccessorMixin) entity)
                             .anticrash$lastDeflectedEntity();
@@ -605,7 +603,7 @@ public final class RuntimeExtensionSnapshot {
                 .append("|forceSupport=")
                 .append(runtime.anticrash$forceSupportUpdate());
         *///?}
-        //? if (>=1.21.11 && <=26.3) {
+        //? if >=1.21.11 {
         line.append("|groundCollision=")
                 .append(entity.verticalCollisionBelow)
                 .append("|motion=")
@@ -622,7 +620,7 @@ public final class RuntimeExtensionSnapshot {
         if (runtime.anticrash$getRidingCooldown() > 0)
             line.append("|riding=").append(runtime.anticrash$getRidingCooldown());
 
-        //? if (>=1.18 && <=26.2) {
+        //? if <=26.2 {
         /*if (entity.invulnerableTime > 0)
         *///?}
         //? if 26.3 {
@@ -630,7 +628,7 @@ public final class RuntimeExtensionSnapshot {
         //?}
         {
 
-            //? if (>=1.18 && <=26.2) {
+            //? if <=26.2 {
             /*line.append("|regen=").append(entity.invulnerableTime);
             *///?}
             //? if 26.3 {
@@ -645,7 +643,7 @@ public final class RuntimeExtensionSnapshot {
             }
         }
 
-        //? if (>=1.21.11 && <=26.3) {
+        //? if >=1.21.11 {
         if (entity instanceof LivingEntity)
             line.append("|kineticTime=")
                     .append(

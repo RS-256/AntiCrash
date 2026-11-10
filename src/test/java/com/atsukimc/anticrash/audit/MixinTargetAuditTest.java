@@ -202,7 +202,7 @@ class MixinTargetAuditTest {
                 for (Object target : list(value(marker, "targets")))
                     targets.add(target.toString().replace('.', '/'));
                 for (String target : targets)
-                //? if (>=1.18 && <=1.20.1) {
+                //? if <=1.20.1 {
                 /*{
 
                 *///?}
@@ -212,13 +212,13 @@ class MixinTargetAuditTest {
                     // Mandatory Minecraft targets remain required; this is not
                     // Carpet runtime coverage.
                 *///?}
-                //? if (>=1.21.9 && <=26.3) {
+                //? if >=1.21.9 {
                 {
                     // Optional external adapters are absent in the game-only offline classpath.
                     // Only @Pseudo Carpet targets may be absent; mandatory Minecraft targets
                     // remain required. This is not Carpet runtime coverage.
                 //?}
-                    //? if (>=1.20.2 && <=26.3) {
+                    //? if >=1.20.2 {
                     boolean pseudo =
                             annotations(mixin.visibleAnnotations, mixin.invisibleAnnotations)
                                     .stream()
@@ -266,11 +266,10 @@ class MixinTargetAuditTest {
                                 if (selector instanceof String name)
                                     for (MethodNode selected : selectedMethods(target, name))
 
-                                        //? if (>=1.18 && <=1.21.11) {
+                                        //? if <=1.21.11 {
                                         /*invokeOccursInTarget(
                                                 selected, value(a, "at"), problems, context);
-                                        *///?}
-                                        //? if (>=26.1 && <=26.3) {
+                                        *///?} else {
                                         invokeOccursInTarget(
                                                 selected, value(a, "forIndex"), problems, context);
                                         //?}
@@ -291,10 +290,9 @@ class MixinTargetAuditTest {
                                 }
                             }
 
-                            //? if (>=1.18 && <=1.21.11) {
+                            //? if <=1.21.11 {
                             /*injectionPoints(value(a, "at"), problems, context);
-                            *///?}
-                            //? if (>=26.1 && <=26.3) {
+                            *///?} else {
                             injectionPoints(value(a, "forIndex"), problems, context);
                             //?}
 

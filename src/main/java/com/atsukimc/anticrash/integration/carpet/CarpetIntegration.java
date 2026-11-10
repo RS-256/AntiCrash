@@ -273,7 +273,7 @@ public final class CarpetIntegration {
 
         data.uuid = player.getStringUUID();
 
-        //? if (>=1.18 && <=1.21.8) {
+        //? if <=1.21.8 {
         /*data.name = player.getGameProfile().getName();
         *///?} else {
         data.name = player.getGameProfile().name();
@@ -294,10 +294,9 @@ public final class CarpetIntegration {
         }
         if (config.fakePlayer.snapshot.gamemode)
 
-            //? if (>=1.18 && <=1.21.4) {
+            //? if <=1.21.4 {
             /*data.gamemode = player.gameMode.getGameModeForPlayer().getName();
-            *///?}
-            //? if (>=1.21.5 && <=26.3) {
+            *///?} else {
             data.gamemode = player.gameMode.getGameModeForPlayer().getSerializedName();
             //?}
 
@@ -311,7 +310,7 @@ public final class CarpetIntegration {
 
             data.strafing = player.xxa;
 
-            //? if (>=1.21.2 && <=26.3) {
+            //? if >=1.21.2 {
             data.playerInput = PlayerInputCodec.capture(player.getLastClientInput());
             //?}
 
@@ -331,10 +330,9 @@ public final class CarpetIntegration {
 
             data.saturation = player.getFoodData().getSaturationLevel();
 
-            //? if (>=1.18 && <=1.21.1) {
+            //? if <=1.21.1 {
             /*data.exhaustion = player.getFoodData().getExhaustionLevel();
-            *///?}
-            //? if (>=1.21.2 && <=26.3) {
+            *///?} else {
             data.exhaustion =
                     ((com.atsukimc.anticrash.mixin.HungerManagerAccessorMixin) player.getFoodData())
                             .anticrash$getExhaustion();
@@ -437,7 +435,7 @@ public final class CarpetIntegration {
                                     + player.getStringUUID());
                 }
 
-                //? if (>=1.18 && <=1.21.8) {
+                //? if <=1.21.8 {
                 /*if (!data.name.equals(player.getGameProfile().getName()))
                 *///?} else {
                 if (!data.name.equals(player.getGameProfile().name()))
@@ -489,7 +487,7 @@ public final class CarpetIntegration {
         }
 
         for (ServerPlayer player : server.getPlayerList().getPlayers())
-            //? if (>=1.18 && <=1.21.8) {
+            //? if <=1.21.8 {
             /*if (isFakePlayer(player)
                     && player.getGameProfile().getName().equalsIgnoreCase(data.name))
             *///?} else {
@@ -513,7 +511,7 @@ public final class CarpetIntegration {
             throw new IOException("FakePlayer checkpoint identity is already in use: " + data.name);
         }
 
-        //? if (>=1.18 && <=1.21.8) {
+        //? if <=1.21.8 {
         /*try (FakePlayerProfileScope ignored =
                 FakePlayerProfileScope.open(
                         server.getProfileCache(), server, expectedUuid, data.name))
@@ -570,7 +568,7 @@ public final class CarpetIntegration {
         if (data.name != null && data.name.matches("[A-Za-z0-9_.+-]{1,16}")) {
             try {
 
-                //? if (>=1.18 && <=1.19) {
+                //? if <=1.19 {
                 /*RecoveryCommandPolicy.runInternal(() ->
                         server.getCommands()
                                 .performCommand(
@@ -654,7 +652,7 @@ public final class CarpetIntegration {
             FakePlayerSnapshot data,
             AntiCrashConfig config)
             throws IOException {
-        //? if (>=1.21.2 && <=26.3) {
+        //? if >=1.21.2 {
 
         // Validate new input state before teleport, vehicle changes, or inventory mutation.
         if (config.fakePlayer.snapshot.movement) PlayerInputCodec.restore(data.playerInput);
@@ -754,14 +752,14 @@ public final class CarpetIntegration {
 
             if (config.fakePlayer.snapshot.dimension && VersionLevels.level(player) != world)
 
-                //? if (>=1.18 && <=1.21.1) {
+                //? if <=1.21.1 {
                 /*player.teleportTo(world, x, y, z, yaw, pitch);
                 *///?} else {
                 player.teleportTo(world, x, y, z, java.util.Set.of(), yaw, pitch, false);
                 //?}
 
             else {
-                //? if (>=1.18 && <=1.21.4) {
+                //? if <=1.21.4 {
                 /*player.absMoveTo(x, y, z, yaw, pitch);
                 *///?} else {
                 player.absSnapTo(x, y, z, yaw, pitch);
@@ -797,7 +795,7 @@ public final class CarpetIntegration {
             player.setSprinting(data.sprinting);
         }
 
-        //? if (>=1.18 && <=1.21.1) {
+        //? if <=1.21.1 {
         /*if (config.fakePlayer.snapshot.movement)
             player.setPlayerInput(data.strafing, data.forward, false, data.sneaking);
         *///?} else {
@@ -815,7 +813,7 @@ public final class CarpetIntegration {
 
             player.getFoodData().setSaturation(data.saturation);
 
-            //? if (>=1.18 && <=1.21.1) {
+            //? if <=1.21.1 {
             /*player.getFoodData().setExhaustion(data.exhaustion);
             *///?} else {
             ((com.atsukimc.anticrash.mixin.HungerManagerAccessorMixin) player.getFoodData())
@@ -861,7 +859,7 @@ public final class CarpetIntegration {
                                     config.fakePlayer.snapshot.blockBreakProgress));
         if (vehicle != null) {
 
-            //? if (>=1.18 && <=1.21.8) {
+            //? if <=1.21.8 {
             /*if (VersionLevels.level(vehicle) != VersionLevels.level(player)
                     || !player.startRiding(vehicle, true))
             *///?} else {
@@ -910,7 +908,7 @@ public final class CarpetIntegration {
 
     private static void collectUuids(net.minecraft.nbt.CompoundTag nbt, Set<UUID> uuids) {
 
-        //? if (>=1.18 && <=1.21.4) {
+        //? if <=1.21.4 {
         /*if (nbt.hasUUID("UUID")) uuids.add(nbt.getUUID("UUID"));
         net.minecraft.nbt.ListTag passengers = VersionNbt.list(nbt, "Passengers", 10);
         *///?} else {
@@ -952,7 +950,7 @@ public final class CarpetIntegration {
                     existing.discard();
             }
 
-        //? if (>=1.18 && <=1.21.1) {
+        //? if <=1.21.1 {
         /*net.minecraft.world.entity.Entity root =
                 net.minecraft.world.entity.EntityType.loadEntityRecursive(
                         nbt, world, entity -> world.addWithUUID(entity) ? entity : null);
@@ -982,14 +980,14 @@ public final class CarpetIntegration {
         throw new IOException("FakePlayer vehicle was not created from its snapshot");
     }
 
-    //? if (>=1.18 && <=1.21.10) {
+    //? if <=1.21.10 {
     /*private static void captureUseState(ServerPlayer player, FakePlayerSnapshot data) {
     *///?} else {
     private static void captureUseState(ServerPlayer player, FakePlayerSnapshot data)
             throws IOException {
     //?}
 
-        //? if (>=26.1 && <=26.3) {
+        //? if >=26.1 {
         var fluids = new net.minecraft.nbt.CompoundTag();
         fluids.put(
                 "Trackers",
@@ -997,7 +995,7 @@ public final class CarpetIntegration {
         data.fluidTrackersNbt = NbtCodec.encode(fluids);
         //?}
 
-        //? if (>=1.21.11 && <=26.3) {
+        //? if >=1.21.11 {
         data.motionFrameNbt =
                 NbtCodec.encode(
                         com.atsukimc.anticrash.runtime.EntityMotionFrame.capture(player).write());
@@ -1007,7 +1005,7 @@ public final class CarpetIntegration {
                 (com.atsukimc.anticrash.mixin.LivingEntityAccessorMixin) player;
         data.lastAttackedTicks = living.anticrash$getLastAttackedTicks();
 
-        //? if (>=1.21.11 && <=26.3) {
+        //? if >=1.21.11 {
         data.lastKineticAttackTime = living.anticrash$lastKineticAttackTime();
         //?}
 
@@ -1022,7 +1020,7 @@ public final class CarpetIntegration {
 
         List<FakePlayerSnapshot.ItemCooldown> cooldowns = new ArrayList<>();
 
-        //? if (>=1.18 && <=1.21.1) {
+        //? if <=1.21.1 {
         /*for (java.util.Map.Entry<net.minecraft.world.item.Item, Object> entry :
         *///?} else {
         for (java.util.Map.Entry<?, Object> entry :
@@ -1035,7 +1033,7 @@ public final class CarpetIntegration {
             if (remaining <= 0) continue;
             FakePlayerSnapshot.ItemCooldown cooldown = new FakePlayerSnapshot.ItemCooldown();
 
-            //? if (>=1.18 && <=1.21.1) {
+            //? if <=1.21.1 {
             /*cooldown.item = VersionIds.id(VersionIds.items(), entry.getKey());
             *///?} else {
             cooldown.item = entry.getKey().toString();
@@ -1052,7 +1050,7 @@ public final class CarpetIntegration {
     private static void restoreUseState(ServerPlayer player, FakePlayerSnapshot data)
             throws IOException {
 
-        //? if (>=26.1 && <=26.3) {
+        //? if >=26.1 {
         if (data.fluidTrackersNbt != null)
             com.atsukimc.anticrash.runtime.FluidInteractionSnapshot.restore(
                     player,
@@ -1060,7 +1058,7 @@ public final class CarpetIntegration {
                             NbtCodec.decodeCompound(data.fluidTrackersNbt), "Trackers", 10));
         //?}
 
-        //? if (>=1.21.11 && <=26.3) {
+        //? if >=1.21.11 {
         if (data.motionFrameNbt != null)
             com.atsukimc.anticrash.runtime.EntityMotionFrame.read(
                             NbtCodec.decodeCompound(data.motionFrameNbt))
@@ -1070,7 +1068,7 @@ public final class CarpetIntegration {
         com.atsukimc.anticrash.mixin.LivingEntityAccessorMixin living =
                 (com.atsukimc.anticrash.mixin.LivingEntityAccessorMixin) player;
 
-        //? if (>=1.21.11 && <=26.3) {
+        //? if >=1.21.11 {
         if (data.lastKineticAttackTime != null)
             living.anticrash$setLastKineticAttackTime(data.lastKineticAttackTime);
         //?}
@@ -1114,10 +1112,10 @@ public final class CarpetIntegration {
 
                 var id = VersionIds.tryParse(cooldown.item);
 
-                //? if (>=1.18 && <=1.21.1) {
+                //? if <=1.21.1 {
                 /*if (id == null || !VersionIds.items().containsKey(id))
                     throw new IOException("Unknown FakePlayer cooldown item: " + cooldown.item);
-                *///?} else if (>=1.21.2 && <=26.3) {
+                *///?} else if >=1.21.2 {
                 if (id == null)
                     throw new IOException("Invalid FakePlayer cooldown group: " + cooldown.item);
                 //?}
@@ -1125,7 +1123,7 @@ public final class CarpetIntegration {
                 // The same remaining time and the same expiry tick; only the progress bar's start
                 // differs.
 
-                //? if (>=1.18 && <=1.21.1) {
+                //? if <=1.21.1 {
                 /*player.getCooldowns()
                         .addCooldown(
                                 VersionIds.value(VersionIds.items(), id), cooldown.remainingTicks);
@@ -1169,7 +1167,7 @@ public final class CarpetIntegration {
         if (data == null || data.formatVersion != 1)
             throw new IllegalArgumentException("Unsupported or empty FakePlayer snapshot");
 
-        //? if (>=1.21.11 && <=26.3) {
+        //? if >=1.21.11 {
         if (data.motionFrameNbt != null)
             com.atsukimc.anticrash.runtime.EntityMotionFrame.read(
                     NbtCodec.decodeCompound(data.motionFrameNbt));
@@ -1178,7 +1176,7 @@ public final class CarpetIntegration {
         // LivingEntity initializes lastKineticAttackTime to Integer.MIN_VALUE (as long).
         // Preserve that never-hit sentinel, while still rejecting other invalid negative times.
 
-        //? if (>=26.1 && <=26.3) {
+        //? if >=26.1 {
         if (data.fluidTrackersNbt != null)
             com.atsukimc.anticrash.runtime.FluidInteractionSnapshot.decode(
                     VersionNbt.list(
@@ -1188,7 +1186,7 @@ public final class CarpetIntegration {
         // LivingEntity initializes lastKineticHitFeedbackTime to Integer.MIN_VALUE (as long).
         // Preserve that never-hit sentinel, while still rejecting other invalid negative times.
 
-        //? if (>=1.21.11 && <=26.3) {
+        //? if >=1.21.11 {
         if (data.lastKineticAttackTime != null
                 && data.lastKineticAttackTime < -1
                 && data.lastKineticAttackTime != Integer.MIN_VALUE)

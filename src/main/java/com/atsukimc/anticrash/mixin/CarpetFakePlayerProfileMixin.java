@@ -1,4 +1,4 @@
-//? if (>=1.20.2 && <=26.3) {
+//? if >=1.20.2 {
 package com.atsukimc.anticrash.mixin;
 
 import com.atsukimc.anticrash.integration.carpet.FakePlayerProfileScope;

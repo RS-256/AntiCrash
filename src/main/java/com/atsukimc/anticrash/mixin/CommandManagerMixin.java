@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-//? if (>=1.18 && <=1.20.2) {
+//? if <=1.20.2 {
 /*import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 *///?}
@@ -35,7 +35,7 @@ public abstract class CommandManagerMixin {
         }
     }
 
-    //? if (>=1.18 && <=1.19) {
+    //? if <=1.19 {
     /*@Inject(method = "performCommand", at = @At("HEAD"), cancellable = true)
     private void anticrash$blockCommandsDuringCheckpoint(
             CommandSourceStack source,
@@ -54,7 +54,7 @@ public abstract class CommandManagerMixin {
             String command,
             CallbackInfo callbackInfo) {
     //?}
-        //? if (>=1.19.1 && <=26.3) {
+        //? if >=1.19.1 {
         CommandSourceStack source = parse.getContext().getSource();
         //?}
 
@@ -75,7 +75,7 @@ public abstract class CommandManagerMixin {
                                         controller.config().language, "checkpoint.command_blocked"),
                                 null));
 
-                //? if (>=1.18 && <=1.20.2) {
+                //? if <=1.20.2 {
                 /*callbackInfo.setReturnValue(0);
                 *///?} else {
                 callbackInfo.cancel();
@@ -97,7 +97,7 @@ public abstract class CommandManagerMixin {
                                     "recovery.command_mutation_blocked"),
                             null));
 
-            //? if (>=1.18 && <=1.20.2) {
+            //? if <=1.20.2 {
             /*callbackInfo.setReturnValue(0);
             *///?} else {
             callbackInfo.cancel();

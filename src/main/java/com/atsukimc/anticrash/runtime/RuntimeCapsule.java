@@ -6,11 +6,10 @@ import java.util.List;
 public final class RuntimeCapsule {
     public static final int MIN_SUPPORTED_FORMAT_VERSION = 1;
 
-    //? if (>=1.18 && <=1.21.11) {
+    //? if <=1.21.11 {
     /*public static final int CURRENT_FORMAT_VERSION = 7;
 
-    *///?}
-    //? if (>=26.1 && <=26.3) {
+    *///?} else {
     public static final int CURRENT_FORMAT_VERSION = 8;
 
     //?}
@@ -33,14 +32,14 @@ public final class RuntimeCapsule {
 
     /** Null in older capsules; missing state must not be treated as an equivalent default. */
 
-    //? if (>=1.20.3 && <=26.3) {
+    //? if >=1.20.3 {
     public NativeTickState nativeTickState;
 
     //?}
 
     /** v8/26.1: null means missing, NOT an equivalent empty set. */
 
-    //? if (>=26.1 && <=26.3) {
+    //? if >=26.1 {
     public List<ClockSnapshot> clockStates;
 
     //?}

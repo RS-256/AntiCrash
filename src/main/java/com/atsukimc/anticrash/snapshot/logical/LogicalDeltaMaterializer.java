@@ -162,10 +162,9 @@ public final class LogicalDeltaMaterializer {
         // the intuitive directory/file order throws "Expected directory" before any delta is
         // applied, so keep the mapped constructor order explicit here.
 
-        //? if (>=1.18 && <=1.20.4) {
+        //? if <=1.20.4 {
         /*try (RegionFile region = new RegionFile(file, directory, false))
-        *///?}
-        //? if (>=1.20.5 && <=26.3) {
+        *///?} else {
         try (RegionFile region =
                 new RegionFile(
                         com.atsukimc.anticrash.snapshot.RegionStorageAdapter.KEY,
@@ -177,13 +176,13 @@ public final class LogicalDeltaMaterializer {
 
             try (DataOutputStream output = region.getChunkDataOutputStream(chunk)) {
 
-                //? if (>=1.18 && <=1.20.1) {
+                //? if <=1.20.1 {
                 /*NbtIo.write(NbtCodec.decodeCompound(encoded), output);
                 *///?}
                 //? if 1.20.2 {
                 /*NbtIo.writeUnnamedTag(NbtCodec.decodeCompound(encoded), output);
                 *///?}
-                //? if (>=1.20.3 && <=26.3) {
+                //? if >=1.20.3 {
                 NbtIo.writeUnnamedTagWithFallback(NbtCodec.decodeCompound(encoded), output);
                 //?}
 
@@ -211,10 +210,9 @@ public final class LogicalDeltaMaterializer {
             return null;
         }
 
-        //? if (>=1.18 && <=1.20.4) {
+        //? if <=1.20.4 {
         /*try (RegionFile probe = new RegionFile(file, directory, false))
-        *///?}
-        //? if (>=1.20.5 && <=26.3) {
+        *///?} else {
         try (RegionFile probe =
                 new RegionFile(
                         com.atsukimc.anticrash.snapshot.RegionStorageAdapter.KEY,
@@ -227,10 +225,9 @@ public final class LogicalDeltaMaterializer {
         }
         copyOnWrite(file);
 
-        //? if (>=1.18 && <=1.20.4) {
+        //? if <=1.20.4 {
         /*try (RegionFile region = new RegionFile(file, directory, false))
-        *///?}
-        //? if (>=1.20.5 && <=26.3) {
+        *///?} else {
         try (RegionFile region =
                 new RegionFile(
                         com.atsukimc.anticrash.snapshot.RegionStorageAdapter.KEY,
@@ -264,10 +261,9 @@ public final class LogicalDeltaMaterializer {
         }
         copyOnWrite(file);
 
-        //? if (>=1.18 && <=1.20.4) {
+        //? if <=1.20.4 {
         /*try (RegionFile region = new RegionFile(file, directory, false))
-        *///?}
-        //? if (>=1.20.5 && <=26.3) {
+        *///?} else {
         try (RegionFile region =
                 new RegionFile(
                         com.atsukimc.anticrash.snapshot.RegionStorageAdapter.KEY,
@@ -283,10 +279,9 @@ public final class LogicalDeltaMaterializer {
             try (var input = region.getChunkDataInputStream(chunk)) {
                 if (input == null) return file;
 
-                //? if (>=1.18 && <=1.20.1) {
+                //? if <=1.20.1 {
                 /*root = NbtIo.read(input);
-                *///?}
-                //? if (>=1.20.2 && <=26.3) {
+                *///?} else {
                 root = NbtIo.read(input, net.minecraft.nbt.NbtAccounter.create(16 * 1024 * 1024));
                 //?}
 
@@ -305,13 +300,13 @@ public final class LogicalDeltaMaterializer {
 
             try (DataOutputStream output = region.getChunkDataOutputStream(chunk)) {
 
-                //? if (>=1.18 && <=1.20.1) {
+                //? if <=1.20.1 {
                 /*NbtIo.write(root, output);
                 *///?}
                 //? if 1.20.2 {
                 /*NbtIo.writeUnnamedTag(root, output);
                 *///?}
-                //? if (>=1.20.3 && <=26.3) {
+                //? if >=1.20.3 {
                 NbtIo.writeUnnamedTagWithFallback(root, output);
                 //?}
 
@@ -324,10 +319,9 @@ public final class LogicalDeltaMaterializer {
 
     private static boolean matchesUuid(CompoundTag entity, String uuidText) {
 
-        //? if (>=1.18 && <=1.21.4) {
+        //? if <=1.21.4 {
         /*if (uuidText == null || !entity.hasUUID("UUID"))
-        *///?}
-        //? if (>=1.21.5 && <=26.3) {
+        *///?} else {
         if (uuidText == null || entity.read("UUID", net.minecraft.core.UUIDUtil.CODEC).isEmpty())
         //?}
             return false;

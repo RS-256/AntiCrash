@@ -10,7 +10,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.players.PlayerList;
 import net.minecraft.server.level.ServerPlayer;
 
-//? if (>=1.18 && <=1.21.8) {
+//? if <=1.21.8 {
 /*import com.mojang.authlib.GameProfile;
 *///?}
 
@@ -22,12 +22,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.net.SocketAddress;
 
-//? if (>=1.18 && <=1.21.11) {
+//? if <=1.21.11 {
 /*@Mixin(PlayerList.class)
 public abstract class PlayerManagerMixin {
 
 *///?}
-    //? if (>=1.18 && <=1.21.8) {
+    //? if <=1.21.8 {
     /*@Inject(method = "canPlayerLogin", at = @At("RETURN"), cancellable = true)
     private void anticrash$loginGate(
             SocketAddress address,
@@ -41,7 +41,7 @@ public abstract class PlayerManagerMixin {
             net.minecraft.server.players.NameAndId profile,
             CallbackInfoReturnable<Component> callbackInfo)
     *///?}
-//? if (>=26.1 && <=26.3) {
+//? if >=26.1 {
 @Mixin(PlayerList.class)
 public abstract class PlayerManagerMixin {
     @Inject(method = "canPlayerLogin", at = @At("RETURN"), cancellable = true)
@@ -65,12 +65,11 @@ public abstract class PlayerManagerMixin {
         }
     }
 
-    //? if (>=1.18 && <=1.20.1) {
+    //? if <=1.20.1 {
     /*@Inject(method = "placeNewPlayer", at = @At("RETURN"))
     private void anticrash$playerConnected(
             Connection connection, ServerPlayer player, CallbackInfo callbackInfo)
-    *///?}
-    //? if (>=1.20.2 && <=26.3) {
+    *///?} else {
     @Inject(method = "placeNewPlayer", at = @At("RETURN"))
     private void anticrash$playerConnected(
             Connection connection,

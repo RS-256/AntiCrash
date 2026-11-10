@@ -269,12 +269,11 @@ public final class DetachedGeneration {
                 CheckpointWriteGuard.requireDetached(target);
                 Files.createDirectories(target.getParent());
 
-                //? if (>=1.18 && <=1.20.4) {
+                //? if <=1.20.4 {
                 /*net.minecraft.world.level.chunk.storage.RegionFile file =
                         new net.minecraft.world.level.chunk.storage.RegionFile(
                                 target, target.getParent(), false);
-                *///?}
-                //? if (>=1.20.5 && <=26.3) {
+                *///?} else {
                 net.minecraft.world.level.chunk.storage.RegionFile file =
                         new net.minecraft.world.level.chunk.storage.RegionFile(
                                 com.atsukimc.anticrash.snapshot.RegionStorageAdapter.KEY,
@@ -299,8 +298,8 @@ public final class DetachedGeneration {
                             try (java.io.DataOutputStream output =
                                     file.getChunkDataOutputStream(write.pos())) {
 
-                                //? if (>=1.18 && <=1.21.11) {
-                                /*//? if (>=1.18 && <=1.20.1) {
+                                //? if <=1.21.11 {
+                                /*//? if <=1.20.1 {
                                 /^net.minecraft.nbt.NbtIo.write(write.nbt(), output);
                                 ^///?}
                                 //? if 1.20.2 {
@@ -310,8 +309,7 @@ public final class DetachedGeneration {
                                 /^net.minecraft.nbt.NbtIo.writeUnnamedTagWithFallback(
                                         write.nbt(), output);
                                 ^///?}
-                                *///?}
-                                //? if (>=26.1 && <=26.3) {
+                                *///?} else {
                                 net.minecraft.nbt.NbtIo.writeUnnamedTagWithFallback(
                                         write.nbt(), output);
                                 //?}

@@ -1,4 +1,4 @@
-//? if (>=1.20 && <=26.3) {
+//? if >=1.20 {
 package com.atsukimc.anticrash.mixin;
 
 import net.minecraft.server.level.ServerLevel;
@@ -32,7 +32,7 @@ public abstract class VibrationListenerMutationMixin {
             Vec3 origin,
             CallbackInfoReturnable<Boolean> ci)
     *///?}
-    //? if (>=1.20.5 && <=26.3) {
+    //? if >=1.20.5 {
     @Inject(
             method =
                     "handleGameEvent(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/Holder;Lnet/minecraft/world/level/gameevent/GameEvent$Context;Lnet/minecraft/world/phys/Vec3;)Z",
@@ -60,7 +60,7 @@ public abstract class VibrationListenerMutationMixin {
             Vec3 origin,
             CallbackInfo ci)
     *///?}
-    //? if (>=1.20.5 && <=26.3) {
+    //? if >=1.20.5 {
     @Inject(method = "forceScheduleVibration", at = @At("TAIL"))
     private void anticrash$dirtyForcedListen(
             ServerLevel world,

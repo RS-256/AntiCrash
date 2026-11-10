@@ -1121,14 +1121,13 @@ public final class AntiCrashController {
     private int permanentTicketsMissing = -1;
     private int permanentTicketStallTicks;
 
-    //? if (>=1.18 && <=1.20.1) {
+    //? if <=1.20.1 {
     /*private volatile com.atsukimc.anticrash.network.DeferredPayloadDispatcher<
                     net.minecraft.server.network.ServerGamePacketListenerImpl,
                     net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket>
             deferredPayloads;
 
-    *///?}
-    //? if (>=1.20.2 && <=26.3) {
+    *///?} else {
     private volatile com.atsukimc.anticrash.network.DeferredPayloadDispatcher<
                     net.minecraft.server.network.ServerGamePacketListenerImpl,
                     net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket>
@@ -1138,12 +1137,11 @@ public final class AntiCrashController {
 
     /** Keeps a mod payload received during the recovery freeze; any thread. */
 
-    //? if (>=1.18 && <=1.20.1) {
+    //? if <=1.20.1 {
     /*public void deferCustomPayload(
             net.minecraft.server.network.ServerGamePacketListenerImpl handler,
             net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket packet)
-    *///?}
-    //? if (>=1.20.2 && <=26.3) {
+    *///?} else {
     public void deferCustomPayload(
             net.minecraft.server.network.ServerGamePacketListenerImpl handler,
             net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket packet)
@@ -1167,13 +1165,12 @@ public final class AntiCrashController {
         delivery.drain();
     }
 
-    //? if (>=1.18 && <=1.20.1) {
+    //? if <=1.20.1 {
     /*private synchronized com.atsukimc.anticrash.network.DeferredPayloadDispatcher<
                     net.minecraft.server.network.ServerGamePacketListenerImpl,
                     net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket>
             payloadDelivery()
-    *///?}
-    //? if (>=1.20.2 && <=26.3) {
+    *///?} else {
     private synchronized com.atsukimc.anticrash.network.DeferredPayloadDispatcher<
                     net.minecraft.server.network.ServerGamePacketListenerImpl,
                     net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket>
@@ -1187,14 +1184,13 @@ public final class AntiCrashController {
                                     !(handler.player == null || handler.player.hasDisconnected()),
                             handler -> {
 
-                                //? if (>=1.18 && <=1.19.3) {
+                                //? if <=1.19.3 {
                                 /*var channel =
                                         ((com.atsukimc.anticrash.mixin
                                                                 .ClientConnectionAccessorMixin)
                                                         handler.connection)
                                                 .anticrash$getChannel();
-                                *///?}
-                                //? if (>=1.19.4 && <=26.3) {
+                                *///?} else {
                                 var channel =
                                         ((com.atsukimc.anticrash.mixin
                                                                 .ClientConnectionAccessorMixin)
@@ -1247,12 +1243,11 @@ public final class AntiCrashController {
         }
 
         for (net.minecraft.server.level.ServerLevel world : server.getAllLevels())
-        //? if (>=1.18 && <=1.18.1) {
+        //? if <=1.18.1 {
         /*{
             // 1.18.1 has no tickChunks boolean; the scoped adapter suppresses only simulation.
             com.atsukimc.anticrash.recovery.VersionChunkLifecycle.advance(world.getChunkSource());
-        *///?}
-        //? if (>=1.18.2 && <=26.3) {
+        *///?} else {
         {
             // No chunk is ticked (second argument); this only advances tickets and chunk loading.
 
@@ -1460,12 +1455,11 @@ public final class AntiCrashController {
             if (capsule.entityIdCounter != null) {
                 // Entities created from now on get ids with the same remainder as they would have.
 
-                //? if (>=1.18 && <=26.1) {
+                //? if <=26.1 {
                 /*java.util.concurrent.atomic.AtomicInteger ids =
                         com.atsukimc.anticrash.mixin.EntityRuntimeAccessorMixin
                                 .anticrash$currentId();
-                *///?}
-                //? if (>=26.2 && <=26.3) {
+                *///?} else {
                 java.util.concurrent.atomic.AtomicInteger ids =
                         com.atsukimc.anticrash.mixin.ServerEntityIdAccessor.anticrash$currentId();
                 //?}
@@ -1541,7 +1535,7 @@ public final class AntiCrashController {
                     com.atsukimc.anticrash.runtime.RuntimeExtensionSnapshot.verdict(
                             want, have, wantCount, haveCount);
 
-            //? if (>=1.20.3 && <=26.3) {
+            //? if >=1.20.3 {
             if (category.equals(com.atsukimc.anticrash.runtime.RuntimeExtensionSnapshot.NATIVE_TICK)
                     && config.recovery.fidelity.equals("STRICT")
                     && (want == null || expected.nativeTickState == null)) {

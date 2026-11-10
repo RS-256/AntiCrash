@@ -1,4 +1,4 @@
-//? if (>=1.19 && <=26.3) {
+//? if >=1.19 {
 package com.atsukimc.anticrash.mixin;
 
 //? if (>=1.19 && <=1.21.1) {
@@ -16,7 +16,7 @@ public interface RecipeMatchGetterAccessorMixin {
     ResourceLocation anticrash$getRecipeId();
 
 *///?}
-//? if (>=1.21.2 && <=26.3) {
+//? if >=1.21.2 {
 @Mixin(targets = "net.minecraft.world.item.crafting.RecipeManager$1")
 public interface RecipeMatchGetterAccessorMixin {
     @Accessor("lastRecipe")
@@ -29,7 +29,7 @@ public interface RecipeMatchGetterAccessorMixin {
     /*@Accessor("lastRecipe")
     void anticrash$setRecipeId(ResourceLocation id);
     *///?}
-    //? if (>=1.21.2 && <=26.3) {
+    //? if >=1.21.2 {
     @Accessor("lastRecipe")
     void anticrash$setRecipeId(
             net.minecraft.resources.ResourceKey<net.minecraft.world.item.crafting.Recipe<?>> id);

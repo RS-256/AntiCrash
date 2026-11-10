@@ -1,4 +1,4 @@
-//? if (>=1.18 && <=1.18.1) {
+//? if <=1.18.1 {
 /*package com.atsukimc.anticrash.recovery;
 
 import static org.junit.jupiter.api.Assertions.*;

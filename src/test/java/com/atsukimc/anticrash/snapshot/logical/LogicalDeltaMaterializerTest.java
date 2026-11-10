@@ -41,10 +41,9 @@ class LogicalDeltaMaterializerTest {
 
         CompoundTag entity = new CompoundTag();
 
-        //? if (>=1.18 && <=1.21.4) {
+        //? if <=1.21.4 {
         /*entity.putUUID("UUID", removed);
-        *///?}
-        //? if (>=1.21.5 && <=26.3) {
+        *///?} else {
         entity.store("UUID", net.minecraft.core.UUIDUtil.CODEC, removed);
         //?}
 
@@ -154,10 +153,9 @@ class LogicalDeltaMaterializerTest {
 
         Path directory = destination.resolve("entities");
 
-        //? if (>=1.18 && <=1.20.4) {
+        //? if <=1.20.4 {
         /*try (RegionFile region = new RegionFile(directory.resolve("r.0.0.mca"), directory, false))
-        *///?}
-        //? if (>=1.20.5 && <=26.3) {
+        *///?} else {
         try (RegionFile region =
                 new RegionFile(
                         com.atsukimc.anticrash.snapshot.RegionStorageAdapter.KEY,
@@ -198,10 +196,9 @@ class LogicalDeltaMaterializerTest {
 
             entity.putString("id", "minecraft:armor_stand");
 
-            //? if (>=1.18 && <=1.21.4) {
+            //? if <=1.21.4 {
             /*entity.putUUID("UUID", uuid);
-            *///?}
-            //? if (>=1.21.5 && <=26.3) {
+            *///?} else {
             entity.store("UUID", net.minecraft.core.UUIDUtil.CODEC, uuid);
             //?}
 
@@ -232,10 +229,9 @@ class LogicalDeltaMaterializerTest {
                                 + (VersionChunkPos.z(pos) >> 5)
                                 + ".mca");
 
-        //? if (>=1.18 && <=1.20.4) {
+        //? if <=1.20.4 {
         /*try (RegionFile region = new RegionFile(file, directory, false))
-        *///?}
-        //? if (>=1.20.5 && <=26.3) {
+        *///?} else {
         try (RegionFile region =
                 new RegionFile(
                         com.atsukimc.anticrash.snapshot.RegionStorageAdapter.KEY,
@@ -247,13 +243,13 @@ class LogicalDeltaMaterializerTest {
 
             try (DataOutputStream output = region.getChunkDataOutputStream(pos)) {
 
-                //? if (>=1.18 && <=1.20.1) {
+                //? if <=1.20.1 {
                 /*NbtIo.write(root, output);
                 *///?}
                 //? if 1.20.2 {
                 /*NbtIo.writeUnnamedTag(root, output);
                 *///?}
-                //? if (>=1.20.3 && <=26.3) {
+                //? if >=1.20.3 {
                 NbtIo.writeUnnamedTagWithFallback(root, output);
                 //?}
 
@@ -275,11 +271,10 @@ class LogicalDeltaMaterializerTest {
                                 + (VersionChunkPos.z(pos) >> 5)
                                 + ".mca");
 
-        //? if (>=1.18 && <=1.20.4) {
+        //? if <=1.20.4 {
         /*try (RegionFile region = new RegionFile(file, directory, false);
                 var input = region.getChunkDataInputStream(pos))
-        *///?}
-        //? if (>=1.20.5 && <=26.3) {
+        *///?} else {
         try (RegionFile region =
                         new RegionFile(
                                 com.atsukimc.anticrash.snapshot.RegionStorageAdapter.KEY,
@@ -290,10 +285,9 @@ class LogicalDeltaMaterializerTest {
         //?}
         {
 
-            //? if (>=1.18 && <=1.20.1) {
+            //? if <=1.20.1 {
             /*return NbtIo.read(input);
-            *///?}
-            //? if (>=1.20.2 && <=26.3) {
+            *///?} else {
             return NbtIo.read(input, net.minecraft.nbt.NbtAccounter.create(16 * 1024 * 1024));
             //?}
 

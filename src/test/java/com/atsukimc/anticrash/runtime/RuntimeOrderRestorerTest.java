@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-//? if (>=1.18 && <=1.21.4) {
+//? if <=1.21.4 {
 /*class RuntimeOrderRestorerTest {
     /^* Vanilla's Ticket#isExpired. ^/
     private static boolean expired(long age, long tickCreated, long expiry) {
@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 *///?}
 
-//? if (>=1.21.5 && <=26.3) {
+//? if >=1.21.5 {
 class RuntimeOrderRestorerTest {
 //?}
     @Test
@@ -27,18 +27,17 @@ class RuntimeOrderRestorerTest {
             long expiry = c[0], remaining = c[1];
             // Live server: created at age 1000 and captured when `remaining` ticks were left.
 
-            //? if (>=1.18 && <=1.21.4) {
+            //? if <=1.21.4 {
             /*long liveCreated = 1000, captureAge = liveCreated + (expiry - remaining);
             *///?}
 
             // New JVM: the ticket manager's age restarted at some unrelated value.
 
-            //? if (>=1.18 && <=1.21.4) {
+            //? if <=1.21.4 {
             /*long newAge = 37;
 
             long restoredCreated = RuntimeOrderRestorer.tickCreatedFor(newAge, expiry, remaining);
-            *///?}
-            //? if (>=1.21.5 && <=26.3) {
+            *///?} else {
             var type =
                     expiry == 300
                             ? net.minecraft.server.level.TicketType.PORTAL
@@ -65,13 +64,12 @@ class RuntimeOrderRestorerTest {
 
             for (int ticks = 0; ticks <= expiry + 2; ticks++) {
 
-                //? if (>=1.18 && <=1.21.4) {
+                //? if <=1.21.4 {
                 /*assertEquals(
                         expired(captureAge + ticks, liveCreated, expiry),
                         expired(newAge + ticks, restoredCreated, expiry),
                         "expiry " + expiry + " remaining " + remaining + " after " + ticks);
-                *///?}
-                //? if (>=1.21.5 && <=26.3) {
+                *///?} else {
                 assertEquals(
                         remaining - ticks < 0,
                         restored.isTimedOut(),
@@ -82,7 +80,7 @@ class RuntimeOrderRestorerTest {
 
             }
 
-            //? if (>=1.18 && <=1.21.4) {
+            //? if <=1.21.4 {
             /*assertFalse(expired(newAge + remaining, restoredCreated, expiry));
 
             assertTrue(expired(newAge + remaining + 1, restoredCreated, expiry));
@@ -149,17 +147,15 @@ class RuntimeOrderRestorerTest {
         unknown.argument = "[3, 3]";
         unknown.remainingTicks = 1L;
 
-        //? if (>=1.18 && <=1.21.3) {
+        //? if <=1.21.3 {
         /*TicketLedgerSnapshot.Entry teleport = ticket("post_teleport", 0, 9, 32, 5);
-        *///?}
-        //? if (>=1.21.4 && <=26.3) {
+        *///?} else {
         TicketLedgerSnapshot.Entry teleport = ticket("ender_pearl", 0, 9, 32, 40);
         //?}
 
-        //? if (>=1.18 && <=1.21.3) {
+        //? if <=1.21.3 {
         /*teleport.argument = "4274109";
-        *///?}
-        //? if (>=1.21.4 && <=26.3) {
+        *///?} else {
         teleport.argument = "[0, 9]";
         //?}
 
@@ -173,11 +169,11 @@ class RuntimeOrderRestorerTest {
         assertTrue(keys.contains("minecraft:overworld|3,3|unknown|33|[3, 3]"));
         // The network entity id of a post-teleport ticket changes with every restart.
 
-        //? if (>=1.18 && <=1.21.3) {
+        //? if <=1.21.3 {
         /*assertTrue(keys.contains("minecraft:overworld|0,9|post_teleport|32|-"));
         *///?}
 
-        //? if (>=1.21.4 && <=26.3) {
+        //? if >=1.21.4 {
         assertTrue(keys.contains("minecraft:overworld|0,9|ender_pearl|32|[0, 9]"));
         //?}
 

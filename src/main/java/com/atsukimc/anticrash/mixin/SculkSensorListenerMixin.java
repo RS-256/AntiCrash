@@ -1,7 +1,7 @@
-//? if (>=1.18 && <=1.19.4) {
+//? if <=1.19.4 {
 /*package com.atsukimc.anticrash.mixin;
 
-//? if (>=1.18 && <=1.18.2) {
+//? if <=1.18.2 {
 /^import java.util.Optional;
 ^///?} else {
 import net.minecraft.core.BlockPos;
@@ -26,7 +26,7 @@ public abstract class SculkSensorListenerMixin {
 
     @Shadow @Final protected PositionSource listenerSource;
 
-    //? if (>=1.18 && <=1.18.2) {
+    //? if <=1.18.2 {
     /^@Shadow protected Optional<GameEvent> receivingEvent;
 
     ^///?}
@@ -42,11 +42,11 @@ public abstract class SculkSensorListenerMixin {
      ^/
     @Inject(method = "tick", at = @At("HEAD"))
     private void anticrash$markPendingVibrationDirty(Level world, CallbackInfo callbackInfo)
-            //? if (>=1.18 && <=1.19.2) {
+            //? if <=1.19.2 {
             /^{
 
             ^///?}
-        //? if (>=1.18 && <=1.18.2) {
+        //? if <=1.18.2 {
         /^if (world.isClientSide() || receivingEvent.isEmpty())
         ^///?}
         //? if (>=1.19 && <=1.19.2) {
@@ -59,7 +59,7 @@ public abstract class SculkSensorListenerMixin {
             ^///?}
             return;
 
-        //? if (>=1.18 && <=1.18.2) {
+        //? if <=1.18.2 {
         /^listenerSource.getPosition(world).ifPresent(world::blockEntityChanged);
         ^///?}
         //? if (>=1.19 && <=1.19.3) {
@@ -80,7 +80,7 @@ public abstract class SculkSensorListenerMixin {
      * end.
      ^/
 
-    //? if (>=1.18 && <=1.18.2) {
+    //? if <=1.18.2 {
     /^@Inject(
             method =
                     "sendSignal(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/level/gameevent/GameEvent;"
@@ -115,7 +115,7 @@ public abstract class SculkSensorListenerMixin {
     ^///?}
             {
 
-        //? if (>=1.18 && <=1.18.2) {
+        //? if <=1.18.2 {
         /^if (!world.isClientSide()) world.blockEntityChanged(pos);
         ^///?}
         //? if (>=1.19 && <=1.19.4) {

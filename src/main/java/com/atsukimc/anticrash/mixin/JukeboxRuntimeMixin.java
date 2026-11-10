@@ -1,4 +1,4 @@
-//? if (>=1.19.1 && <=26.3) {
+//? if >=1.19.1 {
 package com.atsukimc.anticrash.mixin;
 
 //? if (>=1.19.1 && <=1.20.6) {
@@ -38,7 +38,7 @@ public abstract class JukeboxRuntimeMixin {
     private void anticrash$saveEventPhase(
             CompoundTag nbt, net.minecraft.core.HolderLookup.Provider registries, CallbackInfo ci)
     *///?}
-    //? if (>=1.21 && <=26.3) {
+    //? if >=1.21 {
     @Inject(method = "tick", at = @At("HEAD"))
     private static void anticrash$markPlaybackTick(
             Level world,
@@ -105,7 +105,7 @@ public abstract class JukeboxRuntimeMixin {
             //? if (>=1.19.1 && <=1.21.11) {
             /*world.blockEntityChanged(pos);
             *///?}
-        //? if (>=26.1 && <=26.3) {
+        //? if >=26.1 {
         if (!world.isClientSide() && jukebox.getSongPlayer().getSong() != null)
             world.blockEntityChanged(pos);
         //?}

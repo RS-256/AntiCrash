@@ -85,7 +85,7 @@ public abstract class ItemEntityMixin implements com.atsukimc.anticrash.runtime.
         AntiCrashController controller = AntiCrashMod.controller();
         if (controller != null)
 
-            //? if (>=1.18 && <=1.19.3) {
+            //? if <=1.19.3 {
             /*controller.recordTransaction(
                     "ITEM_PICKUP",
                     serverPlayer,

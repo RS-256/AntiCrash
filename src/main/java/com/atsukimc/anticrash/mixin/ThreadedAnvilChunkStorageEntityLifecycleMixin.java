@@ -40,10 +40,9 @@ public abstract class ThreadedAnvilChunkStorageEntityLifecycleMixin {
                 && ((com.atsukimc.anticrash.runtime.ExtensionCarrier) worldChunk)
                         .anticrash$extensionOnDisk()) {
 
-            //? if (>=1.18 && <=1.21.1) {
+            //? if <=1.21.1 {
             /*worldChunk.setUnsaved(true);
-            *///?}
-            //? if (>=1.21.2 && <=26.3) {
+            *///?} else {
             worldChunk.markUnsaved();
             //?}
 

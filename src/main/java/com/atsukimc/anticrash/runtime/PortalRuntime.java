@@ -1,4 +1,4 @@
-//? if (>=1.21 && <=26.3) {
+//? if >=1.21 {
 package com.atsukimc.anticrash.runtime;
 
 import com.atsukimc.anticrash.mixin.PortalManagerAccessorMixin;
@@ -35,7 +35,7 @@ public final class PortalRuntime {
         //? if (>=1.21 && <=1.21.4) {
         /*nbt.put("Pos", NbtUtils.writeBlockPos(manager.getEntryPosition()));
         *///?}
-        //? if (>=1.21.5 && <=26.3) {
+        //? if >=1.21.5 {
         nbt.store("Pos", net.minecraft.core.BlockPos.CODEC, manager.getEntryPosition());
         //?}
 
@@ -60,7 +60,7 @@ public final class PortalRuntime {
                         .orElseThrow(() ->
                                 new IllegalArgumentException("Missing saved Portal position"));
         *///?}
-        //? if (>=1.21.5 && <=26.3) {
+        //? if >=1.21.5 {
         var pos =
                 nbt.read("Pos", net.minecraft.core.BlockPos.CODEC)
                         .orElseThrow(() ->

@@ -351,30 +351,27 @@ public final class CheckpointManager {
                 for (ChunkHolder holder : storage.anticrash$getCurrentChunkHolders().values()) {
                     if (prepared >= 16 || System.nanoTime() - started >= budget) break outer;
                     if (holder == null || !holder.wasAccessibleSinceLastSave()) continue;
-                    //? if (>=1.18 && <=1.20.6) {
+                    //? if <=1.20.6 {
                     /*CompletableFuture<ChunkAccess> saving = holder.getChunkToSave();
-                    *///?}
-                    //? if (>=1.21 && <=26.3) {
+                    *///?} else {
                     CompletableFuture<?> saving = holder.getSaveSyncFuture();
                     //?}
 
-                    //? if (>=1.18 && <=1.20.6) {
+                    //? if <=1.20.6 {
                     /*if (!saving.isDone())
-                    *///?}
-                    //? if (>=1.21 && <=26.3) {
+                    *///?} else {
                     if (!holder.isReadyForSaving())
                     //?}
                         continue;
 
-                    //? if (>=1.18 && <=1.20.6) {
+                    //? if <=1.20.6 {
                     /*ChunkAccess chunk = saving.getNow(null);
-                    *///?}
-                    //? if (>=1.21 && <=26.3) {
+                    *///?} else {
                     saving.getNow(null);
                     //?}
                     // surface exceptional completion; never block
 
-                    //? if (>=1.21 && <=26.3) {
+                    //? if >=1.21 {
                     ChunkAccess chunk = holder.getLatestChunk();
 
                     if (chunk instanceof ImposterProtoChunk readOnly) chunk = readOnly.getWrapped();
@@ -934,10 +931,9 @@ public final class CheckpointManager {
      * what the cut contains, exactly as Vanilla's own autosave treats it.
      */
     private static ChunkAccess savableChunk(ChunkHolder holder) {
-        //? if (>=1.18 && <=1.20.6) {
+        //? if <=1.20.6 {
         /*ChunkAccess current = holder.getLastAvailable();
-        *///?}
-        //? if (>=1.21 && <=26.3) {
+        *///?} else {
         ChunkAccess current = holder.getLatestChunk();
         //?}
 
@@ -945,33 +941,30 @@ public final class CheckpointManager {
 
         if (current instanceof LevelChunk) return current;
 
-        //? if (>=1.18 && <=1.20.6) {
+        //? if <=1.20.6 {
         /*CompletableFuture<ChunkAccess> saving = holder.getChunkToSave();
-        *///?}
-        //? if (>=1.21 && <=26.3) {
+        *///?} else {
         CompletableFuture<?> saving = holder.getSaveSyncFuture();
         //?}
 
         // No status work is pending when the future is done, so no generation thread touches
         // the proto chunk. getNow never blocks here; a failed future fails the cut closed.
 
-        //? if (>=1.18 && <=1.20.6) {
+        //? if <=1.20.6 {
         /*if (!saving.isDone())
-        *///?}
-        //? if (>=1.21 && <=26.3) {
+        *///?} else {
         if (!holder.isReadyForSaving())
         //?}
             return null;
 
-        //? if (>=1.18 && <=1.20.6) {
+        //? if <=1.20.6 {
         /*ChunkAccess saved = saving.getNow(null);
-        *///?}
-        //? if (>=1.21 && <=26.3) {
+        *///?} else {
         saving.getNow(null);
         //?}
         // future represents completion now, not a Chunk payload
 
-        //? if (>=1.21 && <=26.3) {
+        //? if >=1.21 {
         ChunkAccess saved = holder.getLatestChunk();
         //?}
 
@@ -1165,10 +1158,9 @@ public final class CheckpointManager {
             if (++queued >= 4096 || (queued >= 16 && heapTight())) {
                 WriteHold.release();
 
-                //? if (>=1.18 && <=1.20.4) {
+                //? if <=1.20.4 {
                 /*poi.anticrash$getWorker().synchronize(false).join();
-                *///?}
-                //? if (>=1.20.5 && <=26.3) {
+                *///?} else {
                 ((com.atsukimc.anticrash.mixin.ChunkPosKeyedStorageAccessor)
                                 poi.anticrash$getStorageAccess())
                         .anticrash$getWorker()
@@ -1211,12 +1203,11 @@ public final class CheckpointManager {
                         "Unsupported entity storage for " + VersionIds.dimension(world));
             }
 
-            //? if (>=1.18 && <=1.20.4) {
+            //? if <=1.20.4 {
             /*workers.add(
                     ((com.atsukimc.anticrash.mixin.EntityChunkDataAccessAccessorMixin) entityAccess)
                             .anticrash$getDataLoadWorker());
-            *///?}
-            //? if (>=1.20.5 && <=26.3) {
+            *///?} else {
             workers.add(
                     ((com.atsukimc.anticrash.mixin.ChunkPosKeyedStorageAccessor)
                                     ((com.atsukimc.anticrash.mixin
@@ -1226,12 +1217,11 @@ public final class CheckpointManager {
                             .anticrash$getWorker());
             //?}
 
-            //? if (>=1.18 && <=1.20.4) {
+            //? if <=1.20.4 {
             /*workers.add(
                     ((SerializingRegionBasedStorageAccessorMixin) world.getPoiManager())
                             .anticrash$getWorker());
-            *///?}
-            //? if (>=1.20.5 && <=26.3) {
+            *///?} else {
             workers.add(
                     ((com.atsukimc.anticrash.mixin.ChunkPosKeyedStorageAccessor)
                                     ((SerializingRegionBasedStorageAccessorMixin)

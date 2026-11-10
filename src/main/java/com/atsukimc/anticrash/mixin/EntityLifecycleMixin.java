@@ -29,7 +29,7 @@ public abstract class EntityLifecycleMixin {
         recordMove(x, z);
     }
 
-    //? if (>=1.18 && <=1.21.4) {
+    //? if <=1.21.4 {
     /*@Inject(method = "moveTo(DDDFF)V", at = @At("HEAD"))
     *///?} else {
     @Inject(method = "snapTo(DDDFF)V", at = @At("HEAD"))

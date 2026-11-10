@@ -28,24 +28,21 @@ class FakePlayerProfileScopeTest {
             GameProfile selected = FakePlayerProfileScope.lookup(cache, "msbot");
             assertNotNull(selected);
 
-            //? if (>=1.18 && <=1.21.8) {
+            //? if <=1.21.8 {
             /*assertEquals(CHECKPOINT_ID, selected.getId());
-            *///?}
-            //? if (>=1.21.9 && <=26.3) {
+            *///?} else {
             assertEquals(CHECKPOINT_ID, selected.id());
             //?}
 
-            //? if (>=1.18 && <=1.21.8) {
+            //? if <=1.21.8 {
             /*assertEquals("msbot", selected.getName());
-            *///?}
-            //? if (>=1.21.9 && <=26.3) {
+            *///?} else {
             assertEquals("msbot", selected.name());
             //?}
 
-            //? if (>=1.18 && <=1.21.8) {
+            //? if <=1.21.8 {
             /*assertEquals(OTHER_ID, cached.getId());
-            *///?}
-            //? if (>=1.21.9 && <=26.3) {
+            *///?} else {
             assertEquals(OTHER_ID, cached.id());
             //?}
 
@@ -58,10 +55,9 @@ class FakePlayerProfileScopeTest {
         Object cache = new Object();
         try (var scope = FakePlayerProfileScope.open(cache, CHECKPOINT_ID, "MsBot")) {
 
-            //? if (>=1.18 && <=1.21.8) {
+            //? if <=1.21.8 {
             /*assertEquals("MsBot", FakePlayerProfileScope.lookup(cache, "msbot").getName());
-            *///?}
-            //? if (>=1.21.9 && <=26.3) {
+            *///?} else {
             assertEquals("MsBot", FakePlayerProfileScope.lookup(cache, "msbot").name());
             //?}
 
@@ -80,10 +76,9 @@ class FakePlayerProfileScopeTest {
                                     () -> FakePlayerProfileScope.lookup(cache, "msbot"))
                             .get(5, TimeUnit.SECONDS));
 
-            //? if (>=1.18 && <=1.21.8) {
+            //? if <=1.21.8 {
             /*assertEquals(CHECKPOINT_ID, FakePlayerProfileScope.lookup(cache, "msbot").getId());
-            *///?}
-            //? if (>=1.21.9 && <=26.3) {
+            *///?} else {
             assertEquals(CHECKPOINT_ID, FakePlayerProfileScope.lookup(cache, "msbot").id());
             //?}
 
@@ -110,19 +105,17 @@ class FakePlayerProfileScopeTest {
             try (var inner = FakePlayerProfileScope.open(cache, OTHER_ID, "other_bot")) {
                 assertNull(FakePlayerProfileScope.lookup(cache, "msbot"));
 
-                //? if (>=1.18 && <=1.21.8) {
+                //? if <=1.21.8 {
                 /*assertEquals(OTHER_ID, FakePlayerProfileScope.lookup(cache, "other_bot").getId());
-                *///?}
-                //? if (>=1.21.9 && <=26.3) {
+                *///?} else {
                 assertEquals(OTHER_ID, FakePlayerProfileScope.lookup(cache, "other_bot").id());
                 //?}
 
             }
 
-            //? if (>=1.18 && <=1.21.8) {
+            //? if <=1.21.8 {
             /*assertEquals(CHECKPOINT_ID, FakePlayerProfileScope.lookup(cache, "msbot").getId());
-            *///?}
-            //? if (>=1.21.9 && <=26.3) {
+            *///?} else {
             assertEquals(CHECKPOINT_ID, FakePlayerProfileScope.lookup(cache, "msbot").id());
             //?}
 
@@ -144,10 +137,9 @@ class FakePlayerProfileScopeTest {
                     IllegalArgumentException.class,
                     () -> FakePlayerProfileScope.open(cache, OTHER_ID, "bad name"));
 
-            //? if (>=1.18 && <=1.21.8) {
+            //? if <=1.21.8 {
             /*assertEquals(CHECKPOINT_ID, FakePlayerProfileScope.lookup(cache, "msbot").getId());
-            *///?}
-            //? if (>=1.21.9 && <=26.3) {
+            *///?} else {
             assertEquals(CHECKPOINT_ID, FakePlayerProfileScope.lookup(cache, "msbot").id());
             //?}
 
@@ -164,10 +156,9 @@ class FakePlayerProfileScopeTest {
             try (var inner = FakePlayerProfileScope.open(cache, OTHER_ID, "other_bot")) {
                 assertThrows(IllegalStateException.class, outer::close);
 
-                //? if (>=1.18 && <=1.21.8) {
+                //? if <=1.21.8 {
                 /*assertEquals(OTHER_ID, FakePlayerProfileScope.lookup(cache, "other_bot").getId());
-                *///?}
-                //? if (>=1.21.9 && <=26.3) {
+                *///?} else {
                 assertEquals(OTHER_ID, FakePlayerProfileScope.lookup(cache, "other_bot").id());
                 //?}
 

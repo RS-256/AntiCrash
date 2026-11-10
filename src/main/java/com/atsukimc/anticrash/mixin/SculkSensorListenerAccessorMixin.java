@@ -1,7 +1,7 @@
-//? if (>=1.18 && <=1.19.2) {
+//? if <=1.19.2 {
 /*package com.atsukimc.anticrash.mixin;
 
-//? if (>=1.18 && <=1.18.2) {
+//? if <=1.18.2 {
 /^import java.util.Optional;
 import net.minecraft.world.level.gameevent.GameEvent;
 ^///?}
@@ -11,7 +11,7 @@ import net.minecraft.world.level.gameevent.vibrations.VibrationListener;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-//? if (>=1.18 && <=1.18.2) {
+//? if <=1.18.2 {
 /^@Mixin(VibrationListener.class)
 public interface SculkSensorListenerAccessorMixin {
     @Accessor("receivingEvent")
@@ -28,7 +28,7 @@ public interface SculkSensorListenerAccessorMixin {
 
 ^///?}
 
-    //? if (>=1.18 && <=1.18.2) {
+    //? if <=1.18.2 {
     /^@Accessor("receivingEvent")
     void anticrash$setEvent(Optional<GameEvent> event);
 
@@ -48,7 +48,7 @@ public interface SculkSensorListenerAccessorMixin {
     @Accessor("travelTimeInTicks")
     int anticrash$getDelay();
 
-    //? if (>=1.18 && <=1.18.2) {
+    //? if <=1.18.2 {
     /^@Accessor("travelTimeInTicks")
     void anticrash$setDelay(int delay);
     ^///?}

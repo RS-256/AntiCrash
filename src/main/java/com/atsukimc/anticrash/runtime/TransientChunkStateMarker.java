@@ -127,10 +127,9 @@ public final class TransientChunkStateMarker {
                 // queue at the checkpoint boundary; do not narrow capture to ENTITY_TICKING.
                 if (chunkScheduledTicks > 0) orderedScheduledTicks.addAll(exactTicks);
 
-                //? if (>=1.18 && <=26.1) {
+                //? if <=26.1 {
                 /*if (!needsTransientSave(pistonsInChunk > 0, blockTicks, fluidTicks))
-                *///?}
-                //? if (>=26.2 && <=26.3) {
+                *///?} else {
                 if (!needsTransientSave(pistonsInChunk > 0 || sulfur, blockTicks, fluidTicks))
                 //?}
                     continue;
@@ -151,10 +150,9 @@ public final class TransientChunkStateMarker {
                 if (!chunk.isUnsaved()) {
                     chunksMadeDirty++;
 
-                    //? if (>=1.18 && <=1.21.1) {
+                    //? if <=1.21.1 {
                     /*chunk.setUnsaved(true);
-                    *///?}
-                    //? if (>=1.21.2 && <=26.3) {
+                    *///?} else {
                     chunk.markUnsaved();
                     //?}
 
@@ -208,10 +206,9 @@ public final class TransientChunkStateMarker {
         try {
             var ready = future.getNow(null);
 
-            //? if (>=1.18 && <=1.20.4) {
+            //? if <=1.20.4 {
             /*return ready == null ? null : ready.left().orElse(null);
-            *///?}
-            //? if (>=1.20.5 && <=26.3) {
+            *///?} else {
             return ready == null ? null : ready.orElse(null);
             //?}
 

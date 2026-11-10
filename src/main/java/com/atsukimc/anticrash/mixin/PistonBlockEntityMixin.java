@@ -50,7 +50,7 @@ public abstract class PistonBlockEntityMixin {
      * world time when a piston is retracted again) are added.
      */
 
-    //? if (>=1.18 && <=1.20.4) {
+    //? if <=1.20.4 {
     /*@Inject(method = "saveAdditional", at = @At("TAIL"))
     private void anticrash$saveExactProgress(CompoundTag nbt, CallbackInfo callbackInfo)
     *///?}
@@ -61,7 +61,7 @@ public abstract class PistonBlockEntityMixin {
             net.minecraft.core.HolderLookup.Provider registries,
             CallbackInfo callbackInfo)
     *///?}
-    //? if (>=1.21.6 && <=26.3) {
+    //? if >=1.21.6 {
     @Inject(method = "saveAdditional", at = @At("TAIL"))
     private void anticrash$saveExactProgress(
             net.minecraft.world.level.storage.ValueOutput nbt, CallbackInfo callbackInfo)
@@ -77,7 +77,7 @@ public abstract class PistonBlockEntityMixin {
                 });
     }
 
-    //? if (>=1.18 && <=1.20.4) {
+    //? if <=1.20.4 {
     /*@Inject(method = "load", at = @At("TAIL"))
     private void anticrash$loadExactProgress(CompoundTag nbt, CallbackInfo callbackInfo)
     *///?}
@@ -88,7 +88,7 @@ public abstract class PistonBlockEntityMixin {
             net.minecraft.core.HolderLookup.Provider registries,
             CallbackInfo callbackInfo)
     *///?}
-    //? if (>=1.21.6 && <=26.3) {
+    //? if >=1.21.6 {
     @Inject(method = "loadAdditional", at = @At("TAIL"))
     private void anticrash$loadExactProgress(
             net.minecraft.world.level.storage.ValueInput nbt, CallbackInfo callbackInfo)

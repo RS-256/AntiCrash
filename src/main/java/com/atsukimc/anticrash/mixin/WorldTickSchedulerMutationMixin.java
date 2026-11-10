@@ -78,11 +78,10 @@ public abstract class WorldTickSchedulerMutationMixin {
         ChunkMutationTracker.markSchedulerUncertain("clearNextTicks");
     }
 
-    //? if (>=1.18 && <=1.19.3) {
+    //? if <=1.19.3 {
     /*@Inject(method = "copyArea", at = @At("HEAD"))
     private void anticrash$scheduleTicks(BoundingBox box, Vec3i offset, CallbackInfo callbackInfo)
-    *///?}
-    //? if (>=1.19.4 && <=26.3) {
+    *///?} else {
     @Inject(
             method =
                     "copyArea(Lnet/minecraft/world/level/levelgen/structure/BoundingBox;Lnet/minecraft/core/Vec3i;)V",
@@ -103,7 +102,7 @@ public abstract class WorldTickSchedulerMutationMixin {
         ChunkMutationTracker.markSchedulerUncertain("scheduleTicks");
     }
 
-    //? if (>=1.19.4 && <=26.3) {
+    //? if >=1.19.4 {
     @Inject(
             method =
                     "copyAreaFrom(Lnet/minecraft/world/ticks/LevelTicks;Lnet/minecraft/world/level/levelgen/structure/BoundingBox;Lnet/minecraft/core/Vec3i;)V",

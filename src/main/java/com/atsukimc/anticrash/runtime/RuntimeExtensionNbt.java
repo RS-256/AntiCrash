@@ -32,7 +32,7 @@ public final class RuntimeExtensionNbt {
         boolean loadedChunkSave;
         boolean extensionWritten;
 
-        //? if (>=1.21.6 && <=26.3) {
+        //? if >=1.21.6 {
         final java.util.IdentityHashMap<net.minecraft.world.level.storage.ValueOutput, CompoundTag>
                 viewExtensions = new java.util.IdentityHashMap<>();
         //?}
@@ -45,10 +45,9 @@ public final class RuntimeExtensionNbt {
 
     public static void entitySave(boolean active) {
 
-        //? if (>=1.18 && <=1.21.5) {
+        //? if <=1.21.5 {
         /*SCOPE.get().entitySave = active;
-        *///?}
-        //? if (>=1.21.6 && <=26.3) {
+        *///?} else {
         Scope scope = SCOPE.get();
 
         scope.entitySave = active;
@@ -67,7 +66,7 @@ public final class RuntimeExtensionNbt {
         scope.loadedChunkSave = active;
         if (active) scope.extensionWritten = false;
 
-        //? if (>=1.21.6 && <=26.3) {
+        //? if >=1.21.6 {
         if (!active && !scope.entitySave) scope.viewExtensions.clear();
         //?}
 
@@ -114,10 +113,9 @@ public final class RuntimeExtensionNbt {
 
         CompoundTag extension = VersionNbt.getCompoundOrEmpty(nbt, KEY);
 
-        //? if (>=1.18 && <=1.21.4) {
+        //? if <=1.21.4 {
         /*int version = VersionNbt.getInt(extension, VERSION_KEY);
-        *///?}
-        //? if (>=1.21.5 && <=26.3) {
+        *///?} else {
         int version = extension.getInt(VERSION_KEY).orElse(0);
         //?}
 
@@ -126,7 +124,7 @@ public final class RuntimeExtensionNbt {
 
     /** 1.21.6 views preserve registry/error context; do not cast a mod-provided view to NBT. */
 
-    //? if (>=1.21.6 && <=26.3) {
+    //? if >=1.21.6 {
     public static void write(
             net.minecraft.world.level.storage.ValueOutput view, Consumer<CompoundTag> writer) {
         Scope scope = SCOPE.get();
@@ -135,7 +133,7 @@ public final class RuntimeExtensionNbt {
         // ValueOutput.get creates/replaces the nested compound on every call. Preserve superclass
         // and subclass extension contributions in one bounded save scope, then discard references.
 
-        //? if (>=1.21.6 && <=26.3) {
+        //? if >=1.21.6 {
         CompoundTag encoded =
                 scope.entitySave || scope.loadedChunkSave
                         ? scope.viewExtensions.computeIfAbsent(view, ignored -> new CompoundTag())

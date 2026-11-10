@@ -236,7 +236,7 @@ public final class RuntimeFingerprint {
         return lines;
     }
 
-    //? if (>=26.1 && <=26.3) {
+    //? if >=26.1 {
     public static List<String> worldLines(RuntimeCapsule capsule) {
         List<String> lines = worldLines(capsule.worlds);
 
@@ -257,13 +257,12 @@ public final class RuntimeFingerprint {
      */
     public static List<String> worldRngLines() {
 
-        //? if (>=1.18 && <=1.18.2) {
+        //? if <=1.18.2 {
         /*return List.of(
                 "implementation=java.util.Random",
                 "state=UNSUPPORTED",
                 "reason=internal-state-not-exposed-by-minecraft-1.18.2");
-        *///?}
-        //? if (>=1.19 && <=26.3) {
+        *///?} else {
         return List.of(
                 "implementation=net.minecraft.util.math.random.Random",
                 "state=UNSUPPORTED",
@@ -325,15 +324,14 @@ public final class RuntimeFingerprint {
                 continue;
             }
 
-            //? if (>=1.18 && <=1.21.8) {
+            //? if <=1.21.8 {
             /*lines.add(
                     player.getStringUUID()
                             + "|"
                             + player.getGameProfile().getName()
                             + "|"
                             + VersionIds.dimension(player));
-            *///?}
-            //? if (>=1.21.9 && <=26.3) {
+            *///?} else {
             lines.add(
                     player.getStringUUID()
                             + "|"

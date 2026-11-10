@@ -1,4 +1,4 @@
-//? if (>=1.18 && <=1.21.11) {
+//? if <=1.21.11 {
 /*package com.atsukimc.anticrash.probe;
 
 import com.atsukimc.anticrash.AntiCrashController;
@@ -83,7 +83,7 @@ public final class RuntimeStateProbe implements ModInitializer {
     private long lastTime = Long.MIN_VALUE;
     private String lastDump = "";
     private boolean audited;
-    //? if (>=1.18 && <=1.21.10) {
+    //? if <=1.21.10 {
     /^private static final net.minecraft.resources.ResourceLocation ECHO_CHANNEL =
     ^///?}
     //? if 1.21.11 {
@@ -103,7 +103,7 @@ public final class RuntimeStateProbe implements ModInitializer {
     ^///?} else {
     private static net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket payload(
     //?}
-            //? if (>=1.18 && <=1.21.10) {
+            //? if <=1.21.10 {
             /^net.minecraft.resources.ResourceLocation channel,
             net.minecraft.network.FriendlyByteBuf data) {
             ^///?}
@@ -249,7 +249,7 @@ public final class RuntimeStateProbe implements ModInitializer {
                     List.of(
                             payload(VersionIds.of("minecraft", "register"), register),
                             payload(
-                                    //? if (>=1.18 && <=1.21.10) {
+                                    //? if <=1.21.10 {
                                     /^(net.minecraft.resources.ResourceLocation)
                                     ^///?}
                                     //? if 1.21.11 {

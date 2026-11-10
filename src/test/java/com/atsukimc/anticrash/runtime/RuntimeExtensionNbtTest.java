@@ -125,14 +125,14 @@ class RuntimeExtensionNbtTest {
 
     /** Every mixin that adds to a Vanilla saveAdditional must be gated by one of the two save scopes. */
 
-    //? if (>=1.18 && <=1.21.5) {
+    //? if <=1.21.5 {
     /*@Test
     void everyWriteNbtInjectionIsGatedByASaveScope() throws Exception
     *///?}
 
     /** Every mixin that adds to a Vanilla writeData must be gated by one of the two save scopes. */
 
-    //? if (>=1.21.6 && <=26.3) {
+    //? if >=1.21.6 {
     @Test
     void everyWriteDataInjectionIsGatedByASaveScope() throws Exception
     //?}
