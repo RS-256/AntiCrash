@@ -30,7 +30,7 @@ public final class VersionNbt {
     public static Tag item(
             net.minecraft.world.item.ItemStack stack,
             net.minecraft.core.HolderLookup.Provider registries) {
-        //? if (>=1.20.5 && <=1.21.4) {
+        //? if <=1.21.4 {
         /*return stack.saveOptional(registries);
         *///?} else {
         return net.minecraft.world.item.ItemStack.OPTIONAL_CODEC
@@ -44,7 +44,7 @@ public final class VersionNbt {
     public static Tag effect(net.minecraft.world.effect.MobEffectInstance effect) {
         //? if <=1.20.4 {
         /*return effect.save(new CompoundTag());
-        *///?} else if (>=1.20.5 && <=1.21.4) {
+        *///?} else if <=1.21.4 {
         /*return effect.save();
         *///?} else {
         // MobEffect.ENTRY_CODEC uses the static STATUS_EFFECT registry, as verified in bytecode.

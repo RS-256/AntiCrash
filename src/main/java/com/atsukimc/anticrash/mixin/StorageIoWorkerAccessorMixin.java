@@ -20,30 +20,18 @@ import java.util.function.Supplier;
  * The IO actor internals a checkpoint cut seals; see {@link
  * com.atsukimc.anticrash.checkpoint.IoSeal}.
  */
-//? if <=1.21.11 {
-/*@Mixin(IOWorker.class)
+@Mixin(IOWorker.class)
 public interface StorageIoWorkerAccessorMixin {
-    /^* Queued writes not yet on disk. Only the worker's own actor thread may touch this map. ^/
-
-*///?}
+    /** Queued writes not yet on disk. Only the worker's own actor thread may touch this map. */
     //? if <=1.21.1 {
     /*@Accessor("pendingWrites")
     Map<ChunkPos, Object> anticrash$getResults();
 
-    *///?}
-    //? if (>=1.21.2 && <=1.21.11) {
-    /*@Accessor("pendingWrites")
-    java.util.SequencedMap<ChunkPos, Object> anticrash$getResults();
-
-    *///?}
-//? if >=26.1 {
-@Mixin(IOWorker.class)
-public interface StorageIoWorkerAccessorMixin {
-    /** Queued writes not yet on disk. Only the worker's own actor thread may touch this map. */
+    *///?} else {
     @Accessor("pendingWrites")
     java.util.SequencedMap<ChunkPos, Object> anticrash$getResults();
 
-//?}
+    //?}
 
     @Accessor("storage")
     RegionFileStorage anticrash$getStorage();

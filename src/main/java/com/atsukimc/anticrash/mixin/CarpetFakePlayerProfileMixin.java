@@ -4,7 +4,7 @@ package com.atsukimc.anticrash.mixin;
 import com.atsukimc.anticrash.integration.carpet.FakePlayerProfileScope;
 import com.mojang.authlib.GameProfile;
 
-//? if (>=1.20.2 && <=1.21.8) {
+//? if <=1.21.8 {
 /*import java.util.Optional;
 import java.util.function.Consumer;
 *///?} else {
@@ -40,7 +40,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Pseudo
 @Mixin(targets = "carpet.patches.EntityPlayerMPFake", remap = false)
 public abstract class CarpetFakePlayerProfileMixin {
-    //? if (>=1.20.2 && <=1.21.8) {
+    //? if <=1.21.8 {
     /*@Inject(
             method = "fetchGameProfile",
             at = @At("HEAD"),

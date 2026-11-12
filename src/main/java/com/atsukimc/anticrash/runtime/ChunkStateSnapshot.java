@@ -83,11 +83,10 @@ public final class ChunkStateSnapshot {
         Set<Long> forced = new LinkedHashSet<>();
 
         //? if <=1.21.4 {
-        /*for (Long position : world.getForcedChunks())
+        /*for (Long position : world.getForcedChunks()) {
         *///?} else {
-        for (Long position : world.getForceLoadedChunks())
+        for (Long position : world.getForceLoadedChunks()) {
         //?}
-        {
             forced.add(position);
             snapshot.forcedChunks.add(position);
         }
@@ -123,14 +122,12 @@ public final class ChunkStateSnapshot {
             /*boolean entity =
                     holder.getFullStatus() == ChunkHolder.FullChunkStatus.ENTITY_TICKING
                             && completed(holder.getEntityTickingChunkFuture());
-            *///?}
-            //? if (>=1.20 && <=1.21.4) {
+            *///?} else if <=1.21.4 {
             /*boolean entity =
                     holder.getFullStatus()
                                     == net.minecraft.server.level.FullChunkStatus.ENTITY_TICKING
                             && completed(holder.getEntityTickingChunkFuture());
-            *///?}
-            //? if >=1.21.5 {
+            *///?} else {
             boolean entity =
                     holder.getFullStatus()
                                     == net.minecraft.server.level.FullChunkStatus.ENTITY_TICKING
@@ -238,12 +235,11 @@ public final class ChunkStateSnapshot {
     }
 
     //? if <=1.20.4 {
-    /*private static boolean completed(CompletableFuture<? extends Either<?, ?>> future)
+    /*private static boolean completed(CompletableFuture<? extends Either<?, ?>> future) {
     *///?} else {
     private static boolean completed(
-            CompletableFuture<? extends net.minecraft.server.level.ChunkResult<?>> future)
+            CompletableFuture<? extends net.minecraft.server.level.ChunkResult<?>> future) {
     //?}
-            {
         if (future == null || !future.isDone() || future.isCompletedExceptionally()) return false;
         try {
 

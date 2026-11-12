@@ -89,7 +89,7 @@ public final class TransientChunkStateMarker {
                                                 net.minecraft.world.level.block.entity
                                                         .PotentSulfurBlockEntity);
                 *///?}
-                //? if 26.3 {
+                //? if >=26.3 {
                 boolean sulfur =
                         chunk.getBlockEntities().values().stream()
                                 .anyMatch(entity ->
@@ -128,11 +128,11 @@ public final class TransientChunkStateMarker {
                 if (chunkScheduledTicks > 0) orderedScheduledTicks.addAll(exactTicks);
 
                 //? if <=26.1 {
-                /*if (!needsTransientSave(pistonsInChunk > 0, blockTicks, fluidTicks))
+                /*if (!needsTransientSave(pistonsInChunk > 0, blockTicks, fluidTicks)) continue;
                 *///?} else {
                 if (!needsTransientSave(pistonsInChunk > 0 || sulfur, blockTicks, fluidTicks))
-                //?}
                     continue;
+                //?}
 
                 criticalChunks.add(
                         new ChunkReference(

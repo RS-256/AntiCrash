@@ -124,13 +124,13 @@ public final class PlayerSnapshotManager {
 
             data.pitch = player.getViewXRot(0);
         }
+        //? if <=1.21.4 {
+        /*if (config.playerSnapshot.gamemode)
+            data.gamemode = player.gameMode.getGameModeForPlayer().getName();
+        *///?} else {
         if (config.playerSnapshot.gamemode)
-
-            //? if <=1.21.4 {
-            /*data.gamemode = player.gameMode.getGameModeForPlayer().getName();
-            *///?} else {
             data.gamemode = player.gameMode.getGameModeForPlayer().getSerializedName();
-            //?}
+        //?}
 
         if (config.playerSnapshot.abilities) {
             net.minecraft.nbt.CompoundTag abilities =
@@ -160,15 +160,15 @@ public final class PlayerSnapshotManager {
         if (config.playerSnapshot.foodSaturation)
             data.foodSaturation = player.getFoodData().getSaturationLevel();
 
+        //? if <=1.21.1 {
+        /*if (config.playerSnapshot.foodExhaustion)
+            data.foodExhaustion = player.getFoodData().getExhaustionLevel();
+        *///?} else {
         if (config.playerSnapshot.foodExhaustion)
-
-            //? if <=1.21.1 {
-            /*data.foodExhaustion = player.getFoodData().getExhaustionLevel();
-            *///?} else {
             data.foodExhaustion =
                     ((com.atsukimc.anticrash.mixin.HungerManagerAccessorMixin) player.getFoodData())
                             .anticrash$getExhaustion();
-            //?}
+        //?}
 
         if (config.playerSnapshot.potionEffects)
             for (MobEffectInstance effect : player.getActiveEffects())
@@ -188,11 +188,10 @@ public final class PlayerSnapshotManager {
         if (config.playerSnapshot.air) data.air = player.getAirSupply();
 
         //? if <=1.21.4 {
-        /*if (config.playerSnapshot.spawnPoint && player.getRespawnPosition() != null)
+        /*if (config.playerSnapshot.spawnPoint && player.getRespawnPosition() != null) {
         *///?} else {
-        if (config.playerSnapshot.spawnPoint && player.getRespawnConfig() != null)
+        if (config.playerSnapshot.spawnPoint && player.getRespawnConfig() != null) {
         //?}
-        {
 
             //? if >=1.21.5 {
             var respawn = player.getRespawnConfig();
@@ -206,11 +205,9 @@ public final class PlayerSnapshotManager {
 
             //? if <=1.21.4 {
             /*BlockPos pos = player.getRespawnPosition();
-            *///?}
-            //? if (>=1.21.5 && <=1.21.8) {
+            *///?} else if <=1.21.8 {
             /*BlockPos pos = respawn.pos();
-            *///?}
-            //? if >=1.21.9 {
+            *///?} else {
             BlockPos pos = spawn.pos();
             //?}
 
@@ -220,11 +217,9 @@ public final class PlayerSnapshotManager {
 
             //? if <=1.21.4 {
             /*data.spawnAngle = player.getRespawnAngle();
-            *///?}
-            //? if (>=1.21.5 && <=1.21.8) {
+            *///?} else if <=1.21.8 {
             /*data.spawnAngle = respawn.angle();
-            *///?}
-            //? if >=1.21.9 {
+            *///?} else {
             data.spawnAngle = spawn.yaw();
             //?}
 
@@ -243,11 +238,9 @@ public final class PlayerSnapshotManager {
             /*ResourceKey<Level> key = player.getRespawnDimension();
 
             data.spawnDimension = key == null ? VersionIds.dimension(player) : VersionIds.key(key);
-            *///?}
-            //? if (>=1.21.5 && <=1.21.8) {
+            *///?} else if <=1.21.8 {
             /*data.spawnDimension = VersionIds.key(respawn.dimension());
-            *///?}
-            //? if >=1.21.9 {
+            *///?} else {
             data.spawnDimension = VersionIds.key(spawn.dimension());
             //?}
 
@@ -495,14 +488,14 @@ public final class PlayerSnapshotManager {
             if (config.playerSnapshot.foodSaturation)
                 player.getFoodData().setSaturation(data.foodSaturation);
 
+            //? if <=1.21.1 {
+            /*if (config.playerSnapshot.foodExhaustion)
+                player.getFoodData().setExhaustion(data.foodExhaustion);
+            *///?} else {
             if (config.playerSnapshot.foodExhaustion)
-
-                //? if <=1.21.1 {
-                /*player.getFoodData().setExhaustion(data.foodExhaustion);
-                *///?} else {
                 ((com.atsukimc.anticrash.mixin.HungerManagerAccessorMixin) player.getFoodData())
                         .anticrash$setExhaustion(data.foodExhaustion);
-                //?}
+            //?}
 
             if (effects != null) {
 
@@ -518,26 +511,25 @@ public final class PlayerSnapshotManager {
 
             if (config.playerSnapshot.air) player.setAirSupply(data.air);
 
-            if (spawnWorld != null)
-
-                //? if <=1.21.4 {
-                /*player.setRespawnPosition(
+            //? if <=1.21.4 {
+            /*if (spawnWorld != null)
+                player.setRespawnPosition(
                         spawnWorld.dimension(),
                         new BlockPos(data.spawnX, data.spawnY, data.spawnZ),
                         data.spawnAngle,
                         data.spawnForced,
                         false);
-                *///?}
-                //? if (>=1.21.5 && <=1.21.8) {
-                /*player.setRespawnPosition(
+            *///?} else if <=1.21.8 {
+            /*if (spawnWorld != null)
+                player.setRespawnPosition(
                         new ServerPlayer.RespawnConfig(
                                 spawnWorld.dimension(),
                                 new BlockPos(data.spawnX, data.spawnY, data.spawnZ),
                                 data.spawnAngle,
                                 data.spawnForced),
                         false);
-                *///?}
-                //? if >=1.21.9 {
+            *///?} else {
+            if (spawnWorld != null)
                 player.setRespawnPosition(
                         new ServerPlayer.RespawnConfig(
                                 net.minecraft.world.level.storage.LevelData.RespawnData.of(
@@ -547,7 +539,7 @@ public final class PlayerSnapshotManager {
                                         data.spawnPitch),
                                 data.spawnForced),
                         false);
-                //?}
+            //?}
 
             if (inventoryChanged) player.inventoryMenu.sendAllDataToRemote();
 
@@ -598,23 +590,23 @@ public final class PlayerSnapshotManager {
 
         //? if <=1.21.4 {
         /*if (config.playerSnapshot.fallDistance && !Float.isFinite(data.fallDistance))
-
+            throw new IOException("Fall distance is not finite");
         *///?} else {
         if (config.playerSnapshot.fallDistance && !Double.isFinite(data.fallDistance))
-        //?}
             throw new IOException("Fall distance is not finite");
+        //?}
 
         //? if <=1.21.8 {
         /*if (config.playerSnapshot.spawnPoint
                 && data.hasSpawnPoint
                 && !Float.isFinite(data.spawnAngle))
-
+            throw new IOException("Spawn angle is not finite");
         *///?} else {
         if (config.playerSnapshot.spawnPoint
                 && data.hasSpawnPoint
                 && (!Float.isFinite(data.spawnAngle) || !Float.isFinite(data.spawnPitch)))
-        //?}
             throw new IOException("Spawn angle is not finite");
+        //?}
         if (config.playerSnapshot.experienceProgress
                 && (data.experienceProgress < 0.0F || data.experienceProgress > 1.0F))
             throw new IOException("Experience progress is outside 0..1");

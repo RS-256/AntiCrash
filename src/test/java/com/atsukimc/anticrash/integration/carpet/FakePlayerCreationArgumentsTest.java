@@ -45,8 +45,7 @@ class FakePlayerCreationArgumentsTest {
                                 null,
                                 data,
                                 null);
-        *///?}
-        //? if 1.20.2 {
+        *///?} else if <=1.20.2 {
         /*Object[] args =
                 (Object[])
                         method.invoke(
@@ -66,8 +65,7 @@ class FakePlayerCreationArgumentsTest {
                                 null,
                                 data,
                                 null);
-        *///?}
-        //? if >=26.1 {
+        *///?} else {
         Object[] args =
                 (Object[])
                         method.invoke(

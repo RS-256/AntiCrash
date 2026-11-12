@@ -16,25 +16,19 @@ import java.util.*;
 public final class FluidInteractionSnapshot {
     private FluidInteractionSnapshot() {}
 
-    //? if (>=26.1 && <=26.2) {
-    /*public record State(
-    *///?}
-    //? if 26.3 {
+    //? if <=26.2 {
+    /*public record State(String tag, double height, boolean eyes, Vec3 current, int count) {
+    *///?} else {
     public enum Kind {
         FLUID,
         CURRENT
     }
 
     public record State(
-            Kind kind,
+            Kind kind, String tag, double height, boolean eyes, Vec3 current, int count) {
     //?}
-            String tag,
-            double height,
-            boolean eyes,
-            Vec3 current,
-            int count) {
 
-        //? if 26.3 {
+        //? if >=26.3 {
         public State(String tag, double height, boolean eyes, Vec3 current, int count) {
             this(Kind.CURRENT, tag, height, eyes, current, count);
         }
@@ -44,7 +38,7 @@ public final class FluidInteractionSnapshot {
         public State {
             VersionIds.parse(tag);
 
-            //? if (>=26.1 && <=26.2) {
+            //? if <=26.2 {
             /*if (!Double.isFinite(height)
                     || height < 0
                     || current == null
@@ -52,9 +46,8 @@ public final class FluidInteractionSnapshot {
                     || !Double.isFinite(current.y)
                     || !Double.isFinite(current.z)
                     || count < 0)
-
-            *///?}
-            //? if 26.3 {
+                throw new IllegalArgumentException("Invalid fluid interaction state");
+            *///?} else {
             if (kind == null
                     || !Double.isFinite(height)
                     || height < 0
@@ -63,15 +56,14 @@ public final class FluidInteractionSnapshot {
                     || !Double.isFinite(current.y)
                     || !Double.isFinite(current.z)
                     || count < 0)
-
-            //?}
                 throw new IllegalArgumentException("Invalid fluid interaction state");
+            //?}
         }
 
         public CompoundTag write() {
             var n = new CompoundTag();
 
-            //? if 26.3 {
+            //? if >=26.3 {
             n.putString("Kind", kind.name());
             //?}
 
@@ -85,15 +77,14 @@ public final class FluidInteractionSnapshot {
 
         public static State read(CompoundTag n) {
 
-            //? if (>=26.1 && <=26.2) {
+            //? if <=26.2 {
             /*return new State(
                     n.getString("Tag").orElseThrow(),
                     n.getDouble("Height").orElseThrow(),
                     n.getBoolean("Eyes").orElseThrow(),
                     n.read("Current", Vec3.CODEC).orElseThrow(),
                     n.getInt("Count").orElseThrow());
-            *///?}
-            //? if 26.3 {
+            *///?} else {
             return new State(
                     Kind.valueOf(n.getString("Kind").orElseThrow()),
                     n.getString("Tag").orElseThrow(),
@@ -104,7 +95,7 @@ public final class FluidInteractionSnapshot {
             //?}
 
         }
-    //? if (>=26.1 && <=26.2) {
+    //? if <=26.2 {
 
     /*}
 
@@ -127,7 +118,7 @@ public final class FluidInteractionSnapshot {
 
     public static ListTag capture(Entity entity) {
 
-        //? if 26.3 {
+        //? if >=26.3 {
         var interaction = ((EntityFluidAccessor) entity).anticrash$fluids();
 
         var access = (FluidInteractionAccessor) interaction;
@@ -135,7 +126,7 @@ public final class FluidInteractionSnapshot {
 
         var n = new ListTag();
 
-        //? if (>=26.1 && <=26.2) {
+        //? if <=26.2 {
         /*trackers(entity)
                 .forEach((tag, t) ->
                         n.add(
@@ -146,8 +137,7 @@ public final class FluidInteractionSnapshot {
                                                 t.anticrash$current(),
                                                 t.anticrash$count())
                                         .write()));
-        *///?}
-        //? if 26.3 {
+        *///?} else {
         for (Object tracker : access.anticrash$trackers()) {
             var t = (FluidTrackerAccessor) tracker;
 
@@ -194,16 +184,14 @@ public final class FluidInteractionSnapshot {
                 throw new IllegalArgumentException("Invalid fluid entry");
             var state = State.read(compound);
 
-            //? if (>=26.1 && <=26.2) {
-            /*if (!ids.add(state.tag()))
-            *///?}
-            //? if 26.3 {
+            //? if <=26.2 {
+            /*if (!ids.add(state.tag())) throw new IllegalArgumentException("Duplicate fluid entry");
+            *///?} else {
             if (!ids.add(state.kind() + ":" + state.tag()))
-
-            //?}
                 throw new IllegalArgumentException("Duplicate fluid entry");
+            //?}
 
-            //? if 26.3 {
+            //? if >=26.3 {
             if (state.kind() == Kind.FLUID
                     && (!state.current().equals(Vec3.ZERO) || state.count() != 0))
                 throw new IllegalArgumentException(
@@ -217,7 +205,7 @@ public final class FluidInteractionSnapshot {
         }
         // getCurrentAccumulatorFor chooses the first matching tag. Sorting changes semantics.
 
-        //? if 26.3 {
+        //? if >=26.3 {
         return List.copyOf(result);
     }
 
@@ -226,18 +214,16 @@ public final class FluidInteractionSnapshot {
         var fluids = expected.stream().filter(s -> s.kind() == Kind.FLUID).map(State::tag).toList();
         //?}
 
-        //? if (>=26.1 && <=26.2) {
+        //? if <=26.2 {
         /*result.sort(Comparator.comparing(State::tag));
-        *///?}
-        //? if 26.3 {
+        *///?} else {
         var currents =
                 expected.stream().filter(s -> s.kind() == Kind.CURRENT).map(State::tag).toList();
         //?}
 
-        //? if (>=26.1 && <=26.2) {
+        //? if <=26.2 {
         /*return result;
-        *///?}
-        //? if 26.3 {
+        *///?} else {
         if (!currents.equals(currentTags)
                 || existingFluids.size() > fluids.size()
                 || !fluids.subList(0, existingFluids.size()).equals(existingFluids))
@@ -251,7 +237,7 @@ public final class FluidInteractionSnapshot {
      * rather than allocate/replace its final tracker collection or serialize Java objects.
      */
 
-    //? if 26.3 {
+    //? if >=26.3 {
     static Object createTracker(
             net.minecraft.world.entity.EntityFluidInteraction interaction,
             net.minecraft.core.Holder<net.minecraft.world.level.material.Fluid> fluid) {
@@ -285,18 +271,16 @@ public final class FluidInteractionSnapshot {
     public static void restore(Entity entity, ListTag n) {
         var expected = decode(n);
 
-        //? if (>=26.1 && <=26.2) {
+        //? if <=26.2 {
         /*var live = trackers(entity);
-        *///?}
-        //? if 26.3 {
+        *///?} else {
         var interaction = ((EntityFluidAccessor) entity).anticrash$fluids();
         //?}
 
-        //? if (>=26.1 && <=26.2) {
+        //? if <=26.2 {
         /*if (!live.keySet().equals(new HashSet<>(expected.stream().map(State::tag).toList())))
             throw new IllegalStateException("Fluid tracker domain differs");
-        *///?}
-        //? if 26.3 {
+        *///?} else {
         var access = (FluidInteractionAccessor) interaction;
 
         var currents = new LinkedHashMap<String, FluidCurrentAccessor>();
@@ -337,11 +321,11 @@ public final class FluidInteractionSnapshot {
         // All entries have been validated before any value changes.
         for (var s : expected) {
 
-            //? if (>=26.1 && <=26.2) {
+            //? if <=26.2 {
             /*var t = live.get(s.tag());
             *///?}
 
-            //? if 26.3 {
+            //? if >=26.3 {
             if (s.kind() == Kind.FLUID) {
                 var t = (FluidTrackerAccessor) createTracker(interaction, holders.get(s.tag()));
             //?}
@@ -350,12 +334,11 @@ public final class FluidInteractionSnapshot {
 
                 t.anticrash$eyes(s.eyes());
 
-            //? if (>=26.1 && <=26.2) {
+            //? if <=26.2 {
             /*t.anticrash$current(s.current());
 
             t.anticrash$count(s.count());
-            *///?}
-            //? if 26.3 {
+            *///?} else {
 
             } else {
                 var c = currents.get(s.tag());

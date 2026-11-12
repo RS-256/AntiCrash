@@ -31,11 +31,13 @@ public abstract class EntityLifecycleMixin {
 
     //? if <=1.21.4 {
     /*@Inject(method = "moveTo(DDDFF)V", at = @At("HEAD"))
-    *///?} else {
-    @Inject(method = "snapTo(DDDFF)V", at = @At("HEAD"))
-    //?}
     private void anticrash$refreshPosition(
             double x, double y, double z, float yaw, float pitch, CallbackInfo callbackInfo) {
+    *///?} else {
+    @Inject(method = "snapTo(DDDFF)V", at = @At("HEAD"))
+    private void anticrash$refreshPosition(
+            double x, double y, double z, float yaw, float pitch, CallbackInfo callbackInfo) {
+    //?}
         recordMove(x, z);
     }
 

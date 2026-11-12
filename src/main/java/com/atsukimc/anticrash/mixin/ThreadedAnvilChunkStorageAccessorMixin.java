@@ -22,22 +22,12 @@ public interface ThreadedAnvilChunkStorageAccessorMixin {
 
 *///?}
 
-//? if (>=1.21 && <=1.21.11) {
-/*@Mixin(ChunkMap.class)
-public interface ThreadedAnvilChunkStorageAccessorMixin {
-*///?}
-    //? if <=1.21.11 {
-    /*@Accessor("updatingChunkMap")
-    Long2ObjectLinkedOpenHashMap<ChunkHolder> anticrash$getCurrentChunkHolders();
-
-    *///?}
-//? if >=26.1 {
+//? if >=1.21 {
 @Mixin(ChunkMap.class)
 public interface ThreadedAnvilChunkStorageAccessorMixin {
+//?}
     @Accessor("updatingChunkMap")
     Long2ObjectLinkedOpenHashMap<ChunkHolder> anticrash$getCurrentChunkHolders();
-
-//?}
 
     /**
      * Holders already taken out of the live map and waiting for their unload task. Their chunk may

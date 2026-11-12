@@ -1140,13 +1140,12 @@ public final class AntiCrashController {
     //? if <=1.20.1 {
     /*public void deferCustomPayload(
             net.minecraft.server.network.ServerGamePacketListenerImpl handler,
-            net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket packet)
+            net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket packet) {
     *///?} else {
     public void deferCustomPayload(
             net.minecraft.server.network.ServerGamePacketListenerImpl handler,
-            net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket packet)
+            net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket packet) {
     //?}
-            {
         payloadDelivery().defer(handler, packet);
     }
 
@@ -1169,14 +1168,13 @@ public final class AntiCrashController {
     /*private synchronized com.atsukimc.anticrash.network.DeferredPayloadDispatcher<
                     net.minecraft.server.network.ServerGamePacketListenerImpl,
                     net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket>
-            payloadDelivery()
+            payloadDelivery() {
     *///?} else {
     private synchronized com.atsukimc.anticrash.network.DeferredPayloadDispatcher<
                     net.minecraft.server.network.ServerGamePacketListenerImpl,
                     net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket>
-            payloadDelivery()
+            payloadDelivery() {
     //?}
-            {
         if (deferredPayloads == null)
             deferredPayloads =
                     new com.atsukimc.anticrash.network.DeferredPayloadDispatcher<>(
@@ -1242,17 +1240,15 @@ public final class AntiCrashController {
             return false;
         }
 
-        for (net.minecraft.server.level.ServerLevel world : server.getAllLevels())
-        //? if <=1.18.1 {
-        /*{
-            // 1.18.1 has no tickChunks boolean; the scoped adapter suppresses only simulation.
+        for (net.minecraft.server.level.ServerLevel world : server.getAllLevels()) {
+            //? if <=1.18.1 {
+            /*// 1.18.1 has no tickChunks boolean; the scoped adapter suppresses only simulation.
             com.atsukimc.anticrash.recovery.VersionChunkLifecycle.advance(world.getChunkSource());
-        *///?} else {
-        {
+            *///?} else {
             // No chunk is ticked (second argument); this only advances tickets and chunk loading.
 
             world.getChunkSource().tick(() -> true, false);
-        //?}
+            //?}
 
         }
         return true;

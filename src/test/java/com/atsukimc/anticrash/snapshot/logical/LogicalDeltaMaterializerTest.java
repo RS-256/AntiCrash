@@ -154,16 +154,15 @@ class LogicalDeltaMaterializerTest {
         Path directory = destination.resolve("entities");
 
         //? if <=1.20.4 {
-        /*try (RegionFile region = new RegionFile(directory.resolve("r.0.0.mca"), directory, false))
+        /*try (RegionFile region = new RegionFile(directory.resolve("r.0.0.mca"), directory, false)) {
         *///?} else {
         try (RegionFile region =
                 new RegionFile(
                         com.atsukimc.anticrash.snapshot.RegionStorageAdapter.KEY,
                         directory.resolve("r.0.0.mca"),
                         directory,
-                        false))
+                        false)) {
         //?}
-        {
             assertEquals(false, region.hasChunk(new ChunkPos(0, 0)));
         }
 
@@ -230,26 +229,23 @@ class LogicalDeltaMaterializerTest {
                                 + ".mca");
 
         //? if <=1.20.4 {
-        /*try (RegionFile region = new RegionFile(file, directory, false))
+        /*try (RegionFile region = new RegionFile(file, directory, false)) {
         *///?} else {
         try (RegionFile region =
                 new RegionFile(
                         com.atsukimc.anticrash.snapshot.RegionStorageAdapter.KEY,
                         file,
                         directory,
-                        false))
+                        false)) {
         //?}
-        {
 
             try (DataOutputStream output = region.getChunkDataOutputStream(pos)) {
 
                 //? if <=1.20.1 {
                 /*NbtIo.write(root, output);
-                *///?}
-                //? if 1.20.2 {
+                *///?} else if <=1.20.2 {
                 /*NbtIo.writeUnnamedTag(root, output);
-                *///?}
-                //? if >=1.20.3 {
+                *///?} else {
                 NbtIo.writeUnnamedTagWithFallback(root, output);
                 //?}
 
@@ -273,7 +269,7 @@ class LogicalDeltaMaterializerTest {
 
         //? if <=1.20.4 {
         /*try (RegionFile region = new RegionFile(file, directory, false);
-                var input = region.getChunkDataInputStream(pos))
+                var input = region.getChunkDataInputStream(pos)) {
         *///?} else {
         try (RegionFile region =
                         new RegionFile(
@@ -281,9 +277,8 @@ class LogicalDeltaMaterializerTest {
                                 file,
                                 directory,
                                 false);
-                var input = region.getChunkDataInputStream(pos))
+                var input = region.getChunkDataInputStream(pos)) {
         //?}
-        {
 
             //? if <=1.20.1 {
             /*return NbtIo.read(input);

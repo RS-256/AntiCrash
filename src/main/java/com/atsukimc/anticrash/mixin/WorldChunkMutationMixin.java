@@ -14,32 +14,23 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /** Auditable semantic mutation hooks; this is intentionally not a universal mutation journal. */
-//? if <=1.21.11 {
-/*@Mixin(LevelChunk.class)
+@Mixin(LevelChunk.class)
 public abstract class WorldChunkMutationMixin {
-
-*///?}
     //? if <=1.21.4 {
     /*@Inject(method = "setBlockState", at = @At("TAIL"))
     private void anticrash$blockStateMutation(
             BlockPos pos,
             BlockState state,
             boolean moved,
-            CallbackInfoReturnable<BlockState> callbackInfo)
-    *///?}
-//? if >=26.1 {
-@Mixin(LevelChunk.class)
-public abstract class WorldChunkMutationMixin {
-//?}
-    //? if >=1.21.5 {
+            CallbackInfoReturnable<BlockState> callbackInfo) {
+    *///?} else {
     @Inject(method = "setBlockState", at = @At("TAIL"))
     private void anticrash$blockStateMutation(
             BlockPos pos,
             BlockState state,
             int flags,
-            CallbackInfoReturnable<BlockState> callbackInfo)
+            CallbackInfoReturnable<BlockState> callbackInfo) {
     //?}
-            {
 
         LevelChunk chunk = (LevelChunk) (Object) this;
 

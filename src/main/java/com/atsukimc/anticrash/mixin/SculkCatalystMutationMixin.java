@@ -1,7 +1,7 @@
 //? if >=1.19 {
 package com.atsukimc.anticrash.mixin;
 
-//? if (>=1.19 && <=1.19.4) {
+//? if <=1.19.4 {
 /*import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -28,41 +28,26 @@ public abstract class SculkCatalystMutationMixin {
             BlockState state,
             SculkCatalystBlockEntity catalyst,
             CallbackInfo ci) {
+        if (!world.isClientSide()) world.blockEntityChanged(pos);
+    }
 
-        //? if (>=1.19 && <=1.21.11) {
-        /*if (!world.isClientSide()) world.blockEntityChanged(pos);
-        *///?}
-    //? if (>=1.19 && <=1.21.8) {
-
-    /*}
-    *///?}
-
-    //? if (>=1.19 && <=1.19.2) {
-    /*@Inject(method = "handleGameEvent", at = @At("RETURN"))
+    //? if <=1.19.4 {
+    /*//? if <=1.19.2 {
+    /^@Inject(method = "handleGameEvent", at = @At("RETURN"))
     private void anticrash$markNewCursor(
-            ServerLevel world, GameEvent.Message message, CallbackInfoReturnable<Boolean> ci)
-    *///?}
-    //? if (>=1.19.3 && <=1.19.4) {
-    /*@Inject(method = "handleGameEvent", at = @At("RETURN"))
+            ServerLevel world, GameEvent.Message message, CallbackInfoReturnable<Boolean> ci) {
+    ^///?} else {
+    @Inject(method = "handleGameEvent", at = @At("RETURN"))
     private void anticrash$markNewCursor(
             ServerLevel world,
             GameEvent event,
             GameEvent.Context emitter,
             net.minecraft.world.phys.Vec3 origin,
-            CallbackInfoReturnable<Boolean> ci)
-    *///?}
-            //? if (>=1.19 && <=1.19.4) {
-            /*{
+            CallbackInfoReturnable<Boolean> ci) {
+    //?}
         if (ci.getReturnValueZ())
             world.blockEntityChanged(((SculkCatalystBlockEntity) (Object) this).getBlockPos());
-            *///?}
-        //? if >=26.1 {
-        if (!world.isClientSide()) world.blockEntityChanged(pos);
-        //?}
-    //? if (>=1.19 && <=1.19.4) || >=1.21.9 {
-
     }
-    //?}
-
+    *///?}
 }
 //?}

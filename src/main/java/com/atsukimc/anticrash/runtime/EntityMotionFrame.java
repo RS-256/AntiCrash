@@ -24,11 +24,10 @@ public record EntityMotionFrame(Vec3 movement, Vec3 lastPosition, boolean knocke
     public static EntityMotionFrame capture(Entity entity) {
         var accessor = (EntityRuntimeAccessorMixin) entity;
 
-        //? if (>=1.21.11 && <=26.2) {
+        //? if <=26.2 {
         /*return new EntityMotionFrame(
                 accessor.anticrash$movement(), accessor.anticrash$lastPos(), entity.hurtMarked);
-        *///?}
-        //? if 26.3 {
+        *///?} else {
         return new EntityMotionFrame(
                 accessor.anticrash$movement(), accessor.anticrash$lastPos(), entity.syncVelocity);
         //?}
@@ -63,10 +62,9 @@ public record EntityMotionFrame(Vec3 movement, Vec3 lastPosition, boolean knocke
         accessor.anticrash$setMovement(movement);
         accessor.anticrash$setLastPos(lastPosition);
 
-        //? if (>=1.21.11 && <=26.2) {
+        //? if <=26.2 {
         /*entity.hurtMarked = knockedBack;
-        *///?}
-        //? if 26.3 {
+        *///?} else {
         entity.syncVelocity = knockedBack;
         //?}
 

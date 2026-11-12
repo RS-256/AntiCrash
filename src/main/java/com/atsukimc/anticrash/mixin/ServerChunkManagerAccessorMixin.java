@@ -25,29 +25,19 @@ import java.util.concurrent.CompletableFuture;
  * the private {@code getChunkFuture} method confirmed in the 1.18.2 merged bytecode and never
  * changes the ticket manager's internal state.
  */
-//? if <=1.21.11 {
-/*@Mixin(ServerChunkCache.class)
+@Mixin(ServerChunkCache.class)
 public interface ServerChunkManagerAccessorMixin {
-
-*///?}
     //? if <=1.20.4 {
     /*@Invoker("getChunkFutureMainThread")
     CompletableFuture<Either<LevelChunk, ChunkHolder.ChunkLoadingFailure>> anticrash$getChunkFuture(
             int chunkX, int chunkZ, ChunkStatus status, boolean addTicket);
 
     *///?}
-    //? if (>=1.21.5 && <=1.21.11) {
-    /*@org.spongepowered.asm.mixin.gen.Accessor("ticketStorage")
-    net.minecraft.world.level.TicketStorage anticrash$getTicketManager();
-
-    *///?}
-//? if >=26.1 {
-@Mixin(ServerChunkCache.class)
-public interface ServerChunkManagerAccessorMixin {
+    //? if >=1.21.5 {
     @org.spongepowered.asm.mixin.gen.Accessor("ticketStorage")
     net.minecraft.world.level.TicketStorage anticrash$getTicketManager();
 
-//?}
+    //?}
 
     //? if >=1.20.5 {
     @Invoker("getChunkFutureMainThread")

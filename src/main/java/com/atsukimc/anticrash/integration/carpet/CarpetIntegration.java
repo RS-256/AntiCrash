@@ -292,13 +292,13 @@ public final class CarpetIntegration {
 
             data.pitch = player.getViewXRot(0);
         }
+        //? if <=1.21.4 {
+        /*if (config.fakePlayer.snapshot.gamemode)
+            data.gamemode = player.gameMode.getGameModeForPlayer().getName();
+        *///?} else {
         if (config.fakePlayer.snapshot.gamemode)
-
-            //? if <=1.21.4 {
-            /*data.gamemode = player.gameMode.getGameModeForPlayer().getName();
-            *///?} else {
             data.gamemode = player.gameMode.getGameModeForPlayer().getSerializedName();
-            //?}
+        //?}
 
         if (config.fakePlayer.snapshot.flying) data.flying = player.getAbilities().flying;
         if (config.fakePlayer.snapshot.sneaking) data.sneaking = player.isShiftKeyDown();
@@ -436,11 +436,10 @@ public final class CarpetIntegration {
                 }
 
                 //? if <=1.21.8 {
-                /*if (!data.name.equals(player.getGameProfile().getName()))
+                /*if (!data.name.equals(player.getGameProfile().getName())) {
                 *///?} else {
-                if (!data.name.equals(player.getGameProfile().name()))
+                if (!data.name.equals(player.getGameProfile().name())) {
                 //?}
-                {
                     throw new IllegalStateException(
                             "FakePlayer name does not match the checkpoint");
                 }
@@ -486,14 +485,15 @@ public final class CarpetIntegration {
         } catch (Exception ignored) {
         }
 
+        //? if <=1.21.8 {
+        /*for (ServerPlayer player : server.getPlayerList().getPlayers())
+            if (isFakePlayer(player)
+                    && player.getGameProfile().getName().equalsIgnoreCase(data.name)) return player;
+        *///?} else {
         for (ServerPlayer player : server.getPlayerList().getPlayers())
-            //? if <=1.21.8 {
-            /*if (isFakePlayer(player)
-                    && player.getGameProfile().getName().equalsIgnoreCase(data.name))
-            *///?} else {
             if (isFakePlayer(player) && player.getGameProfile().name().equalsIgnoreCase(data.name))
-            //?}
                 return player;
+        //?}
         return null;
     }
 
@@ -514,13 +514,12 @@ public final class CarpetIntegration {
         //? if <=1.21.8 {
         /*try (FakePlayerProfileScope ignored =
                 FakePlayerProfileScope.open(
-                        server.getProfileCache(), server, expectedUuid, data.name))
+                        server.getProfileCache(), server, expectedUuid, data.name)) {
         *///?} else {
         try (FakePlayerProfileScope ignored =
                 FakePlayerProfileScope.open(
-                        server.services().nameToIdCache(), server, expectedUuid, data.name))
+                        server.services().nameToIdCache(), server, expectedUuid, data.name)) {
         //?}
-        {
             return createWithCheckpointProfile(server, data);
         }
     }
@@ -750,15 +749,15 @@ public final class CarpetIntegration {
                                     ? data.pitch
                                     : player.getViewXRot(0);
 
-            if (config.fakePlayer.snapshot.dimension && VersionLevels.level(player) != world)
-
-                //? if <=1.21.1 {
-                /*player.teleportTo(world, x, y, z, yaw, pitch);
-                *///?} else {
-                player.teleportTo(world, x, y, z, java.util.Set.of(), yaw, pitch, false);
-                //?}
-
+            //? if <=1.21.1 {
+            /*if (config.fakePlayer.snapshot.dimension && VersionLevels.level(player) != world)
+                player.teleportTo(world, x, y, z, yaw, pitch);
             else {
+            *///?} else {
+            if (config.fakePlayer.snapshot.dimension && VersionLevels.level(player) != world)
+                player.teleportTo(world, x, y, z, java.util.Set.of(), yaw, pitch, false);
+            else {
+            //?}
                 //? if <=1.21.4 {
                 /*player.absMoveTo(x, y, z, yaw, pitch);
                 *///?} else {
@@ -862,11 +861,12 @@ public final class CarpetIntegration {
             //? if <=1.21.8 {
             /*if (VersionLevels.level(vehicle) != VersionLevels.level(player)
                     || !player.startRiding(vehicle, true))
+                throw new IOException("FakePlayer riding state could not be restored");
             *///?} else {
             if (VersionLevels.level(vehicle) != VersionLevels.level(player)
                     || !player.startRiding(vehicle, true, false))
-            //?}
                 throw new IOException("FakePlayer riding state could not be restored");
+            //?}
         }
     }
 
@@ -910,11 +910,11 @@ public final class CarpetIntegration {
 
         //? if <=1.21.4 {
         /*if (nbt.hasUUID("UUID")) uuids.add(nbt.getUUID("UUID"));
-        net.minecraft.nbt.ListTag passengers = VersionNbt.list(nbt, "Passengers", 10);
         *///?} else {
         nbt.read("UUID", net.minecraft.core.UUIDUtil.CODEC).ifPresent(uuids::add);
-        net.minecraft.nbt.ListTag passengers = VersionNbt.list(nbt, "Passengers", 10);
         //?}
+
+        net.minecraft.nbt.ListTag passengers = VersionNbt.list(nbt, "Passengers", 10);
 
         for (int i = 0; i < passengers.size(); i++)
             collectUuids(VersionNbt.getCompound(passengers, i), uuids);
@@ -1022,10 +1022,10 @@ public final class CarpetIntegration {
 
         //? if <=1.21.1 {
         /*for (java.util.Map.Entry<net.minecraft.world.item.Item, Object> entry :
-        *///?} else {
-        for (java.util.Map.Entry<?, Object> entry :
-        //?}
                 manager.anticrash$getEntries().entrySet()) {
+        *///?} else {
+        for (java.util.Map.Entry<?, Object> entry : manager.anticrash$getEntries().entrySet()) {
+        //?}
             int remaining =
                     ((com.atsukimc.anticrash.mixin.ItemCooldownEntryAccessorMixin) entry.getValue())
                                     .anticrash$getEndTick()
@@ -1115,7 +1115,7 @@ public final class CarpetIntegration {
                 //? if <=1.21.1 {
                 /*if (id == null || !VersionIds.items().containsKey(id))
                     throw new IOException("Unknown FakePlayer cooldown item: " + cooldown.item);
-                *///?} else if >=1.21.2 {
+                *///?} else {
                 if (id == null)
                     throw new IOException("Invalid FakePlayer cooldown group: " + cooldown.item);
                 //?}

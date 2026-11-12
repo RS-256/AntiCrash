@@ -12,10 +12,6 @@ import java.io.InputStream;
 /** Offline evidence for version-dependent semantic assumptions, without starting a server. */
 class VersionAdapterBytecodeTest {
 
-    //? if 1.21.4 {
-    /*@Test
-    void enderPearlTicketHasChunkArgumentAndFortyTickExpiry()
-    *///?}
     //? if >=1.21.9 {
     @Test
     void modernSpawnPointPreservesBothAngles() {
@@ -69,14 +65,13 @@ class VersionAdapterBytecodeTest {
 
     //?}
 
-    //? if >=1.21.5 {
+    //? if 1.21.4 {
+    /*@Test
+    void enderPearlTicketHasChunkArgumentAndFortyTickExpiry() {
+    *///?} else if >=1.21.5 {
     @Test
-    void ticketsUseCountdownAndSeparateLoadingAndSimulation() throws Exception
+    void ticketsUseCountdownAndSeparateLoadingAndSimulation() throws Exception {
     //?}
-            //? if >=1.21.4 {
-            {
-
-            //?}
         //? if 1.21.4 {
         /*assertEquals(40, net.minecraft.server.level.TicketType.ENDER_PEARL.timeout());
         *///?}
@@ -203,14 +198,12 @@ class VersionAdapterBytecodeTest {
 
         var sensor = read("net/minecraft/world/level/block/entity/SculkSensorBlockEntity");
 
-        //? if (>=1.19 && <=1.21.4) {
+        //? if <=1.21.4 {
         /*assertTrue(
                 invokes(sensor, "saveAdditional", "com/mojang/serialization/Codec", "encodeStart"));
-        *///?}
-        //? if 1.21.5 {
+        *///?} else if <=1.21.5 {
         /*assertTrue(invokes(sensor, "saveAdditional", "net/minecraft/nbt/CompoundTag", "store"));
-        *///?}
-        //? if >=1.21.6 {
+        *///?} else {
         assertTrue(
                 invokes(
                         sensor,
@@ -219,16 +212,13 @@ class VersionAdapterBytecodeTest {
                         "store"));
         //?}
 
-        //? if (>=1.19 && <=1.20.4) {
+        //? if <=1.20.4 {
         /*assertTrue(invokes(sensor, "load", "com/mojang/serialization/Codec", "parse"));
-        *///?}
-        //? if (>=1.20.5 && <=1.21.4) {
+        *///?} else if <=1.21.4 {
         /*assertTrue(invokes(sensor, "loadAdditional", "com/mojang/serialization/Codec", "parse"));
-        *///?}
-        //? if 1.21.5 {
+        *///?} else if <=1.21.5 {
         /*assertTrue(invokes(sensor, "loadAdditional", "net/minecraft/nbt/CompoundTag", "read"));
-        *///?}
-        //? if >=1.21.6 {
+        *///?} else {
         assertTrue(
                 invokes(
                         sensor,
@@ -237,19 +227,17 @@ class VersionAdapterBytecodeTest {
                         "read"));
         //?}
 
-        //? if (>=1.19 && <=1.19.4) {
+        //? if <=1.19.4 {
         /*var listener = read("net/minecraft/world/level/gameevent/vibrations/VibrationListener");
-        *///?}
-        //? if >=1.20 {
+        *///?} else {
         var listener = read("net/minecraft/world/level/gameevent/vibrations/VibrationSystem$Data");
         //?}
 
-        //? if (>=1.19 && <=1.19.2) {
+        //? if <=1.19.2 {
         /*assertTrue(
                 listener.fields.stream()
                         .anyMatch(f -> f.name.equals("receivingDistance") && f.desc.equals("F")));
-        *///?}
-        //? if >=1.19.3 {
+        *///?} else {
         assertTrue(
                 listener.fields.stream()
                         .anyMatch(f ->
@@ -257,10 +245,9 @@ class VersionAdapterBytecodeTest {
                                         && f.desc.endsWith("/VibrationSelector;")));
         //?}
 
-        //? if (>=1.19 && <=1.19.2) {
+        //? if <=1.19.2 {
         /*assertTrue(listener.fields.stream().anyMatch(f -> f.name.equals("receivingEvent")));
-        *///?}
-        //? if >=1.19.3 {
+        *///?} else {
         assertTrue(listener.fields.stream().anyMatch(f -> f.name.equals("currentVibration")));
         //?}
 
@@ -285,14 +272,13 @@ class VersionAdapterBytecodeTest {
 
         var getter = read("net/minecraft/world/item/crafting/RecipeManager$1");
 
-        //? if (>=1.19 && <=1.21.1) {
+        //? if <=1.21.1 {
         /*assertTrue(
                 getter.fields.stream()
                         .anyMatch(f ->
                                 f.name.equals("lastRecipe")
                                         && f.desc.endsWith("/ResourceLocation;")));
-        *///?}
-        //? if >=1.21.2 {
+        *///?} else {
         assertTrue(
                 getter.fields.stream()
                         .anyMatch(f ->

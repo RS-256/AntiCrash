@@ -339,11 +339,10 @@ public final class RuntimeCapsuleManager {
                     var value = future.getNow(null);
 
                     //? if <=1.20.4 {
-                    /*if (value != null && value.left().isPresent())
+                    /*if (value != null && value.left().isPresent()) {
                     *///?} else {
-                    if (value != null && value.isSuccess())
+                    if (value != null && value.isSuccess()) {
                     //?}
-                    {
 
                         //? if <=1.20.4 {
                         /*result.addAll(
@@ -554,8 +553,7 @@ public final class RuntimeCapsuleManager {
                             (Object) world.getChunkSource())
                     .anticrash$setLastMobSpawningTime(world.getGameTime());
         }
-            *///?}
-            //? if 26.3 {
+            *///?} else {
 
             // 26.3 incrementInhabitedTime() increments once per spawning tick. There is no
             // lastInhabitedUpdate field or elapsed-world-time accumulator to reset anymore.

@@ -27,7 +27,7 @@ public abstract class BrewingStandBlockEntityMixin {
             BlockPos pos,
             BlockState state,
             BrewingStandBlockEntity stand,
-            CallbackInfo callbackInfo)
+            CallbackInfo callbackInfo) {
     *///?} else {
     @Inject(method = "serverTick", at = @At("HEAD"))
     private static void anticrash$markBrewTimeDirty(
@@ -35,9 +35,8 @@ public abstract class BrewingStandBlockEntityMixin {
             BlockPos pos,
             BlockState state,
             BrewingStandBlockEntity stand,
-            CallbackInfo callbackInfo)
+            CallbackInfo callbackInfo) {
     //?}
-            {
         if (((BrewingStandBlockEntityTimerAccessor) stand).anticrash$getBrewTime() > 0)
             world.blockEntityChanged(pos);
     }
@@ -51,23 +50,21 @@ public abstract class BrewingStandBlockEntityMixin {
      * null, the first tick sees "ingredient changed" and resets the brew to zero, so a brew in
      * progress starts over (up to 400 ticks late).
      */
-
     //? if <=1.20.4 {
     /*@Inject(method = "saveAdditional", at = @At("TAIL"))
     private void anticrash$saveBrewingItem(
-            net.minecraft.nbt.CompoundTag nbt, CallbackInfo callbackInfo)
+            net.minecraft.nbt.CompoundTag nbt, CallbackInfo callbackInfo) {
     *///?} else if <=1.21.5 {
     /*@Inject(method = "saveAdditional", at = @At("TAIL"))
     private void anticrash$saveBrewingItem(
             net.minecraft.nbt.CompoundTag nbt,
             net.minecraft.core.HolderLookup.Provider registries,
-            CallbackInfo callbackInfo)
+            CallbackInfo callbackInfo) {
     *///?} else {
     @Inject(method = "saveAdditional", at = @At("TAIL"))
     private void anticrash$saveBrewingItem(
-            net.minecraft.world.level.storage.ValueOutput nbt, CallbackInfo callbackInfo)
+            net.minecraft.world.level.storage.ValueOutput nbt, CallbackInfo callbackInfo) {
     //?}
-            {
         if (!com.atsukimc.anticrash.runtime.RuntimeExtensionNbt.savingLoadedChunk()) return;
         com.atsukimc.anticrash.runtime.RuntimeExtensionNbt.write(
                 nbt,
@@ -83,19 +80,18 @@ public abstract class BrewingStandBlockEntityMixin {
     //? if <=1.20.4 {
     /*@Inject(method = "load", at = @At("TAIL"))
     private void anticrash$loadBrewingItem(
-            net.minecraft.nbt.CompoundTag nbt, CallbackInfo callbackInfo)
+            net.minecraft.nbt.CompoundTag nbt, CallbackInfo callbackInfo) {
     *///?} else if <=1.21.5 {
     /*@Inject(method = "loadAdditional", at = @At("TAIL"))
     private void anticrash$loadBrewingItem(
             net.minecraft.nbt.CompoundTag nbt,
             net.minecraft.core.HolderLookup.Provider registries,
-            CallbackInfo callbackInfo)
+            CallbackInfo callbackInfo) {
     *///?} else {
     @Inject(method = "loadAdditional", at = @At("TAIL"))
     private void anticrash$loadBrewingItem(
-            net.minecraft.world.level.storage.ValueInput nbt, CallbackInfo callbackInfo)
+            net.minecraft.world.level.storage.ValueInput nbt, CallbackInfo callbackInfo) {
     //?}
-            {
         net.minecraft.nbt.CompoundTag extension =
                 com.atsukimc.anticrash.runtime.RuntimeExtensionNbt.read(nbt);
 

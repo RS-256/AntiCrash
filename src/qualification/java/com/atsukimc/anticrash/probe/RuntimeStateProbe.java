@@ -85,11 +85,11 @@ public final class RuntimeStateProbe implements ModInitializer {
     private boolean audited;
     //? if <=1.21.10 {
     /^private static final net.minecraft.resources.ResourceLocation ECHO_CHANNEL =
-    ^///?}
-    //? if 1.21.11 {
-    /^private static final net.minecraft.resources.Identifier ECHO_CHANNEL =
-    ^///?}
             VersionIds.of("anticrash_probe", "echo");
+    ^///?} else {
+    private static final net.minecraft.resources.Identifier ECHO_CHANNEL =
+            VersionIds.of("anticrash_probe", "echo");
+    //?}
     private final java.util.concurrent.atomic.AtomicInteger echoReceived =
             new java.util.concurrent.atomic.AtomicInteger();
     private int payloadPhase;
@@ -100,29 +100,28 @@ public final class RuntimeStateProbe implements ModInitializer {
     // This preserves channel data and lets installed mods decode their own payloads.
     //? if <=1.20.1 {
     /^private static net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket payload(
+            net.minecraft.resources.ResourceLocation channel,
+            net.minecraft.network.FriendlyByteBuf data) {
+    ^///?} else if <=1.21.10 {
+    /^private static net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket payload(
+            net.minecraft.resources.ResourceLocation channel,
+            net.minecraft.network.FriendlyByteBuf data) {
     ^///?} else {
     private static net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket payload(
+            net.minecraft.resources.Identifier channel,
+            net.minecraft.network.FriendlyByteBuf data) {
     //?}
-            //? if <=1.21.10 {
-            /^net.minecraft.resources.ResourceLocation channel,
-            net.minecraft.network.FriendlyByteBuf data) {
-            ^///?}
-            //? if 1.21.11 {
-            /^net.minecraft.resources.Identifier channel,
-            net.minecraft.network.FriendlyByteBuf data) {
-            ^///?}
         //? if <=1.20.1 {
         /^return new net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket(
                 channel, data);
         ^///?} else {
         var wire = new net.minecraft.network.FriendlyByteBuf(io.netty.buffer.Unpooled.buffer());
         try {
-            //? if (>=1.20.2 && <=1.21.10) {
+            //? if <=1.21.10 {
             /^wire.writeResourceLocation(channel);
-            ^///?}
-            //? if 1.21.11 {
-            /^wire.writeIdentifier(channel);
-            ^///?}
+            ^///?} else {
+            wire.writeIdentifier(channel);
+            //?}
             wire.writeBytes(data, data.readerIndex(), data.readableBytes());
             //? if <=1.20.4 {
             /^return new net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket(wire);
@@ -248,15 +247,17 @@ public final class RuntimeStateProbe implements ModInitializer {
             var packets =
                     List.of(
                             payload(VersionIds.of("minecraft", "register"), register),
-                            payload(
-                                    //? if <=1.21.10 {
-                                    /^(net.minecraft.resources.ResourceLocation)
-                                    ^///?}
-                                    //? if 1.21.11 {
-                                    /^(net.minecraft.resources.Identifier)
-                                    ^///?}
+                            //? if <=1.21.10 {
+                            /^payload(
+                                    (net.minecraft.resources.ResourceLocation)
                                             client.getField("CARPET_CHANNEL").get(null),
                                     hello),
+                            ^///?} else {
+                            payload(
+                                    (net.minecraft.resources.Identifier)
+                                            client.getField("CARPET_CHANNEL").get(null),
+                                    hello),
+                            //?}
                             payload(
                                     ECHO_CHANNEL,
                                     new net.minecraft.network.FriendlyByteBuf(

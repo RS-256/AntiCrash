@@ -64,11 +64,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 //? if <=1.21.11 {
 /*//? if <=1.21.8 {
 /^@Mixin(net.minecraft.server.players.GameProfileCache.class)
-^///?}
-//? if (>=1.21.9 && <=1.21.11) {
-/^@Mixin(net.minecraft.server.players.CachedUserNameToIdResolver.class)
-^///?}
 public abstract class UserCacheMixin {
+^///?} else {
+@Mixin(net.minecraft.server.players.CachedUserNameToIdResolver.class)
+public abstract class UserCacheMixin {
+//?}
 
 *///?}
     //? if <=1.21.8 {
@@ -78,7 +78,7 @@ public abstract class UserCacheMixin {
             cancellable = true)
     private void anticrash$checkpointFakePlayerProfile(
             String name,
-            CallbackInfoReturnable<java.util.Optional<com.mojang.authlib.GameProfile>> callback)
+            CallbackInfoReturnable<java.util.Optional<com.mojang.authlib.GameProfile>> callback) {
     *///?}
     //? if (>=1.21.9 && <=1.21.11) {
     /*@Inject(
@@ -88,7 +88,7 @@ public abstract class UserCacheMixin {
     private void anticrash$checkpointFakePlayerProfile(
             String name,
             CallbackInfoReturnable<java.util.Optional<net.minecraft.server.players.NameAndId>>
-                    callback)
+                    callback) {
     *///?}
 
 /** Exact 26.1 mapped cache API; ordinary authentication/cache lookups are unchanged. */
@@ -106,9 +106,8 @@ public abstract class UserCacheMixin {
     private void anticrash$checkpointFakePlayerProfile(
             String name,
             CallbackInfoReturnable<java.util.Optional<net.minecraft.server.players.NameAndId>>
-                    callback)
+                    callback) {
 //?}
-            {
         GameProfile profile = FakePlayerProfileScope.lookup(this, name);
 
         //? if <=1.21.8 {

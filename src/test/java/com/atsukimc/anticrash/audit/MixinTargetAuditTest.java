@@ -201,24 +201,25 @@ class MixinTargetAuditTest {
                     targets.add(((Type) target).getInternalName());
                 for (Object target : list(value(marker, "targets")))
                     targets.add(target.toString().replace('.', '/'));
-                for (String target : targets)
-                //? if <=1.20.1 {
-                /*{
-
-                *///?}
-                //? if (>=1.20.2 && <=1.21.8) {
-                /*{
-                    // Optional external Carpet is absent in this game-only offline classpath.
+                for (String target : targets) {
+                    //? if (>=1.20.2 && <=1.21.8) {
+                    /*// Optional external Carpet is absent in this game-only offline classpath.
                     // Mandatory Minecraft targets remain required; this is not
                     // Carpet runtime coverage.
-                *///?}
-                //? if >=1.21.9 {
-                {
+                    boolean pseudo =
+                            annotations(mixin.visibleAnnotations, mixin.invisibleAnnotations)
+                                    .stream()
+                                    .anyMatch(a ->
+                                            a.desc.equals("Lorg/spongepowered/asm/mixin/Pseudo;"));
+
+                    if (pseudo
+                            && target.startsWith("carpet/")
+                            && getClass().getClassLoader().getResource(target + ".class") == null)
+                        continue;
+                    *///?} else if >=1.21.9 {
                     // Optional external adapters are absent in the game-only offline classpath.
                     // Only @Pseudo Carpet targets may be absent; mandatory Minecraft targets
                     // remain required. This is not Carpet runtime coverage.
-                //?}
-                    //? if >=1.20.2 {
                     boolean pseudo =
                             annotations(mixin.visibleAnnotations, mixin.invisibleAnnotations)
                                     .stream()
@@ -263,16 +264,17 @@ class MixinTargetAuditTest {
                                 problems.add(context + " Shadow method missing: " + member.desc);
                             }
                             for (Object selector : list(value(a, "method"))) {
+                                //? if <=1.21.11 {
+                                /*if (selector instanceof String name)
+                                    for (MethodNode selected : selectedMethods(target, name))
+                                        invokeOccursInTarget(
+                                                selected, value(a, "at"), problems, context);
+                                *///?} else {
                                 if (selector instanceof String name)
                                     for (MethodNode selected : selectedMethods(target, name))
-
-                                        //? if <=1.21.11 {
-                                        /*invokeOccursInTarget(
-                                                selected, value(a, "at"), problems, context);
-                                        *///?} else {
                                         invokeOccursInTarget(
                                                 selected, value(a, "forIndex"), problems, context);
-                                        //?}
+                                //?}
 
                                 if (selector instanceof String name && !method(target, name)) {
                                     problems.add(context + " method missing: " + name);

@@ -56,23 +56,21 @@ public final class TicketLedgerSnapshot {
                     accessor.anticrash$getTicketsByPosition();
 
             for (Long2ObjectMap.Entry<SortedArraySet<Ticket<?>>> positionEntry :
-                    tickets.long2ObjectEntrySet())
+                    tickets.long2ObjectEntrySet()) {
             *///?} else {
             Long2ObjectOpenHashMap<List<Ticket>> tickets =
                     accessor.anticrash$getTicketsByPosition();
 
-            for (Long2ObjectMap.Entry<List<Ticket>> positionEntry : tickets.long2ObjectEntrySet())
+            for (Long2ObjectMap.Entry<List<Ticket>> positionEntry : tickets.long2ObjectEntrySet()) {
             //?}
-            {
 
                 ChunkPos pos = VersionChunkPos.unpack(positionEntry.getLongKey());
 
                 //? if <=1.21.4 {
-                /*for (Ticket<?> ticket : positionEntry.getValue())
+                /*for (Ticket<?> ticket : positionEntry.getValue()) {
                 *///?} else {
-                for (Ticket ticket : positionEntry.getValue())
+                for (Ticket ticket : positionEntry.getValue()) {
                 //?}
-                {
                     ChunkTicketAccessorMixin ticketAccessor =
                             (ChunkTicketAccessorMixin) (Object) ticket;
 
@@ -122,22 +120,18 @@ public final class TicketLedgerSnapshot {
                     //? if <=1.21.4 {
                     /*entry.tickCreated = ticketAccessor.anticrash$getTickCreated();
 
+                    *///?}
                     entry.expiryTicks = ticket.getType().timeout();
-                    *///?} else {
-                    entry.expiryTicks = ticket.getType().timeout();
-                    //?}
 
-                    if (entry.expiryTicks > 0)
-                    //? if <=1.21.4 {
-                    /*{
-                        // Vanilla keeps a ticket while age - tickCreated <= expiry.
+                    if (entry.expiryTicks > 0) {
+                        //? if <=1.21.4 {
+                        /*// Vanilla keeps a ticket while age - tickCreated <= expiry.
                         entry.remainingTicks =
                                 entry.expiryTicks
                                         - (accessor.anticrash$getAge() - entry.tickCreated);
-                    *///?} else {
-                    {
+                        *///?} else {
                         entry.remainingTicks = ticketAccessor.anticrash$getTicksLeft();
-                    //?}
+                        //?}
 
                     }
                     result.add(entry);

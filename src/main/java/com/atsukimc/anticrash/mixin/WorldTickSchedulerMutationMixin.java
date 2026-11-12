@@ -80,15 +80,14 @@ public abstract class WorldTickSchedulerMutationMixin {
 
     //? if <=1.19.3 {
     /*@Inject(method = "copyArea", at = @At("HEAD"))
-    private void anticrash$scheduleTicks(BoundingBox box, Vec3i offset, CallbackInfo callbackInfo)
+    private void anticrash$scheduleTicks(BoundingBox box, Vec3i offset, CallbackInfo callbackInfo) {
     *///?} else {
     @Inject(
             method =
                     "copyArea(Lnet/minecraft/world/level/levelgen/structure/BoundingBox;Lnet/minecraft/core/Vec3i;)V",
             at = @At("HEAD"))
-    private void anticrash$scheduleTicks(BoundingBox box, Vec3i offset, CallbackInfo callbackInfo)
+    private void anticrash$scheduleTicks(BoundingBox box, Vec3i offset, CallbackInfo callbackInfo) {
     //?}
-            {
         if (ScheduledTickMutationTracer.isActive()) {
             ScheduledTickMutationTracer.record(
                     "world.scheduleTicks",

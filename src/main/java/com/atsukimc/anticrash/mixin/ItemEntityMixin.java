@@ -83,17 +83,17 @@ public abstract class ItemEntityMixin implements com.atsukimc.anticrash.runtime.
         ItemStack pickedStack = before.copy();
         pickedStack.setCount(picked);
         AntiCrashController controller = AntiCrashMod.controller();
-        if (controller != null)
-
-            //? if <=1.19.3 {
-            /*controller.recordTransaction(
+        //? if <=1.19.3 {
+        /*if (controller != null)
+            controller.recordTransaction(
                     "ITEM_PICKUP",
                     serverPlayer,
                     "world",
                     "player",
                     new BlockPos(item.position()),
                     pickedStack);
-            *///?} else {
+        *///?} else {
+        if (controller != null)
             controller.recordTransaction(
                     "ITEM_PICKUP",
                     serverPlayer,
@@ -101,6 +101,6 @@ public abstract class ItemEntityMixin implements com.atsukimc.anticrash.runtime.
                     "player",
                     BlockPos.containing(item.position()),
                     pickedStack);
-            //?}
+        //?}
     }
 }

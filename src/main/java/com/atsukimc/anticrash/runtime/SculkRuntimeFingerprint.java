@@ -1,7 +1,7 @@
 //? if >=1.19 {
 package com.atsukimc.anticrash.runtime;
 
-//? if (>=1.19 && <=1.19.4) {
+//? if <=1.19.4 {
 /*import net.minecraft.world.level.gameevent.vibrations.VibrationListener;
 *///?} else {
 import net.minecraft.world.level.gameevent.vibrations.VibrationSystem;
@@ -21,41 +21,40 @@ public final class SculkRuntimeFingerprint {
 
     public static String capture(BlockEntity entity) {
 
-        //? if (>=1.19 && <=1.19.4) {
+        //? if <=1.19.4 {
         /*VibrationListener listener;
 
         if (entity instanceof SculkSensorBlockEntity sensor) listener = sensor.getListener();
         else if (entity instanceof SculkShriekerBlockEntity shrieker)
             listener = shrieker.getListener();
-        else
-        *///?}
+        else if (entity instanceof SculkCatalystBlockEntity catalyst) {
+        *///?} else {
         if (entity instanceof SculkCatalystBlockEntity catalyst) {
+        //?}
             var view = VersionStorage.writer(entity);
 
-            //? if (>=1.19 && <=1.19.4) {
+            //? if <=1.19.4 {
             /*catalyst.getSculkSpreader().save(view);
-            *///?}
-            //? if >=1.20 {
+            *///?} else {
             catalyst.getListener().getSculkSpreader().save(view);
             //?}
 
             return "catalyst|" + VersionStorage.result(view);
 
-        } else
-        //? if >=1.20 {
-        if (!(entity instanceof VibrationSystem))
+        //? if <=1.19.4 {
+        /*} else return null;
+        *///?} else {
+        } else if (!(entity instanceof VibrationSystem)) return null;
         //?}
-            return null;
 
-        //? if (>=1.19 && <=1.19.4) {
+        //? if <=1.19.4 {
         /*return "listener|"
                 + VibrationListener.codec((VibrationListener.VibrationListenerConfig) entity)
                         .encodeStart(JsonOps.INSTANCE, listener)
                         .result()
                         .orElseThrow(
                                 () -> new IllegalStateException("Sculk listener capture failed"));
-        *///?}
-        //? if >=1.20 {
+        *///?} else {
         return "listener|"
                 + VibrationSystem.Data.CODEC
                         .encodeStart(

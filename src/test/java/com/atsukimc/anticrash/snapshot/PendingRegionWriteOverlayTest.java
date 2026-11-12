@@ -62,16 +62,10 @@ class PendingRegionWriteOverlayTest {
 
         try (DataOutputStream output = file.getChunkDataOutputStream(pos)) {
 
-            //? if <=1.21.11 {
-            /*//? if <=1.20.1 {
-            /^NbtIo.write(nbt, output);
-            ^///?}
-            //? if 1.20.2 {
-            /^NbtIo.writeUnnamedTag(nbt, output);
-            ^///?}
-            //? if (>=1.20.3 && <=1.21.11) {
-            /^NbtIo.writeUnnamedTagWithFallback(nbt, output);
-            ^///?}
+            //? if <=1.20.1 {
+            /*NbtIo.write(nbt, output);
+            *///?} else if <=1.20.2 {
+            /*NbtIo.writeUnnamedTag(nbt, output);
             *///?} else {
             NbtIo.writeUnnamedTagWithFallback(nbt, output);
             //?}

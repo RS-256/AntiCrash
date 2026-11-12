@@ -298,17 +298,10 @@ public final class DetachedGeneration {
                             try (java.io.DataOutputStream output =
                                     file.getChunkDataOutputStream(write.pos())) {
 
-                                //? if <=1.21.11 {
-                                /*//? if <=1.20.1 {
-                                /^net.minecraft.nbt.NbtIo.write(write.nbt(), output);
-                                ^///?}
-                                //? if 1.20.2 {
-                                /^net.minecraft.nbt.NbtIo.writeUnnamedTag(write.nbt(), output);
-                                ^///?}
-                                //? if (>=1.20.3 && <=1.21.11) {
-                                /^net.minecraft.nbt.NbtIo.writeUnnamedTagWithFallback(
-                                        write.nbt(), output);
-                                ^///?}
+                                //? if <=1.20.1 {
+                                /*net.minecraft.nbt.NbtIo.write(write.nbt(), output);
+                                *///?} else if <=1.20.2 {
+                                /*net.minecraft.nbt.NbtIo.writeUnnamedTag(write.nbt(), output);
                                 *///?} else {
                                 net.minecraft.nbt.NbtIo.writeUnnamedTagWithFallback(
                                         write.nbt(), output);

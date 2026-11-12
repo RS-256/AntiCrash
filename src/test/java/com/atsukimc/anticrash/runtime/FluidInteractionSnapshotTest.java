@@ -14,12 +14,11 @@ class FluidInteractionSnapshotTest {
     @Test
     void trackerRoundTripPreservesAllSemanticValues() {
 
-        //? if (>=26.1 && <=26.2) {
+        //? if <=26.2 {
         /*var state =
                 new FluidInteractionSnapshot.State(
                         "minecraft:water", 0.875, true, new Vec3(0.5, -1, 2), 17);
-        *///?}
-        //? if 26.3 {
+        *///?} else {
         var state =
                 new FluidInteractionSnapshot.State(
                         "minecraft:water", 0.875, false, new Vec3(0.5, -1, 2), 17);
@@ -49,20 +48,17 @@ class FluidInteractionSnapshotTest {
                                 "minecraft:water", 0, false, new Vec3(Double.NaN, 0, 0), 0));
     }
 
-    //? if (>=26.1 && <=26.2) {
+    //? if <=26.2 {
     /*@Test
-    void decodedOrderingIsStableWithoutMutatingInput()
-    *///?}
-    //? if 26.3 {
+    void decodedOrderingIsStableWithoutMutatingInput() {
+    *///?} else {
     @Test
-    void decodedOrderingPreservesNativeFirstMatchingTagWithoutMutatingInput()
+    void decodedOrderingPreservesNativeFirstMatchingTagWithoutMutatingInput() {
     //?}
-            {
 
-        //? if (>=26.1 && <=26.2) {
+        //? if <=26.2 {
         /*var water = new FluidInteractionSnapshot.State("minecraft:water", 1, true, Vec3.ZERO, 0);
-        *///?}
-        //? if 26.3 {
+        *///?} else {
         var water = new FluidInteractionSnapshot.State("minecraft:water", 1, false, Vec3.ZERO, 0);
         //?}
 
@@ -71,17 +67,16 @@ class FluidInteractionSnapshotTest {
         n.add(water.write());
         n.add(lava.write());
 
-        //? if (>=26.1 && <=26.2) {
+        //? if <=26.2 {
         /*assertEquals(java.util.List.of(lava, water), FluidInteractionSnapshot.decode(n));
-        *///?}
-        //? if 26.3 {
+        *///?} else {
         assertEquals(java.util.List.of(water, lava), FluidInteractionSnapshot.decode(n));
         //?}
 
         assertEquals(water, FluidInteractionSnapshot.State.read((CompoundTag) n.get(0)));
     }
 
-    //? if 26.3 {
+    //? if >=26.3 {
     @Test
     void contactAndCurrentWithSameIdentifierRemainDistinct() {
         var contact =

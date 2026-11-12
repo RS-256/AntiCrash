@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Entity.class)
 public abstract class EntityRuntimeStateMixin {
 
-    //? if 1.18 {
+    //? if <=1.18 {
     /*@Shadow public boolean blocksBuilding;
     *///?}
 
@@ -42,7 +42,7 @@ public abstract class EntityRuntimeStateMixin {
     /*@Shadow protected boolean isInsidePortal;
     @Shadow protected int portalTime;
     @Shadow protected BlockPos portalEntrancePos;
-    *///?} else{
+    *///?} else {
     @Shadow public net.minecraft.world.entity.PortalProcessor portalProcess;
     //?}
 
@@ -74,7 +74,7 @@ public abstract class EntityRuntimeStateMixin {
         RuntimeExtensionNbt.write(
                 nbt,
                 extension -> {
-                    //? if 1.18 {
+                    //? if <=1.18 {
                     /*// 1.18 EntityGetter reads this for collision queries. Falling-block
                     // construction paths do not all set the same default; preserve both true and
                     // false at the cut.
@@ -225,7 +225,7 @@ public abstract class EntityRuntimeStateMixin {
 
         if (extension == null) return;
 
-        //? if 1.18 {
+        //? if <=1.18 {
         /*if (extension.contains("Inanimate"))
             blocksBuilding = VersionNbt.getBoolean(extension, "Inanimate");
         *///?}

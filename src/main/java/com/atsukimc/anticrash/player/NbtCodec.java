@@ -24,13 +24,8 @@ public final class NbtCodec {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         try (DataOutputStream output = new DataOutputStream(bytes)) {
 
-            //? if <=1.21.11 {
-            /*//? if <=1.20.2 {
-            /^NbtIo.writeUnnamedTag(element, output);
-            ^///?}
-            //? if (>=1.20.3 && <=1.21.11) {
-            /^NbtIo.writeUnnamedTagWithFallback(element, output);
-            ^///?}
+            //? if <=1.20.2 {
+            /*NbtIo.writeUnnamedTag(element, output);
             *///?} else {
             NbtIo.writeUnnamedTagWithFallback(element, output);
             //?}

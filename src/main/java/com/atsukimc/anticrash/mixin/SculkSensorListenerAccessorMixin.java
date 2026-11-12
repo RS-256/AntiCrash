@@ -20,13 +20,13 @@ public interface SculkSensorListenerAccessorMixin {
 ^///?}
 
 /^* 1.19 Vanilla persists vibration/source UUIDs/distance/delay via the listener codec. ^/
-//? if (>=1.19 && <=1.19.2) {
-/^@Mixin(VibrationListener.class)
+//? if >=1.19 {
+@Mixin(VibrationListener.class)
 public interface SculkSensorListenerAccessorMixin {
     @Accessor("receivingEvent")
     VibrationListener.ReceivingEvent anticrash$getVibration();
 
-^///?}
+//?}
 
     //? if <=1.18.2 {
     /^@Accessor("receivingEvent")
@@ -38,12 +38,11 @@ public interface SculkSensorListenerAccessorMixin {
     @Accessor("receivingDistance")
     void anticrash$setDistance(int distance);
 
-    ^///?}
-    //? if (>=1.19 && <=1.19.2) {
-    /^@Accessor("receivingDistance")
+    ^///?} else {
+    @Accessor("receivingDistance")
     float anticrash$getDistance();
 
-    ^///?}
+    //?}
 
     @Accessor("travelTimeInTicks")
     int anticrash$getDelay();

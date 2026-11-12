@@ -66,27 +66,25 @@ final class RuntimeFieldDump {
                             continue;
                         }
 
-                        if (!base.isAssignableFrom(type))
+                        if (!base.isAssignableFrom(type)) continue;
                         *///?} else {
-                        if (!inherits(type, base.getName().replace('.', '/')))
+                        if (!inherits(type, base.getName().replace('.', '/'))) continue;
                         //?}
-                            continue;
                         List<String> fields = new ArrayList<>();
 
                         //? if <=1.19.2 {
-                        /*for (Field field : type.getDeclaredFields())
+                        /*for (Field field : type.getDeclaredFields()) {
                         *///?} else {
-                        for (var field : type.fields)
+                        for (var field : type.fields) {
                         //?}
-                        {
 
                             //? if <=1.19.2 {
                             /*if (Modifier.isStatic(field.getModifiers()) || field.isSynthetic())
-
+                                continue;
                             *///?} else {
                             if ((field.access & (Opcodes.ACC_STATIC | Opcodes.ACC_SYNTHETIC)) != 0)
-                            //?}
                                 continue;
+                            //?}
 
                             //? if <=1.19.2 {
                             /*fields.add(field.getName());

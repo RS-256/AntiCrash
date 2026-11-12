@@ -42,25 +42,21 @@ import java.util.concurrent.CompletableFuture;
  * configured plan. STRICT never truncates its expected domain: concurrent-load and heap limits
  * control preparation pressure, and insufficient capacity fails recovery closed.
  */
-//? if <=1.21.4 {
-/*public final class ChunkRecoveryManager {
-    private static final TicketType<Unit> RECOVERY_TICKET =
+public final class ChunkRecoveryManager {
+    //? if <=1.21.4 {
+    /*private static final TicketType<Unit> RECOVERY_TICKET =
             TicketType.create("anticrash_recovery", (left, right) -> 0);
-*///?}
-//? if (>=1.21.5 && <=1.21.8) {
-/*public final class ChunkRecoveryManager {
-    // An ephemeral, non-persisted type. Long.MAX_VALUE avoids record equality with START;
+    *///?} else if <=1.21.8 {
+    /*// An ephemeral, non-persisted type. Long.MAX_VALUE avoids record equality with START;
     // only public ticket APIs are used, and every abort/completion explicitly releases it.
     public static final TicketType RECOVERY_TICKET =
             new TicketType(Long.MAX_VALUE, false, TicketType.TicketUse.LOADING_AND_SIMULATION);
-*///?}
-//? if >=1.21.9 {
-public final class ChunkRecoveryManager {
+    *///?} else {
     // An ephemeral, non-persisted type, distinct from Vanilla's finite spawn-search tickets;
     // only public ticket APIs are used, and every abort/completion explicitly releases it.
     public static final TicketType RECOVERY_TICKET =
             new TicketType(Long.MAX_VALUE, TicketType.FLAG_LOADING | TicketType.FLAG_SIMULATION);
-//?}
+    //?}
 
     private static final long MAX_POLL_NANOS = 20_000_000L;
     private static final long PROGRESS_LOG_NANOS = 5_000_000_000L;
@@ -358,18 +354,16 @@ public final class ChunkRecoveryManager {
         ChunkPos pos = VersionChunkPos.unpack(entry.packedPosition());
 
         Ticket ticket = null;
-        try
-        //? if <=1.21.4 {
-        /*{
-            // ServerChunkCache.addTicket accepts a radius, not the resulting Vanilla ticket
+        try {
+            //? if <=1.21.4 {
+            /*// ServerChunkCache.addTicket accepts a radius, not the resulting Vanilla ticket
             // level. Track the converted radius before touching Minecraft so an OOM in
             // addTicket/getChunk still leaves abort() with an entry it can remove.
             int ticketRadius = ChunkRecoveryPlan.ticketRadiusForLevel(entry.ticketLevel());
-        *///?} else {
-        {
+            *///?} else {
             // 1.21.5 takes the LEVEL directly; the pre-1.21.5 radius conversion is not applicable.
             int ticketRadius = ChunkRecoveryPlan.ticketArgumentForLevel(entry.ticketLevel());
-        //?}
+            //?}
 
             ticket = new Ticket(world, pos, ticketRadius, entry.ticketLevel());
             tickets.add(ticket);
@@ -378,14 +372,13 @@ public final class ChunkRecoveryManager {
             /*world.getChunkSource()
                     .addRegionTicket(RECOVERY_TICKET, pos, ticketRadius, Unit.INSTANCE);
 
-            if (entry.forced() && !world.getForcedChunks().contains(VersionChunkPos.pack(pos)))
+            if (entry.forced() && !world.getForcedChunks().contains(VersionChunkPos.pack(pos))) {
             *///?} else {
             world.getChunkSource().addTicketWithRadius(RECOVERY_TICKET, pos, ticketRadius);
 
             if (entry.forced()
-                    && !world.getForceLoadedChunks().contains(VersionChunkPos.pack(pos)))
+                    && !world.getForceLoadedChunks().contains(VersionChunkPos.pack(pos))) {
             //?}
-            {
                 // A forced chunk is persistent world state. Keep a record only for the failure
                 // path: after a successful recovery this addition is part of the restored state,
                 // while aborting a failed attempt must not leave an AntiCrash-only forced chunk.
@@ -497,11 +490,10 @@ public final class ChunkRecoveryManager {
             }
 
             //? if <=1.20.4 {
-            /*if (result == null || result.left().isEmpty())
+            /*if (result == null || result.left().isEmpty()) {
             *///?} else {
-            if (result == null || !result.isSuccess())
+            if (result == null || !result.isSuccess()) {
             //?}
-            {
                 fail(request.ticket, pendingChunk, "FULL chunk became unavailable");
                 iterator.remove();
                 continue;
@@ -570,12 +562,10 @@ public final class ChunkRecoveryManager {
         //? if <=1.19.4 {
         /*return holder.getFullStatus() == ChunkHolder.FullChunkStatus.ENTITY_TICKING
                 && completed(holder.getEntityTickingChunkFuture());
-        *///?}
-        //? if (>=1.20 && <=1.21.4) {
+        *///?} else if <=1.21.4 {
         /*return holder.getFullStatus() == net.minecraft.server.level.FullChunkStatus.ENTITY_TICKING
                 && completed(holder.getEntityTickingChunkFuture());
-        *///?}
-        //? if >=1.21.5 {
+        *///?} else {
         return holder.getFullStatus() == net.minecraft.server.level.FullChunkStatus.ENTITY_TICKING
                 && completed(holder.getEntityTickingChunkFuture())
                 && ticket.world.isPositionEntityTicking(
@@ -586,12 +576,11 @@ public final class ChunkRecoveryManager {
     }
 
     //? if <=1.20.4 {
-    /*private static boolean completed(CompletableFuture<? extends Either<?, ?>> future)
+    /*private static boolean completed(CompletableFuture<? extends Either<?, ?>> future) {
     *///?} else {
     private static boolean completed(
-            CompletableFuture<? extends net.minecraft.server.level.ChunkResult<?>> future)
+            CompletableFuture<? extends net.minecraft.server.level.ChunkResult<?>> future) {
     //?}
-            {
         if (future == null || !future.isDone() || future.isCompletedExceptionally()) return false;
         try {
 
@@ -763,17 +752,16 @@ public final class ChunkRecoveryManager {
         }
     }
 
+    //? if <=1.20.4 {
+    /*private record InFlight(
+            Ticket ticket,
+            CompletableFuture<Either<LevelChunk, ChunkHolder.ChunkLoadingFailure>> future) {}
+    *///?} else {
     private record InFlight(
-            Ticket ticket
-                    //? if <=1.20.4 {
-                    /*,
-            CompletableFuture<Either<LevelChunk, ChunkHolder.ChunkLoadingFailure>> future
-                    *///?} else {
-                    ,
+            Ticket ticket,
             CompletableFuture<
                             net.minecraft.server.level.ChunkResult<
                                     net.minecraft.world.level.chunk.ChunkAccess>>
-                    future
-                    //?}
-            ) {}
+                    future) {}
+    //?}
 }

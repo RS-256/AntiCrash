@@ -28,22 +28,27 @@ public abstract class EndGatewayBlockEntityMixin {
 
     //? if <=1.20.6 {
     /*@Inject(method = "teleportTick", at = @At("TAIL"))
-    *///?} else {
-    @Inject(method = "portalTick", at = @At("TAIL"))
-    //?}
     private static void anticrash$markChunkDirty(
             Level world,
             BlockPos pos,
             BlockState state,
             TheEndGatewayBlockEntity gateway,
             CallbackInfo callbackInfo) {
+    *///?} else {
+    @Inject(method = "portalTick", at = @At("TAIL"))
+    private static void anticrash$markChunkDirty(
+            Level world,
+            BlockPos pos,
+            BlockState state,
+            TheEndGatewayBlockEntity gateway,
+            CallbackInfo callbackInfo) {
+    //?}
         world.blockEntityChanged(pos);
     }
 
     /**
      * The cooldown itself is not saved: after a restart a gateway on cooldown teleports at once.
      */
-
     //? if <=1.20.4 {
     /*@Inject(method = "saveAdditional", at = @At("TAIL"))
     private void anticrash$saveTeleportCooldown(CompoundTag nbt, CallbackInfo callbackInfo) {

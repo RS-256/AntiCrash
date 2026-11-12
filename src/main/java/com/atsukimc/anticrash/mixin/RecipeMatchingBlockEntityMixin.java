@@ -1,7 +1,7 @@
 //? if >=1.19 {
 package com.atsukimc.anticrash.mixin;
 
-//? if (>=1.19 && <=1.21.1) {
+//? if <=1.21.1 {
 /*import net.minecraft.world.item.crafting.RecipeManager;
 *///?}
 
@@ -23,30 +23,26 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(AbstractFurnaceBlockEntity.class)
 public abstract class RecipeMatchingBlockEntityMixin {
 
-    //? if (>=1.19 && <=1.21.1) {
+    //? if <=1.21.1 {
     /*@Shadow @Final private RecipeManager.CachedCheck quickCheck;
 
-    *///?}
-    //? if >=1.21.2 {
+    *///?} else {
     @Shadow @Final private net.minecraft.world.item.crafting.RecipeManager.CachedCheck quickCheck;
 
     //?}
 
-    //? if (>=1.19 && <=1.20.4) {
+    //? if <=1.20.4 {
     /*@Inject(method = "saveAdditional", at = @At("TAIL"))
-    private void anticrash$saveRecipeMatch(CompoundTag nbt, CallbackInfo ci)
-    *///?}
-    //? if (>=1.20.5 && <=1.21.5) {
+    private void anticrash$saveRecipeMatch(CompoundTag nbt, CallbackInfo ci) {
+    *///?} else if <=1.21.5 {
     /*@Inject(method = "saveAdditional", at = @At("TAIL"))
     private void anticrash$saveRecipeMatch(
-            CompoundTag nbt, net.minecraft.core.HolderLookup.Provider registries, CallbackInfo ci)
-    *///?}
-    //? if >=1.21.6 {
+            CompoundTag nbt, net.minecraft.core.HolderLookup.Provider registries, CallbackInfo ci) {
+    *///?} else {
     @Inject(method = "saveAdditional", at = @At("TAIL"))
     private void anticrash$saveRecipeMatch(
-            net.minecraft.world.level.storage.ValueOutput nbt, CallbackInfo ci)
+            net.minecraft.world.level.storage.ValueOutput nbt, CallbackInfo ci) {
     //?}
-            {
         if (!RuntimeExtensionNbt.savingLoadedChunk()) return;
 
         var id = ((RecipeMatchGetterAccessorMixin) quickCheck).anticrash$getRecipeId();
@@ -55,46 +51,40 @@ public abstract class RecipeMatchingBlockEntityMixin {
                 nbt,
                 extension -> {
                     extension.remove("RecipeMatch");
-                    if (id != null)
-                        //? if (>=1.19 && <=1.21.1) {
-                        /*extension.putString("RecipeMatch", id.toString());
-                        *///?}
-                        //? if >=1.21.2 {
-                        extension.putString("RecipeMatch", VersionIds.key(id));
-                        //?}
+                    //? if <=1.21.1 {
+                    /*if (id != null) extension.putString("RecipeMatch", id.toString());
+                    *///?} else {
+                    if (id != null) extension.putString("RecipeMatch", VersionIds.key(id));
+                    //?}
 
                 });
     }
 
-    //? if (>=1.19 && <=1.20.4) {
+    //? if <=1.20.4 {
     /*@Inject(method = "load", at = @At("TAIL"))
-    private void anticrash$loadRecipeMatch(CompoundTag nbt, CallbackInfo ci)
-    *///?}
-    //? if (>=1.20.5 && <=1.21.5) {
+    private void anticrash$loadRecipeMatch(CompoundTag nbt, CallbackInfo ci) {
+    *///?} else if <=1.21.5 {
     /*@Inject(method = "loadAdditional", at = @At("TAIL"))
     private void anticrash$loadRecipeMatch(
-            CompoundTag nbt, net.minecraft.core.HolderLookup.Provider registries, CallbackInfo ci)
-    *///?}
-    //? if >=1.21.6 {
+            CompoundTag nbt, net.minecraft.core.HolderLookup.Provider registries, CallbackInfo ci) {
+    *///?} else {
     @Inject(method = "loadAdditional", at = @At("TAIL"))
     private void anticrash$loadRecipeMatch(
-            net.minecraft.world.level.storage.ValueInput nbt, CallbackInfo ci)
+            net.minecraft.world.level.storage.ValueInput nbt, CallbackInfo ci) {
     //?}
-            {
 
         CompoundTag extension = RuntimeExtensionNbt.read(nbt);
 
         if (extension == null) return;
 
-        //? if (>=1.19 && <=1.21.1) {
+        //? if <=1.21.1 {
         /*((RecipeMatchGetterAccessorMixin) quickCheck)
                 .anticrash$setRecipeId(
                         VersionNbt.contains(extension, "RecipeMatch", 8)
                                 ? VersionIds.tryParse(
                                         VersionNbt.getString(extension, "RecipeMatch"))
                                 : null);
-        *///?}
-        //? if >=1.21.2 {
+        *///?} else {
         ((RecipeMatchGetterAccessorMixin) quickCheck)
                 .anticrash$setRecipeId(
                         VersionNbt.contains(extension, "RecipeMatch", 8)

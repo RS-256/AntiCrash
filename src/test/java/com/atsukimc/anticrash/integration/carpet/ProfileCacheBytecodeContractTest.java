@@ -14,15 +14,14 @@ class ProfileCacheBytecodeContractTest {
                 getClass()
                         .getClassLoader()
                         .getResourceAsStream(
-                                "net/minecraft/server/players/GameProfileCache.class"))
+                                "net/minecraft/server/players/GameProfileCache.class")) {
         *///?} else {
         try (var input =
                 getClass()
                         .getClassLoader()
                         .getResourceAsStream(
-                                "net/minecraft/server/players/CachedUserNameToIdResolver.class"))
+                                "net/minecraft/server/players/CachedUserNameToIdResolver.class")) {
         //?}
-        {
             assertNotNull(input, "The exact mapped game class must be present");
             boolean[] found = {false};
             new ClassReader(input)

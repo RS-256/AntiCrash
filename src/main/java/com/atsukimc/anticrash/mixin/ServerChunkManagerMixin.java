@@ -30,11 +30,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * restored world. Instead this mixin supplies an immutable, empty view until Vanilla has produced
  * the real value. The backing field itself is never changed.
  */
-//? if <=1.21.11 {
-/*@Mixin(ServerChunkCache.class)
+@Mixin(ServerChunkCache.class)
 public abstract class ServerChunkManagerMixin {
-
-*///?}
     //? if <=1.18.1 {
     /*@WrapOperation(
             method = "tick(Ljava/util/function/BooleanSupplier;)V",
@@ -50,11 +47,7 @@ public abstract class ServerChunkManagerMixin {
     }
 
     *///?}
-//? if >=26.1 {
-@Mixin(ServerChunkCache.class)
-public abstract class ServerChunkManagerMixin {
-//?}
-    //? if 26.3 {
+    //? if >=26.3 {
     @org.spongepowered.asm.mixin.Shadow @org.spongepowered.asm.mixin.Final
     private net.minecraft.server.level.ServerLevel level;
 
@@ -79,17 +72,16 @@ public abstract class ServerChunkManagerMixin {
                     NaturalSpawner.createState(
                             0,
                             List.<Entity>of(),
-                            (chunkPos, consumer) ->
-            *///?}
-            //? if 26.3 {
+                            (chunkPos, consumer) -> {},
+                            new LocalMobCapCalculator(manager.chunkMap));
+            *///?} else {
             anticrash$emptySpawnInfo =
                     NaturalSpawner.createState(
                             0,
                             level,
-                            (chunkPos, consumer) ->
-            //?}
-                            {},
+                            (chunkPos, consumer) -> {},
                             new LocalMobCapCalculator(manager.chunkMap));
+            //?}
         }
         callbackInfo.setReturnValue(anticrash$emptySpawnInfo);
     }

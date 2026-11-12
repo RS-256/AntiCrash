@@ -45,15 +45,13 @@ public abstract class ServerEntityManagerMixin {
         /*((StorageIoWorkerAccessorMixin) accessor.anticrash$getDataLoadWorker())
                 .anticrash$run(() -> Either.left(null))
                 .join();
-        *///?}
-        //? if (>=1.20.5 && <=1.21.1) {
+        *///?} else if <=1.21.1 {
         /*((StorageIoWorkerAccessorMixin)
                         ((ChunkPosKeyedStorageAccessor) accessor.anticrash$getStorage())
                                 .anticrash$getWorker())
                 .anticrash$run(() -> Either.left(null))
                 .join();
-        *///?}
-        //? if >=1.21.2 {
+        *///?} else {
         ((StorageIoWorkerAccessorMixin)
                         ((ChunkPosKeyedStorageAccessor) accessor.anticrash$getStorage())
                                 .anticrash$getWorker())

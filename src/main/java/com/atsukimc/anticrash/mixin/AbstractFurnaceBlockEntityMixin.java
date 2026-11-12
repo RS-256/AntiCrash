@@ -28,7 +28,7 @@ public abstract class AbstractFurnaceBlockEntityMixin {
             BlockPos pos,
             BlockState state,
             AbstractFurnaceBlockEntity furnace,
-            CallbackInfo callbackInfo)
+            CallbackInfo callbackInfo) {
     *///?} else {
     @Inject(method = "serverTick", at = @At("HEAD"))
     private static void anticrash$markProgressDirty(
@@ -36,9 +36,8 @@ public abstract class AbstractFurnaceBlockEntityMixin {
             BlockPos pos,
             BlockState state,
             AbstractFurnaceBlockEntity furnace,
-            CallbackInfo callbackInfo)
+            CallbackInfo callbackInfo) {
     //?}
-            {
         AbstractFurnaceBlockEntityTimerAccessor timer =
                 (AbstractFurnaceBlockEntityTimerAccessor) furnace;
         if (timer.anticrash$getBurnTime() > 0 || timer.anticrash$getCookTime() > 0)

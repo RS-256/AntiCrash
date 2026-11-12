@@ -351,22 +351,14 @@ public final class CheckpointManager {
                 for (ChunkHolder holder : storage.anticrash$getCurrentChunkHolders().values()) {
                     if (prepared >= 16 || System.nanoTime() - started >= budget) break outer;
                     if (holder == null || !holder.wasAccessibleSinceLastSave()) continue;
+
                     //? if <=1.20.6 {
                     /*CompletableFuture<ChunkAccess> saving = holder.getChunkToSave();
+                    if (!saving.isDone()) continue;
+                    ChunkAccess chunk = saving.getNow(null);
                     *///?} else {
                     CompletableFuture<?> saving = holder.getSaveSyncFuture();
-                    //?}
-
-                    //? if <=1.20.6 {
-                    /*if (!saving.isDone())
-                    *///?} else {
-                    if (!holder.isReadyForSaving())
-                    //?}
-                        continue;
-
-                    //? if <=1.20.6 {
-                    /*ChunkAccess chunk = saving.getNow(null);
-                    *///?} else {
+                    if (!holder.isReadyForSaving()) continue;
                     saving.getNow(null);
                     //?}
                     // surface exceptional completion; never block
@@ -951,17 +943,13 @@ public final class CheckpointManager {
         // the proto chunk. getNow never blocks here; a failed future fails the cut closed.
 
         //? if <=1.20.6 {
-        /*if (!saving.isDone())
+        /*if (!saving.isDone()) return null;
+        ChunkAccess saved = saving.getNow(null);
         *///?} else {
-        if (!holder.isReadyForSaving())
-        //?}
-            return null;
-
-        //? if <=1.20.6 {
-        /*ChunkAccess saved = saving.getNow(null);
-        *///?} else {
+        if (!holder.isReadyForSaving()) return null;
         saving.getNow(null);
         //?}
+
         // future represents completion now, not a Chunk payload
 
         //? if >=1.21 {
@@ -1207,6 +1195,9 @@ public final class CheckpointManager {
             /*workers.add(
                     ((com.atsukimc.anticrash.mixin.EntityChunkDataAccessAccessorMixin) entityAccess)
                             .anticrash$getDataLoadWorker());
+            workers.add(
+                    ((SerializingRegionBasedStorageAccessorMixin) world.getPoiManager())
+                            .anticrash$getWorker());
             *///?} else {
             workers.add(
                     ((com.atsukimc.anticrash.mixin.ChunkPosKeyedStorageAccessor)
@@ -1215,13 +1206,6 @@ public final class CheckpointManager {
                                                     entityAccess)
                                             .anticrash$getStorage())
                             .anticrash$getWorker());
-            //?}
-
-            //? if <=1.20.4 {
-            /*workers.add(
-                    ((SerializingRegionBasedStorageAccessorMixin) world.getPoiManager())
-                            .anticrash$getWorker());
-            *///?} else {
             workers.add(
                     ((com.atsukimc.anticrash.mixin.ChunkPosKeyedStorageAccessor)
                                     ((SerializingRegionBasedStorageAccessorMixin)
@@ -1229,7 +1213,6 @@ public final class CheckpointManager {
                                             .anticrash$getStorageAccess())
                             .anticrash$getWorker());
             //?}
-
         }
         return workers;
     }

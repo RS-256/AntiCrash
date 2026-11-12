@@ -498,13 +498,11 @@ public final class LogicalDeltaEngine {
 
             //? if <=1.19.3 {
             /*root.putInt("DataVersion", SharedConstants.getCurrentVersion().getWorldVersion());
-            *///?}
-            //? if (>=1.19.4 && <=1.21.5) {
+            *///?} else if <=1.21.5 {
             /*root.putInt(
                     "DataVersion",
                     SharedConstants.getCurrentVersion().getDataVersion().getVersion());
-            *///?}
-            //? if >=1.21.6 {
+            *///?} else {
             root.putInt("DataVersion", SharedConstants.getCurrentVersion().dataVersion().version());
             //?}
 
@@ -612,10 +610,9 @@ public final class LogicalDeltaEngine {
         /*for (ServerLevel world : server.getAllLevels()) {
             //? if <=1.19.4 {
             /^if (world.dragonFight() != null) {
-            ^///?}
-            //? if (>=1.20 && <=1.21.11) {
-            /^if (world.getDragonFight() != null) {
-            ^///?}
+            ^///?} else {
+            if (world.getDragonFight() != null) {
+            //?}
 
         *///?}
                 //? if <=1.19.4 {

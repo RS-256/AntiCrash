@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.Portal;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.PortalProcessor;
 
-//? if (>=1.21 && <=1.21.4) {
+//? if <=1.21.4 {
 /*import net.minecraft.nbt.NbtUtils;
 
 *///?}
@@ -32,10 +32,9 @@ public final class PortalRuntime {
 
         nbt.putString("Type", type);
 
-        //? if (>=1.21 && <=1.21.4) {
+        //? if <=1.21.4 {
         /*nbt.put("Pos", NbtUtils.writeBlockPos(manager.getEntryPosition()));
-        *///?}
-        //? if >=1.21.5 {
+        *///?} else {
         nbt.store("Pos", net.minecraft.core.BlockPos.CODEC, manager.getEntryPosition());
         //?}
 
@@ -54,13 +53,12 @@ public final class PortalRuntime {
                 || !(VersionIds.value(VersionIds.blocks(), id) instanceof Portal portal))
             throw new IllegalArgumentException("Invalid saved Portal type");
 
-        //? if (>=1.21 && <=1.21.4) {
+        //? if <=1.21.4 {
         /*var pos =
                 NbtUtils.readBlockPos(nbt, "Pos")
                         .orElseThrow(() ->
                                 new IllegalArgumentException("Missing saved Portal position"));
-        *///?}
-        //? if >=1.21.5 {
+        *///?} else {
         var pos =
                 nbt.read("Pos", net.minecraft.core.BlockPos.CODEC)
                         .orElseThrow(() ->

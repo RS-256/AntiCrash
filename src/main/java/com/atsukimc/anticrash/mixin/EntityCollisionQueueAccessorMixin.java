@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(Entity.class)
 public interface EntityCollisionQueueAccessorMixin {
 
-    //? if (>=1.21.2 && <=1.21.5) {
+    //? if <=1.21.5 {
     /*@Accessor("movementThisTick")
     java.util.List<?> anticrash$collisionChecks();
     *///?} else {

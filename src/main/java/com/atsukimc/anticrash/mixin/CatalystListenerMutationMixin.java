@@ -19,7 +19,7 @@ public abstract class CatalystListenerMutationMixin {
     @Shadow
     public abstract PositionSource getListenerSource();
 
-    //? if (>=1.20 && <=1.20.4) {
+    //? if <=1.20.4 {
     /*@Inject(method = "handleGameEvent", at = @At("RETURN"))
     private void anticrash$dirtyCursor(
             ServerLevel world,

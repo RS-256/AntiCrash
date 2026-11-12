@@ -163,26 +163,23 @@ public final class LogicalDeltaMaterializer {
         // applied, so keep the mapped constructor order explicit here.
 
         //? if <=1.20.4 {
-        /*try (RegionFile region = new RegionFile(file, directory, false))
+        /*try (RegionFile region = new RegionFile(file, directory, false)) {
         *///?} else {
         try (RegionFile region =
                 new RegionFile(
                         com.atsukimc.anticrash.snapshot.RegionStorageAdapter.KEY,
                         file,
                         directory,
-                        false))
+                        false)) {
         //?}
-        {
 
             try (DataOutputStream output = region.getChunkDataOutputStream(chunk)) {
 
                 //? if <=1.20.1 {
                 /*NbtIo.write(NbtCodec.decodeCompound(encoded), output);
-                *///?}
-                //? if 1.20.2 {
+                *///?} else if <=1.20.2 {
                 /*NbtIo.writeUnnamedTag(NbtCodec.decodeCompound(encoded), output);
-                *///?}
-                //? if >=1.20.3 {
+                *///?} else {
                 NbtIo.writeUnnamedTagWithFallback(NbtCodec.decodeCompound(encoded), output);
                 //?}
 
@@ -211,31 +208,29 @@ public final class LogicalDeltaMaterializer {
         }
 
         //? if <=1.20.4 {
-        /*try (RegionFile probe = new RegionFile(file, directory, false))
+        /*try (RegionFile probe = new RegionFile(file, directory, false)) {
         *///?} else {
         try (RegionFile probe =
                 new RegionFile(
                         com.atsukimc.anticrash.snapshot.RegionStorageAdapter.KEY,
                         file,
                         directory,
-                        false))
+                        false)) {
         //?}
-        {
             if (!probe.hasChunk(chunk)) return null;
         }
         copyOnWrite(file);
 
         //? if <=1.20.4 {
-        /*try (RegionFile region = new RegionFile(file, directory, false))
+        /*try (RegionFile region = new RegionFile(file, directory, false)) {
         *///?} else {
         try (RegionFile region =
                 new RegionFile(
                         com.atsukimc.anticrash.snapshot.RegionStorageAdapter.KEY,
                         file,
                         directory,
-                        false))
+                        false)) {
         //?}
-        {
             region.clear(chunk);
 
             region.flush();
@@ -262,16 +257,15 @@ public final class LogicalDeltaMaterializer {
         copyOnWrite(file);
 
         //? if <=1.20.4 {
-        /*try (RegionFile region = new RegionFile(file, directory, false))
+        /*try (RegionFile region = new RegionFile(file, directory, false)) {
         *///?} else {
         try (RegionFile region =
                 new RegionFile(
                         com.atsukimc.anticrash.snapshot.RegionStorageAdapter.KEY,
                         file,
                         directory,
-                        false))
+                        false)) {
         //?}
-        {
             if (!region.hasChunk(chunk)) return file;
 
             CompoundTag root;
@@ -302,11 +296,9 @@ public final class LogicalDeltaMaterializer {
 
                 //? if <=1.20.1 {
                 /*NbtIo.write(root, output);
-                *///?}
-                //? if 1.20.2 {
+                *///?} else if <=1.20.2 {
                 /*NbtIo.writeUnnamedTag(root, output);
-                *///?}
-                //? if >=1.20.3 {
+                *///?} else {
                 NbtIo.writeUnnamedTagWithFallback(root, output);
                 //?}
 
@@ -320,11 +312,11 @@ public final class LogicalDeltaMaterializer {
     private static boolean matchesUuid(CompoundTag entity, String uuidText) {
 
         //? if <=1.21.4 {
-        /*if (uuidText == null || !entity.hasUUID("UUID"))
+        /*if (uuidText == null || !entity.hasUUID("UUID")) return false;
         *///?} else {
         if (uuidText == null || entity.read("UUID", net.minecraft.core.UUIDUtil.CODEC).isEmpty())
-        //?}
             return false;
+        //?}
         try {
             return uuidText.equalsIgnoreCase(VersionNbt.getUUID(entity, "UUID").toString());
         } catch (RuntimeException ignored) {

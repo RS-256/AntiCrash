@@ -245,11 +245,10 @@ public final class RuntimeOrderRestorer {
                 ChunkPos chunk = VersionChunkPos.unpack(position.getLongKey());
 
                 //? if <=1.21.4 {
-                /*for (Ticket<?> ticket : position.getValue())
+                /*for (Ticket<?> ticket : position.getValue()) {
                 *///?} else {
-                for (Ticket ticket : position.getValue())
+                for (Ticket ticket : position.getValue()) {
                 //?}
-                {
 
                     //? if <=1.21.4 {
                     /*TicketType<?> type = ticket.getType();
@@ -260,13 +259,12 @@ public final class RuntimeOrderRestorer {
                     //? if <=1.21.3 {
                     /*if (type != TicketType.UNKNOWN
                             && type != TicketType.POST_TELEPORT
-                            && type != TicketType.PORTAL)
+                            && type != TicketType.PORTAL) continue;
                     *///?} else {
                     if (type != TicketType.UNKNOWN
                             && type != TicketType.ENDER_PEARL
-                            && type != TicketType.PORTAL)
+                            && type != TicketType.PORTAL) continue;
                     //?}
-                        continue;
 
                     //? if <=1.21.4 {
                     /*Object argument =
@@ -279,7 +277,7 @@ public final class RuntimeOrderRestorer {
                                     VersionChunkPos.z(chunk),
                                     String.valueOf(type),
                                     ticket.getTicketLevel(),
-                                    String.valueOf(argument))))
+                                    String.valueOf(argument)))) {
                     *///?} else {
                     String name =
                             net.minecraft.core.registries.BuiltInRegistries.TICKET_TYPE
@@ -293,9 +291,8 @@ public final class RuntimeOrderRestorer {
                                     VersionChunkPos.z(chunk),
                                     name,
                                     ticket.getTicketLevel(),
-                                    "-")))
+                                    "-"))) {
                     //?}
-                    {
 
                         //? if <=1.21.4 {
                         /*stray.add(new Object[] {type, chunk, ticket.getTicketLevel(), argument});
@@ -371,7 +368,7 @@ public final class RuntimeOrderRestorer {
                 case "portal" -> {
                     Matcher matcher = BLOCK_POS.matcher(entry.argument);
 
-                    if (!matcher.find() || entry.level > 33)
+                    if (!matcher.find() || entry.level > 33) continue;
             *///?} else {
             TicketStorage manager =
                     ((com.atsukimc.anticrash.mixin.ServerChunkManagerAccessorMixin)
@@ -389,9 +386,8 @@ public final class RuntimeOrderRestorer {
                         default -> null;
                     };
 
-            if (type == null)
+            if (type == null) continue;
             //?}
-                continue;
 
                     //? if <=1.21.4 {
                     /*BlockPos portal =
@@ -486,23 +482,21 @@ public final class RuntimeOrderRestorer {
             long expiry = type.timeout();
 
             //? if <=1.21.4 {
-            /*for (Ticket<?> ticket : tickets)
+            /*for (Ticket<?> ticket : tickets) {
             *///?} else {
-            for (Ticket ticket : tickets)
+            for (Ticket ticket : tickets) {
             //?}
-            {
                 ChunkTicketAccessorMixin ticketAccessor =
                         (ChunkTicketAccessorMixin) (Object) ticket;
 
                 //? if <=1.21.4 {
                 /*if (ticketAccessor.anticrash$getType() == type
                         && ticket.getTicketLevel() == entry.level
-                        && argument.equals(ticketAccessor.anticrash$getArgument()))
+                        && argument.equals(ticketAccessor.anticrash$getArgument())) {
                 *///?} else {
                 if (ticketAccessor.anticrash$getType() == type
-                        && ticket.getTicketLevel() == entry.level)
+                        && ticket.getTicketLevel() == entry.level) {
                 //?}
-                {
 
                     //? if <=1.21.4 {
                     /*ticketAccessor.anticrash$setTickCreated(

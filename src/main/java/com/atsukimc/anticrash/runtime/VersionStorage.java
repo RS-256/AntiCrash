@@ -153,7 +153,7 @@ public final class VersionStorage {
     public static ListTag enderChest(Player player) {
         //? if <=1.20.4 {
         /*return player.getEnderChestInventory().createTag();
-        *///?} else if (>=1.20.5 && <=1.21.5) {
+        *///?} else if <=1.21.5 {
         /*return player.getEnderChestInventory().createTag(player.registryAccess());
         *///?} else {
         return inventory(player.getEnderChestInventory(), player.registryAccess());
@@ -164,7 +164,7 @@ public final class VersionStorage {
     public static Runnable enderChest(Player player, ListTag encoded) {
         //? if <=1.20.4 {
         /*return () -> player.getEnderChestInventory().fromTag(encoded);
-        *///?} else if (>=1.20.5 && <=1.21.5) {
+        *///?} else if <=1.21.5 {
         /*return () -> player.getEnderChestInventory().fromTag(encoded, player.registryAccess());
         *///?} else {
         var stacks =
