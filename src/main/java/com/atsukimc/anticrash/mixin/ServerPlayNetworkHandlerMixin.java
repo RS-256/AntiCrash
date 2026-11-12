@@ -238,19 +238,17 @@ public abstract class ServerPlayNetworkHandlerMixin {
         if (controller != null && controller.holdsServerTasks()) info.cancel();
     }
 
+    // Consume only after Vanilla has validated the signature, unpacked the chain and
+    // processed
+    // ACKs.
+
     //? if <=1.19 {
     /*@Inject(
             method = "handleChat(Lnet/minecraft/network/protocol/game/ServerboundChatPacket;)V",
             at = @At("HEAD"),
             cancellable = true)
     private void anticrash$chat(ServerboundChatPacket packet, CallbackInfo info) {
-    *///?}
-
-    // Consume only after Vanilla has validated the signature, unpacked the chain and
-    // processed
-    // ACKs.
-
-    //? if >=1.19.1 {
+    *///?} else {
     @Inject(method = "broadcastChatMessage", at = @At("HEAD"), cancellable = true)
     private void anticrash$chat(
             net.minecraft.network.chat.PlayerChatMessage packet, CallbackInfo info) {
@@ -395,21 +393,13 @@ public abstract class ServerPlayNetworkHandlerMixin {
 
         //? if <=26.2 {
         /*BlockPos pos = packet.getHitResult().getBlockPos();
+        BlockPos placement = pos.relative(packet.getHitResult().getDirection());
+        AntiCrashController controller = anticrash$controller();
+        boolean place = player.getItemInHand(packet.getHand()).getItem() instanceof BlockItem;
         *///?} else {
         BlockPos pos = packet.hitResult().getBlockPos();
-        //?}
-
-        //? if <=26.2 {
-        /*BlockPos placement = pos.relative(packet.getHitResult().getDirection());
-        *///?} else {
         BlockPos placement = pos.relative(packet.hitResult().getDirection());
-        //?}
-
         AntiCrashController controller = anticrash$controller();
-
-        //? if <=26.2 {
-        /*boolean place = player.getItemInHand(packet.getHand()).getItem() instanceof BlockItem;
-        *///?} else {
         boolean place = player.getItemInHand(packet.hand()).getItem() instanceof BlockItem;
         //?}
 
@@ -433,8 +423,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 //? if (>=1.19 && <=26.2) {
                 /*VersionLevels.server(player)
                         .execute(() -> anticrash$ackPrediction(packet.getSequence()));
-                *///?}
-                //? if >=26.3 {
+                *///?} else if >=26.3 {
                 VersionLevels.server(player)
                         .execute(() -> anticrash$ackPrediction(packet.sequence()));
                 //?}
@@ -470,15 +459,12 @@ public abstract class ServerPlayNetworkHandlerMixin {
             info.cancel();
             anticrash$resyncInventory();
 
-            //? if >=1.19 {
-            ServerPlayer player = anticrash$player();
-            //?}
-
             //? if (>=1.19 && <=26.2) {
-            /*VersionLevels.server(player)
+            /*ServerPlayer player = anticrash$player();
+            VersionLevels.server(player)
                     .execute(() -> anticrash$ackPrediction(packet.getSequence()));
-            *///?}
-            //? if >=26.3 {
+            *///?} else if >=26.3 {
+            ServerPlayer player = anticrash$player();
             VersionLevels.server(player).execute(() -> anticrash$ackPrediction(packet.sequence()));
             //?}
 
@@ -555,9 +541,8 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 "entity",
                 null,
                 anticrash$player().getMainHandItem());
-    }
-
         //?}
+    }
 
     // 26.1 has a separate attack packet. Cancelling only Interact no longer prevents attacks.
 
@@ -588,9 +573,9 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 "entity",
                 null,
                 anticrash$player().getMainHandItem());
-    //?}
-
     }
+
+    //?}
 
     //? if <=1.21.4 {
     /*@Inject(method = "handleContainerClick", at = @At("HEAD"), cancellable = true)
@@ -663,20 +648,16 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 "container",
                 null,
                 packet.getCarriedItem());
-        *///?}
-
-        // The packet now contains hashes, not trusted ItemStacks. Log the server-owned cursor.
-
-        //? if (>=1.21.5 && <=1.21.11) {
-        /*anticrash$record(
+        *///?} else if <=1.21.11 {
+        /*// The packet now contains hashes, not trusted ItemStacks. Log the server-owned cursor.
+        anticrash$record(
                 drop ? "ITEM_DROP" : "CONTAINER_INTERACTION",
                 anticrash$player(),
                 "player",
                 "container",
                 null,
                 anticrash$player().containerMenu.getCarried());
-        *///?}
-        //? if >=26.1 {
+        *///?} else {
         anticrash$record(
                 drop ? "ITEM_DROP" : "CREATIVE_INVENTORY",
                 anticrash$player(),
@@ -696,8 +677,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
     *///?}
         //? if <=1.20.4 {
         /*boolean drop = packet.getSlotNum() < 0;
-        *///?}
-        //? if (>=1.20.5 && <=1.21.11) {
+        *///?} else if <=1.21.11 {
         /*boolean drop = packet.slotNum() < 0;
         *///?}
 
@@ -723,8 +703,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 drop ? "world" : "inventory",
                 null,
                 packet.getItem());
-        *///?}
-        //? if (>=1.20.5 && <=1.21.11) {
+        *///?} else if <=1.21.11 {
         /*anticrash$record(
                 drop ? "ITEM_DROP" : "CREATIVE_INVENTORY",
                 anticrash$player(),
@@ -734,7 +713,6 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 packet.itemStack());
         *///?}
     //? if <=1.21.11 {
-
     /*}
 
     *///?}

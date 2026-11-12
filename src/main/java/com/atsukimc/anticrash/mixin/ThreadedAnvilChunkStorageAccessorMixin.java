@@ -20,9 +20,7 @@ public interface ThreadedAnvilChunkStorageAccessorMixin {
     @Accessor("entitiesInLevel")
     LongSet anticrash$getLoadedChunks();
 
-*///?}
-
-//? if >=1.21 {
+*///?} else {
 @Mixin(ChunkMap.class)
 public interface ThreadedAnvilChunkStorageAccessorMixin {
 //?}

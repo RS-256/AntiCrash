@@ -31,9 +31,6 @@ public abstract class CampfireRecipeMatchingMixin
         implements com.atsukimc.anticrash.runtime.CampfireRecipeState {
     @org.spongepowered.asm.mixin.Unique private RecipeMatchGetterAccessorMixin anticrash$getter;
 
-//?}
-
-    //? if >=1.21.2 {
     @org.spongepowered.asm.mixin.Unique
     private net.minecraft.resources.ResourceKey<net.minecraft.world.item.crafting.Recipe<?>>
             anticrash$savedId;
@@ -65,7 +62,7 @@ public abstract class CampfireRecipeMatchingMixin
                 .anticrash$bindRecipeGetter((RecipeMatchGetterAccessorMixin) getter);
     }
 
-    //?}
+//?}
 
     //? if <=1.20.4 {
     /*@Inject(method = "saveAdditional", at = @At("TAIL"))

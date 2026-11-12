@@ -360,12 +360,8 @@ public final class CheckpointManager {
                     CompletableFuture<?> saving = holder.getSaveSyncFuture();
                     if (!holder.isReadyForSaving()) continue;
                     saving.getNow(null);
-                    //?}
                     // surface exceptional completion; never block
-
-                    //? if >=1.21 {
                     ChunkAccess chunk = holder.getLatestChunk();
-
                     if (chunk instanceof ImposterProtoChunk readOnly) chunk = readOnly.getWrapped();
                     //?}
 
@@ -933,26 +929,18 @@ public final class CheckpointManager {
 
         if (current instanceof LevelChunk) return current;
 
-        //? if <=1.20.6 {
-        /*CompletableFuture<ChunkAccess> saving = holder.getChunkToSave();
-        *///?} else {
-        CompletableFuture<?> saving = holder.getSaveSyncFuture();
-        //?}
-
         // No status work is pending when the future is done, so no generation thread touches
         // the proto chunk. getNow never blocks here; a failed future fails the cut closed.
 
         //? if <=1.20.6 {
-        /*if (!saving.isDone()) return null;
+        /*CompletableFuture<ChunkAccess> saving = holder.getChunkToSave();
+        if (!saving.isDone()) return null;
         ChunkAccess saved = saving.getNow(null);
         *///?} else {
+        CompletableFuture<?> saving = holder.getSaveSyncFuture();
         if (!holder.isReadyForSaving()) return null;
         saving.getNow(null);
-        //?}
-
         // future represents completion now, not a Chunk payload
-
-        //? if >=1.21 {
         ChunkAccess saved = holder.getLatestChunk();
         //?}
 

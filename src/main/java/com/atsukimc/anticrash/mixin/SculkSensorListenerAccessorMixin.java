@@ -14,22 +14,17 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 //? if <=1.18.2 {
 /^@Mixin(VibrationListener.class)
 public interface SculkSensorListenerAccessorMixin {
-    @Accessor("receivingEvent")
-    Optional<GameEvent> anticrash$getEvent();
-
-^///?}
-
+^///?} else {
 /^* 1.19 Vanilla persists vibration/source UUIDs/distance/delay via the listener codec. ^/
-//? if >=1.19 {
 @Mixin(VibrationListener.class)
 public interface SculkSensorListenerAccessorMixin {
-    @Accessor("receivingEvent")
-    VibrationListener.ReceivingEvent anticrash$getVibration();
-
 //?}
 
     //? if <=1.18.2 {
     /^@Accessor("receivingEvent")
+    Optional<GameEvent> anticrash$getEvent();
+
+    @Accessor("receivingEvent")
     void anticrash$setEvent(Optional<GameEvent> event);
 
     @Accessor("receivingDistance")
@@ -42,6 +37,9 @@ public interface SculkSensorListenerAccessorMixin {
     void anticrash$setDelay(int delay);
 
     ^///?} else {
+    @Accessor("receivingEvent")
+    VibrationListener.ReceivingEvent anticrash$getVibration();
+
     @Accessor("receivingDistance")
     float anticrash$getDistance();
 

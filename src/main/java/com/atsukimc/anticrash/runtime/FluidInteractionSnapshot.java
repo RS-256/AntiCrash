@@ -273,16 +273,11 @@ public final class FluidInteractionSnapshot {
 
         //? if <=26.2 {
         /*var live = trackers(entity);
-        *///?} else {
-        var interaction = ((EntityFluidAccessor) entity).anticrash$fluids();
-        //?}
-
-        //? if <=26.2 {
-        /*if (!live.keySet().equals(new HashSet<>(expected.stream().map(State::tag).toList())))
+        if (!live.keySet().equals(new HashSet<>(expected.stream().map(State::tag).toList())))
             throw new IllegalStateException("Fluid tracker domain differs");
         *///?} else {
+        var interaction = ((EntityFluidAccessor) entity).anticrash$fluids();
         var access = (FluidInteractionAccessor) interaction;
-
         var currents = new LinkedHashMap<String, FluidCurrentAccessor>();
 
         access.anticrash$currents()

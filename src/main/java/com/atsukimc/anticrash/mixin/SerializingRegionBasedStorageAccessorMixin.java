@@ -33,16 +33,12 @@ public interface SerializingRegionBasedStorageAccessorMixin {
     /*@Accessor("dirty")
     LongLinkedOpenHashSet anticrash$getUnsavedElements();
 
+    @Invoker("writeColumn")
+    void anticrash$save(ChunkPos pos);
     *///?} else {
     @Accessor("dirtyChunks")
     LongLinkedOpenHashSet anticrash$getUnsavedElements();
 
-    //?}
-
-    //? if <=1.21.1 {
-    /*@Invoker("writeColumn")
-    void anticrash$save(ChunkPos pos);
-    *///?} else {
     @Invoker("writeChunk")
     void anticrash$save(ChunkPos pos);
     //?}

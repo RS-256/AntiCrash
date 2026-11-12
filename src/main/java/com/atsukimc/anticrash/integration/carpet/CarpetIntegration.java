@@ -485,15 +485,15 @@ public final class CarpetIntegration {
         } catch (Exception ignored) {
         }
 
-        //? if <=1.21.8 {
-        /*for (ServerPlayer player : server.getPlayerList().getPlayers())
-            if (isFakePlayer(player)
+        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+            //? if <=1.21.8 {
+            /*if (isFakePlayer(player)
                     && player.getGameProfile().getName().equalsIgnoreCase(data.name)) return player;
-        *///?} else {
-        for (ServerPlayer player : server.getPlayerList().getPlayers())
+            *///?} else {
             if (isFakePlayer(player) && player.getGameProfile().name().equalsIgnoreCase(data.name))
                 return player;
-        //?}
+            //?}
+        }
         return null;
     }
 

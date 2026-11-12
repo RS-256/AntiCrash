@@ -61,27 +61,27 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 /** Exact 1.21.10 mapped cache API; ordinary authentication/cache lookups are unchanged. */
 
 /** Exact 1.21.11 mapped cache API; ordinary authentication/cache lookups are unchanged. */
-//? if <=1.21.11 {
-/*//? if <=1.21.8 {
-/^@Mixin(net.minecraft.server.players.GameProfileCache.class)
-public abstract class UserCacheMixin {
-^///?} else {
-@Mixin(net.minecraft.server.players.CachedUserNameToIdResolver.class)
-public abstract class UserCacheMixin {
-//?}
 
-*///?}
-    //? if <=1.21.8 {
-    /*@Inject(
+/** Exact 26.1 mapped cache API; ordinary authentication/cache lookups are unchanged. */
+
+/** Exact 26.2 mapped cache API; ordinary authentication/cache lookups are unchanged. */
+
+/** Exact 26.3 mapped cache API; ordinary authentication/cache lookups are unchanged. */
+
+//? if <=1.21.8 {
+/*@Mixin(net.minecraft.server.players.GameProfileCache.class)
+public abstract class UserCacheMixin {
+    @Inject(
             method = "get(Ljava/lang/String;)Ljava/util/Optional;",
             at = @At("HEAD"),
             cancellable = true)
     private void anticrash$checkpointFakePlayerProfile(
             String name,
             CallbackInfoReturnable<java.util.Optional<com.mojang.authlib.GameProfile>> callback) {
-    *///?}
-    //? if (>=1.21.9 && <=1.21.11) {
-    /*@Inject(
+*///?} else if <=1.21.11 {
+/*@Mixin(net.minecraft.server.players.CachedUserNameToIdResolver.class)
+public abstract class UserCacheMixin {
+    @Inject(
             method = "get(Ljava/lang/String;)Ljava/util/Optional;",
             at = @At("HEAD"),
             cancellable = true)
@@ -89,14 +89,7 @@ public abstract class UserCacheMixin {
             String name,
             CallbackInfoReturnable<java.util.Optional<net.minecraft.server.players.NameAndId>>
                     callback) {
-    *///?}
-
-/** Exact 26.1 mapped cache API; ordinary authentication/cache lookups are unchanged. */
-
-/** Exact 26.2 mapped cache API; ordinary authentication/cache lookups are unchanged. */
-
-/** Exact 26.3 mapped cache API; ordinary authentication/cache lookups are unchanged. */
-//? if >=26.1 {
+*///?} else {
 @Mixin(net.minecraft.server.players.CachedUserNameToIdResolver.class)
 public abstract class UserCacheMixin {
     @Inject(

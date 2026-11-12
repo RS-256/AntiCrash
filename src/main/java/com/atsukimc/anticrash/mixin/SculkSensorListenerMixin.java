@@ -29,8 +29,7 @@ public abstract class SculkSensorListenerMixin {
     //? if <=1.18.2 {
     /^@Shadow protected Optional<GameEvent> receivingEvent;
 
-    ^///?}
-    //? if (>=1.19 && <=1.19.2) {
+    ^///?} else if <=1.19.2 {
     /^@Shadow protected VibrationListener.ReceivingEvent receivingEvent;
 
     ^///?}
@@ -104,22 +103,17 @@ public abstract class SculkSensorListenerMixin {
 
         //? if <=1.18.2 {
         /^if (!world.isClientSide()) world.blockEntityChanged(pos);
-        ^///?}
-        //? if >=1.19 {
+        ^///?} else {
         if (ci.getReturnValueZ()) {
-        //?}
-            //? if (>=1.19 && <=1.19.3) {
+            //? if <=1.19.3 {
             /^listenerSource
                     .getPosition(world)
                     .ifPresent(pos -> world.blockEntityChanged(new BlockPos(pos)));
-            ^///?}
-            //? if >=1.19.4 {
+            ^///?} else {
             listenerSource
                     .getPosition(world)
                     .ifPresent(pos -> world.blockEntityChanged(BlockPos.containing(pos)));
             //?}
-        //? if >=1.19 {
-
         }
         //?}
 

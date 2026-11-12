@@ -32,19 +32,19 @@ public interface ServerChunkManagerAccessorMixin {
     CompletableFuture<Either<LevelChunk, ChunkHolder.ChunkLoadingFailure>> anticrash$getChunkFuture(
             int chunkX, int chunkZ, ChunkStatus status, boolean addTicket);
 
-    *///?}
-    //? if >=1.21.5 {
-    @org.spongepowered.asm.mixin.gen.Accessor("ticketStorage")
-    net.minecraft.world.level.TicketStorage anticrash$getTicketManager();
-
-    //?}
-
-    //? if >=1.20.5 {
+    *///?} else {
     @Invoker("getChunkFutureMainThread")
     CompletableFuture<
                     net.minecraft.server.level.ChunkResult<
                             net.minecraft.world.level.chunk.ChunkAccess>>
             anticrash$getChunkFuture(int chunkX, int chunkZ, ChunkStatus status, boolean addTicket);
+
+    //?}
+
+    //? if >=1.21.5 {
+    @org.spongepowered.asm.mixin.gen.Accessor("ticketStorage")
+    net.minecraft.world.level.TicketStorage anticrash$getTicketManager();
+
     //?}
 
     //? if <=26.2 {

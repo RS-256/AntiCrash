@@ -27,9 +27,15 @@ public interface StorageIoWorkerAccessorMixin {
     /*@Accessor("pendingWrites")
     Map<ChunkPos, Object> anticrash$getResults();
 
+    @Invoker("submitTask")
+    <T> CompletableFuture<T> anticrash$run(Supplier<Either<T, Exception>> task);
+
     *///?} else {
     @Accessor("pendingWrites")
     java.util.SequencedMap<ChunkPos, Object> anticrash$getResults();
+
+    @Invoker("submitTask")
+    <T> CompletableFuture<T> anticrash$run(Supplier<T> task);
 
     //?}
 
@@ -41,13 +47,4 @@ public interface StorageIoWorkerAccessorMixin {
      */
     @Invoker("tellStorePending")
     void anticrash$writeRemainingResults();
-
-    //? if <=1.21.1 {
-    /*@Invoker("submitTask")
-    <T> CompletableFuture<T> anticrash$run(Supplier<Either<T, Exception>> task);
-    *///?} else {
-    @Invoker("submitTask")
-    <T> CompletableFuture<T> anticrash$run(Supplier<T> task);
-    //?}
-
 }
