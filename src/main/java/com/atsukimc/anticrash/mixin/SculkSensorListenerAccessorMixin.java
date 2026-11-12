@@ -38,6 +38,9 @@ public interface SculkSensorListenerAccessorMixin {
     @Accessor("receivingDistance")
     void anticrash$setDistance(int distance);
 
+    @Accessor("travelTimeInTicks")
+    void anticrash$setDelay(int delay);
+
     ^///?} else {
     @Accessor("receivingDistance")
     float anticrash$getDistance();
@@ -46,11 +49,5 @@ public interface SculkSensorListenerAccessorMixin {
 
     @Accessor("travelTimeInTicks")
     int anticrash$getDelay();
-
-    //? if <=1.18.2 {
-    /^@Accessor("travelTimeInTicks")
-    void anticrash$setDelay(int delay);
-    ^///?}
-
 }
 *///?}

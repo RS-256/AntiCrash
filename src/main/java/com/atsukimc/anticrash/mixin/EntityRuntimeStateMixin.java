@@ -117,8 +117,7 @@ public abstract class EntityRuntimeStateMixin {
                         extension.put(
                                 "SupportingBlock",
                                 NbtUtils.writeBlockPos(mainSupportingBlockPos.get()));
-                    *///?}
-                    //? if >=1.21.5 {
+                    *///?} else if >=1.21.5 {
                     if (mainSupportingBlockPos.isPresent())
                         extension.store(
                                 "SupportingBlock",
@@ -229,9 +228,8 @@ public abstract class EntityRuntimeStateMixin {
         /*if (extension.contains("Inanimate"))
             blocksBuilding = VersionNbt.getBoolean(extension, "Inanimate");
         *///?}
-        //? if >=1.20 {
+
         Object self = this;
-        //?}
 
         // Old normal-world entity NBT may predate 26.1. Cross-game checkpoint restoration is
         // rejected separately; do not prevent Vanilla's ordinary world upgrade on this basis.
@@ -242,15 +240,18 @@ public abstract class EntityRuntimeStateMixin {
                     (Entity) self, VersionNbt.list(extension, "FluidTrackers", 10));
         //?}
 
-        //? if <=1.19.4 {
-        /*Object self = this;
-        *///?}
-        //? if (>=1.21 && <=1.21.4) {
-        /*if (self instanceof net.minecraft.world.entity.item.PrimedTnt
+        //? if >=1.21 {
+        if (self instanceof net.minecraft.world.entity.item.PrimedTnt
                 && VersionNbt.contains(extension, "TeleportedTnt", 1))
             ((TntRuntimeAccessorMixin) self)
                     .anticrash$setTeleported(VersionNbt.getBoolean(extension, "TeleportedTnt"));
-        *///?}
+
+        if (self instanceof net.minecraft.world.entity.item.FallingBlockEntity falling
+                && VersionNbt.contains(extension, "ShouldDupe", 1))
+            falling.forceTickAfterTeleportToDuplicate =
+                    VersionNbt.getBoolean(extension, "ShouldDupe");
+        //?}
+
         //? if >=1.21.11 {
         if (self instanceof LivingEntity && extension.contains("LastKineticAttackTime"))
             ((LivingEntityAccessorMixin) self)
@@ -269,42 +270,23 @@ public abstract class EntityRuntimeStateMixin {
                             VersionNbt.getBoolean(extension, "CheckedForLeftOwner"));
         //?}
 
-        //? if >=1.21.5 {
-        if (self instanceof net.minecraft.world.entity.item.PrimedTnt
-                && VersionNbt.contains(extension, "TeleportedTnt", 1))
-            ((TntRuntimeAccessorMixin) self)
-                    .anticrash$setTeleported(VersionNbt.getBoolean(extension, "TeleportedTnt"));
-        //?}
-
-        //? if >=1.21 {
-        if (self instanceof net.minecraft.world.entity.item.FallingBlockEntity falling
-                && VersionNbt.contains(extension, "ShouldDupe", 1))
-            falling.forceTickAfterTeleportToDuplicate =
-                    VersionNbt.getBoolean(extension, "ShouldDupe");
-        //?}
-
-        //? if (>=1.20 && <=1.21.4) {
-        /*if (VersionNbt.contains(extension, "ForceSupportUpdate", 1)) {
+        //? if >=1.20 {
+        if (VersionNbt.contains(extension, "ForceSupportUpdate", 1)) {
             onGroundNoBlocks = VersionNbt.getBoolean(extension, "ForceSupportUpdate");
             verticalCollisionBelow = VersionNbt.getBoolean(extension, "GroundCollision");
             //? if <=1.20.4 {
-            /^mainSupportingBlockPos =
+            /*mainSupportingBlockPos =
                     VersionNbt.contains(extension, "SupportingBlock", 10)
                             ? java.util.Optional.of(
                                     NbtUtils.readBlockPos(
                                             VersionNbt.getCompound(extension, "SupportingBlock")))
                             : java.util.Optional.empty();
-            ^///?} else {
-            mainSupportingBlockPos = NbtUtils.readBlockPos(extension, "SupportingBlock");
-            //?}
-        }
-        *///?}
-        //? if >=1.21.5 {
-        if (VersionNbt.contains(extension, "ForceSupportUpdate", 1)) {
-            onGroundNoBlocks = VersionNbt.getBoolean(extension, "ForceSupportUpdate");
-            verticalCollisionBelow = VersionNbt.getBoolean(extension, "GroundCollision");
+            *///?} else if <=1.21.4 {
+            /*mainSupportingBlockPos = NbtUtils.readBlockPos(extension, "SupportingBlock");
+            *///?} else {
             mainSupportingBlockPos =
                     extension.read("SupportingBlock", net.minecraft.core.BlockPos.CODEC);
+            //?}
         }
         //?}
 
