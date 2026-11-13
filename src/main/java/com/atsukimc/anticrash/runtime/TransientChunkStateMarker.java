@@ -34,18 +34,6 @@ import java.util.Set;
  * <p>This class runs only on the server thread while the checkpoint barrier owns the world. It
  * examines already accessible chunks and never requests or waits for a new chunk.
  */
-
-/**
- * Makes Vanilla's transient chunk state eligible for the save immediately before a checkpoint.
- *
- * <p>In 1.18.2 {@code ChunkSerializer} already writes block entities and chunk-local scheduled
- * ticks. The missing part is that {@code ChunkMap} skips serialization unless
- * {@code Chunk#needsSaving()} is true. Piston progress and some scheduler mutations do not set that
- * flag reliably, so the checkpoint can otherwise contain an older moving-piston state.
- *
- * <p>This class runs only on the server thread while the checkpoint barrier owns the world. It
- * examines already accessible chunks and never requests or waits for a new chunk.
- */
 public final class TransientChunkStateMarker {
     private static final String PISTON_BLOCK_ENTITY_ID = "minecraft:piston";
 

@@ -893,22 +893,6 @@ public final class CheckpointManager {
      * <p>A loaded chunk is taken from the highest completed status, not from the saving future:
      * that future stays pending while any status or ticket change is scheduled, and a holder whose
      * level dropped (a chunk being unloaded) has already had its accessible future replaced, yet
-     * its LevelChunk can still hold changes nobody saved. A ImposterProtoChunk is unwrapped because it
-     * always reports "nothing to save" even when the LevelChunk inside is dirty.
-     *
-     * <p>Waiting instead, as the old barrier did for up to 26 frozen ticks, lets chunk loads finish
-     * during the cut and add block-entity tickers and entities to the world after the Runtime
-     * Capsule was taken. A chunk that is still being generated is part of no one's world yet: it
-     * holds world generation output only, never a player's block, and its saved form on disk is
-     * what the cut contains, exactly as Vanilla's own autosave treats it.
-     */
-
-    /**
-     * The chunk whose state at the cut must reach the checkpoint, without waiting for the holder.
-     *
-     * <p>A loaded chunk is taken from the highest completed status, not from the saving future:
-     * that future stays pending while any status or ticket change is scheduled, and a holder whose
-     * level dropped (a chunk being unloaded) has already had its accessible future replaced, yet
      * its LevelChunk can still hold changes nobody saved. A ImposterProtoChunk is unwrapped because
      * it always reports "nothing to save" even when the LevelChunk inside is dirty.
      *
