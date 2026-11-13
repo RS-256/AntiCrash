@@ -340,19 +340,15 @@ public final class RuntimeCapsuleManager {
 
                     //? if <=1.20.4 {
                     /*if (value != null && value.left().isPresent()) {
-                    *///?} else {
-                    if (value != null && value.isSuccess()) {
-                    //?}
-
-                        //? if <=1.20.4 {
-                        /*result.addAll(
+                        result.addAll(
                                 ScheduledTickSnapshot.capture(
                                         VersionIds.dimension(world), value.left().get()));
-                        *///?} else {
+                    *///?} else {
+                    if (value != null && value.isSuccess()) {
                         result.addAll(
                                 ScheduledTickSnapshot.capture(
                                         VersionIds.dimension(world), value.orElse(null)));
-                        //?}
+                    //?}
 
                     }
                 } catch (RuntimeException ignored) {

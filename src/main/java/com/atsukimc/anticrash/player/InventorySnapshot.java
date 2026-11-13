@@ -33,44 +33,40 @@ public final class InventorySnapshot {
         /*if (mainEnabled)
             for (ItemStack stack : inventory.items)
                 snapshot.main.add(NbtCodec.encode(stack.save(new net.minecraft.nbt.CompoundTag())));
+
+        if (armorEnabled)
+            for (ItemStack stack : inventory.armor)
+                snapshot.armor.add(
+                        NbtCodec.encode(stack.save(new net.minecraft.nbt.CompoundTag())));
+
+        if (offhandEnabled)
+            for (ItemStack stack : inventory.offhand)
+                snapshot.offhand.add(
+                        NbtCodec.encode(stack.save(new net.minecraft.nbt.CompoundTag())));
         *///?} else if <=1.21.4 {
         /*if (mainEnabled)
             for (ItemStack stack : inventory.items)
                 snapshot.main.add(NbtCodec.encode(VersionNbt.item(stack, player.registryAccess())));
+
+        if (armorEnabled)
+            for (ItemStack stack : inventory.armor)
+                snapshot.armor.add(
+                        NbtCodec.encode(VersionNbt.item(stack, player.registryAccess())));
+
+        if (offhandEnabled)
+            for (ItemStack stack : inventory.offhand)
+                snapshot.offhand.add(
+                        NbtCodec.encode(VersionNbt.item(stack, player.registryAccess())));
         *///?} else {
         if (mainEnabled)
             for (ItemStack stack : inventory.getNonEquipmentItems())
                 snapshot.main.add(NbtCodec.encode(VersionNbt.item(stack, player.registryAccess())));
-        //?}
 
-        //? if <=1.20.4 {
-        /*if (armorEnabled)
-            for (ItemStack stack : inventory.armor)
-                snapshot.armor.add(
-                        NbtCodec.encode(stack.save(new net.minecraft.nbt.CompoundTag())));
-        *///?} else if <=1.21.4 {
-        /*if (armorEnabled)
-            for (ItemStack stack : inventory.armor)
-                snapshot.armor.add(
-                        NbtCodec.encode(VersionNbt.item(stack, player.registryAccess())));
-        *///?} else {
         if (armorEnabled)
             for (ItemStack stack : equipmentStacks(inventory, 36, 4))
                 snapshot.armor.add(
                         NbtCodec.encode(VersionNbt.item(stack, player.registryAccess())));
-        //?}
 
-        //? if <=1.20.4 {
-        /*if (offhandEnabled)
-            for (ItemStack stack : inventory.offhand)
-                snapshot.offhand.add(
-                        NbtCodec.encode(stack.save(new net.minecraft.nbt.CompoundTag())));
-        *///?} else if <=1.21.4 {
-        /*if (offhandEnabled)
-            for (ItemStack stack : inventory.offhand)
-                snapshot.offhand.add(
-                        NbtCodec.encode(VersionNbt.item(stack, player.registryAccess())));
-        *///?} else {
         if (offhandEnabled)
             for (ItemStack stack : equipmentStacks(inventory, 40, 1))
                 snapshot.offhand.add(
@@ -99,10 +95,31 @@ public final class InventorySnapshot {
         //? if <=1.20.4 {
         /*List<ItemStack> decodedMain =
                 mainEnabled ? decodeList(main, inventory.items.size(), "main") : null;
+
+        List<ItemStack> decodedArmor =
+                armorEnabled ? decodeList(armor, inventory.armor.size(), "armor") : null;
+
+        List<ItemStack> decodedOffhand =
+                offhandEnabled ? decodeList(offhand, inventory.offhand.size(), "offhand") : null;
         *///?} else if <=1.21.4 {
         /*List<ItemStack> decodedMain =
                 mainEnabled
                         ? decodeList(main, inventory.items.size(), "main", player.registryAccess())
+                        : null;
+
+        List<ItemStack> decodedArmor =
+                armorEnabled
+                        ? decodeList(
+                                armor, inventory.armor.size(), "armor", player.registryAccess())
+                        : null;
+
+        List<ItemStack> decodedOffhand =
+                offhandEnabled
+                        ? decodeList(
+                                offhand,
+                                inventory.offhand.size(),
+                                "offhand",
+                                player.registryAccess())
                         : null;
         *///?} else {
         List<ItemStack> decodedMain =
@@ -113,35 +130,10 @@ public final class InventorySnapshot {
                                 "main",
                                 player.registryAccess())
                         : null;
-        //?}
 
-        //? if <=1.20.4 {
-        /*List<ItemStack> decodedArmor =
-                armorEnabled ? decodeList(armor, inventory.armor.size(), "armor") : null;
-        *///?} else if <=1.21.4 {
-        /*List<ItemStack> decodedArmor =
-                armorEnabled
-                        ? decodeList(
-                                armor, inventory.armor.size(), "armor", player.registryAccess())
-                        : null;
-        *///?} else {
         List<ItemStack> decodedArmor =
                 armorEnabled ? decodeList(armor, 4, "armor", player.registryAccess()) : null;
-        //?}
 
-        //? if <=1.20.4 {
-        /*List<ItemStack> decodedOffhand =
-                offhandEnabled ? decodeList(offhand, inventory.offhand.size(), "offhand") : null;
-        *///?} else if <=1.21.4 {
-        /*List<ItemStack> decodedOffhand =
-                offhandEnabled
-                        ? decodeList(
-                                offhand,
-                                inventory.offhand.size(),
-                                "offhand",
-                                player.registryAccess())
-                        : null;
-        *///?} else {
         List<ItemStack> decodedOffhand =
                 offhandEnabled ? decodeList(offhand, 1, "offhand", player.registryAccess()) : null;
         //?}
@@ -155,22 +147,18 @@ public final class InventorySnapshot {
 
         //? if <=1.21.4 {
         /*if (decodedArmor != null) applyList(inventory, decodedArmor, inventory.items.size());
+
+        if (decodedOffhand != null)
+            applyList(inventory, decodedOffhand, inventory.items.size() + inventory.armor.size());
+
+        if (selectedEnabled) inventory.selected = selectedSlot;
         *///?} else {
         if (decodedArmor != null)
             applyList(inventory, decodedArmor, inventory.getNonEquipmentItems().size());
-        //?}
 
-        //? if <=1.21.4 {
-        /*if (decodedOffhand != null)
-            applyList(inventory, decodedOffhand, inventory.items.size() + inventory.armor.size());
-        *///?} else {
         if (decodedOffhand != null)
             applyList(inventory, decodedOffhand, inventory.getNonEquipmentItems().size() + 4);
-        //?}
 
-        //? if <=1.21.4 {
-        /*if (selectedEnabled) inventory.selected = selectedSlot;
-        *///?} else {
         if (selectedEnabled) inventory.setSelectedSlot(selectedSlot);
         //?}
 
@@ -193,29 +181,25 @@ public final class InventorySnapshot {
 
         //? if <=1.20.4 {
         /*if (mainEnabled) decodeList(main, inventory.items.size(), "main");
+
+        if (armorEnabled) decodeList(armor, inventory.armor.size(), "armor");
+
+        if (offhandEnabled) decodeList(offhand, inventory.offhand.size(), "offhand");
         *///?} else if <=1.21.4 {
         /*if (mainEnabled) decodeList(main, inventory.items.size(), "main", player.registryAccess());
+
+        if (armorEnabled)
+            decodeList(armor, inventory.armor.size(), "armor", player.registryAccess());
+
+        if (offhandEnabled)
+            decodeList(offhand, inventory.offhand.size(), "offhand", player.registryAccess());
         *///?} else {
         if (mainEnabled)
             decodeList(
                     main, inventory.getNonEquipmentItems().size(), "main", player.registryAccess());
-        //?}
 
-        //? if <=1.20.4 {
-        /*if (armorEnabled) decodeList(armor, inventory.armor.size(), "armor");
-        *///?} else if <=1.21.4 {
-        /*if (armorEnabled)
-            decodeList(armor, inventory.armor.size(), "armor", player.registryAccess());
-        *///?} else {
         if (armorEnabled) decodeList(armor, 4, "armor", player.registryAccess());
-        //?}
 
-        //? if <=1.20.4 {
-        /*if (offhandEnabled) decodeList(offhand, inventory.offhand.size(), "offhand");
-        *///?} else if <=1.21.4 {
-        /*if (offhandEnabled)
-            decodeList(offhand, inventory.offhand.size(), "offhand", player.registryAccess());
-        *///?} else {
         if (offhandEnabled) decodeList(offhand, 1, "offhand", player.registryAccess());
         //?}
 
@@ -233,19 +217,11 @@ public final class InventorySnapshot {
             throws IOException {
         //? if <=1.20.4 {
         /*if (mainEnabled) decodeList(main, 36, "main");
+        if (armorEnabled) decodeList(armor, 4, "armor");
+        if (offhandEnabled) decodeList(offhand, 1, "offhand");
         *///?} else {
         if (mainEnabled) validateEncodedList(main, 36, "main");
-        //?}
-
-        //? if <=1.20.4 {
-        /*if (armorEnabled) decodeList(armor, 4, "armor");
-        *///?} else {
         if (armorEnabled) validateEncodedList(armor, 4, "armor");
-        //?}
-
-        //? if <=1.20.4 {
-        /*if (offhandEnabled) decodeList(offhand, 1, "offhand");
-        *///?} else {
         if (offhandEnabled) validateEncodedList(offhand, 1, "offhand");
         //?}
 

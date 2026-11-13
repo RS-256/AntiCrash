@@ -50,6 +50,21 @@ final class RuntimeFieldDump {
 
                         //? if <=1.19.2 {
                         /*Class<?> type;
+
+                        try {
+                            type = Class.forName(name, false, base.getClassLoader());
+                        } catch (Throwable unloadable) {
+                            continue;
+                        }
+
+                        if (!base.isAssignableFrom(type)) continue;
+
+                        List<String> fields = new ArrayList<>();
+                        for (Field field : type.getDeclaredFields()) {
+                            if (Modifier.isStatic(field.getModifiers()) || field.isSynthetic())
+                                continue;
+
+                            fields.add(field.getName());
                         *///?} else {
                         new ClassReader(Files.readAllBytes(path))
                                 .accept(
@@ -57,40 +72,16 @@ final class RuntimeFieldDump {
                                         ClassReader.SKIP_CODE
                                                 | ClassReader.SKIP_DEBUG
                                                 | ClassReader.SKIP_FRAMES);
-                        //?}
 
-                        //? if <=1.19.2 {
-                        /*try {
-                            type = Class.forName(name, false, base.getClassLoader());
-                        } catch (Throwable unloadable) {
-                            continue;
-                        }
-
-                        if (!base.isAssignableFrom(type)) continue;
-                        *///?} else {
                         if (!inherits(type, base.getName().replace('.', '/'))) continue;
-                        //?}
                         List<String> fields = new ArrayList<>();
 
-                        //? if <=1.19.2 {
-                        /*for (Field field : type.getDeclaredFields()) {
-                        *///?} else {
                         for (var field : type.fields) {
-                        //?}
-
-                            //? if <=1.19.2 {
-                            /*if (Modifier.isStatic(field.getModifiers()) || field.isSynthetic())
-                                continue;
-                            *///?} else {
                             if ((field.access & (Opcodes.ACC_STATIC | Opcodes.ACC_SYNTHETIC)) != 0)
                                 continue;
-                            //?}
 
-                            //? if <=1.19.2 {
-                            /*fields.add(field.getName());
-                            *///?} else {
                             fields.add(field.name);
-                            //?}
+                        //?}
 
                         }
                         result.put(name, fields);

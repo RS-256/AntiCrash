@@ -43,18 +43,16 @@ public final class SculkRuntimeFingerprint {
 
         //? if <=1.19.4 {
         /*} else return null;
-        *///?} else {
-        } else if (!(entity instanceof VibrationSystem)) return null;
-        //?}
 
-        //? if <=1.19.4 {
-        /*return "listener|"
+        return "listener|"
                 + VibrationListener.codec((VibrationListener.VibrationListenerConfig) entity)
                         .encodeStart(JsonOps.INSTANCE, listener)
                         .result()
                         .orElseThrow(
                                 () -> new IllegalStateException("Sculk listener capture failed"));
         *///?} else {
+        } else if (!(entity instanceof VibrationSystem)) return null;
+
         return "listener|"
                 + VibrationSystem.Data.CODEC
                         .encodeStart(

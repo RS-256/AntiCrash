@@ -246,15 +246,11 @@ public final class RuntimeOrderRestorer {
 
                 //? if <=1.21.4 {
                 /*for (Ticket<?> ticket : position.getValue()) {
+                    TicketType<?> type = ticket.getType();
                 *///?} else {
                 for (Ticket ticket : position.getValue()) {
-                //?}
-
-                    //? if <=1.21.4 {
-                    /*TicketType<?> type = ticket.getType();
-                    *///?} else {
                     TicketType type = ticket.getType();
-                    //?}
+                //?}
 
                     //? if <=1.21.3 {
                     /*if (type != TicketType.UNKNOWN
@@ -278,6 +274,7 @@ public final class RuntimeOrderRestorer {
                                     String.valueOf(type),
                                     ticket.getTicketLevel(),
                                     String.valueOf(argument)))) {
+                        stray.add(new Object[] {type, chunk, ticket.getTicketLevel(), argument});
                     *///?} else {
                     String name =
                             net.minecraft.core.registries.BuiltInRegistries.TICKET_TYPE
@@ -292,13 +289,8 @@ public final class RuntimeOrderRestorer {
                                     name,
                                     ticket.getTicketLevel(),
                                     "-"))) {
-                    //?}
-
-                        //? if <=1.21.4 {
-                        /*stray.add(new Object[] {type, chunk, ticket.getTicketLevel(), argument});
-                        *///?} else {
                         stray.add(new Object[] {ticket, chunk});
-                        //?}
+                    //?}
 
                     }
                 }
@@ -493,21 +485,17 @@ public final class RuntimeOrderRestorer {
                 /*if (ticketAccessor.anticrash$getType() == type
                         && ticket.getTicketLevel() == entry.level
                         && argument.equals(ticketAccessor.anticrash$getArgument())) {
+                    ticketAccessor.anticrash$setTickCreated(
+                            tickCreatedFor(
+                                    accessor.anticrash$getAge(), expiry, entry.remainingTicks));
                 *///?} else {
                 if (ticketAccessor.anticrash$getType() == type
                         && ticket.getTicketLevel() == entry.level) {
-                //?}
-
-                    //? if <=1.21.4 {
-                    /*ticketAccessor.anticrash$setTickCreated(
-                            tickCreatedFor(
-                                    accessor.anticrash$getAge(), expiry, entry.remainingTicks));
-                    *///?} else {
                     if (entry.remainingTicks > expiry)
                         throw new IllegalArgumentException("Invalid remaining ticket lifetime");
 
                     ticketAccessor.anticrash$setTicksLeft(entry.remainingTicks);
-                    //?}
+                //?}
 
                     restored++;
                 }

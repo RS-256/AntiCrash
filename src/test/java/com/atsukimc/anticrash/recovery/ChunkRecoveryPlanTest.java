@@ -290,13 +290,8 @@ class ChunkRecoveryPlanTest {
     //? if <=1.21.4 {
     /*@Test
     void convertsVanillaTicketLevelsToServerChunkManagerRadii() {
-    *///?} else {
-    @Test
-    void passesVanillaTicketLevelsDirectlyIn1215() {
-    //?}
 
-        //? if <=1.21.4 {
-        /*assertEquals(
+        assertEquals(
                 0, ChunkRecoveryPlan.ticketRadiusForLevel(ChunkRecoveryPlan.FULL_TICKET_LEVEL));
 
         assertEquals(
@@ -312,7 +307,10 @@ class ChunkRecoveryPlanTest {
                 () ->
                         ChunkRecoveryPlan.ticketRadiusForLevel(
                                 ChunkRecoveryPlan.FULL_TICKET_LEVEL + 1));
-        *///?} else {
+    *///?} else {
+    @Test
+    void passesVanillaTicketLevelsDirectlyIn1215() {
+
         assertEquals(
                 33, ChunkRecoveryPlan.ticketArgumentForLevel(ChunkRecoveryPlan.FULL_TICKET_LEVEL));
 
@@ -329,7 +327,7 @@ class ChunkRecoveryPlanTest {
                 () ->
                         ChunkRecoveryPlan.ticketArgumentForLevel(
                                 ChunkRecoveryPlan.FULL_TICKET_LEVEL + 1));
-        //?}
+    //?}
 
     }
 

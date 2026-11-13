@@ -51,16 +51,12 @@ class FluidInteractionSnapshotTest {
     //? if <=26.2 {
     /*@Test
     void decodedOrderingIsStableWithoutMutatingInput() {
+        var water = new FluidInteractionSnapshot.State("minecraft:water", 1, true, Vec3.ZERO, 0);
     *///?} else {
     @Test
     void decodedOrderingPreservesNativeFirstMatchingTagWithoutMutatingInput() {
-    //?}
-
-        //? if <=26.2 {
-        /*var water = new FluidInteractionSnapshot.State("minecraft:water", 1, true, Vec3.ZERO, 0);
-        *///?} else {
         var water = new FluidInteractionSnapshot.State("minecraft:water", 1, false, Vec3.ZERO, 0);
-        //?}
+    //?}
 
         var lava = new FluidInteractionSnapshot.State("minecraft:lava", 0, false, Vec3.ZERO, 0);
         var n = new ListTag();

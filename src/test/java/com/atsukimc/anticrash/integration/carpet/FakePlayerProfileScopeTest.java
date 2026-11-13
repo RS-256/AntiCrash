@@ -30,19 +30,11 @@ class FakePlayerProfileScopeTest {
 
             //? if <=1.21.8 {
             /*assertEquals(CHECKPOINT_ID, selected.getId());
+            assertEquals("msbot", selected.getName());
+            assertEquals(OTHER_ID, cached.getId());
             *///?} else {
             assertEquals(CHECKPOINT_ID, selected.id());
-            //?}
-
-            //? if <=1.21.8 {
-            /*assertEquals("msbot", selected.getName());
-            *///?} else {
             assertEquals("msbot", selected.name());
-            //?}
-
-            //? if <=1.21.8 {
-            /*assertEquals(OTHER_ID, cached.getId());
-            *///?} else {
             assertEquals(OTHER_ID, cached.id());
             //?}
 

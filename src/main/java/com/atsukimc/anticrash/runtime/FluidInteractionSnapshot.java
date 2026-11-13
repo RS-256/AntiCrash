@@ -216,14 +216,10 @@ public final class FluidInteractionSnapshot {
 
         //? if <=26.2 {
         /*result.sort(Comparator.comparing(State::tag));
+        return result;
         *///?} else {
         var currents =
                 expected.stream().filter(s -> s.kind() == Kind.CURRENT).map(State::tag).toList();
-        //?}
-
-        //? if <=26.2 {
-        /*return result;
-        *///?} else {
         if (!currents.equals(currentTags)
                 || existingFluids.size() > fluids.size()
                 || !fluids.subList(0, existingFluids.size()).equals(existingFluids))

@@ -78,17 +78,6 @@ public abstract class UserCacheMixin {
     private void anticrash$checkpointFakePlayerProfile(
             String name,
             CallbackInfoReturnable<java.util.Optional<com.mojang.authlib.GameProfile>> callback) {
-*///?} else if <=1.21.11 {
-/*@Mixin(net.minecraft.server.players.CachedUserNameToIdResolver.class)
-public abstract class UserCacheMixin {
-    @Inject(
-            method = "get(Ljava/lang/String;)Ljava/util/Optional;",
-            at = @At("HEAD"),
-            cancellable = true)
-    private void anticrash$checkpointFakePlayerProfile(
-            String name,
-            CallbackInfoReturnable<java.util.Optional<net.minecraft.server.players.NameAndId>>
-                    callback) {
 *///?} else {
 @Mixin(net.minecraft.server.players.CachedUserNameToIdResolver.class)
 public abstract class UserCacheMixin {

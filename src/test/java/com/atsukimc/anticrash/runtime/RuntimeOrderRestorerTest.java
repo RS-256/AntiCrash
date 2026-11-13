@@ -149,13 +149,9 @@ class RuntimeOrderRestorerTest {
 
         //? if <=1.21.3 {
         /*TicketLedgerSnapshot.Entry teleport = ticket("post_teleport", 0, 9, 32, 5);
+        teleport.argument = "4274109";
         *///?} else {
         TicketLedgerSnapshot.Entry teleport = ticket("ender_pearl", 0, 9, 32, 40);
-        //?}
-
-        //? if <=1.21.3 {
-        /*teleport.argument = "4274109";
-        *///?} else {
         teleport.argument = "[0, 9]";
         //?}
 

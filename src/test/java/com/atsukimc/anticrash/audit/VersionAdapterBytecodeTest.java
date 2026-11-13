@@ -237,17 +237,15 @@ class VersionAdapterBytecodeTest {
         /*assertTrue(
                 listener.fields.stream()
                         .anyMatch(f -> f.name.equals("receivingDistance") && f.desc.equals("F")));
+
+        assertTrue(listener.fields.stream().anyMatch(f -> f.name.equals("receivingEvent")));
         *///?} else {
         assertTrue(
                 listener.fields.stream()
                         .anyMatch(f ->
                                 f.name.equals("selectionStrategy")
                                         && f.desc.endsWith("/VibrationSelector;")));
-        //?}
 
-        //? if <=1.19.2 {
-        /*assertTrue(listener.fields.stream().anyMatch(f -> f.name.equals("receivingEvent")));
-        *///?} else {
         assertTrue(listener.fields.stream().anyMatch(f -> f.name.equals("currentVibration")));
         //?}
 

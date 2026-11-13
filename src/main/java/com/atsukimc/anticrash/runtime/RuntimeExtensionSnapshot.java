@@ -415,25 +415,21 @@ public final class RuntimeExtensionSnapshot {
 
         //? if <=1.20.6 {
         /*if (runtime.anticrash$isInNetherPortal() || runtime.anticrash$getNetherPortalTime() > 0) {
-        *///?} else {
-        if (entity.portalProcess != null) {
-        //?}
-
-            //? if <=1.20.6 {
-            /*lines.get(PORTAL)
+            lines.get(PORTAL)
                     .add(
                             id
                                     + "|"
                                     + runtime.anticrash$isInNetherPortal()
                                     + "|"
                                     + runtime.anticrash$getNetherPortalTime());
-            *///?} else {
+        *///?} else {
+        if (entity.portalProcess != null) {
             lines.get(PORTAL).add(id + "|" + PortalRuntime.canonical(entity.portalProcess));
 
             if (PortalRuntime.type(entity.portalProcess) == null
                     && !capsule.unsupportedRuntimeState.contains("PORTAL_IMPLEMENTATION"))
                 capsule.unsupportedRuntimeState.add("PORTAL_IMPLEMENTATION");
-            //?}
+        //?}
 
         }
         StringBuilder line = new StringBuilder(id);
@@ -464,29 +460,25 @@ public final class RuntimeExtensionSnapshot {
                         instanceof net.minecraft.world.entity.vehicle.NewMinecartBehavior
                 && !capsule.unsupportedRuntimeState.contains("EXPERIMENTAL_MINECART_RUNTIME"))
             capsule.unsupportedRuntimeState.add("EXPERIMENTAL_MINECART_RUNTIME");
+
+        if (entity instanceof net.minecraft.world.entity.vehicle.MinecartHopper
+                && !capsule.unsupportedRuntimeState.contains("HOPPER_MINECART_RUNTIME"))
+            capsule.unsupportedRuntimeState.add("HOPPER_MINECART_RUNTIME");
+
+        if (entity instanceof net.minecraft.world.entity.vehicle.AbstractBoat
+                && !capsule.unsupportedRuntimeState.contains("BOAT_TURN_UNDERWATER_RUNTIME"))
+            capsule.unsupportedRuntimeState.add("BOAT_TURN_UNDERWATER_RUNTIME");
         *///?} else if >=1.21.11 {
         if (entity instanceof net.minecraft.world.entity.vehicle.minecart.AbstractMinecart cart
                 && cart.getBehavior()
                         instanceof net.minecraft.world.entity.vehicle.minecart.NewMinecartBehavior
                 && !capsule.unsupportedRuntimeState.contains("EXPERIMENTAL_MINECART_RUNTIME"))
             capsule.unsupportedRuntimeState.add("EXPERIMENTAL_MINECART_RUNTIME");
-        //?}
 
-        //? if (>=1.21.2 && <=1.21.10) {
-        /*if (entity instanceof net.minecraft.world.entity.vehicle.MinecartHopper
-                && !capsule.unsupportedRuntimeState.contains("HOPPER_MINECART_RUNTIME"))
-            capsule.unsupportedRuntimeState.add("HOPPER_MINECART_RUNTIME");
-        *///?} else if >=1.21.11 {
         if (entity instanceof net.minecraft.world.entity.vehicle.minecart.MinecartHopper
                 && !capsule.unsupportedRuntimeState.contains("HOPPER_MINECART_RUNTIME"))
             capsule.unsupportedRuntimeState.add("HOPPER_MINECART_RUNTIME");
-        //?}
 
-        //? if (>=1.21.2 && <=1.21.10) {
-        /*if (entity instanceof net.minecraft.world.entity.vehicle.AbstractBoat
-                && !capsule.unsupportedRuntimeState.contains("BOAT_TURN_UNDERWATER_RUNTIME"))
-            capsule.unsupportedRuntimeState.add("BOAT_TURN_UNDERWATER_RUNTIME");
-        *///?} else if >=1.21.11 {
         if (entity instanceof net.minecraft.world.entity.vehicle.boat.AbstractBoat
                 && !capsule.unsupportedRuntimeState.contains("BOAT_TURN_UNDERWATER_RUNTIME"))
             capsule.unsupportedRuntimeState.add("BOAT_TURN_UNDERWATER_RUNTIME");
@@ -566,15 +558,11 @@ public final class RuntimeExtensionSnapshot {
 
         //? if <=26.2 {
         /*if (entity.invulnerableTime > 0) {
+            line.append("|regen=").append(entity.invulnerableTime);
         *///?} else {
         if (entity.getInvulnerableTime() > 0) {
-        //?}
-
-            //? if <=26.2 {
-            /*line.append("|regen=").append(entity.invulnerableTime);
-            *///?} else {
             line.append("|regen=").append(entity.getInvulnerableTime());
-            //?}
+        //?}
 
             if (entity instanceof LivingEntity living) {
                 line.append("|lastDamage=")
