@@ -65,10 +65,11 @@ class VersionAdapterBytecodeTest {
 
     //?}
 
+    //? if >=1.21.4 {
     //? if 1.21.4 {
     /*@Test
     void enderPearlTicketHasChunkArgumentAndFortyTickExpiry() {
-    *///?} else if >=1.21.5 {
+    *///?} else {
     @Test
     void ticketsUseCountdownAndSeparateLoadingAndSimulation() throws Exception {
     //?}
@@ -122,8 +123,6 @@ class VersionAdapterBytecodeTest {
         //? if >=1.21.9 {
         assertNotEquals(net.minecraft.server.level.TicketType.DRAGON, recovery);
         //?}
-    //? if >=1.21.4 {
-
     }
 
     @Test

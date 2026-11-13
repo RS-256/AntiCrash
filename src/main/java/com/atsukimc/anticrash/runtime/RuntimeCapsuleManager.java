@@ -543,19 +543,15 @@ public final class RuntimeCapsuleManager {
             // ServerChunkCache adds (world time - lastMobSpawningTime) to every ticking chunk's
             // InhabitedTime. The field starts at 0 in a new JVM, so the first tick after a restart
             // would add the whole age of the world. At a tick boundary it equals the world time.
+            // 26.3 incrementInhabitedTime() increments once per spawning tick. There is no
+            // lastInhabitedUpdate field or elapsed-world-time accumulator to reset anymore.
 
             //? if <=26.2 {
             /*((com.atsukimc.anticrash.mixin.ServerChunkManagerAccessorMixin)
                             (Object) world.getChunkSource())
                     .anticrash$setLastMobSpawningTime(world.getGameTime());
+            *///?}
         }
-            *///?} else {
-
-            // 26.3 incrementInhabitedTime() increments once per spawning tick. There is no
-            // lastInhabitedUpdate field or elapsed-world-time accumulator to reset anymore.
-        }
-            //?}
-
     }
 
     /**

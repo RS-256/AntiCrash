@@ -197,19 +197,15 @@ public final class RuntimeExtensionSnapshot {
                         .anticrash$getCurrentChunkHolders();
 
         for (var holder : holders.values()) {
-        //?}
-            //? if (>=1.20.3 && <=1.20.6) {
+            //? if <=1.20.6 {
             /*LevelChunk loaded = holder.getTickingChunk();
-            *///?}
-            //? if >=1.21 {
+            *///?} else {
             LevelChunk loaded = VersionChunkView.worldChunk(holder);
             //?}
 
-            //? if >=1.20.3 {
             if (loaded == null) continue;
 
             for (BlockEntity entity : loaded.getBlockEntities().values()) {
-            //?}
                 //? if >=26.3 {
                 if (entity instanceof BrewingStandBlockEntity) {
                     var stand = (BrewingStandBlockEntityTimerAccessor) entity;
@@ -295,25 +291,20 @@ public final class RuntimeExtensionSnapshot {
                     capsule.unsupportedRuntimeState.add("CREAKING_HEART_RUNTIME");
                 //?}
 
-                //? if >=1.20.3 {
                 if (entity instanceof net.minecraft.world.level.block.entity.TrialSpawnerBlockEntity
                         && !capsule.unsupportedRuntimeState.contains("TRIAL_SPAWNER_RUNTIME")) {
                     capsule.unsupportedRuntimeState.add("TRIAL_SPAWNER_RUNTIME");
-                //?}
-                //? if >=1.20.5 {
-
                 }
 
+                //? if >=1.20.5 {
                 if (entity instanceof net.minecraft.world.level.block.entity.vault.VaultBlockEntity
                         && !capsule.unsupportedRuntimeState.contains("VAULT_RUNTIME")) {
                     capsule.unsupportedRuntimeState.add("VAULT_RUNTIME");
-                //?}
-                //? if >=1.20.3 {
-
                 }
+                //?}
             }
         }
-                //?}
+        //?}
 
         WorldAccessorMixin accessor = (WorldAccessorMixin) world;
 
@@ -359,12 +350,8 @@ public final class RuntimeExtensionSnapshot {
                             ((EndGatewayBlockEntityAccessorMixin) blockEntity)
                                     .anticrash$getTeleportCooldown();
                     if (cooldown > 0) lines.get(END_GATEWAY).add(where + "|" + cooldown);
-                //? if <=1.19.2 {
-
-                /*}
-                *///?}
                 //? if <=1.18.2 {
-                /*else if (blockEntity instanceof SculkSensorBlockEntity sensor) {
+                /*} else if (blockEntity instanceof SculkSensorBlockEntity sensor) {
                     SculkSensorListenerAccessorMixin listener =
                             (SculkSensorListenerAccessorMixin) sensor.getListener();
 
@@ -382,10 +369,7 @@ public final class RuntimeExtensionSnapshot {
                                                 + listener.anticrash$getDelay());
                     }
                 *///?}
-                //? if <=1.18.2 || >=1.19.3 {
-
                 }
-                //?}
 
                 //? if >=1.19 {
                 String sculk = SculkRuntimeFingerprint.capture(blockEntity);

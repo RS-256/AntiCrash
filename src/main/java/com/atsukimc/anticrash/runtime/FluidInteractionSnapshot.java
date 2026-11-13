@@ -95,11 +95,10 @@ public final class FluidInteractionSnapshot {
             //?}
 
         }
+    }
+
     //? if <=26.2 {
-
-    /*}
-
-    private static Map<String, FluidTrackerAccessor> trackers(Entity entity) {
+    /*private static Map<String, FluidTrackerAccessor> trackers(Entity entity) {
         var source =
                 ((FluidInteractionAccessor) ((EntityFluidAccessor) entity).anticrash$fluids())
                         .anticrash$trackers();
@@ -112,9 +111,9 @@ public final class FluidInteractionSnapshot {
         });
 
         return result;
-    *///?}
-
     }
+
+    *///?}
 
     public static ListTag capture(Entity entity) {
 
@@ -205,19 +204,18 @@ public final class FluidInteractionSnapshot {
         }
         // getCurrentAccumulatorFor chooses the first matching tag. Sorting changes semantics.
 
-        //? if >=26.3 {
-        return List.copyOf(result);
-    }
-
-    static void validateDomains(
-            List<State> expected, List<String> existingFluids, List<String> currentTags) {
-        var fluids = expected.stream().filter(s -> s.kind() == Kind.FLUID).map(State::tag).toList();
-        //?}
-
         //? if <=26.2 {
         /*result.sort(Comparator.comparing(State::tag));
         return result;
         *///?} else {
+        return List.copyOf(result);
+        //?}
+    }
+
+    //? if >=26.3 {
+    static void validateDomains(
+            List<State> expected, List<String> existingFluids, List<String> currentTags) {
+        var fluids = expected.stream().filter(s -> s.kind() == Kind.FLUID).map(State::tag).toList();
         var currents =
                 expected.stream().filter(s -> s.kind() == Kind.CURRENT).map(State::tag).toList();
         if (!currents.equals(currentTags)
@@ -226,14 +224,10 @@ public final class FluidInteractionSnapshot {
             throw new IllegalStateException("Fluid interaction domain/order differs");
     }
 
-        //?}
-
     /**
      * Native private return type is not source-accessible. Invoke the audited Vanilla factory,
      * rather than allocate/replace its final tracker collection or serialize Java objects.
      */
-
-    //? if >=26.3 {
     static Object createTracker(
             net.minecraft.world.entity.EntityFluidInteraction interaction,
             net.minecraft.core.Holder<net.minecraft.world.level.material.Fluid> fluid) {
@@ -260,9 +254,9 @@ public final class FluidInteractionSnapshot {
                 throw new IllegalStateException("Unsupported fluid tracker factory", error);
             }
         }
-    //?}
-
     }
+
+    //?}
 
     public static void restore(Entity entity, ListTag n) {
         var expected = decode(n);

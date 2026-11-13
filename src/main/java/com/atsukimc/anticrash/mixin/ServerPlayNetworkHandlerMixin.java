@@ -599,6 +599,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
         /*boolean drop = packet.clickType() == ClickType.THROW;
         *///?} else {
         boolean drop = packet.containerInput() == ContainerInput.THROW;
+        //?}
 
         if (anticrash$frozen()) {
             var lock = anticrash$controller().config().recovery.lock;
@@ -608,34 +609,6 @@ public abstract class ServerPlayNetworkHandlerMixin {
 
                 anticrash$resyncInventory();
 
-                return;
-            }
-        }
-        //?}
-
-        // The packet now contains hashes, not trusted ItemStacks. Log the server-owned cursor.
-
-        //? if >=26.1 {
-        anticrash$record(
-                drop ? "ITEM_DROP" : "CONTAINER_INTERACTION",
-                anticrash$player(),
-                "player",
-                "container",
-                null,
-                anticrash$player().containerMenu.getCarried());
-    }
-
-    @Inject(method = "handleSetCreativeModeSlot", at = @At("HEAD"), cancellable = true)
-    private void anticrash$creative(
-            ServerboundSetCreativeModeSlotPacket packet, CallbackInfo info) {
-        boolean drop = packet.slotNum() < 0;
-        //?}
-
-        if (anticrash$frozen()) {
-            var lock = anticrash$controller().config().recovery.lock;
-            if ((drop && !lock.allowItemDrop) || (!drop && !lock.allowContainerInteraction)) {
-                info.cancel();
-                anticrash$resyncInventory();
                 return;
             }
         }
@@ -648,8 +621,8 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 "container",
                 null,
                 packet.getCarriedItem());
-        *///?} else if <=1.21.11 {
-        /*// The packet now contains hashes, not trusted ItemStacks. Log the server-owned cursor.
+        *///?} else {
+        // The packet now contains hashes, not trusted ItemStacks. Log the server-owned cursor.
         anticrash$record(
                 drop ? "ITEM_DROP" : "CONTAINER_INTERACTION",
                 anticrash$player(),
@@ -657,32 +630,19 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 "container",
                 null,
                 anticrash$player().containerMenu.getCarried());
-        *///?} else {
-        anticrash$record(
-                drop ? "ITEM_DROP" : "CREATIVE_INVENTORY",
-                anticrash$player(),
-                "player",
-                drop ? "world" : "inventory",
-                null,
-                packet.itemStack());
         //?}
-
     }
 
-    //? if <=1.21.11 {
-    /*@Inject(method = "handleSetCreativeModeSlot", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "handleSetCreativeModeSlot", at = @At("HEAD"), cancellable = true)
     private void anticrash$creative(
             ServerboundSetCreativeModeSlotPacket packet, CallbackInfo info) {
-
-    *///?}
         //? if <=1.20.4 {
         /*boolean drop = packet.getSlotNum() < 0;
-        *///?} else if <=1.21.11 {
-        /*boolean drop = packet.slotNum() < 0;
-        *///?}
+        *///?} else {
+        boolean drop = packet.slotNum() < 0;
+        //?}
 
-        //? if <=1.21.11 {
-        /*if (anticrash$frozen()) {
+        if (anticrash$frozen()) {
             var lock = anticrash$controller().config().recovery.lock;
 
             if ((drop && !lock.allowItemDrop) || (!drop && !lock.allowContainerInteraction)) {
@@ -693,7 +653,6 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 return;
             }
         }
-        *///?}
 
         //? if <=1.20.4 {
         /*anticrash$record(
@@ -703,19 +662,16 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 drop ? "world" : "inventory",
                 null,
                 packet.getItem());
-        *///?} else if <=1.21.11 {
-        /*anticrash$record(
+        *///?} else {
+        anticrash$record(
                 drop ? "ITEM_DROP" : "CREATIVE_INVENTORY",
                 anticrash$player(),
                 "player",
                 drop ? "world" : "inventory",
                 null,
                 packet.itemStack());
-        *///?}
-    //? if <=1.21.11 {
-    /*}
-
-    *///?}
+        //?}
+    }
 
     @Inject(method = "handleContainerClose", at = @At("HEAD"), cancellable = true)
     private void anticrash$closeScreen(ServerboundContainerClosePacket packet, CallbackInfo info) {

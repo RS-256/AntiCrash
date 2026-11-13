@@ -290,9 +290,9 @@ public final class InventorySnapshot {
             }
         }
         return decoded;
-    //? if >=1.20.5 {
     }
 
+    //? if >=1.20.5 {
     private static List<ItemStack> decodeList(
             List<String> encoded,
             int expectedSize,
@@ -327,9 +327,9 @@ public final class InventorySnapshot {
         }
 
         return result;
-    //?}
-
     }
+
+    //?}
 
     private static void applyList(Inventory inventory, List<ItemStack> decoded, int offset) {
         for (int index = 0; index < decoded.size(); index++)

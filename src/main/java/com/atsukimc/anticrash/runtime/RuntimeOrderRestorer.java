@@ -312,11 +312,7 @@ public final class RuntimeOrderRestorer {
             }
         }
         return removed;
-    //? if <=1.21.4 || >=26.1 {
-
     }
-
-    //?}
 
     //? if <=1.21.4 {
     /*@SuppressWarnings("unchecked")
@@ -327,10 +323,7 @@ public final class RuntimeOrderRestorer {
             int level,
             Object argument) {
         manager.removeTicket((TicketType<T>) type, chunk, level, (T) argument);
-    *///?}
-    //? if <=1.21.11 {
-
-    /*}
+    }
 
     *///?}
 
@@ -361,6 +354,71 @@ public final class RuntimeOrderRestorer {
                     Matcher matcher = BLOCK_POS.matcher(entry.argument);
 
                     if (!matcher.find() || entry.level > 33) continue;
+                    BlockPos portal =
+                            new BlockPos(
+                                    Integer.parseInt(matcher.group(1)),
+                                    Integer.parseInt(matcher.group(2)),
+                                    Integer.parseInt(matcher.group(3)));
+
+                    manager.addRegionTicket(TicketType.PORTAL, chunk, 33 - entry.level, portal);
+
+                    type = TicketType.PORTAL;
+
+                    argument = portal;
+                }
+
+                //? if <=1.21.3 {
+                /^case "post_teleport" -> {
+                    Integer id;
+
+                    try {
+                        id = Integer.valueOf(entry.argument.trim());
+                    } catch (NumberFormatException invalid) {
+                        continue;
+                    }
+
+                    if (entry.level > 33) continue;
+
+                    manager.addRegionTicket(TicketType.POST_TELEPORT, chunk, 33 - entry.level, id);
+
+                    type = TicketType.POST_TELEPORT;
+
+                    argument = id;
+                }
+                ^///?} else {
+                case "ender_pearl" -> {
+                    // POST_TELEPORT no longer exists. This is a distinct 40-tick ticket whose
+                    // argument is ChunkPos, not the old teleporting entity's network id.
+                    Matcher matcher = CHUNK_POS.matcher(entry.argument);
+
+                    if (!matcher.matches())
+                        throw new IllegalArgumentException("Invalid ender-pearl ticket argument");
+
+                    ChunkPos pearl =
+                            new ChunkPos(
+                                    Integer.parseInt(matcher.group(1)),
+                                    Integer.parseInt(matcher.group(2)));
+
+                    manager.addTicket(TicketType.ENDER_PEARL, chunk, entry.level, pearl);
+
+                    type = TicketType.ENDER_PEARL;
+
+                    argument = pearl;
+                }
+                //?}
+
+                case "unknown" -> {
+                    manager.addTicket(TicketType.UNKNOWN, chunk, entry.level, chunk);
+
+                    type = TicketType.UNKNOWN;
+
+                    argument = chunk;
+                }
+
+                default -> {
+                    continue;
+                }
+            }
             *///?} else {
             TicketStorage manager =
                     ((com.atsukimc.anticrash.mixin.ServerChunkManagerAccessorMixin)
@@ -380,77 +438,6 @@ public final class RuntimeOrderRestorer {
 
             if (type == null) continue;
             //?}
-
-                    //? if <=1.21.4 {
-                    /*BlockPos portal =
-                            new BlockPos(
-                                    Integer.parseInt(matcher.group(1)),
-                                    Integer.parseInt(matcher.group(2)),
-                                    Integer.parseInt(matcher.group(3)));
-
-                    manager.addRegionTicket(TicketType.PORTAL, chunk, 33 - entry.level, portal);
-
-                    type = TicketType.PORTAL;
-
-                    argument = portal;
-                }
-                    *///?}
-
-                //? if <=1.21.3 {
-                /*case "post_teleport" -> {
-                    Integer id;
-
-                    try {
-                        id = Integer.valueOf(entry.argument.trim());
-                    } catch (NumberFormatException invalid) {
-                        continue;
-                    }
-
-                    if (entry.level > 33) continue;
-
-                    manager.addRegionTicket(TicketType.POST_TELEPORT, chunk, 33 - entry.level, id);
-
-                    type = TicketType.POST_TELEPORT;
-
-                    argument = id;
-                *///?}
-                //? if 1.21.4 {
-                /*case "ender_pearl" -> {
-                    // POST_TELEPORT no longer exists. This is a distinct 40-tick ticket whose
-                    // argument is ChunkPos, not the old teleporting entity's network id.
-                    Matcher matcher = CHUNK_POS.matcher(entry.argument);
-
-                    if (!matcher.matches())
-                        throw new IllegalArgumentException("Invalid ender-pearl ticket argument");
-
-                    ChunkPos pearl =
-                            new ChunkPos(
-                                    Integer.parseInt(matcher.group(1)),
-                                    Integer.parseInt(matcher.group(2)));
-
-                    manager.addTicket(TicketType.ENDER_PEARL, chunk, entry.level, pearl);
-
-                    type = TicketType.ENDER_PEARL;
-
-                    argument = pearl;
-                *///?}
-                //? if <=1.21.4 {
-
-                /*}
-
-                case "unknown" -> {
-                    manager.addTicket(TicketType.UNKNOWN, chunk, entry.level, chunk);
-
-                    type = TicketType.UNKNOWN;
-
-                    argument = chunk;
-                }
-
-                default -> {
-                    continue;
-                }
-            }
-                *///?}
 
             // Public addition deduplicates by type identity + level. PORTAL is now persisted by
             // Vanilla; refresh the existing ticket, rather than introducing a second ledger entry.
@@ -502,11 +489,7 @@ public final class RuntimeOrderRestorer {
             }
         }
         return restored;
-    //? if <=1.21.4 || >=26.1 {
-
     }
-
-    //?}
 
     /**
      * Vanilla drops a ticket once {@code age - tickCreated > expiry}; a ticket with {@code
@@ -516,10 +499,7 @@ public final class RuntimeOrderRestorer {
     //? if <=1.21.4 {
     /*static long tickCreatedFor(long age, long expiry, long remaining) {
         return age - (expiry - Math.min(expiry, Math.max(0L, remaining)));
-    *///?}
-    //? if <=1.21.11 {
-
-    /*}
+    }
 
     *///?}
 
